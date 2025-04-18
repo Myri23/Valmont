@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - Formulaire</title>
+    <link rel="stylesheet" href="../../assets/styles/formulaire.css">
+</head>
+<body>
+    <!-- Formulaire --> 
+    <div id="formulaire">
+        <h2>S'inscrire :</h2>
+        <form action="#" method="post">
+            <fieldset>
+                <label for="pseudo">Pseudonyme :</label>
+                <input type="text" id="pseudo" name="pseudo" required><br><br>
+
+                <label for="age">Age :</label>
+                <input type="number" id="age" name="age" required min="1" max="100" value="50"><br><br>
+
+                <label for="genre">Sexe / Genre :</label>
+
+                <input type="radio" id="homme" name="genre" value="homme">
+                <label for="homme">Homme</label>
+
+                <input type="radio" id="femme" name="genre" value="femme">
+                <label for="femme">Femme</label><br><br>
+                
+                <label for="dateN">Date de naissance :</label>
+                <input type="date" id="dateN" name="dateN" required><br><br>
+                
+                <label for="typeM">Type de membre :</label>
+
+                <input type="radio" id="dev" name="typeM" value="dev">
+                <label for="dev">Développeur</label>
+
+                <input type="radio" id="test" name="typeM" value="test">
+                <label for="test">Testeur</label>
+
+                <input type="radio" id="chef" name="typeM" value="chef">
+                <label for="chef">Chef de Projet</label>
+
+                <input type="radio" id="dir" name="typeM" value="dir">
+                <label for="dir">Directeur</label><br><br>
+
+                <label for="image">Image :</label>
+                <input type="file" accept="image/*" id="image" name="image"><br><br>
+
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required><br><br>
+
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" required><br><br>
+
+                <label for="mdp">Mot de Passe :</label>
+                <input type="password" id="mdp" name="mdp"><br><br>
+                
+                <button type="submit">Envoyer</button>
+                <button type="reset">Réinitialiser</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

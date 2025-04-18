@@ -1,0 +1,112 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #CAD2C5;  /* Vert pâle */
+    color: #2F3D46;  /* Vert très foncé pour le texte */
+    line-height: 1.6;
+}
+
+h1, h2 {
+    color: #354E52;  /* Vert foncé pour les titres */
+    margin-bottom: 20px;
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #354E52;  /* Vert foncé */
+    padding: 15px 0;  /* Ajustement pour toute la largeur */
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-links a:hover {
+    background-color: #527970;  /* Vert moyen pour le survol */
+    color: #CAD2C5;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 2px solid #527970;  /* Vert moyen */
+    margin-right: 10px;
+    background-color: white;
+    width: 200px;
+}
+
+.btn-search {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #84A98D;  /* Vert doux */
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-search:hover {
+    background-color: #527970;  /* Vert moyen */
+}
+
+/* Boutons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #84A98D;  /* Vert doux */
+}

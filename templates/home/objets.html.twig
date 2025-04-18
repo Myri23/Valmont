@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - Lieux d'intérêt</title>
+    <link rel="stylesheet" href="../../assets/styles/objets.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="../index.html">Accueil</a>
+                <a class="nav-link active" href="#">Lieux d'intérêt</a>
+                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="#" class="btn btn-secondary">S'inscrire</a>
+                <a href="#" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+  <header class="hero">
+    <h1>Gestion des Objets Connectés</h1>
+    <p>Surveillez, contrôlez et gérez l'ensemble de vos objets connectés en toute simplicité.</p>
+  </header>
+
+  <section class="container">
+    <h2>Ajouter un objet connecté</h2>
+    <form id="addForm">
+      <label>Nom:
+        <input type="text" id="name" required />
+      </label>
+      <label>Description:
+        <textarea id="description"></textarea>
+      </label>
+      <label>Statut:
+        <select id="status">
+          <option value="activé">Activé</option>
+          <option value="désactivé">Désactivé</option>
+        </select>
+      </label>
+      <label>Paramètres (Luminosité):
+        <input type="range" id="parameters" min="0" max="100" />
+        <span id="paramValue">50%</span>
+      </label>
+      <label>Zone / Pièce:
+        <select id="zone">
+          <option value="Salon">Salon</option>
+          <option value="Cuisine">Cuisine</option>
+          <option value="Chambre">Chambre</option>
+          <option value="Salle de bain">Salle de bain</option>
+        </select>
+      </label>
+      <label>Horaire de fonctionnement (Lumière) ou Température cible (Thermostat):
+        <input type="time" id="schedule" />
+      </label>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+
+    <h2>Liste des objets connectés</h2>
+    <div id="deviceList" class="grid-lieux"></div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 - SmartCity | Gestion des objets connectés</p>
+  </footer>
+
+  <!-- Modal de modification -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <h2>Modifier l'objet connecté</h2>
+      <form id="editForm">
+        <label>Nom:
+          <input type="text" id="editName" />
+        </label>
+        <label>Description:
+          <textarea id="editDescription"></textarea>
+        </label>
+        <label>Statut:
+          <select id="editStatus">
+            <option value="activé">Activé</option>
+            <option value="désactivé">Désactivé</option>
+          </select>
+        </label>
+        <label>Paramètres (Luminosité):
+          <input type="range" id="editParameters" min="0" max="100" />
+          <span id="paramValue">50%</span>
+        </label>
+        <label>Zone / Pièce:
+          <select id="editZone">
+            <option value="Salon">Salon</option>
+            <option value="Cuisine">Cuisine</option>
+            <option value="Chambre">Chambre</option>
+            <option value="Salle de bain">Salle de bain</option>
+          </select>
+        </label>
+        <label>Horaire de fonctionnement (Lumière) ou Température cible (Thermostat):
+          <input type="time" id="editSchedule" />
+        </label>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="button" class="btn btn-tertiary" onclick="closeEditModal()">Annuler</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('addForm');
+    const deviceList = document.getElementById('deviceList');
+    let currentEditingIndex = null;
+
+    let devices = [
+      {
+        name: "Capteurs de qualité de l'air",
+        description: "Mesurent les niveaux de pollution, CO2, particules fines, etc.",
+        status: "activé",
+        parameters: 50,
+        zone: "Salon",
+        schedule: "08:00"
+      },
+      {
+        name: "Feux de circulation intelligents",
+        description: "Adaptent la signalisation en fonction du trafic en temps réel.",
+        status: "activé",
+        parameters: 30,
+        zone: "Extérieur",
+        schedule: "19:00"
+      },
+      {
+        name: "Lampadaires intelligents",
+        description: "Ajustent l’intensité lumineuse selon l’heure, la météo ou la présence de piétons.",
+        status: "activé",
+        parameters: 75,
+        zone: "Jardin",
+        schedule: "20:30"
+      },
+      {
+        name: "Poubelles connectées",
+        description: "Préviennent automatiquement les services municipaux lorsqu’elles sont pleines.",
+        status: "activé",
+        parameters: 80,
+        zone: "Extérieur",
+        schedule: "08:00"
+      },
+      {
+        name: "Bornes de recharge électrique intelligentes",
+        description: "Optimisent l'énergie et informent les usagers de la disponibilité.",
+        status: "activé",
+        parameters: 50,
+        zone: "Parking",
+        schedule: "09:00"
+      },
+      {
+        name: "Compteurs d'eau connectés",
+        description: "Permettent de suivre la consommation en temps réel et de détecter les fuites.",
+        status: "activé",
+        parameters: 90,
+        zone: "Cuisine",
+        schedule: "12:00"
+      },
+      {
+        name: "Compteurs d’électricité intelligents",
+        description: "Pour une gestion plus fine et plus durable de l’énergie.",
+        status: "activé",
+        parameters: 60,
+        zone: "Salon",
+        schedule: "15:00"
+      }
+    ];
+
+    function renderDevices() {
+      deviceList.innerHTML = '';
+      devices.forEach((device, index) => {
+        const card = document.createElement('div');
+        card.className = 'lieu-card';
+        card.innerHTML = `
+          <h3>${device.name}</h3>
+          <p>${device.description}</p>
+          <p><strong>Statut:</strong> ${device.status}</p>
+          <p><strong>Paramètres:</strong> <span>${device.parameters}%</span></p>
+          <p><strong>Zone:</strong> ${device.zone}</p>
+          <p><strong>Horaire/Température:</strong> ${device.schedule}</p>
+          <button class="btn btn-secondary" onclick="toggleStatus(${index})">Activer/Désactiver</button>
+          <button class="btn btn-primary" onclick="openEditModal(${index})">Modifier</button>
+        `;
+        deviceList.appendChild(card);
+      });
+    }
+
+    function toggleStatus(index) {
+      devices[index].status = devices[index].status === 'activé' ? 'désactivé' : 'activé';
+      renderDevices();
+    }
+
+    function openEditModal(index) {
+      currentEditingIndex = index;
+      const device = devices[index];
+      document.getElementById('editName').value = device.name;
+      document.getElementById('editDescription').value = device.description;
+      document.getElementById('editStatus').value = device.status;
+      document.getElementById('editParameters').value = device.parameters;
+      document.getElementById('paramValue').textContent = device.parameters + "%";
+      document.getElementById('editZone').value = device.zone;
+      document.getElementById('editSchedule').value = device.schedule;
+
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    document.getElementById('editForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const newName = document.getElementById('editName').value;
+      const newDescription = document.getElementById('editDescription').value;
+      const newStatus = document.getElementById('editStatus').value;
+      const newParameters = document.getElementById('editParameters').value;
+      const newZone = document.getElementById('editZone').value;
+      const newSchedule = document.getElementById('editSchedule').value;
+
+      devices[currentEditingIndex].name = newName;
+      devices[currentEditingIndex].description = newDescription;
+      devices[currentEditingIndex].status = newStatus;
+      devices[currentEditingIndex].parameters = newParameters;
+      devices[currentEditingIndex].zone = newZone;
+      devices[currentEditingIndex].schedule = newSchedule;
+
+      renderDevices();
+      closeEditModal();
+    });
+
+    document.getElementById('addForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const description = document.getElementById('description').value;
+      const status = document.getElementById('status').value;
+      const parameters = document.getElementById('parameters').value;
+      const zone = document.getElementById('zone').value;
+      const schedule = document.getElementById('schedule').value;
+
+      devices.push({
+        name,
+        description,
+        status,
+        parameters,
+        zone,
+        schedule
+      });
+
+      renderDevices();
+      form.reset();
+    });
+
+    renderDevices();
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - Concert de Jazz au Parc Lidia Poët</title>
+    <link rel="stylesheet" href="../../assets/styles/evenements.css">
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <div class="container">
+            <a href="../index.html" class="navbar-brand">Événements Valmont</a>
+            <div class="navbar-links">
+                <a href="#">Accueil</a>
+                <a href="#">À propos</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="navbar-actions">
+                <input type="text" class="search-bar" placeholder="Rechercher un événement...">
+                <button class="btn-search">Rechercher</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Réservation -->
+    <div class="container">
+        <h1>Réservation pour le Concert de Jazz au Parc Lidia Poët</h1>
+
+        <div class="event-detail">
+            <h2>Concert de Jazz au Parc Lidia Poët</h2>
+            <p><strong>Date :</strong> 5 avril 2025</p>
+            <p><strong>Lieu :</strong> Parc Lidia Poët, Valmont</p>
+
+            <form action="confirmation.html" method="POST">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="nb_places">Nombre de places :</label>
+                <input type="number" id="nb_places" name="nb_places" min="1" required>
+
+                <button type="submit" class="btn btn-primary">Confirmer la réservation</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

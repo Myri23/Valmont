@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - Accueil</title>
+    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <style>
+        .dropdown-list {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="#lieux">Lieux d'intérêt</a>
+                <a class="nav-link" href="#evenements">Événements</a>
+                <a class="nav-link" href="#transports">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="#" class="btn btn-secondary">S'inscrire</a>
+                <a href="#" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-video">
+        <video autoplay muted loop playsinline class="video-background">
+            <source src="assets/video/valmont.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+        <div class="hero-content">
+            <h1>Bienvenue sur Valmont</h1>
+            <p>Explorez les informations locales et restez à jour sur votre ville connectée.</p>
+            <a href="#lieux" class="btn btn-header">Découvrir</a>
+        </div>
+    </header>
+    
+
+    <section id="lieux" class="container">
+        <h2>Lieux d'Intérêt</h2>
+        <p>Découvrez les musées, parcs, restaurants et bibliothèques à proximité.</p>
+        <a href="#" class="btn btn-primary">Explorer les lieux</a>
+    </section>
+
+    <section id="evenements" class="container">
+        <h2>Événements Locaux</h2>
+        <p>Restez informé des festivals, marchés et concerts à venir.</p>
+        <a href="#" class="btn btn-primary">Voir les événements</a>
+    </section>
+
+    <section id="transports" class="container">
+        <h2>Transports Publics</h2>
+        <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
+        <button class="btn btn-primary" onclick="toggleDropdown()">Consulter les horaires</button>
+
+        <div id="dropdown" class="dropdown-list">
+            <a class="btn btn-transport" href="pages/transport/bus.html">Bus</a></br>
+            <a class="btn btn-transport" href="pages/transport/tram.html">TramWay</a></br>
+            <a class="btn btn-transport" href="pages/transport/metro.html">Metro</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

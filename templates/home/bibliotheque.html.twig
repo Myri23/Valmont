@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - Bibliothèques</title>
+    <link rel="stylesheet" href="../../assets/styles/bibliotheque.css">
+    <style>
+        .biblio-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .biblio-card img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-right: 20px;
+            flex: 1;
+        }
+
+        .biblio-info {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .biblio-info h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="../index.html">Accueil</a>
+                <a class="nav-link active" href="#">Lieux d'intérêt</a>
+                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="#" class="btn btn-secondary">S'inscrire</a>
+                <a href="#" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Les Bibliothèques de Valmont</h1>
+        <p>Des lieux calmes et inspirants pour lire, apprendre et se cultiver.</p>
+    </header>
+
+    <section class="container">
+
+        <div class="biblio-card">
+            <img src="../assets/images/bibliotheque_taverny.jpg" alt="Bibliothèque centrale">
+            <div class="biblio-info">
+                <h3>Bibliothèque Centrale</h3>
+                <p>Le plus grand centre de lecture publique de Valmont, avec un large choix de livres, de périodiques et d'espaces de travail collaboratif.</p>
+                <a href="#" class="btn btn-primary">Accéder au catalogue</a>
+
+                <section id="coup-de-coeur">
+                    <h2>❤️ Les coups de cœur des bibliothécaires</h2>
+                
+                    <div class="cadre">
+                        <p><strong>"Chanson douce"</strong> de Leïla Slimani</p>
+                        <p>Un roman glaçant et captivant, récompensé par le prix Goncourt, que toute l'équipe recommande pour sa plume fine et sa réflexion percutante sur la maternité et les rapports sociaux.</p>
+                    </div>
+                
+                    <div class="cadre">
+                        <p><strong>"La Peste"</strong> d'Albert Camus</p>
+                        <p>Un classique indémodable qui interroge notre rapport à la solidarité, à la mort, et à la résilience collective dans un contexte de crise sanitaire.</p>
+                    </div>
+                
+                    <div class="cadre">
+                        <p><strong>"L'Art de la joie"</strong> de Goliarda Sapienza</p>
+                        <p>Une fresque puissante et féministe sur le destin d'une femme libre dans une Italie marquée par les soubresauts du XXe siècle. Inoubliable.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="biblio-card">
+            <img src="../assets/images/mediatheque.jpg" alt="Médiathèque Jeunesse">
+            <div class="biblio-info">
+                <h3>Médiathèque Jeunesse</h3>
+                <p>Un espace ludique et éducatif pour les enfants et les adolescents, avec des animations régulières, des jeux, et une grande collection jeunesse.</p>
+                <div class="cadre">
+                    <h2>Rendez-vous réguliers</h2>
+                    <ul>
+                        <li>📖 Heure du conte : chaque mercredi à 15h</li>
+                        <li>🎨 Ateliers créatifs : le samedi matin, une fois par mois</li>
+                        <li>🎲 Tournoi de jeux de société : pendant les vacances scolaires</li>
+                        <li>📚 Club lecture ados : chaque premier jeudi du mois</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="biblio-card">
+            <img src="../assets/images/bibliotheque_universite.jpg" alt="Bibliothèque Universitaire">
+            <div class="biblio-info">
+                <h3>Bibliothèque Universitaire</h3>
+                <p>Un espace chaleureux pour lire au calme entre deux cours ou emprunter rapidement un ouvrage sans traverser le campus. La BU de proximité idéale pour allier efficacité et sérénité.</p>
+                <div class="cadre">
+                    <h2>Horaires d'ouverture</h2>
+                    <ul>
+                        <li>Lundi à vendredi : 8h30 - 20h</li>
+                        <li>Samedi : 9h - 18h</li>
+                        <li>Fermée le dimanche et les jours fériés</li>
+                    </ul>
+                </div>
+                <div class="cadre">
+                    <h2>Accès</h2>
+                    <p>La bibliothèque est située dans le bâtiment C du campus, au rez-de-chaussée. Elle est accessible à pied, à vélo ou via la navette universitaire. Stationnement vélo et consignes disponibles à l'entrée.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+</body>
+</html>

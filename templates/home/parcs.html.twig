@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - Parcs</title>
+    <link rel="stylesheet" href="../../assets/styles/lieux_interet.css">
+    <style>
+        .parc-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .parc-card img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-right: 20px;
+            flex: 1;
+        }
+
+        .parc-info {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .parc-info h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="../index.html">Accueil</a>
+                <a class="nav-link active" href="#">Lieux d'intérêt</a>
+                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="#" class="btn btn-secondary">S'inscrire</a>
+                <a href="#" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Les Parcs de Valmont</h1>
+        <p>Profitez des espaces verts de la ville pour vous détendre, faire du sport ou vous promener.</p>
+    </header>
+
+    <section class="container">
+
+        <div class="parc-card">
+            <img src="../assets/images/parc_MLK.jpg" alt="Parc Lidia Poët">
+            <div class="parc-info">
+                <h3>Parc Lidia Poët</h3>
+                <p>Le cœur vert de Valmont. Ce parc offre de vastes pelouses, des aires de jeux pour enfants, un lac artificiel et une piste cyclable. Parfait pour toute la famille.</p>
+                <div class="cadre">
+                    <p><strong>Horaires :</strong> Tous les jours de 7h à 21h</p>
+                    <p><strong>Accès :</strong> Entrées par l'avenue des Peupliers et la rue des Érables. Parking et accès vélo disponibles.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="parc-card">
+            <img src="../assets/images/parc_chanteraines.jpeg" alt="Parc Rosa Park">
+            <div class="parc-info">
+                <h3>Parc Rosa Park</h3>
+                <p>Un havre de paix avec des milliers d'espèces végétales, des serres tropicales, et des parcours éducatifs pour mieux comprendre la biodiversité locale et exotique.</p>
+                <div class="cadre">
+                    <p><strong>Horaires :</strong> Lundi à samedi : 8h - 20h | Dimanche : 9h - 18h</p>
+                    <p><strong>Accès :</strong> Entrée principale sur le boulevard des Jardins. Tram ligne 2, arrêt \"Serres\".</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="parc-card">
+            <img src="../assets/images/parc_arg.jpg" alt="Parc des Libellules">
+            <div class="parc-info">
+                <h3>Parc des Libellules</h3>
+                <p>Situé sur les hauteurs de la ville, ce parc offre une vue panoramique sur Valmont. Sentiers de randonnée, zones boisées et belvédères y attendent les amoureux de la nature.</p>
+                <div class="cadre">
+                    <p><strong>Horaires :</strong> Tous les jours de 6h30 à 21h</p>
+                    <p><strong>Accès :</strong> Sentier du Belvédère ou route des Pins. Parking au sud du parc.</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="parc-card">
+            <img src="../assets/images/square_batignolles.jpg" alt="Square Marie Curie">
+            <div class="parc-info">
+                <h3>Square Marie Curie</h3>
+                <p>Un square paisible en plein cœur de la ville, parfait pour une pause au vert entre deux rendez-vous.</p>
+                <div class="cadre">
+                    <p><strong>Horaires :</strong> Tous les jours de 8h à 20h</p>
+                    <p><strong>Accès :</strong> Place des Sciences, à proximité de la station de métro Curie.</p>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+</body>
+</html>
