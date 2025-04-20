@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réservation - Concert de Jazz au Parc Lidia Poët</title>
-    <link rel="stylesheet" href="../../assets/styles/evenements.css">
+    <link rel="stylesheet" href="{{ asset('styles/evenements.css') }}">
+
 </head>
 <body>
 
-    <!-- Barre de navigation -->
-    <div class="navbar">
-        <div class="container">
-            <a href="../index.html" class="navbar-brand">Événements Valmont</a>
+    <nav class="navbar">
+        <div class="container-nav">
+            <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a href="#">Accueil</a>
-                <a href="#">À propos</a>
-                <a href="#">Contact</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
             </div>
             <div class="navbar-actions">
-                <input type="text" class="search-bar" placeholder="Rechercher un événement...">
-                <button class="btn-search">Rechercher</button>
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!-- Section Réservation -->
     <div class="container">

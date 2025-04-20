@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horaires du Bus</title>
-    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
 </head>
 <body>
+
+    <nav class="navbar">
+        <div class="container-nav">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
 
 <header>
     <h1>Horaires du Bus</h1>
@@ -22,7 +40,7 @@
     
     <p>Pour connaître les itinéraires, veuillez consulter les plans disponibles dans les arrêts.</p>
 
-    <a class="btn btn-primary" href="../../index.html">Retour à l'accueil</a>
+    <a class="btn btn-primary" href="{{ path('index') }}">Retour à l'accueil</a>
 </section>
 
 </body>

@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valmont - Lieux d'intérêt</title>
-    <link rel="stylesheet" href="../../assets/styles/objets.css">
+    <link rel="stylesheet" href="{{ asset('styles/objets.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a class="nav-link" href="../index.html">Accueil</a>
-                <a class="nav-link active" href="#">Lieux d'intérêt</a>
-                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
                 <a class="nav-link" href="#">Transports</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="#" class="btn btn-secondary">S'inscrire</a>
-                <a href="#" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
     </nav>

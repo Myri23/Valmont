@@ -1,55 +1,78 @@
+/* Styles généraux */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #CAD2C5;
-    color: #2F3D46;
+    background-color: #CAD2C5;  /* Vert pâle */
+    color: #2F3D46;  /* Vert très foncé pour le texte */
     line-height: 1.6;
 }
 
-h1, h2, h3 {
-    color: #354E52;
-    margin-bottom: 15px;
+header, section {
+    padding: 20px;
 }
 
-.navbar {
+/* Header simple (si jamais tu en as besoin ailleurs, sinon supprime) */
+header:not(.hero-video) {
+    background-color: #84A98D;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+
+footer {
     background-color: #354E52;
-    padding: 15px 0;
-    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+h1, h2, h3 {
+    color: #354E52;  /* Vert foncé pour les titres */
+    margin-bottom: 20px;
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #354E52;  /* Vert foncé */
     position: sticky;
     top: 0;
-    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.navbar .container {
+.navbar .container-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 80px;
+    background-color: transparent;
 }
 
-.navbar-brand {
+.navbar .navbar-brand {
     font-size: 1.8rem;
     color: white;
     font-weight: bold;
     text-decoration: none;
 }
 
+.navbar-links {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
 .navbar-links a {
     color: white;
-    margin-left: 20px;
     text-decoration: none;
     font-size: 1rem;
-    padding: 8px 15px;
+    padding: 10px 25px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .navbar-links a:hover {
-    background-color: #527970;
+    background-color: #527970;  /* Vert moyen pour le survol */
     color: #CAD2C5;
 }
 
@@ -61,16 +84,49 @@ h1, h2, h3 {
 .search-bar {
     padding: 8px 12px;
     border-radius: 20px;
-    border: 2px solid #527970;
+    border: 2px solid #527970;  /* Vert moyen */
     margin-right: 10px;
     background-color: white;
     width: 200px;
 }
 
+/* Boutons */
+.btn-primary {
+    all: unset;
+    background-color: #84A98D;  /* Vert doux */
+    display: inline-block;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.2s;
+    margin: 10px 0;
+}
+
+.btn-header {
+    display: block;
+    margin: 20px auto;
+    margin-bottom: 0px;
+    width: fit-content;
+    background-color: #84A98D;
+    border: 1px solid white;
+}
+
+.btn-header:hover {
+    color: #84A98D;
+    background-color: white;
+    border: 1px solid #84A98D;
+}
+
 .btn-search {
     padding: 8px 20px;
     border-radius: 20px;
-    background-color: #84A98D;
+    background-color: #84A98D;  /* Vert doux */
     border: none;
     color: white;
     cursor: pointer;
@@ -78,25 +134,25 @@ h1, h2, h3 {
 }
 
 .btn-search:hover {
-    background-color: #527970;
+    background-color: #527970;  /* Vert moyen */
+    transform: translateY(-2px);
 }
 
-.btn-secondary, .btn-tertiary {
-    padding: 8px 20px;
-    border-radius: 20px;
-    margin-left: 10px;
-    background-color: transparent;
-    border: 2px solid white;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
+.btn-primary:hover {
+    transform: translateY(-2px);
 }
 
-.btn-secondary:hover,
+.btn-secondary, 
+.btn-tertiary {
+    border: 1px solid white;
+    margin-left: 20px;
+}
+
+.btn-secondary:hover, 
 .btn-tertiary:hover {
     background-color: white;
     color: #354E52;
+    border: 1px solid #354E52;
 }
 
 header {

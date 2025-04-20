@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival de Talents</title>
+    <link rel="stylesheet" href="{{ asset('styles/evenements.css') }}">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-nav">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
+                <a class="nav-link" href="#">Transports</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Section Inscription -->
+    <div class="container">
+        <h1>Inscris-toi pour montrer ton talent !</h1>
+
+        <div class="event-detail">
+            <h2>Festival de Talents</h2>
+            <p><strong>Date :</strong> 19 avril 2025</p>
+            <p><strong>Lieu :</strong> Place Hypatie, Valmont</p>
+
+            <form action="confirmation.html" method="POST">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="nb_places">Nombre de places :</label>
+                <input type="number" id="nb_places" name="nb_places" min="1" required>
+
+                <button type="submit" class="btn btn-primary">Confirmer la réservation</button>
+            </form>
+        </div>
+    </div>

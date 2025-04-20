@@ -8,6 +8,26 @@ body {
     line-height: 1.6;
 }
 
+header, section {
+    padding: 20px;
+}
+
+/* Header simple (si jamais tu en as besoin ailleurs, sinon supprime) */
+header:not(.hero-video) {
+    background-color: #84A98D;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+
+footer {
+    background-color: #354E52;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
 h1, h2 {
     color: #354E52;  /* Vert foncé pour les titres */
     margin-bottom: 20px;
@@ -16,23 +36,16 @@ h1, h2 {
 /* Barre de navigation */
 .navbar {
     background-color: #354E52;  /* Vert foncé */
-    padding: 15px 0;  /* Ajustement pour toute la largeur */
-    width: 100%;
     position: sticky;
     top: 0;
-    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.navbar .container {
+.navbar .container-nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 80px;
     background-color: transparent;
-    box-shadow: none;
 }
 
 .navbar .navbar-brand {
@@ -45,14 +58,15 @@ h1, h2 {
 .navbar-links {
     display: flex;
     align-items: center;
+    margin-right: 50px;
+    margin-left: 50px;
 }
 
 .navbar-links a {
     color: white;
-    margin-left: 20px;
     text-decoration: none;
     font-size: 1rem;
-    padding: 8px 15px;
+    padding: 10px 25px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -76,6 +90,39 @@ h1, h2 {
     width: 200px;
 }
 
+/* Boutons */
+.btn-primary {
+    all: unset;
+    background-color: #84A98D;  /* Vert doux */
+    display: inline-block;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.2s;
+    margin: 10px 0;
+}
+
+.btn-header {
+    display: block;
+    margin: 20px auto;
+    margin-bottom: 0px;
+    width: fit-content;
+    background-color: #84A98D;
+    border: 1px solid white;
+}
+
+.btn-header:hover {
+    color: #84A98D;
+    background-color: white;
+    border: 1px solid #84A98D;
+}
+
 .btn-search {
     padding: 8px 20px;
     border-radius: 20px;
@@ -88,6 +135,24 @@ h1, h2 {
 
 .btn-search:hover {
     background-color: #527970;  /* Vert moyen */
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-secondary, 
+.btn-tertiary {
+    border: 1px solid white;
+    margin-left: 20px;
+}
+
+.btn-secondary:hover, 
+.btn-tertiary:hover {
+    background-color: white;
+    color: #354E52;
+    border: 1px solid #354E52;
 }
 
 /* Boutons */

@@ -1,10 +1,9 @@
-{# templates/home/formulaire.html.twig #}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Formulaire</title>
+    <title>Valmont - Connexion</title>
     <link rel="stylesheet" href="{{ asset('styles/formulaire.css') }}">
 </head>
 <body>
@@ -13,7 +12,7 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
                 <a class="nav-link" href="{{ path('event') }}">Événements</a>
                 <a class="nav-link" href="#">Transports</a>
             </div>
@@ -21,37 +20,25 @@
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
                 <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary active">Se connecter</a>
             </div>
         </div>
     </nav>
 
-    <!-- Formulaire -->
+    <!-- Formulaire de connexion -->
     <div id="formulaire">
-        <h2>S'inscrire :</h2>
-        
+        <h2>Se connecter :</h2>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
         {{ form_start(form) }}
         <fieldset>
-
             {{ form_row(form.pseudo) }}
-            {{ form_row(form.age) }}
-            {{ form_label(form.genre) }}
-            {{ form_widget(form.genre) }}
-
-            {{ form_row(form.dateNaissance) }}
-
-            {{ form_label(form.typeMembre) }}
-            {{ form_widget(form.typeMembre) }}
-
-            {{ form_row(form.image) }}
-
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
             {{ form_row(form.motDePasse) }}
 
-            <button type="submit">Envoyer</button>
+            <button type="submit">Se connecter</button>
             <button type="reset">Réinitialiser</button>
-
         </fieldset>
         {{ form_end(form) }}
     </div>

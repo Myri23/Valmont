@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valmont - Bibliothèques</title>
-    <link rel="stylesheet" href="../../assets/styles/bibliotheque.css">
+    <link rel="stylesheet" href="{{ asset('styles/bibliotheque.css') }}">
+
     <style>
         .biblio-card {
             background-color: #ffffff;
@@ -36,19 +37,19 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a class="nav-link" href="../index.html">Accueil</a>
-                <a class="nav-link active" href="#">Lieux d'intérêt</a>
-                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
                 <a class="nav-link" href="#">Transports</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="#" class="btn btn-secondary">S'inscrire</a>
-                <a href="#" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -61,11 +62,11 @@
     <section class="container">
 
         <div class="biblio-card">
-            <img src="../assets/images/bibliotheque_taverny.jpg" alt="Bibliothèque centrale">
+            <img src="{{ asset('images/bibliotheque_taverny.jpg') }}" alt="Bibliothèque centrale">
             <div class="biblio-info">
                 <h3>Bibliothèque Centrale</h3>
                 <p>Le plus grand centre de lecture publique de Valmont, avec un large choix de livres, de périodiques et d'espaces de travail collaboratif.</p>
-                <a href="#" class="btn btn-primary">Accéder au catalogue</a>
+                <a href="#" class="btn btn-primary">Ajouter un coup de coeur</a> 
 
                 <section id="coup-de-coeur">
                     <h2>❤️ Les coups de cœur des bibliothécaires</h2>
@@ -89,7 +90,7 @@
         </div>
 
         <div class="biblio-card">
-            <img src="../assets/images/mediatheque.jpg" alt="Médiathèque Jeunesse">
+            <img src="{{ asset('images/mediatheque.jpg') }}"  alt="Médiathèque Jeunesse">
             <div class="biblio-info">
                 <h3>Médiathèque Jeunesse</h3>
                 <p>Un espace ludique et éducatif pour les enfants et les adolescents, avec des animations régulières, des jeux, et une grande collection jeunesse.</p>
@@ -106,7 +107,7 @@
         </div>
 
         <div class="biblio-card">
-            <img src="../assets/images/bibliotheque_universite.jpg" alt="Bibliothèque Universitaire">
+            <img src="{{ asset('images/bibliotheque_universite.jpg') }}"  alt="Bibliothèque Universitaire">
             <div class="biblio-info">
                 <h3>Bibliothèque Universitaire</h3>
                 <p>Un espace chaleureux pour lire au calme entre deux cours ou emprunter rapidement un ouvrage sans traverser le campus. La BU de proximité idéale pour allier efficacité et sérénité.</p>

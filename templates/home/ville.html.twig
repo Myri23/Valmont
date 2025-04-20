@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmont - La Ville</title>
+    <link rel="stylesheet" href="{{ asset('styles/ville.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container-nav">
+            <a class="navbar-brand" href="#">Valmont</a>
+            <div class="navbar-links">
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
+                <a class="nav-link active" href="#">La Ville</a>
+            </div>
+            <div class="navbar-actions">
+                <input class="search-bar" type="search" placeholder="Rechercher">
+                <button class="btn btn-search">Rechercher</button>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Bienvenue à Valmont</h1>
+        <p>Une ville connectée, dynamique et tournée vers l’avenir.</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>À propos de Valmont</h2>
+            <p>Située entre mer et collines, Valmont est une ville à taille humaine où il fait bon vivre. Connue pour ses parcs verdoyants, son patrimoine culturel riche et son engagement pour le développement durable, elle accueille chaque année des milliers de visiteurs et nouveaux habitants.</p>
+        </section>
+
+        <section class="card">
+            <h2>Informations pratiques</h2>
+            <ul>
+                <li><strong>Population :</strong> environ 35 000 habitants</li>
+                <li><strong>Code postal :</strong> 12345</li>
+                <li><strong>Région :</strong> Île-de-France</li>
+                <li><strong>Maire :</strong> Sophie Lambert (mandat 2020–2026)</li>
+                <li><strong>Horaires de la mairie :</strong> Lundi à vendredi, 8h30–12h / 14h–17h30</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Nous contacter</h2>
+            <p>Pour toute question ou demande d'information, vous pouvez contacter les services suivants :</p>
+            <ul>
+                <li><strong>Myriam SAADI</strong> — Responsable communication<br>
+                    📧 <a href="mailto:myriam.saadi@etu.cyu.fr">myriam.saadi@ville-valmont.fr</a>
+                </li>
+                <li><strong>Inès RIBAR</strong> — Chargée de la culture<br>
+                    📧 <a href="mailto:ines.ribar@etu.cyu.fr">ines.ribar@ville-valmont.fr</a>
+                </li>
+                <li><strong>Abbess ZERROUKI</strong> — Responsable des transports<br>
+                    📧 <a href="mailto:abbess.zerrouki@etu.cyu.fr">abbess.zerrouki@ville-valmont.fr</a>
+                </li>
+                <li><strong>Ilian BALIT</strong> — Référent jeunesse et événements<br>
+                    📧 <a href="mailto:ilian.balit@etu.cyu.fr">ilian.balit@ville-valmont.fr</a>
+                </li>
+                <li><strong>Éléonore GEORGEL</strong> — Accueil et renseignements généraux<br>
+                    📧 <a href="mailto:eleonore.georgel@etu.cyu.fr">eleonore.georgel@ville-valmont.fr</a>
+                </li>
+            </ul>
+            <a href="mailto:myriam.saadi@etu.cyu.fr" class="btn btn-primary">Contact général</a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+</body>
+</html>

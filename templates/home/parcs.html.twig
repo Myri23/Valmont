@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valmont - Parcs</title>
-    <link rel="stylesheet" href="../../assets/styles/lieux_interet.css">
+    <link rel="stylesheet" href="{{ asset('styles/parcs.css') }}">
     <style>
         .parc-card {
             background-color: #ffffff;
@@ -36,19 +36,19 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a class="nav-link" href="../index.html">Accueil</a>
-                <a class="nav-link active" href="#">Lieux d'intérêt</a>
-                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
                 <a class="nav-link" href="#">Transports</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="#" class="btn btn-secondary">S'inscrire</a>
-                <a href="#" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -61,7 +61,7 @@
     <section class="container">
 
         <div class="parc-card">
-            <img src="../assets/images/parc_MLK.jpg" alt="Parc Lidia Poët">
+            <img src="{{ asset('images/parc_MLK.jpg') }}"  alt="Parc Lidia Poët">
             <div class="parc-info">
                 <h3>Parc Lidia Poët</h3>
                 <p>Le cœur vert de Valmont. Ce parc offre de vastes pelouses, des aires de jeux pour enfants, un lac artificiel et une piste cyclable. Parfait pour toute la famille.</p>
@@ -73,7 +73,7 @@
         </div>
     
         <div class="parc-card">
-            <img src="../assets/images/parc_chanteraines.jpeg" alt="Parc Rosa Park">
+            <img src="{{ asset('images/parc_chanteraines.jpeg') }}"  alt="Parc Rosa Park">
             <div class="parc-info">
                 <h3>Parc Rosa Park</h3>
                 <p>Un havre de paix avec des milliers d'espèces végétales, des serres tropicales, et des parcours éducatifs pour mieux comprendre la biodiversité locale et exotique.</p>
@@ -85,7 +85,7 @@
         </div>
     
         <div class="parc-card">
-            <img src="../assets/images/parc_arg.jpg" alt="Parc des Libellules">
+            <img src="{{ asset('images/parc_arg.jpg') }}"  alt="Parc des Libellules">
             <div class="parc-info">
                 <h3>Parc des Libellules</h3>
                 <p>Situé sur les hauteurs de la ville, ce parc offre une vue panoramique sur Valmont. Sentiers de randonnée, zones boisées et belvédères y attendent les amoureux de la nature.</p>
@@ -97,7 +97,7 @@
         </div>
     
         <div class="parc-card">
-            <img src="../assets/images/square_batignolles.jpg" alt="Square Marie Curie">
+            <img src="{{ asset('images/square_batignolles.jpg') }}"  alt="Square Marie Curie">
             <div class="parc-info">
                 <h3>Square Marie Curie</h3>
                 <p>Un square paisible en plein cœur de la ville, parfait pour une pause au vert entre deux rendez-vous.</p>

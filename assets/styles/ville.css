@@ -1,0 +1,187 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #CAD2C5;
+    color: #2F3D46;
+    line-height: 1.6;
+}
+
+header, section {
+    padding: 20px;
+}
+
+/* Header spécifique à la page "La Ville" */
+header.hero {
+    background-color: #84A98D;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+header.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+header.hero p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Cartes d'information */
+.card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+
+/* Titres */
+h1, h2 {
+    color: #354E52;
+    margin-bottom: 20px;
+}
+
+/* Liste d’infos */
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card li {
+    margin-bottom: 10px;
+}
+
+/* Bouton */
+.btn-primary {
+    background-color: #84A98D;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+}
+
+/* Barre de navigation */
+.navbar {
+    background-color: #354E52;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar .container-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px 25px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-links a:hover {
+    background-color: #527970;
+    color: #CAD2C5;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 2px solid #527970;
+    margin-right: 10px;
+    background-color: white;
+    width: 200px;
+}
+
+.btn-search {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #84A98D;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-search:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+}
+
+.btn-secondary,
+.btn-tertiary {
+    border: 1px solid white;
+    margin-left: 20px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover,
+.btn-tertiary:hover {
+    background-color: white;
+    color: #354E52;
+}
+
+/* Pied de page */
+.footer {
+    background-color: #354E52;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}

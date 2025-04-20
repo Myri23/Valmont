@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valmont - Restaurants</title>
-    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="{{ asset('styles/restaurants.css') }}">
     <style>
         .restaurant-card {
             background-color: #ffffff;
@@ -64,19 +64,19 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a class="nav-link" href="index.html">Accueil</a>
-                <a class="nav-link active" href="#">Lieux d'intérêt</a>
-                <a class="nav-link" href="#">Événements</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
+                <a class="nav-link" href="{{ path('event') }}">Événements</a>
                 <a class="nav-link" href="#">Transports</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="#" class="btn btn-secondary">S'inscrire</a>
-                <a href="#" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -89,47 +89,48 @@
     <section class="container">
 
         <div class="restaurant-card">
-            <img src="images/queen_resto.jpg" alt="Queen">
+            <img src="{{ asset('images/queen_resto.jpg') }}"  alt="Queen">
             <div class="restaurant-info">
                 <h3>Queen</h3>
                 <p>Restaurant raffiné avec une terrasse ensoleillée, proposant une cuisine française moderne à base de produits frais et locaux.</p>
                 <div class="menu-section">
-    <h4>Entrées</h4>
-    <div class="menu-item">
-        <strong>Œuf parfait, émulsion de cèpes — 18,00€</strong>
-        <span>Ingrédients : œuf bio, cèpes, crème, éclats de noisettes</span>
-    </div>
-    <div class="menu-item">
-        <strong>Langoustine rôtie, mousseline de petits pois — 24,00€</strong>
-        <span>Ingrédients : langoustines, petits pois frais, menthe, citron</span>
-    </div>
+                    <h4>Entrées</h4>
+                    <div class="menu-item">
+                        <strong>Œuf parfait, émulsion de cèpes — 18,00€</strong>
+                        <span>Ingrédients : œuf bio, cèpes, crème, éclats de noisettes</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Langoustine rôtie, mousseline de petits pois — 24,00€</strong>
+                        <span>Ingrédients : langoustines, petits pois frais, menthe, citron</span>
+                    </div>
 
-    <h4>Plats</h4>
-    <div class="menu-item">
-        <strong>Saint-Jacques snackées, risotto crémeux au safran — 32,00€</strong>
-        <span>Ingrédients : noix de Saint-Jacques, riz arborio, parmesan, safran</span>
-    </div>
-    <div class="menu-item">
-        <strong>Filet de bœuf Rossini, purée de topinambours — 36,00€</strong>
-        <span>Ingrédients : filet de bœuf, foie gras poêlé, topinambours, truffe</span>
-    </div>
+                    <h4>Plats</h4>
+                    <div class="menu-item">
+                        <strong>Saint-Jacques snackées, risotto crémeux au safran — 32,00€</strong>
+                        <span>Ingrédients : noix de Saint-Jacques, riz arborio, parmesan, safran</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Filet de bœuf Rossini, purée de topinambours — 36,00€</strong>
+                        <span>Ingrédients : filet de bœuf, foie gras poêlé, topinambours, truffe</span>
+                    </div>
 
-    <h4>Desserts</h4>
-<div class="menu-item">
-    <strong>Tarte fine aux poires et caramel au beurre salé — 12,00€</strong>
-    <span>Ingrédients : pâte feuilletée, poires pochées, caramel maison, crème chantilly</span>
-</div>
-<div class="menu-item">
-    <strong>Soufflé chaud au Grand Marnier — 14,00€</strong>
-    <span>Ingrédients : œufs, sucre, zestes d'orange, liqueur Grand Marnier</span>
-</div>
-</div>
+                    <h4>Desserts</h4>
+                <div class="menu-item">
+                    <strong>Tarte fine aux poires et caramel au beurre salé — 12,00€</strong>
+                    <span>Ingrédients : pâte feuilletée, poires pochées, caramel maison, crème chantilly</span>
+                </div>
+                <div class="menu-item">
+                    <strong>Soufflé chaud au Grand Marnier — 14,00€</strong>
+                    <span>Ingrédients : œufs, sucre, zestes d'orange, liqueur Grand Marnier</span>
+                </div>
+            </div>
+
                 <a href="#" class="btn btn-primary">Réserver une table</a>
             </div>
         </div>
 
         <div class="restaurant-card">
-            <img src="images/la_belle_epoque_resto.jpg" alt="Restaurant La Belle Epoque">
+            <img src="{{ asset('images/la_belle_epoque_resto.jpg') }}"  alt="Restaurant La Belle Epoque">
             <div class="restaurant-info">
                 <h3>La Belle Epoque</h3>
                 <p>Ambiance conviviale et cuisine du terroir au rendez-vous. Parfait pour un déjeuner entre amis ou un dîner en famille.</p>
@@ -169,7 +170,7 @@
         </div>
 
         <div class="restaurant-card">
-            <img src="images/la_petite_sirene_resto.jpg" alt="La petite Sirène">
+            <img src="{{ asset('images/la_petite_sirene_resto.jpg') }}"  alt="La petite Sirène">
             <div class="restaurant-info">
                 <h3>La Petite Sirène</h3>
                 <p>Un restaurant spécialisé dans les délices de la mer, des sushis aux fruits de mer grillés, le tout servi dans une atmosphère zen et raffinée.</p>
@@ -208,6 +209,9 @@
                         <span>Ingrédients : fromage frais, yuzu, biscuit sablé, chantilly</span>
                     </div>
                 </div>
+            <a href="#" class="btn btn-primary">Réserver une table</a>
+            </div>
+        </div>
 
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
