@@ -26,26 +26,36 @@
 
     <section class="container">
         <h2>Ajouter un objet connecté</h2>
+        {{ form_start(form) }}
+            {{ form_row(form.idUnique) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.marque) }}
+            {{ form_row(form.etat) }}
+            {{ form_row(form.localisation) }}
+            {{ form_row(form.derniereInteraction) }}
+            {{ form_row(form.connectivite) }}
+            {{ form_row(form.batteriePct) }}
+            {{ form_row(form.actif) }}
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        {{ form_end(form) }}
 
-    {{ form_start(form) }}
-        {{ form_row(form.idUnique) }}
-        {{ form_row(form.nom) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.marque) }}
-        {{ form_row(form.etat) }}
-        {{ form_row(form.localisation) }}
-        {{ form_row(form.derniereInteraction) }}
-        {{ form_row(form.connectivite) }}
-        {{ form_row(form.batteriePct) }}
-        {{ form_row(form.actif) }}
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    {{ form_end(form) }}
-</section>
+        <hr>
 
-<footer class="footer">
+        <h2>Ajouter une caméra de surveillance</h2>
+        {{ form_start(form_camera) }}
+            {{ form_row(form_camera.objet) }}
+            {{ form_row(form_camera.resolution) }}
+            {{ form_row(form_camera.detection_mouvement) }}
+            {{ form_row(form_camera.vision_nocturne) }}
+            {{ form_row(form_camera.angle_vision) }}
+            <button type="submit" class="btn btn-primary">Ajouter caméra</button>
+        {{ form_end(form_camera) }}
+    </section>
+
+    <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
-</footer>
-
+    </footer>
 </body>
 </html>

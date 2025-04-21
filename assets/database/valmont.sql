@@ -193,7 +193,7 @@ INSERT INTO HISTORIQUE_ACTIONS (utilisateur_id, type_action, details) VALUES
 (4, 'connexion', 'Connexion utilisateur'),
 (4, 'consultation_evenements', 'Consultation des événements à venir'),
 (5, 'connexion', 'Connexion utilisateur'),
-(5, 'recherche', 'Recherche d\'informations sur les transports');
+(5, 'recherche', 'Recherche informations sur les transports');
 
 -- Insertion des objets connectés
 INSERT INTO OBJET_CONNECTE (id_unique, nom, description, type, marque, etat, localisation, derniere_interaction, connectivite, batterie_pct, actif) VALUES
