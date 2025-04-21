@@ -1,5 +1,5 @@
 <?php
-// src/Controller/FormulaireController.php
+
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FormulaireController extends AbstractController
@@ -21,7 +22,7 @@ class FormulaireController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('image')->getData();
+            $imageFile = $form->get('photo_url')->getData();
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -33,11 +34,19 @@ class FormulaireController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Gérer l'erreur de téléchargement
+                    // Gérer l'erreur de téléchargement si nécessaire
                 }
 
-                $utilisateur->setImage($newFilename);
+                $utilisateur->setPhotoUrl($newFilename);
             }
+
+            // Champs non inclus dans le formulaire à remplir ici :
+            $utilisateur->setTypeUtilisateur('visiteur');
+            $utilisateur->setNiveauExperience('débutant');
+            $utilisateur->setPointsConnexion(0);
+            $utilisateur->setPointsConsultation(0);
+            $utilisateur->setCompteValide(false);
+            $utilisateur->setDateInscription(new \DateTime());
 
             $em->persist($utilisateur);
             $em->flush();
@@ -51,5 +60,3 @@ class FormulaireController extends AbstractController
         ]);
     }
 }
-
-

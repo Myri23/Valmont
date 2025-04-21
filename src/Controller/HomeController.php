@@ -69,12 +69,6 @@ class HomeController extends AbstractController
         return $this->render('home/festival_talent.html.twig');
     }
 
-    #[Route('/expo', name: 'expo')]
-    public function expo()
-    {
-        return $this->render('home/louaye_expo.html.twig');
-    }
-
     #[Route('/musees', name: 'musees')]
     public function musees()
     {
@@ -116,8 +110,26 @@ class HomeController extends AbstractController
     {
         return $this->render('home/chasse_oeufs.html.twig');
     }
-
-
+    
+    #[Route('/objets/ajouter', name: 'ajouter_objet')]
+    public function ajouter(Request $request, EntityManagerInterface $em): Response
+    {
+        $objet = new ObjetConnecte();
+        $form = $this->createForm(ObjetConnecteType::class, $objet);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($objet);
+            $em->flush();
+    
+            return $this->redirectToRoute('ajouter_objet');
+        }
+    
+        return $this->render('objets/ajouter_objet.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+   
 
 }
 

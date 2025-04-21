@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horaires du Métro</title>
-    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+    <title>Valmont - Lieux d'intérêt</title>
+    <link rel="stylesheet" href="{{ asset('styles/objets.css') }}">
 </head>
 <body>
-
     <nav class="navbar">
         <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
@@ -25,22 +24,28 @@
         </div>
     </nav>
 
-<header>
-    <h1>Horaires du Métro</h1>
-</header>
+    <section class="container">
+        <h2>Ajouter un objet connecté</h2>
 
-<section>
-    <h2>Horaires de fonctionnement :</h2>
-    <p>Le métro fonctionne tous les jours de la semaine avec les horaires suivants :</p>
-    <ul>
-        <li>Lundi - Dimanche : 05:30 - 00:30</li>
-        <li>Fréquence : 5 à 10 minutes en journée</li>
-    </ul>
-    
-    <p>Pour plus d'informations, contactez notre service clientèle ou consultez les panneaux d'information en station.</p>
-
-    <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
+    {{ form_start(form) }}
+        {{ form_row(form.idUnique) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.marque) }}
+        {{ form_row(form.etat) }}
+        {{ form_row(form.localisation) }}
+        {{ form_row(form.derniereInteraction) }}
+        {{ form_row(form.connectivite) }}
+        {{ form_row(form.batteriePct) }}
+        {{ form_row(form.actif) }}
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    {{ form_end(form) }}
 </section>
+
+<footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+</footer>
 
 </body>
 </html>

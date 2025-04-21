@@ -4,49 +4,52 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UtilisateurType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo')
-            ->add('age')
-            ->add('genre', ChoiceType::class, [
+            ->add('login', TextType::class)
+            ->add('mot_de_passe', PasswordType::class)
+            ->add('nom', TextType::class, [
+                'required' => false,
+            ])
+            ->add('prenom', TextType::class, [
+                'required' => false,
+            ])
+            ->add('date_naissance', DateType::class, [
+                'widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('sexe', ChoiceType::class, [
                 'choices' => [
                     'Homme' => 'homme',
                     'Femme' => 'femme',
+                    'Autre' => 'autre',
                 ],
-                'expanded' => true,
+                'required' => false,
             ])
-            ->add('dateNaissance', DateType::class, [
-                'widget' => 'single_text',
+            ->add('email', EmailType::class)
+            ->add('type_membre', TextType::class, [
+                'required' => false,
             ])
-            ->add('typeMembre', ChoiceType::class, [
-                'choices' => [
-                    'Développeur' => 'dev',
-                    'Testeur' => 'test',
-                    'Chef de Projet' => 'chef',
-                    'Directeur' => 'dir',
-                ],
-                'expanded' => true,
-            ])
-            ->add('image', FileType::class, [
+            ->add('photo_url', FileType::class, [
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('nom')
-            ->add('prenom')
-            ->add('motDePasse', PasswordType::class);
+        ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Utilisateur::class,

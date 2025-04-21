@@ -13,9 +13,8 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
-                <a class="nav-link" href="{{ path('event') }}">Événements</a>
-                <a class="nav-link" href="#">Transports</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
+                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
@@ -40,7 +39,7 @@
     
     <p>Vérifiez les panneaux en station pour toute mise à jour des horaires.</p>
 
-    <a class="btn btn-primary" href="{{ path('index') }}">Retour à l'accueil</a>
+    <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
 </section>
 
 </body>

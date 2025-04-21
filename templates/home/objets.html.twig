@@ -12,9 +12,8 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
-                <a class="nav-link" href="{{ path('event') }}">Événements</a>
-                <a class="nav-link" href="#">Transports</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
+                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
@@ -31,45 +30,14 @@
   </header>
 
   <section class="container">
-    <h2>Ajouter un objet connecté</h2>
-    <form id="addForm">
-      <label>Nom:
-        <input type="text" id="name" required />
-      </label>
-      <label>Description:
-        <textarea id="description"></textarea>
-      </label>
-      <label>Statut:
-        <select id="status">
-          <option value="activé">Activé</option>
-          <option value="désactivé">Désactivé</option>
-        </select>
-      </label>
-      <label>Paramètres (Luminosité):
-        <input type="range" id="parameters" min="0" max="100" />
-        <span id="paramValue">50%</span>
-      </label>
-      <label>Zone / Pièce:
-        <select id="zone">
-          <option value="Salon">Salon</option>
-          <option value="Cuisine">Cuisine</option>
-          <option value="Chambre">Chambre</option>
-          <option value="Salle de bain">Salle de bain</option>
-        </select>
-      </label>
-      <label>Horaire de fonctionnement (Lumière) ou Température cible (Thermostat):
-        <input type="time" id="schedule" />
-      </label>
-      <button type="submit" class="btn btn-primary">Ajouter</button>
-    </form>
+    <a href="{{ path('ajouter_objet') }}" class="btn btn-header">Ajouter un objet connecté</a>
+
 
     <h2>Liste des objets connectés</h2>
     <div id="deviceList" class="grid-lieux"></div>
   </section>
 
-  <footer class="footer">
-    <p>&copy; 2025 - SmartCity | Gestion des objets connectés</p>
-  </footer>
+
 
   <!-- Modal de modification -->
   <div id="editModal" class="modal">
@@ -262,4 +230,9 @@
     renderDevices();
   </script>
 </body>
+
+<footer class="footer">
+  <p>&copy; 2025 - SmartCity | Gestion des objets connectés</p>
+</footer>
+
 </html>

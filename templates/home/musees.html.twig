@@ -12,9 +12,8 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('lieux_interet') }}">Lieux d'intérêt</a>
-                <a class="nav-link" href="{{ path('event') }}">Événements</a>
-                <a class="nav-link" href="#">Transports</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
+                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
@@ -57,7 +56,7 @@
                 <h2>Musée du Citronnier</h2>
                 <p>Au cœur du Jardin des Pivoines, ce musée met en lumière les artistes locaux et internationaux à travers des expositions audacieuses et des installations modernes.</p>
                 <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
-                <a href="{{ path('expo') }}" class="btn btn-primary">Découvrir l'expositions du moment</a>
+                <a href="{{ path('expo_valmont') }}" class="btn btn-primary">En savoir plus</a>
             </div>
         </div>
     </section>
