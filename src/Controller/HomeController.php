@@ -5,6 +5,12 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\ObjetConnecte;
+use App\Form\ObjetConnecteType;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class HomeController extends AbstractController
 {
@@ -111,7 +117,7 @@ class HomeController extends AbstractController
         return $this->render('home/chasse_oeufs.html.twig');
     }
     
-    #[Route('/objets/ajouter', name: 'ajouter_objet')]
+    #[Route('/ajouter_objet', name: 'ajouter_objet')]
     public function ajouter(Request $request, EntityManagerInterface $em): Response
     {
         $objet = new ObjetConnecte();
@@ -125,7 +131,7 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('ajouter_objet');
         }
     
-        return $this->render('objets/ajouter_objet.html.twig', [
+        return $this->render('home/ajouter_objet.html.twig', [
             'form' => $form->createView(),
         ]);
     }
