@@ -1,4 +1,4 @@
-# README - CY City
+# README - Valmont
 
 ## 🌐 Présentation du projet
 
@@ -28,15 +28,15 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
 ### Étapes d'installation
 1. Clonez le dépôt Git :
     ```bash
-    git clone https://github.com/Myri23/CY_City.git
+    git clone https://github.com/Myri23/Valmont.git
     ```
 2. Ouvrez le dossier du projet dans votre éditeur :
     ```bash
-    cd CY_City
+    cd Valmont
     ```
 3. Lancez le site en ouvrant simplement :
    ```bash
-   index.html
+   templates/home/index.html
    ```
    (clic droit > Ouvrir avec > votre navigateur préféré)
 
