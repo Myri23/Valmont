@@ -21,27 +21,27 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
 
 ## Installation
 ### Prérequis
-- Avoir php installé (Version recommandé : PHP 8.1 ou plus). Tester avec :
+1. Avoir php installé (Version recommandé : PHP 8.1 ou plus). Tester avec :
     ```bash
     php -v
     ```
-- Avoir Composer installé. Composer gère les dépendances PHP. Tester avec :
+2. Avoir Composer installé. Composer gère les dépendances PHP. Tester avec :
     ```bash
     composer --version
     ```
-Sinon installer avec :
+- Sinon installer avec :
     ```bash
     sudo apt install composer
     ```
-- Installer symfony. Pour lancer le serveur local Symfony. Tester avec :
+3. Installer symfony. Pour lancer le serveur local Symfony. Tester avec :
     ```bash
     symfony -v
     ```
-Sinon installer avec :
+- Sinon installer avec :
     ```bash
     wget https://get.symfony.com/cli/installer -O - | bash
     ```
-Puis ajouter ceci au .bachrc ou .zshrc :
+- Puis ajouter ceci au .bachrc ou .zshrc :
     ```bash
     export PATH="$HOME/.symfony/bin:$PATH"
     ```    
