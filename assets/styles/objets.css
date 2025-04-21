@@ -1,65 +1,58 @@
-/* Styles généraux */
+/* === Reset et Styles généraux === */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #CAD2C5;  /* Vert pâle */
-  color: #2F3D46;  /* Vert très foncé pour le texte */
+  background-color: #CAD2C5; /* Vert pâle */
+  color: #2F3D46; /* Vert très foncé pour le texte */
   line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: #354E52; /* Vert foncé pour les titres */
+  margin-bottom: 20px;
 }
 
 header, section {
   padding: 20px;
 }
 
-/* Header simple (si jamais tu en as besoin ailleurs, sinon supprime) */
-header:not(.hero-video) {
-  background-color: #84A98D;
-  color: white;
-  text-align: center;
-  padding: 20px 20px;
-}
-
-
-footer {
+footer, .footer {
   background-color: #354E52;
   color: white;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  padding: 20px;
 }
 
-h1, h2, h3 {
-  color: #354E52;  /* Vert foncé pour les titres */
-  margin-bottom: 20px;
-}
-
-/* Barre de navigation */
+/* === Barre de navigation === */
 .navbar {
-  background-color: #354E52;  /* Vert foncé */
+  background-color: #354E52;
   position: sticky;
   top: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 10px 0px;
 }
 
-.navbar .container-nav {
+.container-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 80px;
-  background-color: transparent;
+  position: relative;
 }
 
-.navbar .navbar-brand {
+.navbar-brand {
   font-size: 1.8rem;
   color: white;
   font-weight: bold;
   text-decoration: none;
 }
 
+/* Liens de navigation */
 .navbar-links {
   display: flex;
   align-items: center;
-  margin-right: 50px;
-  margin-left: 50px;
+  gap: 1rem;
 }
 
 .navbar-links a {
@@ -72,49 +65,70 @@ h1, h2, h3 {
 }
 
 .navbar-links a:hover {
-  background-color: #527970;  /* Vert moyen pour le survol */
+  background-color: #527970;
   color: #CAD2C5;
 }
 
+/* === Actions dans la navbar === */
 .navbar-actions {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .search-bar {
   padding: 8px 12px;
   border-radius: 20px;
-  border: 2px solid #527970;  /* Vert moyen */
-  margin-right: 10px;
+  border: 2px solid #527970;
   background-color: white;
   width: 200px;
 }
 
-/* Boutons */
-.btn-primary {
-  all: unset;
-  background-color: #84A98D;  /* Vert doux */
-  display: inline-block;
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
 }
 
+.btn-secondary,
+.btn-tertiary {
+  border: 1px solid white;
+}
+
+.btn-secondary:hover,
+.btn-tertiary:hover {
+  background-color: white;
+  color: #354E52;
+  border: 1px solid #354E52;
+}
+
+/* === Boutons === */
 .btn {
   padding: 10px 20px;
   border-radius: 30px;
   text-decoration: none;
-  border: none;
   color: white;
   font-weight: bold;
   transition: transform 0.2s;
-  margin: 10px 0;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #84A98D;
+  margin-top: 10px;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #527970;
+  transform: translateY(-2px);
 }
 
 .btn-header {
-  display: block;
-  margin: 20px auto;
-  margin-bottom: 0px;
-  width: fit-content;
   background-color: #84A98D;
   border: 1px solid white;
+  margin: 20px auto 0;
+  display: block;
+  width: fit-content;
 }
 
 .btn-header:hover {
@@ -126,7 +140,7 @@ h1, h2, h3 {
 .btn-search {
   padding: 8px 20px;
   border-radius: 20px;
-  background-color: #84A98D;  /* Vert doux */
+  background-color: #84A98D;
   border: none;
   color: white;
   cursor: pointer;
@@ -134,126 +148,120 @@ h1, h2, h3 {
 }
 
 .btn-search:hover {
-  background-color: #527970;  /* Vert moyen */
+  background-color: #527970;
   transform: translateY(-2px);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
+/* === Contenu principal === */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
-.btn-secondary, 
-.btn-tertiary {
-  border: 1px solid white;
-  margin-left: 20px;
-}
-
-.btn-secondary:hover, 
-.btn-tertiary:hover {
+.card {
   background-color: white;
-  color: #354E52;
-  border: 1px solid #354E52;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
 }
-  
-  .hero {
-    background-color: #84A98D;
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  form label {
-    display: block;
-    margin: 10px 0;
-  }
-  
-  input[type="text"], textarea, select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-  }
-  
-  .grid-lieux {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .lieu-card {
-    background-color: #ffffff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .lieu-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  .lieu-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .lieu-card p {
-    margin: 8px 0;
-  }
-  
-  .footer {
-    background-color: #354E52;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-  }
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    padding-top: 60px;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
-  }
-  
-  .modal-content input[type="text"],
-  .modal-content textarea,
-  .modal-content select,
-  .modal-content input[type="range"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-  
-  .modal-content button {
-    margin-top: 10px;
-  }
-  
-  span {
-    font-size: 1.1em;
-    margin-left: 10px;
-  }
-    
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+
+/* === Formulaire et Grid === */
+form label {
+  display: block;
+  margin: 10px 0;
+}
+
+input[type="text"], textarea, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.grid-lieux {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.lieu-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lieu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.lieu-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.lieu-card p {
+  margin: 8px 0;
+}
+
+/* === Footer === */
+.footer {
+  background-color: #354E52;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+/* === Modal === */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content select,
+.modal-content input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+}
+
+span {
+  font-size: 1.1em;
+  margin-left: 10px;
+}

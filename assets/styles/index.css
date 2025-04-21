@@ -1,65 +1,58 @@
-/* Styles généraux */
+/* === Reset et Styles généraux === */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #CAD2C5;  /* Vert pâle */
-    color: #2F3D46;  /* Vert très foncé pour le texte */
+    background-color: #CAD2C5; /* Vert pâle */
+    color: #2F3D46; /* Vert très foncé pour le texte */
     line-height: 1.6;
+}
+
+h1, h2 {
+    color: #354E52; /* Vert foncé pour les titres */
+    margin-bottom: 20px;
 }
 
 header, section {
     padding: 20px;
 }
 
-/* Header simple (si jamais tu en as besoin ailleurs, sinon supprime) */
-header:not(.hero-video) {
-    background-color: #84A98D;
-    color: white;
-    text-align: center;
-    padding: 20px 20px;
-}
-
-
-footer {
+footer, .footer {
     background-color: #354E52;
     color: white;
-    display: flex;
-    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
 
-h1, h2 {
-    color: #354E52;  /* Vert foncé pour les titres */
-    margin-bottom: 20px;
-}
-
-/* Barre de navigation */
+/* === Barre de navigation === */
 .navbar {
-    background-color: #354E52;  /* Vert foncé */
+    background-color: #354E52;
     position: sticky;
     top: 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px 0px;
 }
 
-.navbar .container-nav {
+.container-nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 80px;
-    background-color: transparent;
+    position: relative;
 }
 
-.navbar .navbar-brand {
+.navbar-brand {
     font-size: 1.8rem;
     color: white;
     font-weight: bold;
     text-decoration: none;
 }
 
+/* Liens de navigation */
 .navbar-links {
     display: flex;
     align-items: center;
-    margin-right: 50px;
-    margin-left: 50px;
+    gap: 1rem;
 }
 
 .navbar-links a {
@@ -72,49 +65,85 @@ h1, h2 {
 }
 
 .navbar-links a:hover {
-    background-color: #527970;  /* Vert moyen pour le survol */
+    background-color: #527970;
     color: #CAD2C5;
 }
 
+/* === Actions dans la navbar === */
 .navbar-actions {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .search-bar {
     padding: 8px 12px;
     border-radius: 20px;
-    border: 2px solid #527970;  /* Vert moyen */
-    margin-right: 10px;
+    border: 2px solid #527970;
     background-color: white;
     width: 200px;
 }
 
-/* Boutons */
-.btn-primary {
-    all: unset;
-    background-color: #84A98D;  /* Vert doux */
-    display: inline-block;
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
 }
 
+.btn-secondary,
+.btn-tertiary {
+    border: 1px solid white;
+}
+
+.btn-secondary:hover,
+.btn-tertiary:hover {
+    background-color: white;
+    color: #354E52;
+    border: 1px solid #354E52;
+}
+
+/* === Boutons === */
 .btn {
     padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
-    border: none;
     color: white;
     font-weight: bold;
     transition: transform 0.2s;
-    margin: 10px 0;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #84A98D;
+    margin-top: 10px;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+}
+
+.btn-search {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: #84A98D;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-search:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
 }
 
 .btn-header {
-    display: block;
-    margin: 20px auto;
-    margin-bottom: 0px;
-    width: fit-content;
     background-color: #84A98D;
     border: 1px solid white;
+    margin: 20px auto 0;
+    display: block;
+    width: fit-content;
 }
 
 .btn-header:hover {
@@ -123,44 +152,26 @@ h1, h2 {
     border: 1px solid #84A98D;
 }
 
-.btn-search {
-    padding: 8px 20px;
+.btn-transport {
+    background-color: #E0E1DD;
+    color: #2F3D46;
+    padding: 10px 20px;
+    margin: 5px 0;
     border-radius: 20px;
-    background-color: #84A98D;  /* Vert doux */
-    border: none;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.btn-search:hover {
-    background-color: #527970;  /* Vert moyen */
-    transform: translateY(-2px);
+.btn-transport:hover {
+    background-color: #B5C4B1;
+    color: #1C1C1C;
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-}
-
-.btn-secondary, 
-.btn-tertiary {
-    border: 1px solid white;
-    margin-left: 20px;
-}
-
-.btn-secondary:hover, 
-.btn-tertiary:hover {
-    background-color: white;
-    color: #354E52;
-    border: 1px solid #354E52;
-}
-
-#dropdown {
-    margin-left: 20px;
-}
+/* === Hero avec vidéo === */
 .hero-video {
     position: relative;
-    height: 100vh; /* prend tout l'écran */
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -199,8 +210,7 @@ h1, h2 {
     margin-bottom: 30px;
 }
 
-
-/* Section centrale */
+/* === Contenu principal === */
 .container {
     max-width: 1200px;
     margin: auto;
@@ -219,47 +229,4 @@ h1, h2 {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 16px rgba(0,0,0,0.15);
-}
-
-.btn-primary {
-    background-color: #84A98D;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.btn-primary:hover {
-    background-color: #527970;
-    transform: translateY(-2px);
-}
-
-.btn-transport {
-    display: inline-block;
-    background-color: #E0E1DD;
-    color: #2F3D46; /* Gris-vert lisible */
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-transport:hover {
-    background-color: #B5C4B1; /* un peu plus foncé que le fond */
-    color: #1C1C1C; /* plus foncé que #2F3D46 pour un contraste renforcé */
-}
-
-
-/* Footer */
-.footer {
-    background-color: #354E52;
-    color: white;
-    text-align: center;
-    padding: 20px;
 }

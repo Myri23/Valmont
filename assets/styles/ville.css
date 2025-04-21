@@ -69,37 +69,21 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
-/* Bouton */
-.btn-primary {
-    background-color: #84A98D;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.btn-primary:hover {
-    background-color: #527970;
-    transform: translateY(-2px);
-}
-
-/* Barre de navigation */
+/* === Barre de navigation === */
 .navbar {
     background-color: #354E52;
     position: sticky;
     top: 0;
-    z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px 0px;
 }
 
-.navbar .container-nav {
+.container-nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 80px;
+    position: relative;
 }
 
 .navbar-brand {
@@ -109,11 +93,11 @@ h1, h2 {
     text-decoration: none;
 }
 
+/* Liens de navigation */
 .navbar-links {
     display: flex;
     align-items: center;
-    margin-left: 50px;
-    margin-right: 50px;
+    gap: 1rem;
 }
 
 .navbar-links a {
@@ -130,18 +114,58 @@ h1, h2 {
     color: #CAD2C5;
 }
 
+/* === Actions dans la navbar === */
 .navbar-actions {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .search-bar {
     padding: 8px 12px;
     border-radius: 20px;
     border: 2px solid #527970;
-    margin-right: 10px;
     background-color: white;
     width: 200px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-secondary,
+.btn-tertiary {
+    border: 1px solid white;
+}
+
+.btn-secondary:hover,
+.btn-tertiary:hover {
+    background-color: white;
+    color: #354E52;
+    border: 1px solid #354E52;
+}
+
+/* Bouton */
+.btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #84A98D;
+    margin-top: 10px;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
 }
 
 .btn-search {
@@ -157,25 +181,6 @@ h1, h2 {
 .btn-search:hover {
     background-color: #527970;
     transform: translateY(-2px);
-}
-
-.btn-secondary,
-.btn-tertiary {
-    border: 1px solid white;
-    margin-left: 20px;
-    padding: 8px 20px;
-    border-radius: 20px;
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-secondary:hover,
-.btn-tertiary:hover {
-    background-color: white;
-    color: #354E52;
 }
 
 /* Pied de page */
