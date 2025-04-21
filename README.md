@@ -21,9 +21,30 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
 
 ## Installation
 ### Prérequis
-- Un navigateur web moderne (Chrome, Firefox, Edge…)
-- Un éditeur de code (Visual Studio Code recommandé)
-- Git installé (facultatif mais utile pour suivre les modifications)
+1. Avoir php installé (Version recommandé : PHP 8.1 ou plus). Tester avec :
+    ```bash
+    php -v
+    ```
+2. Avoir Composer installé. Composer gère les dépendances PHP. Tester avec :
+    ```bash
+    composer --version
+    ```
+- Sinon installer avec :
+    ```bash
+    sudo apt install composer
+    ```
+3. Installer symfony. Pour lancer le serveur local Symfony. Tester avec :
+    ```bash
+    symfony -v
+    ```
+- Sinon installer avec :
+    ```bash
+    wget https://get.symfony.com/cli/installer -O - | bash
+    ```
+- Puis ajouter ceci au .bachrc ou .zshrc :
+    ```bash
+    export PATH="$HOME/.symfony/bin:$PATH"
+    ```    
 
 ### Étapes d'installation
 1. Clonez le dépôt Git :
@@ -34,11 +55,18 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
     ```bash
     cd Valmont
     ```
-3. Lancez le site en ouvrant simplement :
+3. Installer les dépendances avec Composer :
    ```bash
-   templates/home/index.html
+   composer install
    ```
-   (clic droit > Ouvrir avec > votre navigateur préféré)
+4. Lancer le serveur symfony:
+   ```bash
+   symfony serve
+   ```
+5. Puis aller sur : 
+    ```bash
+    https://127.0.0.1:8000
+    ```
 
 ---
 
