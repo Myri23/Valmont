@@ -49,7 +49,7 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
 ### Étapes d'installation
 1. Clonez le dépôt Git :
     ```bash
-    git clone https://github.com/Myri23/Valmont.git
+    git clone git@github.com:myri23/Valmont.git
     ```
 2. Ouvrez le dossier du projet dans votre éditeur :
     ```bash
