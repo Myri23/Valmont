@@ -1,4 +1,4 @@
-/* === Reset et Styles généraux === */
+/* === Styles généraux === */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,11 +13,11 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-header, section {
+section {
     padding: 20px;
 }
 
-footer, .footer {
+footer {
     background-color: #354E52;
     color: white;
     text-align: center;
@@ -69,7 +69,7 @@ footer, .footer {
     color: #CAD2C5;
 }
 
-/* === Actions dans la navbar === */
+/* === Barre de recherche === */
 .navbar-actions {
     display: flex;
     align-items: center;
@@ -82,45 +82,6 @@ footer, .footer {
     border: 2px solid #527970;
     background-color: white;
     width: 200px;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-secondary,
-.btn-tertiary {
-    border: 1px solid white;
-}
-
-.btn-secondary:hover,
-.btn-tertiary:hover {
-    background-color: white;
-    color: #354E52;
-    border: 1px solid #354E52;
-}
-
-/* === Boutons === */
-.btn {
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: transform 0.2s;
-    display: inline-block;
-}
-
-.btn-primary {
-    background-color: #84A98D;
-    margin-top: 10px;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #527970;
-    transform: translateY(-2px);
 }
 
 .btn-search {
@@ -138,40 +99,31 @@ footer, .footer {
     transform: translateY(-2px);
 }
 
-.btn-header {
-    background-color: #84A98D;
-    border: 1px solid white;
-    margin: 20px auto 0;
-    display: block;
-    width: fit-content;
+/* Boutons inscription/connexion */
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
 }
 
-.btn-header:hover {
-    color: #84A98D;
-    background-color: white;
-    border: 1px solid #84A98D;
-}
-
-.btn-transport {
-    background-color: #E0E1DD;
-    color: #2F3D46;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 20px;
+.btn-auth {
     text-decoration: none;
+    color: white;
     font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 10px 20px;
 }
 
-.btn-transport:hover {
-    background-color: #B5C4B1;
-    color: #1C1C1C;
+.btn-auth:hover {
+    background-color: white;
+    color: #354E52;
+    border: 1px solid #354E52;
 }
 
-/* === Hero avec vidéo === */
+/* Vidéo */
 .hero-video {
-    position: relative;
-    height: 100vh;
+    height: 90vh;
+    width: auto;
     overflow: hidden;
 }
 
@@ -186,8 +138,8 @@ footer, .footer {
     filter: brightness(70%);
 }
 
+/* Contenu sur la vidéo */
 .hero-content {
-    position: relative;
     z-index: 1;
     height: 100%;
     display: flex;
@@ -210,10 +162,30 @@ footer, .footer {
     margin-bottom: 30px;
 }
 
-/* === Contenu principal === */
+/* Bouton présent sur la vidéo */
+.btn-header {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: #84A98D;
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    transition: transform 0.2s;
+}
+
+.btn-header:hover {
+    color: #84A98D;
+    background-color: white;
+    border: 1px solid #84A98D;
+}
+
+/* Contenu principal */
 .container {
     max-width: 1200px;
     margin: auto;
+    margin-top: 50px;
     padding: 20px;
 }
 
@@ -227,6 +199,45 @@ footer, .footer {
 }
 
 .card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+
+/* Boutons */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #84A98D;
+    margin-top: 10px;
+}
+
+button.btn-primary {
+    padding: 15px 20px;
+}
+
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.btn-transport {
+    display: inline-block;
+    background-color: #E0E1DD;
+    color: #2F3D46;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-transport:hover {
+    background-color: #527970; 
+    transform: translateY(-2px);
 }
