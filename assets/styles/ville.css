@@ -1,72 +1,33 @@
-/* Styles généraux */
+/* === Styles généraux === */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #CAD2C5;
-    color: #2F3D46;
+    background-color: #CAD2C5; /* Vert pâle */
+    color: #2F3D46; /* Vert très foncé pour le texte */
     line-height: 1.6;
+}
+
+h1, h2 {
+    color: #354E52; /* Vert foncé pour les titres */
+    margin-bottom: 20px;
 }
 
 header, section {
     padding: 20px;
 }
 
-/* Header spécifique à la page "La Ville" */
-header.hero {
+header {
     background-color: #84A98D;
     color: white;
     text-align: center;
-    padding: 60px 20px;
 }
 
-header.hero h1 {
-    font-size: 2.8rem;
-    margin-bottom: 15px;
-}
-
-header.hero p {
-    font-size: 1.3rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Container principal */
-.container {
-    max-width: 1200px;
-    margin: auto;
+footer {
+    background-color: #354E52;
+    color: white;
+    text-align: center;
     padding: 20px;
-}
-
-/* Cartes d'information */
-.card {
-    background-color: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
-}
-
-/* Titres */
-h1, h2 {
-    color: #354E52;
-    margin-bottom: 20px;
-}
-
-/* Liste d’infos */
-.card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.card li {
-    margin-bottom: 10px;
 }
 
 /* === Barre de navigation === */
@@ -114,7 +75,7 @@ h1, h2 {
     color: #CAD2C5;
 }
 
-/* === Actions dans la navbar === */
+/* === Barre de recherche === */
 .navbar-actions {
     display: flex;
     align-items: center;
@@ -127,45 +88,6 @@ h1, h2 {
     border: 2px solid #527970;
     background-color: white;
     width: 200px;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-secondary,
-.btn-tertiary {
-    border: 1px solid white;
-}
-
-.btn-secondary:hover,
-.btn-tertiary:hover {
-    background-color: white;
-    color: #354E52;
-    border: 1px solid #354E52;
-}
-
-/* Bouton */
-.btn {
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: transform 0.2s;
-    display: inline-block;
-}
-
-.btn-primary {
-    background-color: #84A98D;
-    margin-top: 10px;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #527970;
-    transform: translateY(-2px);
 }
 
 .btn-search {
@@ -183,10 +105,74 @@ h1, h2 {
     transform: translateY(-2px);
 }
 
-/* Pied de page */
-.footer {
-    background-color: #354E52;
+/* Boutons inscription/connexion */
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-auth {
+    text-decoration: none;
     color: white;
-    text-align: center;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+.btn-auth:hover {
+    background-color: white;
+    color: #354E52;
+    border: 1px solid #354E52;
+}
+
+/* Contenu principal */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
     padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+
+/* Boutons */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #84A98D;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+/* Lien Mail */
+li a {
+    text-decoration: none;
+    color: #527970;
+}
+
+li a:hover {
+    text-decoration: none;
+    color: black;
 }
