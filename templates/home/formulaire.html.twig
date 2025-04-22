@@ -21,39 +21,42 @@
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
-
-     <header>
+    
+    <header>
         <h1>Valmont - Inscription</h1>
     </header>
 
-    <!-- Formulaire -->
-    <div id="formulaire">
-        <h2>S'inscrire :</h2>
+    <main class="container">
+        <section class="card">
+            <h2>S'inscrire :</h2>
 
-        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
-        <fieldset>
+            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+            <fieldset>
 
-            {{ form_row(form.login) }}
-            {{ form_row(form.mot_de_passe) }}
-            {{ form_row(form.nom) }}
-            {{ form_row(form.prenom) }}
-            {{ form_row(form.date_naissance) }}
-            {{ form_row(form.sexe) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.type_membre) }}
-            {{ form_row(form.photo_url) }}
+                {{ form_row(form.login) }}
+                {{ form_row(form.mot_de_passe) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.date_naissance) }}
+                {{ form_row(form.sexe) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.type_membre) }}
+                {{ form_row(form.photo_url) }}
 
-            <button type="submit">Envoyer</button>
-            <button type="reset">Réinitialiser</button>
+                <div class="btn-form">
+                    <button type="submit">Envoyer</button>
+                    <button type="reset">Réinitialiser</button>
+                </div>
 
-        </fieldset>
-        {{ form_end(form) }}
-    </div>
+            </fieldset>
+            {{ form_end(form) }}
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2025 - Valmont | Ville connectée</p>

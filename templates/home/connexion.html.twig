@@ -20,8 +20,8 @@
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -32,23 +32,28 @@
     </header>
 
 
-    <!-- Formulaire de connexion -->
-    <div id="formulaire">
-        <h2>Se connecter :</h2>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
+    <main class="container">
+        <section class="card">
+            <h2>Se connecter :</h2>
 
-        {{ form_start(form) }}
-        <fieldset>
-            {{ form_row(form.pseudo) }}
-            {{ form_row(form.motDePasse) }}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
 
-            <button type="submit">Se connecter</button>
-            <button type="reset">Réinitialiser</button>
-        </fieldset>
-        {{ form_end(form) }}
-    </div>
+            {{ form_start(form) }}
+            <fieldset>
+                {{ form_row(form.pseudo) }}
+                {{ form_row(form.motDePasse) }}
+
+                <div class="btn-form">
+                    <button type="submit">Se connecter</button>
+                    <button type="reset">Réinitialiser</button>
+                </div>
+                
+            </fieldset>
+            {{ form_end(form) }}
+        </div>
+    </main>
 
     <footer>
         <p>&copy; 2025 - Valmont | Ville connectée</p>
