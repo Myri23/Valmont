@@ -49,13 +49,9 @@
         <section id="transports" class="card">
             <h2>Transports Publics</h2>
             <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
-            <button class="btn btn-primary" onclick="toggleDropdown()">Consulter les horaires</button>
-
-            <div id="dropdown" class="dropdown-list">
-                <a class="btn btn-transport" href="{{ path('bus') }}">Bus</a></br>
-                <a class="btn btn-transport" href="{{ path('tram') }}">TramWay</a></br>
-                <a class="btn btn-transport" href="{{ path('metro') }}">Metro</a>
-            </div>
+            <a class="btn btn-primary" href="{{ path('bus') }}">Bus</a></br>
+            <a class="btn btn-primary" href="{{ path('tram') }}">TramWay</a></br>
+            <a class="btn btn-primary" href="{{ path('metro') }}">Metro</a>
         </section>
 
         <section class="card">

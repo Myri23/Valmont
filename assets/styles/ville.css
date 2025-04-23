@@ -167,23 +167,6 @@ footer {
     cursor: pointer;
 }
 
-.btn-transport {
-    display: inline-block;
-    background-color: #E0E1DD;
-    color: #2F3D46;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-transport:hover {
-    background-color: #527970; 
-    transform: translateY(-2px);
-}
-
 .btn-back {
     padding: 10px 20px;
     width: fit-content;
