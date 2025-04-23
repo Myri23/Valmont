@@ -38,47 +38,6 @@
             <a href="{{ path('ville') }}" class="btn btn-header">Découvrir</a>
         </div>
     </header>
-    
-    <main class="container" id="explore">
-        <section id="lieux" class="card">
-            <h2>Lieux d'Intérêt</h2>
-            <p>Découvrez les musées, parcs, restaurants et bibliothèques à proximité.</p>
-            <a href="{{ path('lieux_interet') }}" class="btn btn-primary">Explorer les lieux</a>
-        </section>
-
-        <section id="evenements" class="card">
-            <h2>Événements Locaux</h2>
-            <p>Restez informé des festivals, marchés et concerts à venir.</p>
-            <a href="{{ path('event') }}" class="btn btn-primary">Voir les événements</a>
-        </section>
-
-        <section id="transports" class="card">
-            <h2>Transports Publics</h2>
-            <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
-            <button class="btn btn-primary" onclick="toggleDropdown()">Consulter les horaires</button>
-
-            <div id="dropdown" class="dropdown-list">
-                <a class="btn btn-transport" href="{{ path('bus') }}">Bus</a></br>
-                <a class="btn btn-transport" href="{{ path('tram') }}">TramWay</a></br>
-                <a class="btn btn-transport" href="{{ path('metro') }}">Metro</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 - Valmont | Ville connectée</p>
-    </footer>
-
-    <script>
-        function toggleDropdown() {
-            var dropdown = document.getElementById("dropdown");
-            if (dropdown.style.display === "none" || dropdown.style.display === "") {
-                dropdown.style.display = "block";
-            } else {
-                dropdown.style.display = "none";
-            }
-        }
-    </script>
 </body>
 </html>
 {% endblock %}
