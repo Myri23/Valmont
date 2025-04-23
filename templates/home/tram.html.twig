@@ -4,43 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horaires du Tramway</title>
-    <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/ville.css') }}">
 </head>
 <body>
-
     <nav class="navbar">
         <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
+                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
 
-<header>
-    <h1>Horaires du Tramway</h1>
-</header>
+    <header>
+        <h1>Horaires du Tramway</h1>
+    </header>
 
-<section>
-    <h2>Horaires de fonctionnement :</h2>
-    <p>Le tramway circule tous les jours selon les horaires suivants :</p>
-    <ul>
-        <li>Lundi - Dimanche : 06:00 - 23:00</li>
-        <li>Fréquence : 7 à 15 minutes en journée</li>
-    </ul>
-    
-    <p>Vérifiez les panneaux en station pour toute mise à jour des horaires.</p>
+    <section class="container">
+        <div class="card">
+            <h2>Horaires de fonctionnement :</h2>
+            <p>Le tramway circule tous les jours selon les horaires suivants :</p>
+            <ul>
+                <li>Lundi - Dimanche : 06:00 - 23:00</li>
+                <li>Fréquence : 7 à 15 minutes en journée</li>
+            </ul>
+            
+            <p>Vérifiez les panneaux en station pour toute mise à jour des horaires.</p>
+        </div>
 
-    <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
-</section>
+        <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
+    </section>
 
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
 </body>
 </html>
