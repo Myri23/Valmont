@@ -154,6 +154,10 @@ footer {
   box-shadow: 0 10px 16px rgba(0,0,0,0.15);
 }
 
+.card-text p{
+  margin-bottom: 20px;
+}
+
 /* Boutons */
 .btn-primary {
   padding: 10px 20px;
