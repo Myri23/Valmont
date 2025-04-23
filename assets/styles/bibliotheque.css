@@ -127,19 +127,21 @@ footer {
 }
 
 /* Boutons */
-.btn-primary {
-  display: inline-block;
+.btn-back {
   padding: 10px 20px;
+  width: fit-content;
+  align-self: center;
   border-radius: 15px;
   border: none;
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 20px;
   background-color: #84A98D;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.btn-primary:hover {
+.btn-back:hover {
   background-color: #527970;
   transform: translateY(-2px);
   cursor: pointer;
@@ -152,7 +154,6 @@ footer {
   padding: 20px;
 }
 
-/* Cartes de bibliothèques */
 .card {
   background-color: #ffffff;
   border-radius: 15px;
