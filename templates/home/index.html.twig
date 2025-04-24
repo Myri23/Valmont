@@ -10,17 +10,19 @@
         <div class="container-nav">
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
-                <a class="nav-link" href="{{ app.request.uri }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
+                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -36,47 +38,6 @@
             <a href="{{ path('ville') }}" class="btn btn-header">Découvrir</a>
         </div>
     </header>
-    
-    <main class="container" id="explore">
-        <section id="lieux" class="card">
-            <h2>Lieux d'Intérêt</h2>
-            <p>Découvrez les musées, parcs, restaurants et bibliothèques à proximité.</p>
-            <a href="{{ path('lieux_interet') }}" class="btn btn-primary">Explorer les lieux</a>
-        </section>
-
-        <section id="evenements" class="card">
-            <h2>Événements Locaux</h2>
-            <p>Restez informé des festivals, marchés et concerts à venir.</p>
-            <a href="{{ path('event') }}" class="btn btn-primary">Voir les événements</a>
-        </section>
-
-        <section id="transports" class="card">
-            <h2>Transports Publics</h2>
-            <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
-            <button class="btn btn-primary" onclick="toggleDropdown()">Consulter les horaires</button>
-
-            <div id="dropdown" class="dropdown-list">
-                <a class="btn btn-transport" href="{{ path('bus') }}">Bus</a></br>
-                <a class="btn btn-transport" href="{{ path('tram') }}">TramWay</a></br>
-                <a class="btn btn-transport" href="{{ path('metro') }}">Metro</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2025 - Valmont | Ville connectée</p>
-    </footer>
-
-    <script>
-        function toggleDropdown() {
-            var dropdown = document.getElementById("dropdown");
-            if (dropdown.style.display === "none" || dropdown.style.display === "") {
-                dropdown.style.display = "block";
-            } else {
-                dropdown.style.display = "none";
-            }
-        }
-    </script>
 </body>
 </html>
 {% endblock %}

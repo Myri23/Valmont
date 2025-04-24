@@ -6,6 +6,7 @@ body {
     background-color: #CAD2C5; /* Vert pâle */
     color: #2F3D46; /* Vert très foncé pour le texte */
     line-height: 1.6;
+    overflow-y: scroll;
 }
 
 h1, h2 {
@@ -165,6 +166,26 @@ footer {
     transform: translateY(-2px);
     cursor: pointer;
 }
+
+.btn-back {
+    padding: 10px 20px;
+    width: fit-content;
+    align-self: center;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #84A98D;
+    margin-bottom: 20px;
+  }
+  
+  .btn-back:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
 
 /* Lien Mail */
 li a {

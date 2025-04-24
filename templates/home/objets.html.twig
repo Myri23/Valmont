@@ -12,16 +12,18 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -31,28 +33,30 @@
         <p>Surveillez, contrôlez et gérez l'ensemble de vos objets connectés en toute simplicité.</p>
     </header>
 
-    <section class="container">
-        <a href="{{ path('ajouter_objet') }}" class="btn btn-header">Ajouter un objet connecté</a>
+    <main class="container">
+        <a href="{{ path('ajouter_objet') }}" class="btn btn-primary">Ajouter un objet connecté</a>
 
-        <h2>Liste des objets connectés</h2>
-        <div class="grid-lieux">
-            {% for objet in objets %}
-                <div class="lieu-card">
-                    <h3>{{ objet.nom }}</h3>
-                    <p><strong>Description :</strong> {{ objet.description }}</p>
-                    <p><strong>Type :</strong> {{ objet.type }}</p>
-                    <p><strong>Marque :</strong> {{ objet.marque }}</p>
-                    <p><strong>État :</strong> {{ objet.etat }}</p>
-                    <p><strong>Connectivité :</strong> {{ objet.connectivite }}</p>
-                    <p><strong>Localisation :</strong> {{ objet.localisation }}</p>
-                    <p><strong>Batterie :</strong> {{ objet.batteriePct }}%</p>
-                    <p><strong>Actif :</strong> {{ objet.actif ? 'Oui' : 'Non' }}</p>
-                </div>
-            {% else %}
-                <p>Aucun objet connecté enregistré.</p>
-            {% endfor %}
-        </div>
-    </section>
+        <section class="card">
+            <h2>Liste des objets connectés</h2>
+            <div class="grid-lieux">
+                {% for objet in objets %}
+                    <div class="card">
+                        <h3>{{ objet.nom }}</h3>
+                        <p><strong>Description :</strong> {{ objet.description }}</p>
+                        <p><strong>Type :</strong> {{ objet.type }}</p>
+                        <p><strong>Marque :</strong> {{ objet.marque }}</p>
+                        <p><strong>État :</strong> {{ objet.etat }}</p>
+                        <p><strong>Connectivité :</strong> {{ objet.connectivite }}</p>
+                        <p><strong>Localisation :</strong> {{ objet.localisation }}</p>
+                        <p><strong>Batterie :</strong> {{ objet.batteriePct }}%</p>
+                        <p><strong>Actif :</strong> {{ objet.actif ? 'Oui' : 'Non' }}</p>
+                    </div>
+                {% else %}
+                    <p>Aucun objet connecté enregistré.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <p>&copy; 2025 - SmartCity | Gestion des objets connectés</p>

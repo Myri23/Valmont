@@ -122,7 +122,7 @@ footer {
 
 /* Vidéo */
 .hero-video {
-    height: 90vh;
+    height: 80vh;
     width: auto;
     overflow: hidden;
 }
@@ -179,65 +179,4 @@ footer {
     color: #84A98D;
     background-color: white;
     border: 1px solid #84A98D;
-}
-
-/* Contenu principal */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 20px;
-}
-
-.card {
-    background-color: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
-}
-
-/* Boutons */
-.btn-primary {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 15px;
-    border: none;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    background-color: #84A98D;
-    margin-top: 10px;
-}
-
-button.btn-primary {
-    padding: 15px 20px;
-}
-
-.btn-primary:hover {
-    background-color: #527970;
-    transform: translateY(-2px);
-    cursor: pointer;
-}
-
-.btn-transport {
-    display: inline-block;
-    background-color: #E0E1DD;
-    color: #2F3D46;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-transport:hover {
-    background-color: #527970; 
-    transform: translateY(-2px);
 }

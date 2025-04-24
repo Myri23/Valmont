@@ -12,14 +12,18 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -30,7 +34,7 @@
     </header>
 
     <section class="container grid-musees">
-        <div class="musee-card">
+        <div class="card">
             <img src="{{ asset('images/musee_histoire.jpg') }}"  alt="Musée d'Histoire de Valmont">
             <div class="musee-info">
                 <h2>Musée d'Histoire de Valmont</h2>
@@ -40,25 +44,26 @@
             </div>
         </div>
 
-        <div class="musee-card">
-            <img src="{{ asset('images/musee_science.jpg') }}"  alt="Musée des Sciences et de la Nature">
+        <div class="card">
+            <img src="{{ asset('images/musee_science.jpg') }}"  alt="Musée des Sciences & Nature">
             <div class="musee-info">
-                <h2>Musée des Sciences et de la Nature</h2>
+                <h2>Musée Sciences & Nature</h2>
                 <p>Un lieu fascinant pour petits et grands, avec des expositions interactives sur la biodiversité, la géologie régionale et les innovations scientifiques.</p>
                 <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
                 <a href="#" class="btn btn-primary">Découvrir</a>
             </div>
         </div>
 
-        <div class="musee-card">
+        <div class="card">
             <img src="{{ asset('images/musee_orangerie.jpg') }}"  alt="Musée d’Art Contemporain">
             <div class="musee-info">
                 <h2>Musée du Citronnier</h2>
                 <p>Au cœur du Jardin des Pivoines, ce musée met en lumière les artistes locaux et internationaux à travers des expositions audacieuses et des installations modernes.</p>
                 <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
-                <a href="{{ path('expo_valmont') }}" class="btn btn-primary">En savoir plus</a>
+                <a href="#" class="btn btn-primary">En savoir plus</a>
             </div>
         </div>
+        <a href="{{ path('lieux_interet') }}" class="btn btn-back">Retourner aux lieux</a>
     </section>
 
     <footer class="footer">

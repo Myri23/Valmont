@@ -12,26 +12,48 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>Bienvenue à Valmont</h1>
+        <h1>Valmont - Information</h1>
         <p>Une ville connectée, dynamique et tournée vers l’avenir.</p>
     </header>
 
     <main class="container">
+        <section id="lieux" class="card">
+            <h2>Lieux d'Intérêt</h2>
+            <p>Découvrez les musées, parcs, restaurants et bibliothèques à proximité.</p>
+            <a href="{{ path('lieux_interet') }}" class="btn btn-primary">Explorer les lieux</a>
+        </section>
+
+        <section id="evenements" class="card">
+            <h2>Événements Locaux</h2>
+            <p>Restez informé des festivals, marchés et concerts à venir.</p>
+            <a href="{{ path('event') }}" class="btn btn-primary">Voir les événements</a>
+        </section>
+
+        <section id="transports" class="card">
+            <h2>Transports Publics</h2>
+            <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
+            <a class="btn btn-primary" href="{{ path('bus') }}">Bus</a></br>
+            <a class="btn btn-primary" href="{{ path('tram') }}">TramWay</a></br>
+            <a class="btn btn-primary" href="{{ path('metro') }}">Metro</a>
+        </section>
+
         <section class="card">
             <h2>À propos de Valmont</h2>
             <p>Située entre mer et collines, Valmont est une ville à taille humaine où il fait bon vivre. Connue pour ses parcs verdoyants, son patrimoine culturel riche et son engagement pour le développement durable, elle accueille chaque année des milliers de visiteurs et nouveaux habitants.</p>
@@ -70,7 +92,6 @@
             </ul>
             <a href="mailto:myriam.saadi@etu.cyu.fr" class="btn btn-primary">Contact général</a>
         </section>
-
     </main>
 
     <footer class="footer">

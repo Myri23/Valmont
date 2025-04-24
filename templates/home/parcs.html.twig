@@ -5,34 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valmont - Parcs</title>
     <link rel="stylesheet" href="{{ asset('styles/parcs.css') }}">
-    <style>
-        .parc-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .parc-card img {
-            max-width: 300px;
-            border-radius: 10px;
-            margin-right: 20px;
-            flex: 1;
-        }
-
-        .parc-info {
-            flex: 2;
-            min-width: 250px;
-        }
-
-        .parc-info h3 {
-            margin-top: 0;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -40,14 +12,18 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations sur La Ville</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés de la ville</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
-                <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
         </div>
     </nav>
@@ -58,8 +34,7 @@
     </header>
 
     <section class="container">
-
-        <div class="parc-card">
+        <div class="card">
             <img src="{{ asset('images/parc_MLK.jpg') }}"  alt="Parc Lidia Poët">
             <div class="parc-info">
                 <h3>Parc Lidia Poët</h3>
@@ -71,7 +46,7 @@
             </div>
         </div>
     
-        <div class="parc-card">
+        <div class="card">
             <img src="{{ asset('images/parc_chanteraines.jpeg') }}"  alt="Parc Rosa Park">
             <div class="parc-info">
                 <h3>Parc Rosa Park</h3>
@@ -83,7 +58,7 @@
             </div>
         </div>
     
-        <div class="parc-card">
+        <div class="card">
             <img src="{{ asset('images/parc_arg.jpg') }}"  alt="Parc des Libellules">
             <div class="parc-info">
                 <h3>Parc des Libellules</h3>
@@ -95,7 +70,7 @@
             </div>
         </div>
     
-        <div class="parc-card">
+        <div class="card">
             <img src="{{ asset('images/square_batignolles.jpg') }}"  alt="Square Marie Curie">
             <div class="parc-info">
                 <h3>Square Marie Curie</h3>
@@ -106,7 +81,7 @@
                 </div>
             </div>
         </div>
-    
+        <a href="{{ path('lieux_interet') }}" class="btn btn-back">Retourner aux lieux</a>
     </section>
     
 
