@@ -78,40 +78,22 @@ footer {
     color: #CAD2C5;
 }
 
-/* === Barre de recherche === */
-.navbar-actions {
+/* === Boutons Barre Navigation === */
+.navbar-buttons {
     display: flex;
-    align-items: center;
     gap: 1rem;
-}
-
-.search-bar {
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: 2px solid #527970;
-    background-color: white;
-    width: 200px;
 }
 
 .btn-search {
-    padding: 8px 20px;
-    border-radius: 20px;
-    background-color: #84A98D;
+    background-color: transparent;
     border: none;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-right: 15px;
 }
 
 .btn-search:hover {
-    background-color: #527970;
     transform: translateY(-2px);
-}
-
-/* Boutons inscription/connexion */
-.auth-buttons {
-    display: flex;
-    gap: 1rem;
 }
 
 .btn-auth {
