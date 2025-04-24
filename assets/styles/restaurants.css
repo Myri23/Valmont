@@ -200,7 +200,7 @@ footer {
   color: #5c5c5c;
 }
 
-img {
+.card img {
   width: 50%;
   height: auto;
   border: solid #84A98D;
