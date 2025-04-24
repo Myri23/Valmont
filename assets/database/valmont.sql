@@ -59,17 +59,6 @@ CREATE TABLE CAMERA_SURVEILLANCE (
     FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
 );
 
--- Table COMPTEUR_ELECTRICITE
-CREATE TABLE COMPTEUR_ELECTRICITE (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    objet_id INT NOT NULL,
-    consommation_actuelle FLOAT,
-    consommation_journaliere FLOAT,
-    consommation_mensuelle FLOAT,
-    puissance_max FLOAT,
-    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
-);
-
 -- Table PARKING_INTELLIGENT
 CREATE TABLE PARKING_INTELLIGENT (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -110,15 +99,6 @@ CREATE TABLE CAPTEUR_NIVEAU_EAU (
     FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
 );
 
--- Table DONNEES_CAPTEUR
-CREATE TABLE DONNEES_CAPTEUR (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    objet_id INT NOT NULL,
-    horodatage DATETIME DEFAULT CURRENT_TIMESTAMP,
-    valeurs JSON,
-    type_donnee VARCHAR(50),
-    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
-);
 
 -- Table EVENEMENT
 CREATE TABLE EVENEMENT (
@@ -325,3 +305,136 @@ INSERT INTO SERVICE (nom, description, type_service, actif) VALUES
 ('Carte Interactive', 'Carte interactive des points d\'intérêt et services de la ville', 'information', TRUE);
 
 SELECT CURRENT_USER();
+
+
+-- Compléter la table Capteur qualité de l'air qui était incomplète
+CREATE TABLE CAPTEUR_QUALITE_AIR (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    objet_id INT NOT NULL,
+    niveau_pm25 FLOAT,
+    niveau_pm10 FLOAT,
+    niveau_co2 FLOAT,
+    niveau_o3 FLOAT,
+    qualite_globale VARCHAR(20),
+    derniere_mesure DATETIME,
+    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
+);
+ 
+-- Table pour les feux de circulation intelligents
+CREATE TABLE FEU_CIRCULATION (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    objet_id INT NOT NULL,
+    etat_actuel ENUM('vert', 'orange', 'rouge', 'clignotant', 'eteint') DEFAULT 'rouge',
+    mode_fonctionnement ENUM('normal', 'adaptatif', 'clignotant', 'eteint') DEFAULT 'normal',
+    duree_cycle INT,
+    priorite_transport_commun BOOLEAN DEFAULT FALSE,
+    detection_vehicules BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
+);
+ 
+-- Table pour les lampadaires intelligents
+CREATE TABLE LAMPADAIRE_INTELLIGENT (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    objet_id INT NOT NULL,
+    intensite_lumineuse INT,
+    mode_eclairage ENUM('fixe', 'adaptatif', 'economie', 'eteint') DEFAULT 'adaptatif',
+    capteur_mouvement BOOLEAN DEFAULT TRUE,
+    capteur_luminosite BOOLEAN DEFAULT TRUE,
+    heures_fonctionnement VARCHAR(100),
+    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
+);
+ 
+-- Table pour les poubelles connectées
+CREATE TABLE POUBELLE_CONNECTEE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    objet_id INT NOT NULL,
+    niveau_remplissage INT,
+    capacite_totale INT,
+    type_dechets ENUM('ordures', 'recyclable', 'verre', 'compost', 'mixte') DEFAULT 'mixte',
+    derniere_collecte DATETIME,
+    compacteur BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
+);
+ 
+-- Table pour les bornes de recharge électrique
+CREATE TABLE BORNE_RECHARGE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    objet_id INT NOT NULL,
+    puissance_max FLOAT,
+    type_connecteur VARCHAR(50),
+    nombre_points_charge INT DEFAULT 1,
+    status_occupation ENUM('libre', 'occupé', 'hors service') DEFAULT 'libre',
+    prix_kwh FLOAT,
+    temps_charge_moyen INT,
+    FOREIGN KEY (objet_id) REFERENCES OBJET_CONNECTE(id) ON DELETE CASCADE
+);
+ 
+-- Insertion des objets connectés pour les nouveaux types
+INSERT INTO OBJET_CONNECTE (id_unique, nom, description, type, marque, etat, localisation, derniere_interaction, connectivite, batterie_pct, actif) VALUES
+-- Capteurs qualité air
+('AIR001', 'Capteur Air Centre-Ville', 'Mesure la qualité de l\'air au centre-ville', 'capteur air', 'AirQuality', 'Actif', 'Place Centrale', NOW(), 'LoRa', 90, TRUE),
+('AIR002', 'Capteur Air École', 'Mesure la qualité de l\'air près de l\'école primaire', 'capteur air', 'AirQuality', 'Actif', 'École Jean Jaurès', NOW(), 'LoRa', 85, TRUE),
+ 
+-- Feux de circulation
+('FEU001', 'Feu Carrefour Principal', 'Feu intelligent au carrefour principal', 'feu circulation', 'TrafficTech', 'Actif', 'Carrefour République', NOW(), 'Fibre', 100, TRUE),
+('FEU002', 'Feu Entrée Sud', 'Feu intelligent à l\'entrée sud de la ville', 'feu circulation', 'TrafficTech', 'Actif', 'Avenue du Sud', NOW(), 'Fibre', 100, TRUE),
+ 
+-- Lampadaires
+('LAMP001', 'Lampadaire Rue Principale', 'Lampadaire intelligent avec détection de présence', 'lampadaire', 'LightSmart', 'Actif', 'Rue Principale', NOW(), 'LoRa', 100, TRUE),
+('LAMP002', 'Lampadaire Parc', 'Lampadaire intelligent dans le parc municipal', 'lampadaire', 'LightSmart', 'Actif', 'Parc Lidia Poêt', NOW(), 'LoRa', 100, TRUE),
+ 
+-- Poubelles
+('POUB001', 'Poubelle Centre Commercial', 'Poubelle connectée avec compacteur solaire', 'poubelle', 'WasteSmart', 'Actif', 'Centre Commercial', NOW(), 'LoRa', 80, TRUE),
+('POUB002', 'Poubelle Tri Sélectif Parc', 'Poubelle connectée pour tri sélectif', 'poubelle', 'WasteSmart', 'Actif', 'Parc Lidia Poêt', NOW(), 'LoRa', 85, TRUE),
+ 
+-- Bornes de recharge
+('BORNE001', 'Borne Recharge Parking Centre', 'Station de recharge pour véhicules électriques', 'borne recharge', 'ElectroDrive', 'Actif', 'Parking Centre-Ville', NOW(), 'GSM', 100, TRUE),
+('BORNE002', 'Borne Recharge Gare', 'Station de recharge pour véhicules électriques', 'borne recharge', 'ElectroDrive', 'Actif', 'Parking Gare', NOW(), 'GSM', 100, TRUE);
+ 
+-- Insertion des données spécifiques pour chaque nouveau type d'objet
+-- Capteurs qualité air
+INSERT INTO CAPTEUR_QUALITE_AIR (objet_id, niveau_pm25, niveau_pm10, niveau_co2, niveau_o3, qualite_globale, derniere_mesure) VALUES
+(14, 12.3, 25.7, 430.2, 41.5, 'Bonne', NOW()),
+(15, 15.8, 32.1, 450.5, 38.2, 'Moyenne', NOW());
+ 
+-- Feux de circulation
+INSERT INTO FEU_CIRCULATION (objet_id, etat_actuel, mode_fonctionnement, duree_cycle, priorite_transport_commun, detection_vehicules) VALUES
+(16, 'vert', 'adaptatif', 120, TRUE, TRUE),
+(17, 'rouge', 'normal', 90, FALSE, TRUE);
+ 
+-- Lampadaires
+INSERT INTO LAMPADAIRE_INTELLIGENT (objet_id, intensite_lumineuse, mode_eclairage, capteur_mouvement, capteur_luminosite, heures_fonctionnement) VALUES
+(18, 75, 'adaptatif', TRUE, TRUE, '19:00-07:00'),
+(19, 60, 'economie', TRUE, TRUE, '20:00-06:00');
+ 
+-- Poubelles
+INSERT INTO POUBELLE_CONNECTEE (objet_id, niveau_remplissage, capacite_totale, type_dechets, derniere_collecte, compacteur) VALUES
+(20, 65, 100, 'mixte', '2025-04-20 08:30:00', TRUE),
+(21, 40, 100, 'recyclable', '2025-04-22 08:15:00', FALSE);
+ 
+-- Bornes de recharge
+INSERT INTO BORNE_RECHARGE (objet_id, puissance_max, type_connecteur, nombre_points_charge, status_occupation, prix_kwh, temps_charge_moyen) VALUES
+(22, 22.0, 'Type 2, CCS', 2, 'libre', 0.35, 120),
+(23, 50.0, 'Type 2, CCS, CHAdeMO', 4, 'occupé', 0.40, 60);
+ 
+-- Ajout de données capteurs pour les nouveaux objets
+INSERT INTO DONNEES_CAPTEUR (objet_id, horodatage, valeurs, type_donnee) VALUES
+(14, NOW() - INTERVAL 6 HOUR, '{"pm25": 10.5, "pm10": 22.3, "co2": 410.5, "o3": 39.2}', 'qualité_air'),
+(14, NOW() - INTERVAL 3 HOUR, '{"pm25": 11.2, "pm10": 24.1, "co2": 420.3, "o3": 40.1}', 'qualité_air'),
+(14, NOW(), '{"pm25": 12.3, "pm10": 25.7, "co2": 430.2, "o3": 41.5}', 'qualité_air'),
+ 
+(16, NOW() - INTERVAL 2 HOUR, '{"etat": "rouge", "temps_attente": 45}', 'trafic'),
+(16, NOW() - INTERVAL 1 HOUR, '{"etat": "vert", "temps_attente": 10}', 'trafic'),
+(16, NOW(), '{"etat": "vert", "temps_attente": 5}', 'trafic'),
+ 
+(18, NOW() - INTERVAL 8 HOUR, '{"intensite": 100, "presence": true}', 'eclairage'),
+(18, NOW() - INTERVAL 4 HOUR, '{"intensite": 60, "presence": false}', 'eclairage'),
+(18, NOW(), '{"intensite": 75, "presence": true}', 'eclairage'),
+ 
+(20, NOW() - INTERVAL 48 HOUR, '{"niveau_remplissage": 30}', 'dechets'),
+(20, NOW() - INTERVAL 24 HOUR, '{"niveau_remplissage": 50}', 'dechets'),
+(20, NOW(), '{"niveau_remplissage": 65}', 'dechets'),
+ 
+(22, NOW() - INTERVAL 12 HOUR, '{"occupation": "occupé", "puissance_fournie": 19.2}', 'recharge'),
+(22, NOW() - INTERVAL 6 HOUR, '{"occupation": "libre", "puissance_fournie": 0}', 'recharge'),
+(22, NOW(), '{"occupation": "libre", "puissance_fournie": 0}', 'recharge');

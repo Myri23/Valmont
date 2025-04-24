@@ -28,35 +28,103 @@
         </div>
     </nav>
 
-    <section class="container">
-        <h2>Ajouter un objet connecté</h2>
-        {{ form_start(form) }}
-            {{ form_row(form.idUnique) }}
-            {{ form_row(form.nom) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.type) }}
-            {{ form_row(form.marque) }}
-            {{ form_row(form.etat) }}
-            {{ form_row(form.localisation) }}
-            {{ form_row(form.derniereInteraction) }}
-            {{ form_row(form.connectivite) }}
-            {{ form_row(form.batteriePct) }}
-            {{ form_row(form.actif) }}
-            <button type="submit" class="btn btn-primary">Ajouter</button>
-        {{ form_end(form) }}
+        <section class="container">
+            <h2>Ajouter un objet connecté</h2>
+            {{ form_start(form) }}
+                {{ form_row(form.idUnique) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.type) }}
+                {{ form_row(form.marque) }}
+                {{ form_row(form.etat) }}
+                {{ form_row(form.localisation) }}
+                {{ form_row(form.derniereInteraction) }}
+                {{ form_row(form.connectivite) }}
+                {{ form_row(form.batteriePct) }}
+                {{ form_row(form.actif) }}
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            {{ form_end(form) }}
 
-        <hr>
+            <hr>
 
-        <h2>Ajouter une caméra de surveillance</h2>
-        {{ form_start(form_camera) }}
-            {{ form_row(form_camera.objet) }}
-            {{ form_row(form_camera.resolution) }}
-            {{ form_row(form_camera.detection_mouvement) }}
-            {{ form_row(form_camera.vision_nocturne) }}
-            {{ form_row(form_camera.angle_vision) }}
-            <button type="submit" class="btn btn-primary">Ajouter caméra</button>
-        {{ form_end(form_camera) }}
-    </section>
+            <h2>Ajouter une caméra de surveillance</h2>
+            {{ form_start(form_camera) }}
+                {{ form_row(form_camera.objet) }}
+                {{ form_row(form_camera.resolution) }}
+                {{ form_row(form_camera.detection_mouvement) }}
+                {{ form_row(form_camera.vision_nocturne) }}
+                {{ form_row(form_camera.angle_vision) }}
+                <button type="submit" class="btn btn-primary">Ajouter caméra</button>
+            {{ form_end(form_camera) }}
+
+            <hr>
+
+            <h2>Ajouter un capteur de qualité de l'air</h2>
+            {{ form_start(form_capteur) }}
+                {{ form_row(form_capteur.objet) }}
+                {{ form_row(form_capteur.niveauPm25) }}
+                {{ form_row(form_capteur.niveauPm10) }}
+                {{ form_row(form_capteur.niveauCo2) }}
+                {{ form_row(form_capteur.niveauO3) }}
+                {{ form_row(form_capteur.qualiteGlobale) }}
+                {{ form_row(form_capteur.derniereMesure) }}
+                <button type="submit" class="btn btn-primary">Ajouter capteur</button>
+            {{ form_end(form_capteur) }}
+
+            <hr>
+
+            <h2>Ajouter un feu de circulation</h2>
+            {{ form_start(form_feu) }}
+                {{ form_row(form_feu.objet) }}
+                {{ form_row(form_feu.etatActuel) }}
+                {{ form_row(form_feu.modeFonctionnement) }}
+                {{ form_row(form_feu.dureeCycle) }}
+                {{ form_row(form_feu.prioriteTransportCommun) }}
+                {{ form_row(form_feu.detectionVehicules) }}
+                <button type="submit" class="btn btn-primary">Ajouter feu</button>
+            {{ form_end(form_feu) }}
+
+            <hr>
+
+            <h2>Ajouter un lampadaire intelligent</h2>
+            {{ form_start(form_lampadaire) }}
+                {{ form_row(form_lampadaire.objet) }}
+                {{ form_row(form_lampadaire.intensiteLumineuse) }}
+                {{ form_row(form_lampadaire.modeEclairage) }}
+                {{ form_row(form_lampadaire.capteurMouvement) }}
+                {{ form_row(form_lampadaire.capteurLuminosite) }}
+                {{ form_row(form_lampadaire.heuresFonctionnement) }}
+                <button type="submit" class="btn btn-primary">Ajouter lampadaire</button>
+            {{ form_end(form_lampadaire) }}
+
+            <hr>
+
+            <h2>Ajouter une poubelle connectée</h2>
+            {{ form_start(form_poubelle) }}
+                {{ form_row(form_poubelle.objet) }}
+                {{ form_row(form_poubelle.niveauRemplissage) }}
+                {{ form_row(form_poubelle.capaciteTotale) }}
+                {{ form_row(form_poubelle.typeDechets) }}
+                {{ form_row(form_poubelle.derniereCollecte) }}
+                {{ form_row(form_poubelle.compacteur) }}
+                <button type="submit" class="btn btn-primary">Ajouter poubelle</button>
+            {{ form_end(form_poubelle) }}
+
+            <hr>
+
+            <h2>Ajouter une borne de recharge</h2>
+            {{ form_start(form_borne) }}
+                {{ form_row(form_borne.objet) }}
+                {{ form_row(form_borne.puissanceMax) }}
+                {{ form_row(form_borne.typeConnecteur) }}
+                {{ form_row(form_borne.nombrePointsCharge) }}
+                {{ form_row(form_borne.statusOccupation) }}
+                {{ form_row(form_borne.prixKwh) }}
+                {{ form_row(form_borne.tempsChargeMoyen) }}
+                <button type="submit" class="btn btn-primary">Ajouter borne</button>
+            {{ form_end(form_borne) }}
+        </section>
+
 
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
