@@ -42,7 +42,11 @@ class CameraSurveillanceType extends AbstractType
                     '180°' => '180°',
                     '360°' => '360°',
                 ]
-            ]);
+            ])
+            ->add('saveCamera', SubmitType::class, [
+    'label' => 'Ajouter la caméra',
+]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

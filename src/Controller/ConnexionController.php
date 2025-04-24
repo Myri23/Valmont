@@ -25,8 +25,8 @@ class ConnexionController extends AbstractController
 
             // Recherche de l'utilisateur dans la base
             $user = $em->getRepository(Utilisateur::class)->findOneBy([
-                'pseudo' => $data['pseudo'],
-                'motDePasse' => $data['motDePasse'], // ⚠️ à sécuriser + hasher en vrai
+                'login' => $data['login'],
+                'mot_de_passe' => $data['mot_de_passe'], // ⚠️ à sécuriser + hasher en vrai
             ]);
 
             if ($user) {

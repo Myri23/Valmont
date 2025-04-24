@@ -13,8 +13,8 @@ class ConnexionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class)
-            ->add('motDePasse', PasswordType::class);
+            ->add('login', TextType::class)
+            ->add('mot_de_passe', PasswordType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

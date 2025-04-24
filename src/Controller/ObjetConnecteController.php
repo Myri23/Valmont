@@ -27,15 +27,15 @@ class ObjetConnecteController extends AbstractController
         $formCamera = $this->createForm(CameraSurveillanceType::class, $camera);
         $formCamera->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->get('saveObjet')->isClicked() && $form->isValid()) {
             $em->persist($objet);
             $em->flush();
             $this->addFlash('success', 'Objet ajouté avec succès !');
             return $this->redirectToRoute('ajouter_objet');
         }
 
-        if ($formCamera->isSubmitted() && $formCamera->isValid()) {
-            // Vérifier que la caméra est bien liée à un objet connecté
+        if ($formCamera->get('saveCamera')->isClicked() && $formCamera->isValid()) {
+
             if (!$camera->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour la caméra.');
             } else {
