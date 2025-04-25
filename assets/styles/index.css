@@ -159,6 +159,27 @@ footer {
     outline: none;
 }
 
+/* Bouton recherche */
+button.btn-search[type="submit"]{
+    display: inline-block;
+    padding: 10px 20px;
+    width: fit-content;
+    font-size: large;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #527970;
+    margin-left: 100px;
+}
+
+button.btn-search[type="submit"]:hover {
+    background-color: white;
+    color: #527970;
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
 /* Bouton fermeture */
 .btn-close {
     height: 10vh;
