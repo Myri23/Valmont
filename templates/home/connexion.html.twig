@@ -15,26 +15,40 @@
                 <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
                 <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
             </div>
-<<<<<<< HEAD
-            <div class="navbar-actions">
-                <input class="search-bar" type="search" placeholder="Rechercher">
-                <button class="btn btn-search">Rechercher</button>
-            </div>
-            <div class="auth-buttons">
-                    <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
-=======
             <div class="navbar-buttons">
-                <button class="btn btn-search">
+                <button id="btn-search" class="btn btn-search">
                     <img src="{{ asset('images/search.svg') }}" alt="Recherche">
                 </button>
                 <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
                 <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
->>>>>>> 1db8ea382df210f8aa92102a7adf951a66809609
             </div>
         </div>
     </nav>
 
+    <div id="search-panel" class="hidden">
+        <input type="text" placeholder="Rechercher...">
+
+        <!-- Filtres -->
+        <select>
+            <option value="">Lieux</option>
+            <option value="musee">Musée</option>
+            <option value="parc">Parcs</option>
+            <option value="restaurant">Restaurants</option>
+            <option value="bibliothèque">Bibliothèques</option>
+        </select>
+
+        <select>
+            <option value="">Evenements</option>
+            <option value="festival">Festival</option>
+            <option value="soiree">Soirée</option>
+            <option value="activite">Activité</option>
+            <option value="expo">Exposition</option>
+        </select>
+         
+        <button id="btn-close" class="btn btn-close">
+            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
+        </button>
+    </div>
 
     <header>
         <h1>Valmont - Inscription</h1>
@@ -63,5 +77,6 @@
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
 
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>

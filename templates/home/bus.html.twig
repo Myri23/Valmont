@@ -18,7 +18,7 @@
                 <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
             <div class="navbar-buttons">
-                <button class="btn btn-search">
+                <button id="btn-search" class="btn btn-search">
                     <img src="{{ asset('images/search.svg') }}" alt="Recherche">
                 </button>
                 <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
@@ -26,6 +26,31 @@
             </div>
         </div>
     </nav>
+
+    <div id="search-panel" class="hidden">
+        <input type="text" placeholder="Rechercher...">
+
+        <!-- Filtres -->
+        <select>
+            <option value="">Lieux</option>
+            <option value="musee">Musée</option>
+            <option value="parc">Parcs</option>
+            <option value="restaurant">Restaurants</option>
+            <option value="bibliothèque">Bibliothèques</option>
+        </select>
+
+        <select>
+            <option value="">Evenements</option>
+            <option value="festival">Festival</option>
+            <option value="soiree">Soirée</option>
+            <option value="activite">Activité</option>
+            <option value="expo">Exposition</option>
+        </select>
+         
+        <button id="btn-close" class="btn btn-close">
+            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
+        </button>
+    </div>
 
     <header>
         <h1>Horaires du Bus</h1>
@@ -49,5 +74,7 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>

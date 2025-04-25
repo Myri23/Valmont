@@ -163,3 +163,74 @@ footer {
     background-color: white;
     border: 1px solid #84A98D;
 }
+
+/* Panel Recherche */
+.hidden {
+    visibility: hidden;
+}
+
+#search-panel {
+    height: 10vh;
+    background-color: #2F3D46;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#search-panel input, #search-panel select {
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+#search-panel input {
+    width: 60%;
+    margin-left: 70px;
+    opacity: 0.8;
+    background-color: #2F3D46;
+}
+
+#search-panel select {
+    text-align: center;
+    width: 10%;
+    background-color: #84A98D;
+    border-radius: 30px;
+    appearance: none; /* Masque la flèche sur la plupart des navigateurs modernes */
+    -webkit-appearance: none; /* Safari */
+    -moz-appearance: none; /* Firefox */
+}
+
+#search-panel select:hover {
+    background-color: white;
+    color: #84A98D;
+}
+
+#search-panel option {
+    background-color: #354E52;
+    color: white;
+    border: none;
+}  
+
+#search-panel input::placeholder {
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+#search-panel input:focus, #search-panel select:focus {
+    outline: none;
+}
+
+/* Bouton fermeture */
+.btn-close {
+    height: 10vh;
+    width: 10%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    transform: translateY(-2px);
+}

@@ -204,9 +204,7 @@ li a:hover {
 }
 
 #search-panel input, #search-panel select {
-    margin: 15px;
-    height: 6vh;
-    padding: 5px;
+    padding: 10px;
     color: white;
     font-size: 20px;
     border: none;
@@ -222,7 +220,6 @@ li a:hover {
 #search-panel select {
     text-align: center;
     width: 10%;
-    padding: 15px;
     background-color: #84A98D;
     border-radius: 30px;
     appearance: none; /* Masque la flèche sur la plupart des navigateurs modernes */
@@ -238,7 +235,6 @@ li a:hover {
 #search-panel option {
     background-color: #354E52;
     color: white;
-    margin-top: 10px;
     border: none;
 }  
 
@@ -250,4 +246,17 @@ li a:hover {
 
 #search-panel input:focus, #search-panel select:focus {
     outline: none;
+}
+
+/* Bouton fermeture */
+.btn-close {
+    height: 10vh;
+    width: 10%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    transform: translateY(-2px);
 }
