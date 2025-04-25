@@ -12,7 +12,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 #[Route('/gestion/statistiques')]
-class GestionStatistiquesController extends AbstractController
+class GestionStatistiqueController extends AbstractController
 {
     #[Route('/', name: 'gestion_statistiques_index')]
     public function index(ObjetConnecteRepository $objetConnecteRepository): Response
