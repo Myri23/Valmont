@@ -7,9 +7,16 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+
 use App\Entity\ParkingIntelligent;
 use App\Entity\CapteurBruit;
 use App\Entity\AbribusIntelligent;
+use App\Entity\CameraSurveillance;
+use App\Entity\BorneRecharge;
+use App\Entity\CapteurQualiteAir;
+use App\Entity\FeuCirculation;
+use App\Entity\LampadaireIntelligent;
+use App\Entity\PoubelleConnectee;
 
 #[ORM\Entity(repositoryClass: ObjetConnecteRepository::class)]
 class ObjetConnecte
@@ -61,11 +68,39 @@ class ObjetConnecte
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: AbribusIntelligent::class, cascade: ['persist', 'remove'])]
     private Collection $abribusIntelligents;
 
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: CameraSurveillance::class, cascade: ['persist', 'remove'])]
+    private Collection $cameraSurveillance;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: BorneRecharge::class, cascade: ['persist', 'remove'])]
+    private Collection $borneRecharge;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: CapteurQualiteAir::class, cascade: ['persist', 'remove'])]
+    private Collection $capteurQualiteAir;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: FeuCirculation::class, cascade: ['persist', 'remove'])]
+    private Collection $feuCirculation;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: LampadaireIntelligent::class, cascade: ['persist', 'remove'])]
+    private Collection $lampadaireIntelligent;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: PoubelleConnectee::class, cascade: ['persist', 'remove'])]
+    private Collection $poubelleConnectee;
+
+    #[ORM\ManyToOne(inversedBy: 'objetsConnectes')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Zone $zone = null;
+
     public function __construct()
     {
         $this->parkings = new ArrayCollection();
         $this->capteursBruit = new ArrayCollection();
         $this->abribusIntelligents = new ArrayCollection();
+        $this->cameraSurveillance = new ArrayCollection();
+        $this->borneRecharge = new ArrayCollection();
+        $this->capteurQualiteAir = new ArrayCollection();
+        $this->feuCirculation = new ArrayCollection();
+        $this->lampadaireIntelligent = new ArrayCollection();
+        $this->poubelleConnectee = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +229,17 @@ class ObjetConnecte
         return $this;
     }
 
+    public function getZone(): ?Zone
+{
+    return $this->zone;
+}
+
+public function setZone(?Zone $zone): self
+{
+    $this->zone = $zone;
+    return $this;
+}
+
     /**
      * @return Collection<int, ParkingIntelligent>
      */
@@ -281,6 +327,186 @@ class ObjetConnecte
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CameraSurveillance>
+     */
+    public function getCameraSurveillance(): Collection
+    {
+        return $this->cameraSurveillance;
+    }
+    
+    public function addCameraSurveillance(CameraSurveillance $cameraSurveillance): self
+    {
+        if (!$this->cameraSurveillance->contains($cameraSurveillance)) {
+            $this->cameraSurveillance->add($cameraSurveillance);
+            $cameraSurveillance->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeCameraSurveillance(CameraSurveillance $cameraSurveillance): self
+    {
+        if ($this->cameraSurveillance->removeElement($cameraSurveillance)) {
+            // set the owning side to null (unless already changed)
+            if ($cameraSurveillance->getObjet() === $this) {
+                $cameraSurveillance->setObjet(null);
+            }
+        }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BorneRecharge>
+     */
+    public function getBorneRecharge(): Collection
+    {
+        return $this->borneRecharge;
+    }
+    
+    public function addBorneRecharge(BorneRecharge $borneRecharge): self
+    {
+        if (!$this->borneRecharge->contains($borneRecharge)) {
+            $this->borneRecharge->add($borneRecharge);
+            $borneRecharge->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeBorneRecharge(BorneRecharge $borneRecharge): self
+    {
+        if ($this->borneRecharge->removeElement($borneRecharge)) {
+            // set the owning side to null (unless already changed)
+            if ($borneRecharge->getObjet() === $this) {
+                $borneRecharge->setObjet(null);
+            }
+        }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CapteurQualiteAir>
+     */
+    public function getCapteurQualiteAir(): Collection
+    {
+        return $this->capteurQualiteAir;
+    }
+    
+    public function addCapteurQualiteAir(CapteurQualiteAir $capteurQualiteAir): self
+    {
+        if (!$this->capteurQualiteAir->contains($capteurQualiteAir)) {
+            $this->capteurQualiteAir->add($capteurQualiteAir);
+            $capteurQualiteAir->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeCapteurQualiteAir(CapteurQualiteAir $capteurQualiteAir): self
+    {
+        if ($this->capteurQualiteAir->removeElement($capteurQualiteAir)) {
+            // set the owning side to null (unless already changed)
+            if ($capteurQualiteAir->getObjet() === $this) {
+                $capteurQualiteAir->setObjet(null);
+            }
+        }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeuCirculation>
+     */
+    public function getFeuCirculation(): Collection
+    {
+        return $this->feuCirculation;
+    }
+    
+    public function addFeuCirculation(FeuCirculation $feuCirculation): self
+    {
+        if (!$this->feuCirculation->contains($feuCirculation)) {
+            $this->feuCirculation->add($feuCirculation);
+            $feuCirculation->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeFeuCirculation(FeuCirculation $feuCirculation): self
+    {
+        if ($this->feuCirculation->removeElement($feuCirculation)) {
+            // set the owning side to null (unless already changed)
+            if ($feuCirculation->getObjet() === $this) {
+                $feuCirculation->setObjet(null);
+            }
+        }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LampadaireIntelligent>
+     */
+    public function getLampadaireIntelligent(): Collection
+    {
+        return $this->lampadaireIntelligent;
+    }
+    
+    public function addLampadaireIntelligent(LampadaireIntelligent $lampadaireIntelligent): self
+    {
+        if (!$this->lampadaireIntelligent->contains($lampadaireIntelligent)) {
+            $this->lampadaireIntelligent->add($lampadaireIntelligent);
+            $lampadaireIntelligent->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeLampadaireIntelligent(LampadaireIntelligent $lampadaireIntelligent): self
+    {
+        if ($this->lampadaireIntelligent->removeElement($lampadaireIntelligent)) {
+            // set the owning side to null (unless already changed)
+            if ($lampadaireIntelligent->getObjet() === $this) {
+                $lampadaireIntelligent->setObjet(null);
+            }
+        }
+    
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PoubelleConnectee>
+     */
+    public function getPoubelleConnectee(): Collection
+    {
+        return $this->poubelleConnectee;
+    }
+    
+    public function addPoubelleConnectee(PoubelleConnectee $poubelleConnectee): self
+    {
+        if (!$this->poubelleConnectee->contains($poubelleConnectee)) {
+            $this->poubelleConnectee->add($poubelleConnectee);
+            $poubelleConnectee->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removePoubelleConnectee(PoubelleConnectee $poubelleConnectee): self
+    {
+        if ($this->poubelleConnectee->removeElement($poubelleConnectee)) {
+            // set the owning side to null (unless already changed)
+            if ($poubelleConnectee->getObjet() === $this) {
+                $poubelleConnectee->setObjet(null);
+            }
+        }
+    
         return $this;
     }
 }

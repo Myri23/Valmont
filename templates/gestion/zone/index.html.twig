@@ -1,0 +1,64 @@
+{# templates/gestion/zone/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des zones{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <h1>Gestion des zones</h1>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <p>Liste des zones de la ville intelligente</p>
+            <a href="{{ path('gestion_zone_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Ajouter une zone
+            </a>
+        </div>
+        
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Objets connectés</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for zone in zones %}
+                        <tr>
+                            <td>{{ zone[0].id }}</td>
+                            <td>{{ zone[0].nom }}</td>
+                            <td>{{ zone[0].type|title }}</td>
+                            <td>{{ zone['objetCount'] }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ path('gestion_zone_show', {'id': zone[0].id}) }}" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('gestion_zone_edit', {'id': zone[0].id}) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('gestion_zone_objets', {'id': zone[0].id}) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-plug"></i> Objets
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucune zone n'a été créée</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -15,6 +15,7 @@
                 <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
                 <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
             </div>
+<<<<<<< HEAD
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
@@ -22,6 +23,14 @@
             <div class="auth-buttons">
                     <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
                     <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
+=======
+            <div class="navbar-buttons">
+                <button class="btn btn-search">
+                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
+                </button>
+                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+>>>>>>> 1db8ea382df210f8aa92102a7adf951a66809609
             </div>
         </div>
     </nav>

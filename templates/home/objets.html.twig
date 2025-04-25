@@ -17,11 +17,10 @@
                 <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
                 <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
             </div>
-            <div class="navbar-actions">
-                <input class="search-bar" type="search" placeholder="Rechercher">
-                <button class="btn btn-search">Rechercher</button>
-            </div>
-            <div class="auth-buttons">
+            <div class="navbar-buttons">
+                <button class="btn btn-search">
+                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
+                </button>
                 <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
                 <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
             </div>
@@ -59,7 +58,7 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 - SmartCity | Gestion des objets connectés</p>
+        <p>&copy; 2025 - Valmont | Gestion des objets connectés</p>
     </footer>
 </body>
 </html>

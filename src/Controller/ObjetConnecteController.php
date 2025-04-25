@@ -7,18 +7,36 @@ use App\Entity\CameraSurveillance;
 use App\Entity\ParkingIntelligent;
 use App\Entity\CapteurBruit;
 use App\Entity\AbribusIntelligent;
+use App\Entity\BorneRecharge;
+use App\Entity\CapteurQualiteAir;
+use App\Entity\FeuCirculation;
+use App\Entity\LampadaireIntelligent;
+use App\Entity\PoubelleConnectee;
+use App\Entity\Zone;
 use App\Form\ObjetConnecteType;
 use App\Form\CameraSurveillanceType;
 use App\Form\ParkingIntelligentType;
 use App\Form\CapteurBruitType;
 use App\Form\AbribusIntelligentType;
+use App\Form\BorneRechargeType;
+use App\Form\CapteurQualiteAirType;
+use App\Form\FeuCirculationType;
+use App\Form\LampadaireIntelligentType;
+use App\Form\PoubelleConnecteeType;
 use App\Repository\ObjetConnecteRepository;
+use App\Repository\CameraSurveillanceRepository;
+use App\Repository\BorneRechargeRepository;
+use App\Repository\CapteurQualiteAirRepository;
+use App\Repository\FeuCirculationRepository;
+use App\Repository\LampadaireIntelligentRepository;
+use App\Repository\PoubelleConnecteeRepository;
+use App\Repository\ZoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ObjetConnecteController extends AbstractController
 {
@@ -44,6 +62,26 @@ class ObjetConnecteController extends AbstractController
         $abribus = new AbribusIntelligent();
         $formAbribus = $this->createForm(AbribusIntelligentType::class, $abribus);
         $formAbribus->handleRequest($request);
+
+        $borneRecharge = new BorneRecharge();
+        $formBorneRecharge = $this->createForm(BorneRechargeType::class, $borneRecharge);
+        $formBorneRecharge->handleRequest($request);
+
+        $capteurQualiteAir = new CapteurQualiteAir();
+        $formCapteurQualiteAir = $this->createForm(CapteurQualiteAirType::class, $capteurQualiteAir);
+        $formCapteurQualiteAir->handleRequest($request);
+
+        $feuCirculation = new FeuCirculation();
+        $formFeuCirculation = $this->createForm(FeuCirculationType::class, $feuCirculation);
+        $formFeuCirculation->handleRequest($request);
+
+        $lampadaireIntelligent = new LampadaireIntelligent();
+        $formLampadaireIntelligent = $this->createForm(LampadaireIntelligentType::class, $lampadaireIntelligent);
+        $formLampadaireIntelligent->handleRequest($request);
+
+        $poubelleConnectee = new PoubelleConnectee();
+        $formPoubelleConnectee = $this->createForm(PoubelleConnecteeType::class, $poubelleConnectee);
+        $formPoubelleConnectee->handleRequest($request);
 
         if ($form->get('saveObjet')->isClicked() && $form->isValid()) {
             $em->persist($objet);
@@ -89,9 +127,73 @@ class ObjetConnecteController extends AbstractController
             if (!$abribus->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour l\'abribus intelligent.');
             } else {
+                $zone = $formAbribus->get('zone')->getData();
+                if ($zone) {
+                    $abribus->getObjet()->setZone($zone);
+                }
                 $em->persist($abribus);
                 $em->flush();
                 $this->addFlash('success', 'Abribus intelligent ajouté avec succès !');
+                return $this->redirectToRoute('ajouter_objet');
+            }
+        }
+
+        if ($formBorneRecharge->get('saveBorneRecharge')->isClicked() && $formBorneRecharge->isValid()) {
+
+            if (!$borneRecharge->getObjet()) {
+                $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour la borne de recharge.');
+            } else {
+                $em->persist($borneRecharge);
+                $em->flush();
+                $this->addFlash('success', 'Borne de recharge ajoutée avec succès !');
+                return $this->redirectToRoute('ajouter_objet');
+            }
+        }
+
+        if ($formCapteurQualiteAir->get('saveCapteurQualiteAir')->isClicked() && $formCapteurQualiteAir->isValid()) {
+
+            if (!$capteurQualiteAir->getObjet()) {
+                $this->addFlash('error', "Veuillez sélectionner un objet connecté pour le Capteur de Qualite d'Air.");
+            } else {
+                $em->persist($capteurQualiteAir);
+                $em->flush();
+                $this->addFlash('success', "Capteur de Qualite d'Air ajouté avec succès !");
+                return $this->redirectToRoute('ajouter_objet');
+            }
+        }
+
+        if ($formFeuCirculation->get('saveFeuCirculation')->isClicked() && $formFeuCirculation->isValid()) {
+
+            if (!$feuCirculation->getObjet()) {
+                $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour le feu de circulation.');
+            } else {
+                $em->persist($feuCirculation);
+                $em->flush();
+                $this->addFlash('success', 'Feu de circulation ajouté avec succès !');
+                return $this->redirectToRoute('ajouter_objet');
+            }
+        }
+
+        if ($formLampadaireIntelligent->get('saveLampadaireIntelligent')->isClicked() && $formLampadaireIntelligent->isValid()) {
+
+            if (!$lampadaireIntelligent->getObjet()) {
+                $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour le lampadaire intelligent.');
+            } else {
+                $em->persist($lampadaireIntelligent);
+                $em->flush();
+                $this->addFlash('success', 'Lampadaire intelligent ajouté avec succès !');
+                return $this->redirectToRoute('ajouter_objet');
+            }
+        }
+
+        if ($formPoubelleConnectee->get('savePoubelleConnectee')->isClicked() && $formPoubelleConnectee->isValid()) {
+
+            if (!$poubelleConnectee->getObjet()) {
+                $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour la poubelle connectee.');
+            } else {
+                $em->persist($poubelleConnectee);
+                $em->flush();
+                $this->addFlash('success', 'Poubelle connectee ajoutée avec succès !');
                 return $this->redirectToRoute('ajouter_objet');
             }
         }
@@ -102,6 +204,11 @@ class ObjetConnecteController extends AbstractController
             'form_parking' => $formParking->createView(),
             'form_capteur' => $formCapteur->createView(),
             'form_abribus' => $formAbribus->createView(),
+            'form_borneRecharge' => $formBorneRecharge->createView(),
+            'form_capteur_qualite_air' => $formCapteurQualiteAir->createView(),
+            'form_feu_circulation' => $formFeuCirculation->createView(),
+            'form_lampadaire_intelligent' => $formLampadaireIntelligent->createView(),
+            'form_poubelle_connectee' => $formPoubelleConnectee->createView(),
         ]);
     }
 

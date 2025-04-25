@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\AbribusIntelligent;
 use App\Entity\ObjetConnecte;
+use App\Entity\Zone;
+use App\Repository\ZoneRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -21,6 +23,18 @@ class AbribusIntelligentType extends AbstractType
                 'class' => ObjetConnecte::class,
                 'choice_label' => 'nom',
                 'label' => 'Objet connecté lié',
+            ])
+            // Ajout du champ zone
+            ->add('zone', EntityType::class, [
+                'class' => Zone::class,
+                'choice_label' => 'nom',
+                'required' => false,
+                'placeholder' => 'Sélectionnez une zone (optionnel)',
+                'query_builder' => function (ZoneRepository $zoneRepository) {
+                    return $zoneRepository->createQueryBuilder('z')
+                        ->orderBy('z.nom', 'ASC');
+                },
+                'mapped' => false, 
             ])
             ->add('prochains_passages', TextareaType::class, [
                 'label' => 'Prochains passages',
