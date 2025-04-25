@@ -27,14 +27,14 @@
         </div>
     </nav>
 
-    <form id="search-panel" class="hidden" method="GET">
-        <input type="text" placeholder="Rechercher...">
+    <form id="search-panel" class="hidden" method="GET" action="{{ path('search_results') }}">
+        <input type="text" name="q" placeholder="Rechercher...">
 
         <!-- Filtres -->
-        <label><input type="checkbox" name="filter[]" value="lieux"> Lieux d’intérêt</label>
-        <label><input type="checkbox" name="filter[]" value="evenements"> Événements</label>
-        <label><input type="checkbox" name="filter[]" value="transports"> Transports</label>
-        <label><input type="checkbox" name="filter[]" value="horaires"> Horaires</label>
+        <label><input type="checkbox" name="filters[]" value="lieux"> Lieux d’intérêt</label>
+        <label><input type="checkbox" name="filters[]" value="evenements"> Événements</label>
+        <label><input type="checkbox" name="filters[]" value="transports"> Transports</label>
+        <label><input type="checkbox" name="filters[]" value="horaires"> Horaires</label>
 
         <button type="submit" class="btn-primary">Rechercher</button>
     
