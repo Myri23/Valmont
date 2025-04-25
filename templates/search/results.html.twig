@@ -3,5 +3,44 @@
 {% block title %}Résultats de recherche{% endblock %}
 
 {% block body %}
-    <h1>Résultats de la recherche pour :</h1>
+<body>
+    <header class="hero">
+        {% if results|trim is not empty %}
+            <h1>Résultats de la recherche pour : </br><span>{{ results }}</span></h1>
+        {% else %}
+            <h1>Aucune recherche effectué</h1>
+        {% endif %}
+    </header>
+
+    <section class="container">
+        <h2>Résultats de la recherche : </h2>
+
+        {% if filters is not empty %}
+            <p>Filtre(s) selectionné(s) :
+            {% for val in filters %}
+                {{ val }}
+            {% endfor %}
+            </p>
+        {% else %}
+            <p>Aucun filtre selectionné</p>
+        {% endif %}
+
+        {% if results|trim is not empty %}
+            <div class="card">
+                <p>Ici sera présent le résultat de la recherche</p>
+            </div>
+        {% else %}
+            <div class="card">
+                <h1>Aucun résultat trouvé...</h1>
+            </div>
+        {% endif %}
+
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
+</body>
 {% endblock %}

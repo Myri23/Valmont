@@ -15,17 +15,15 @@ class SearchController extends AbstractController
         $query = $request->query->get('q'); // Récupérer la recherche textuelle
 
         // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
-        $filters = $request->query->get('filter');
-        if (!is_array($filters)) {
-            $filters = [];
+        $tab = $request->query->all('tab');
+        
+        if (!is_array($tab)) {
+            $tab = [];
         }
 
-        // Exemple de logique de recherche (il faudrait adapter selon ton application)
-        $results = $this->performSearch($query, $filters);
-
         return $this->render('search/results.html.twig', [
-            'results' => $results,
-            'filters' => $filters
+            'results' => $query,
+            'filters' => $tab
         ]);
     }
 
