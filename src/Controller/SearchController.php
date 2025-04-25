@@ -12,11 +12,11 @@ class SearchController extends AbstractController
     #[Route('/search', name: 'search_results')]
     public function search(Request $request): Response
     {
-        $query = $request->query->get('q'); // Récupérer la recherche textuelle
+        $query = trim($request->query->get('q')); // Récupérer la recherche textuelle
 
         // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
         $tab = $request->query->all('tab');
-        
+
         if (!is_array($tab)) {
             $tab = [];
         }

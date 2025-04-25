@@ -5,7 +5,7 @@
 {% block body %}
 <body>
     <header class="hero">
-        {% if results|trim is not empty %}
+        {% if results is not empty %}
             <h1>Résultats de la recherche pour : </br><span>{{ results }}</span></h1>
         {% else %}
             <h1>Aucune recherche effectué</h1>
