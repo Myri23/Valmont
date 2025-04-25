@@ -272,7 +272,10 @@ footer {
     cursor: pointer;
 }
 
-/* === Page ville.html.twig & concert_jazz.html.twig & festival_talent.html.twig === */
+/* === Page ville.html.twig === */
+/* === concert_jazz.html.twig === */
+/* === festival_talent.html.twig === */
+/* === chasse_oeufs.html.twig === */
 .container {
     max-width: 1200px;
     margin: auto;
