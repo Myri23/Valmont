@@ -5,6 +5,11 @@ namespace App\Entity;
 use App\Repository\ObjetConnecteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\ParkingIntelligent;
+use App\Entity\CapteurBruit;
+use App\Entity\AbribusIntelligent;
 
 #[ORM\Entity(repositoryClass: ObjetConnecteRepository::class)]
 class ObjetConnecte
@@ -46,6 +51,22 @@ class ObjetConnecte
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $actif = null;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: ParkingIntelligent::class, cascade: ['persist', 'remove'])]
+    private Collection $parkings;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: CapteurBruit::class, cascade: ['persist', 'remove'])]
+    private Collection $capteursBruit;
+
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: AbribusIntelligent::class, cascade: ['persist', 'remove'])]
+    private Collection $abribusIntelligents;
+
+    public function __construct()
+    {
+        $this->parkings = new ArrayCollection();
+        $this->capteursBruit = new ArrayCollection();
+        $this->abribusIntelligents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +191,96 @@ class ObjetConnecte
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ParkingIntelligent>
+     */
+    public function getParkings(): Collection
+    {
+        return $this->parkings;
+    }
+
+    public function addParking(ParkingIntelligent $parking): self
+    {
+        if (!$this->parkings->contains($parking)) {
+            $this->parkings->add($parking);
+            $parking->setObjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParking(ParkingIntelligent $parking): self
+    {
+        if ($this->parkings->removeElement($parking)) {
+            // set the owning side to null (unless already changed)
+            if ($parking->getObjet() === $this) {
+                $parking->setObjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CapteurBruit>
+     */
+    public function getCapteursBruit(): Collection
+    {
+        return $this->capteursBruit;
+    }
+
+    public function addCapteurBruit(CapteurBruit $capteurBruit): self
+    {
+        if (!$this->capteursBruit->contains($capteurBruit)) {
+            $this->capteursBruit->add($capteurBruit);
+            $capteurBruit->setObjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCapteurBruit(CapteurBruit $capteurBruit): self
+    {
+        if ($this->capteursBruit->removeElement($capteurBruit)) {
+            // set the owning side to null (unless already changed)
+            if ($capteurBruit->getObjet() === $this) {
+                $capteurBruit->setObjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AbribusIntelligent>
+     */
+    public function getAbribusIntelligents(): Collection
+    {
+        return $this->abribusIntelligents;
+    }
+
+    public function addAbribusIntelligent(AbribusIntelligent $abribusIntelligent): self
+    {
+        if (!$this->abribusIntelligents->contains($abribusIntelligent)) {
+            $this->abribusIntelligents->add($abribusIntelligent);
+            $abribusIntelligent->setObjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbribusIntelligent(AbribusIntelligent $abribusIntelligent): self
+    {
+        if ($this->abribusIntelligents->removeElement($abribusIntelligent)) {
+            // set the owning side to null (unless already changed)
+            if ($abribusIntelligent->getObjet() === $this) {
+                $abribusIntelligent->setObjet(null);
+            }
+        }
+
         return $this;
     }
 }

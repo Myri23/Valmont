@@ -12,48 +12,43 @@
             <a class="navbar-brand" href="#">Valmont</a>
             <div class="navbar-links">
                 <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
+                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
+                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
             </div>
             <div class="navbar-actions">
                 <input class="search-bar" type="search" placeholder="Rechercher">
                 <button class="btn btn-search">Rechercher</button>
             </div>
             <div class="auth-buttons">
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                    <a href="{{ path('formulaire') }}" class="btn btn-secondary">S'inscrire</a>
+                    <a href="{{ path('connexion') }}" class="btn btn-tertiary">Se connecter</a>
             </div>
         </div>
     </nav>
 
+
     <header>
-        <h1>Valmont - Connexion</h1>
+        <h1>Valmont - Inscription</h1>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>Se connecter :</h2>
 
-            {% if error %}
-                <p style="color: red;">{{ error }}</p>
-            {% endif %}
-            
+    <!-- Formulaire de connexion -->
+    <div id="formulaire">
+        <h2>Se connecter :</h2>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
         {{ form_start(form) }}
         <fieldset>
             {{ form_row(form.login) }}
             {{ form_row(form.mot_de_passe) }}
 
-                <div class="btn-form">
-                    <button type="submit">Se connecter</button>
-                    <button type="reset">Réinitialiser</button>
-                </div>
-
-            </fieldset>
-            {{ form_end(form) }}
-        </div>
-    </main>
+            <button type="submit">Se connecter</button>
+            <button type="reset">Réinitialiser</button>
+        </fieldset>
+        {{ form_end(form) }}
+    </div>
 
     <footer>
         <p>&copy; 2025 - Valmont | Ville connectée</p>

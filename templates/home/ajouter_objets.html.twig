@@ -56,6 +56,77 @@
             {{ form_row(form_camera.angle_vision) }}
             <button type="submit" class="btn btn-primary">Ajouter caméra</button>
         {{ form_end(form_camera) }}
+        
+        <hr>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Ajouter un parking intelligent</h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form_parking) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form_parking.objet) }}
+                        {{ form_row(form_parking.places_totales) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form_parking.places_disponibles) }}
+                        {{ form_row(form_parking.localisation_precise) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveParking) }}
+                </div>
+                {{ form_end(form_parking) }}
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Ajouter un capteur de bruit</h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form_capteur) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form_capteur.objet) }}
+                        {{ form_row(form_capteur.niveau_decibel) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form_capteur.seuil_alerte) }}
+                        {{ form_row(form_capteur.derniere_alerte) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    {{ form_row(form_capteur.saveCapteur) }}
+                </div>
+                {{ form_end(form_capteur) }}
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Ajouter un abribus intelligent</h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form_abribus) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form_abribus.objet) }}
+                        {{ form_row(form_abribus.prochains_passages) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form_abribus.ecran_fonctionnel) }}
+                        {{ form_row(form_abribus.informations_affichees) }}
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    {{ form_row(form_abribus.saveAbribus) }}
+                </div>
+                {{ form_end(form_abribus) }}
+            </div>
+        </div>
     </section>
 
     <footer class="footer">
