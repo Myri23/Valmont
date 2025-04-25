@@ -5,10 +5,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Valmont - Accueil{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
-        {% block stylesheets %}
-        {% endblock %}
     </head>
     <body>
+        <nav class="navbar">
+            <div class="container-nav">
+                <a class="navbar-brand" href="#">Valmont</a>
+                <div class="navbar-links">
+                    <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                    <a class="nav-link active" href="{{ path('ville') }}">Information</a>
+                    <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
+                    <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
+                    <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
+                </div>
+                <div class="navbar-buttons">
+                    <button id="btn-search" class="btn btn-search">
+                        <img src="{{ asset('images/search.svg') }}" alt="Recherche">
+                    </button>
+                    <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                    <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                </div>
+            </div>
+        </nav>
+
+        <form id="search-panel" class="hidden" method="GET" action="{{ path('search_results') }}">
+            <input type="text" name="q" placeholder="Rechercher...">
+
+            <!-- Filtres -->
+            <label><input type="checkbox" name="filters[]" value="lieux"> Lieux d’intérêt</label>
+            <label><input type="checkbox" name="filters[]" value="evenements"> Événements</label>
+            <label><input type="checkbox" name="filters[]" value="transports"> Transports</label>
+            <label><input type="checkbox" name="filters[]" value="horaires"> Horaires</label>
+
+            <button type="submit" class="btn-primary">Rechercher</button>
+        
+            <button id="btn-close" class="btn btn-close">
+                <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
+            </button>
+        </form>
+
         {% block body %}{% endblock %}
     </body>
 </html>

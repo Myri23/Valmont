@@ -10,12 +10,18 @@ body {
 }
 
 h1, h2 {
-    color: #354E52; /* Vert foncé pour les titres */
+    color: #354E52;
     margin-bottom: 20px;
 }
 
-section {
+header, section {
     padding: 20px;
+}
+
+.hero{
+    background-color: #84A98D;
+    color: white;
+    text-align: center;
 }
 
 footer {
@@ -88,6 +94,7 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Boutons inscription/connexion */
 .btn-auth {
     text-decoration: none;
     color: white;
@@ -103,7 +110,69 @@ footer {
     border: 1px solid #354E52;
 }
 
-/* Vidéo */
+/* Panel Recherche */
+.hidden {
+    visibility: hidden;
+}
+
+#search-panel {
+    height: 10vh;
+    background-color: #2F3D46;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#search-panel input[type="text"], #search-panel label {
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+#search-panel input[type="text"] {
+    margin-left: 100px;
+    width: 40%;
+    opacity: 0.8;
+    background-color: #2F3D46;
+}
+
+#search-panel label {
+    text-align: center;
+    width: 10%;
+    background-color: #84A98D;
+    border-radius: 30px;
+}
+
+#search-panel label:hover {
+    background-color: white;
+    color: #84A98D;
+}
+
+#search-panel input[type="text"]::placeholder {
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+
+#search-panel input[type="text"]:focus, #search-panel label:focus {
+    outline: none;
+}
+
+/* Bouton fermeture */
+.btn-close {
+    height: 10vh;
+    width: 5%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    transform: translateY(-2px);
+}
+
+/* === Page index.html.twig === */
 .hero-video {
     height: 80vh;
     width: auto;
@@ -164,73 +233,206 @@ footer {
     border: 1px solid #84A98D;
 }
 
-/* Panel Recherche */
-.hidden {
-    visibility: hidden;
-}
+/* === Page ville.html.twig === */
+.container-grid, .container-grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+  }
 
-#search-panel {
-    height: 10vh;
-    background-color: #2F3D46;
-    position: fixed;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#search-panel input, #search-panel select {
-    padding: 10px;
-    color: white;
-    font-size: 20px;
-    border: none;
-}
-
-#search-panel input {
-    width: 60%;
-    margin-left: 70px;
-    opacity: 0.8;
-    background-color: #2F3D46;
-}
-
-#search-panel select {
-    text-align: center;
-    width: 10%;
-    background-color: #84A98D;
-    border-radius: 30px;
-    appearance: none; /* Masque la flèche sur la plupart des navigateurs modernes */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
-}
-
-#search-panel select:hover {
+.card {
     background-color: white;
-    color: #84A98D;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
 }
 
-#search-panel option {
-    background-color: #354E52;
+.card:hover {
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+
+/* Boutons */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
     color: white;
-    border: none;
-}  
-
-#search-panel input::placeholder {
-    color: white;
-    font-size: 20px;
-    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #84A98D;
+    margin-top: 10px;
 }
 
-#search-panel input:focus, #search-panel select:focus {
-    outline: none;
-}
-
-/* Bouton fermeture */
-.btn-close {
-    height: 10vh;
-    width: 10%;
-    background-color: transparent;
-    border: none;
+.btn-primary:hover {
+    background-color: #527970;
+    transform: translateY(-2px);
     cursor: pointer;
 }
 
-.btn-close:hover {
+.btn-back {
+    padding: 10px 20px;
+    width: fit-content;
+    align-self: center;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #84A98D;
+    margin-bottom: 20px;
+  }
+  
+  .btn-back:hover {
+    background-color: #527970;
     transform: translateY(-2px);
+    cursor: pointer;
+  }
+
+/* Lien Mail */
+li a {
+    text-decoration: none;
+    color: #527970;
+}
+
+li a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+/* === Page formulaire.html.twig & connexion.html.twig === */
+.container-form {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.card-form {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+}
+
+/* Formulaire */
+.title-form {
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+    padding: 10px;
+    color: #527970;
+    font-weight: bold;
+}
+
+form {
+    margin: 0 auto;
+}
+
+.fieldset-form input, .fieldset-form select {
+    background-color: #CAD2C5;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    width: 90%;
+    box-sizing: border-box; 
+    margin-bottom: 15px; 
+}
+
+.fieldset-form > div {
+    margin-bottom: 20px;
+}
+
+.fieldset-form div {
+    display: flex;
+    align-items: center;
+}
+
+.fieldset-form label {
+    min-width: 150px;
+    margin-right: 15px;
+}
+
+/* Boutons Formulaire */
+.btn-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-form button[type="submit"], .btn-form button[type="reset"]{
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-form button[type="submit"] {
+    background-color: green;
+}
+
+.btn-form button[type="submit"]:hover {
+    background-color: darkgreen;
+}
+
+.btn-form button[type="reset"] {
+    background-color: red;
+}
+
+.btn-form button[type="reset"]:hover {
+    background-color: darkred;
+}
+
+/* === Page lieux_interet.html.twig === */
+.container-lieu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+}
+  
+.card-lieu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+  
+.card-lieu:hover {
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+  
+.card-lieu .card-text p{
+    margin-bottom: 20px;
+}
+
+/* Images */
+.card-lieu img {
+    width: 100%;
+    height: 200px;
+    border: solid #84A98D;
+    border-radius: 15px;
 }

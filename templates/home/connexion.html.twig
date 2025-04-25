@@ -1,77 +1,35 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Connexion</title>
-    <link rel="stylesheet" href="{{ asset('styles/formulaire.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Informations</a>
-                <a class="nav-link active" href="{{ path('objets') }}">Objets connectés</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-         
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
-    <header>
+    <header class="hero">
         <h1>Valmont - Inscription</h1>
     </header>
 
 
-    <!-- Formulaire de connexion -->
-    <div id="formulaire">
-        <h2>Se connecter :</h2>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
+    <main class="container-form">
+        <section class="card-form">
+            <h2 class="title-form">Se connecter :</h2>
 
-        {{ form_start(form) }}
-        <fieldset>
-            {{ form_row(form.login) }}
-            {{ form_row(form.mot_de_passe) }}
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
 
-            <button type="submit">Se connecter</button>
-            <button type="reset">Réinitialiser</button>
-        </fieldset>
-        {{ form_end(form) }}
-    </div>
+            {{ form_start(form) }}
+            <fieldset class="fieldset-form">
+
+                {{ form_row(form.login) }}
+                {{ form_row(form.mot_de_passe) }}
+
+                <div class="btn-form">
+                    <button type="submit">Se connecter</button>
+                    <button type="reset">Réinitialiser</button>
+                </div>
+
+            </fieldset>
+            {{ form_end(form) }}
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2025 - Valmont | Ville connectée</p>
@@ -80,3 +38,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

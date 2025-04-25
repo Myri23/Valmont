@@ -1,65 +1,14 @@
-{# templates/home/lieux_interet.html.twig #}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Lieux d'intérêt</title>
-    <link rel="stylesheet" href="{{ asset('styles/lieux_interet.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-         
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
     <header class="hero">
         <h1>Les Lieux d'Intérêt de Valmont</h1>
         <p>Explorez les trésors de la ville : culture, nature, gastronomie et détente.</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-lieu">
+        <div class="card-lieu">
             <img src="{{ asset('images/musee_histoire.jpg') }}" alt="Musée d'Histoire de Valmont">
             <div class="card-text">
                 <h3>Musées</h3>
@@ -68,7 +17,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/parc_MLK.jpg') }}" alt="Parc Lidia Poët">
             <div class="card-text">
                 <h3>Parcs</h3>
@@ -77,7 +26,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/queen_resto.jpg') }}" alt="Queen">
             <div class="card-text">
                 <h3>Restaurants</h3>
@@ -86,7 +35,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/bibliotheque_universite.jpg') }}" alt="Bibliothèque Universitaire">
             <div class="card-text">
                 <h3>Bibliothèques</h3>
@@ -103,3 +52,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}
