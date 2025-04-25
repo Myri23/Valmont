@@ -1,79 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Bibliothèques</title>
-    <link rel="stylesheet" href="{{ asset('styles/bibliotheque.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-    
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
     <header class="hero">
         <h1>Les Bibliothèques de Valmont</h1>
         <p>Des lieux calmes et inspirants pour lire, apprendre et se cultiver.</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-biblio">
+        <div class="card-biblio">
             <img src="{{ asset('images/bibliotheque_taverny.jpg') }}" alt="Bibliothèque centrale">
             <div class="biblio-info">
                 <h3>Bibliothèque Centrale</h3>
                 <p>Le plus grand centre de lecture publique de Valmont, avec un large choix de livres, de périodiques et d'espaces de travail collaboratif.</p>
                 <div class="coup-de-coeur">
                     <h2>❤️ Les coups de cœur des bibliothécaires</h2>
-                    <div class="cadre">
+                    <div class="cadre-biblio">
                         <p><strong>"Chanson douce"</strong> de Leïla Slimani</p>
                         <p>Un roman glaçant et captivant, récompensé par le prix Goncourt, que toute l'équipe recommande pour sa plume fine et sa réflexion percutante sur la maternité et les rapports sociaux.</p>
                     </div>
-                    <div class="cadre">
+                    <div class="cadre-biblio">
                         <p><strong>"La Peste"</strong> d'Albert Camus</p>
                         <p>Un classique indémodable qui interroge notre rapport à la solidarité, à la mort, et à la résilience collective dans un contexte de crise sanitaire.</p>
                     </div>
-                    <div class="cadre">
+                    <div class="cadre-biblio">
                         <p><strong>"L'Art de la joie"</strong> de Goliarda Sapienza</p>
                         <p>Une fresque puissante et féministe sur le destin d'une femme libre dans une Italie marquée par les soubresauts du XXe siècle. Inoubliable.</p>
                     </div>
@@ -81,12 +31,12 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-biblio">
             <img src="{{ asset('images/bibliotheque.jpg') }}"  alt="Médiathèque Jeunesse">
             <div class="biblio-info">
                 <h3>Médiathèque Jeunesse</h3>
                 <p>Un espace ludique et éducatif pour les enfants et les adolescents, avec des animations régulières, des jeux, et une grande collection jeunesse.</p>
-                <div class="cadre">
+                <div class="cadre-biblio">
                     <h2>Rendez-vous réguliers</h2>
                     <ul>
                         <li>📖 Heure du conte : chaque mercredi à 15h</li>
@@ -98,12 +48,12 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-biblio">
             <img src="{{ asset('images/bibliotheque_universite.jpg') }}"  alt="Bibliothèque Universitaire">
             <div class="biblio-info">
                 <h3>Bibliothèque Universitaire</h3>
                 <p>Un espace chaleureux pour lire au calme entre deux cours ou emprunter rapidement un ouvrage sans traverser le campus. La BU de proximité idéale pour allier efficacité et sérénité.</p>
-                <div class="cadre">
+                <div class="cadre-biblio">
                     <h2>Horaires d'ouverture</h2>
                     <ul>
                         <li>Lundi à vendredi : 8h30 - 20h</li>
@@ -111,7 +61,7 @@
                         <li>Fermée le dimanche et les jours fériés</li>
                     </ul>
                 </div>
-                <div class="cadre">
+                <div class="cadre-biblio">
                     <h2>Accès</h2>
                     <p>La bibliothèque est située dans le bâtiment C du campus, au rez-de-chaussée. Elle est accessible à pied, à vélo ou via la navette universitaire. Stationnement vélo et consignes disponibles à l'entrée.</p>
                 </div>
@@ -127,3 +77,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}
