@@ -1,58 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horaires du Tramway</title>
-    <link rel="stylesheet" href="{{ asset('styles/ville.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-         
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
-    <header>
+    <header class="hero">
         <h1>Horaires du Tramway</h1>
     </header>
 
@@ -68,7 +18,7 @@
             <p>Vérifiez les panneaux en station pour toute mise à jour des horaires.</p>
         </div>
 
-        <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
+        <a class="btn btn-primary" href="{{ path('ville') }}">Retour à l'accueil</a>
     </section>
 
     <footer class="footer">
@@ -78,3 +28,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}
