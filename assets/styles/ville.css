@@ -203,55 +203,46 @@ li a:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-#search-panel input, #search-panel select {
+#search-panel input[type="text"], #search-panel label {
     padding: 10px;
     color: white;
     font-size: 20px;
     border: none;
 }
 
-#search-panel input {
-    width: 60%;
-    margin-left: 70px;
+#search-panel input[type="text"] {
+    margin-left: 100px;
+    width: 40%;
     opacity: 0.8;
     background-color: #2F3D46;
 }
 
-#search-panel select {
+#search-panel label {
     text-align: center;
     width: 10%;
     background-color: #84A98D;
     border-radius: 30px;
-    appearance: none; /* Masque la flèche sur la plupart des navigateurs modernes */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
 }
 
-#search-panel select:hover {
+#search-panel label:hover {
     background-color: white;
     color: #84A98D;
 }
 
-#search-panel option {
-    background-color: #354E52;
-    color: white;
-    border: none;
-}  
-
-#search-panel input::placeholder {
+#search-panel input[type="text"]::placeholder {
     color: white;
     font-size: 20px;
     border: none;
 }
 
-#search-panel input:focus, #search-panel select:focus {
+#search-panel input[type="text"]:focus, #search-panel label:focus {
     outline: none;
 }
 
 /* Bouton fermeture */
 .btn-close {
     height: 10vh;
-    width: 10%;
+    width: 5%;
     background-color: transparent;
     border: none;
     cursor: pointer;

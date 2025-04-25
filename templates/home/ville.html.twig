@@ -27,30 +27,21 @@
         </div>
     </nav>
 
-    <div id="search-panel" class="hidden">
+    <form id="search-panel" class="hidden" method="GET">
         <input type="text" placeholder="Rechercher...">
 
         <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
+        <label><input type="checkbox" name="filter[]" value="lieux"> Lieux d’intérêt</label>
+        <label><input type="checkbox" name="filter[]" value="evenements"> Événements</label>
+        <label><input type="checkbox" name="filter[]" value="transports"> Transports</label>
+        <label><input type="checkbox" name="filter[]" value="horaires"> Horaires</label>
 
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
+        <button type="submit" class="btn-primary">Rechercher</button>
     
         <button id="btn-close" class="btn btn-close">
             <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
         </button>
-    </div>
+    </form>
 
     <header class="hero">
         <h1>Valmont - Information</h1>
