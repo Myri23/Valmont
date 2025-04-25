@@ -233,7 +233,13 @@ footer {
     border: 1px solid #84A98D;
 }
 
-/* === Page ville.html.twig === */
+/* === Page ville.html.twig & concert_jazz.html.twig === */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
 .container-grid, .container-grid2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
