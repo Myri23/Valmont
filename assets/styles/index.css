@@ -488,3 +488,50 @@ form {
 }
 
 /* === Page parc.html.twig === */
+.container-parcs {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+  
+.card-parcs {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+  
+.card-parcs:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+}
+  
+.card-parcs img {
+    max-width: 300px;
+    border-radius: 10px;
+    margin-right: 20px;
+    flex: 1;
+}
+  
+.parc-info {
+    flex: 2;
+    min-width: 250px;
+}
+  
+.parc-info h3 {
+    margin-top: 0;
+}
+  
+.cadre-parcs {
+    background-color: #E0E1DD;
+    border-left: 5px solid #84A98D;
+    padding: 15px 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}

@@ -1,105 +1,55 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Parcs</title>
-    <link rel="stylesheet" href="{{ asset('styles/parcs.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-         
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
     <header class="hero">
         <h1>Les Parcs de Valmont</h1>
         <p>Profitez des espaces verts de la ville pour vous détendre, faire du sport ou vous promener.</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-parcs">
+        <div class="card-parcs">
             <img src="{{ asset('images/parc_MLK.jpg') }}"  alt="Parc Lidia Poët">
             <div class="parc-info">
                 <h3>Parc Lidia Poët</h3>
                 <p>Le cœur vert de Valmont. Ce parc offre de vastes pelouses, des aires de jeux pour enfants, un lac artificiel et une piste cyclable. Parfait pour toute la famille.</p>
-                <div class="cadre">
+                <div class="cadre-parcs">
                     <p><strong>Horaires :</strong> Tous les jours de 7h à 21h</p>
                     <p><strong>Accès :</strong> Entrées par l'avenue des Peupliers et la rue des Érables. Parking et accès vélo disponibles.</p>
                 </div>
             </div>
         </div>
     
-        <div class="card">
+        <div class="card-parcs">
             <img src="{{ asset('images/parc_chanteraines.jpeg') }}"  alt="Parc Rosa Park">
             <div class="parc-info">
                 <h3>Parc Rosa Park</h3>
                 <p>Un havre de paix avec des milliers d'espèces végétales, des serres tropicales, et des parcours éducatifs pour mieux comprendre la biodiversité locale et exotique.</p>
-                <div class="cadre">
+                <div class="cadre-parcs">
                     <p><strong>Horaires :</strong> Lundi à samedi : 8h - 20h | Dimanche : 9h - 18h</p>
                     <p><strong>Accès :</strong> Entrée principale sur le boulevard des Jardins. Tram ligne 2, arrêt \"Serres\".</p>
                 </div>
             </div>
         </div>
     
-        <div class="card">
+        <div class="card-parcs">
             <img src="{{ asset('images/parc_arg.jpg') }}"  alt="Parc des Libellules">
             <div class="parc-info">
                 <h3>Parc des Libellules</h3>
                 <p>Situé sur les hauteurs de la ville, ce parc offre une vue panoramique sur Valmont. Sentiers de randonnée, zones boisées et belvédères y attendent les amoureux de la nature.</p>
-                <div class="cadre">
+                <div class="cadre-parcs">
                     <p><strong>Horaires :</strong> Tous les jours de 6h30 à 21h</p>
                     <p><strong>Accès :</strong> Sentier du Belvédère ou route des Pins. Parking au sud du parc.</p>
                 </div>
             </div>
         </div>
     
-        <div class="card">
+        <div class="card-parcs">
             <img src="{{ asset('images/square_batignolles.jpg') }}"  alt="Square Marie Curie">
             <div class="parc-info">
                 <h3>Square Marie Curie</h3>
                 <p>Un square paisible en plein cœur de la ville, parfait pour une pause au vert entre deux rendez-vous.</p>
-                <div class="cadre">
+                <div class="cadre-parcs">
                     <p><strong>Horaires :</strong> Tous les jours de 8h à 20h</p>
                     <p><strong>Accès :</strong> Place des Sciences, à proximité de la station de métro Curie.</p>
                 </div>
@@ -116,3 +66,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}
