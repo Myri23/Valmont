@@ -1,97 +1,44 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Événements</title>
-    <link rel="stylesheet" href="{{ asset('styles/lieux_interet.css') }}">
+{% extends 'base.html.twig' %}
 
-</head>
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button id="btn-search" class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <div id="search-panel" class="hidden">
-        <input type="text" placeholder="Rechercher...">
-
-        <!-- Filtres -->
-        <select>
-            <option value="">Lieux</option>
-            <option value="musee">Musée</option>
-            <option value="parc">Parcs</option>
-            <option value="restaurant">Restaurants</option>
-            <option value="bibliothèque">Bibliothèques</option>
-        </select>
-
-        <select>
-            <option value="">Evenements</option>
-            <option value="festival">Festival</option>
-            <option value="soiree">Soirée</option>
-            <option value="activite">Activité</option>
-            <option value="expo">Exposition</option>
-        </select>
-         
-        <button id="btn-close" class="btn btn-close">
-            <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
-        </button>
-    </div>
-
     <header class="hero">
         <h1>Les Événements à Valmont</h1>
         <p>Concerts, expositions, festivals... Découvrez ce qui se passe à Valmont !</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-lieu">
+        <div class="card-lieu">
             <img src="{{ asset('images/jazz.jpg') }}" alt="Festival de Jazz">
             <div class="musee-info">
                 <h2>Festival de Jazz</h2>
                 <p>Un événement musical incontournable au parc Lidia Poët rassemblant les meilleurs artistes de jazz dans une ambiance conviviale.</p>
-                <p><strong>Dates :</strong>Le 10 juillet 2025</p>
+                <p><strong>Dates :</strong> Le 10 juillet 2025</p>
                 <a href="{{ path('concert_jazz') }}" class="btn btn-primary">En savoir plus</a>
-
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{asset('images/festivaltalents.png')}}" alt="Nuit des Talents">
             <div class="musee-info">
                 <h2>Nuit des Talents</h2>
                 <p>Une scène ouverte aux jeunes talents de Valmont : musique, théâtre, danse et plus encore ! On vous attend place Hypatie !</p>
-                <p><strong>Date :</strong>Le 19 avril 2025</p>
+                <p><strong>Date :</strong> Le 19 avril 2025</p>
                 <a href="{{ path('festival_talent') }}" class="btn btn-primary">En savoir plus</a>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{asset('images/chasseoeufs.png')}}" alt="Chasse aux Œufs">
             <div class="musee-info">
                 <h2>Grande Chasse aux Œufs</h2>
                 <p>Activité familiale au Parc Rosa Parc pour célébrer Pâques. Œufs en chocolat, jeux et surprises !</p>
                 <p><strong>Date :</strong> 20 avril</p>
-
                 <a href="{{ path('chasse_oeufs') }}" class="btn btn-primary">En savoir plus</a>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{asset('images/tblvivant.png')}}" alt="Tableau Vivant">
             <div class="musee-info">
                 <h2>Reproduis ton tableau préféré</h2>
@@ -101,12 +48,12 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{asset('images/expo.png')}}" alt="Exposition Valmont d'Hier et d'Aujourd'hui">
             <div class="musee-info">
                 <h2>Expo : Valmont d'Hier et d'Aujourd'hui</h2>
                 <p>Une exposition immersive sur l'évolution de la ville à travers des documents d'archives et créations numériques.</p>
-                <p><strong>Dates :</strong>À partir du 12 avril</p>
+                <p><strong>Dates :</strong> À partir du 12 avril</p>
                 <a href="{{ path('expo_valmont') }}" class="btn btn-primary">En savoir plus</a>
             </div>
         </div>
@@ -119,4 +66,4 @@
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
-
+{% endblock %}

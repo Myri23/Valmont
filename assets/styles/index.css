@@ -398,7 +398,7 @@ form {
     background-color: darkred;
 }
 
-/* === Page lieux_interet.html.twig === */
+/* === Page lieux_interet.html.twig & event.html.twig === */
 .container-lieu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
