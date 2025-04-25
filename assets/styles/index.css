@@ -233,36 +233,6 @@ footer {
     border: 1px solid #84A98D;
 }
 
-/* === Page ville.html.twig & concert_jazz.html.twig === */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
-.container-grid, .container-grid2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 60px;
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 10px;
-    padding: 20px;
-  }
-
-.card {
-    background-color: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
-}
-
 /* Boutons */
 .btn-primary {
     display: inline-block;
@@ -300,6 +270,36 @@ footer {
     background-color: #527970;
     transform: translateY(-2px);
     cursor: pointer;
+}
+
+/* === Page ville.html.twig & concert_jazz.html.twig & festival_talent.html.twig === */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.container-grid, .container-grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+  }
+
+.card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 16px rgba(0,0,0,0.15);
 }
 
 /* Lien Mail */
