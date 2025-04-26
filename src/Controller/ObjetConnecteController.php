@@ -56,8 +56,8 @@ class ObjetConnecteController extends AbstractController
         $formParking->handleRequest($request);
         
         $capteur = new CapteurBruit();
-        $formCapteur = $this->createForm(CapteurBruitType::class, $capteur);
-        $formCapteur->handleRequest($request);
+        $formCapteurBruit = $this->createForm(CapteurBruitType::class, $capteurBruit);
+        $formCapteurBruit->handleRequest($request);
         
         $abribus = new AbribusIntelligent();
         $formAbribus = $this->createForm(AbribusIntelligentType::class, $abribus);
@@ -112,11 +112,11 @@ class ObjetConnecteController extends AbstractController
             }
         }
         
-        if ($formCapteur->get('saveCapteur')->isClicked() && $formCapteur->isValid()) {
-            if (!$capteur->getObjet()) {
+        if ($formCapteurBruit->get('saveCapteurBruit')->isClicked() && $formCapteurBruit->isValid()) {
+            if (!$capteurBruit->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour le capteur de bruit.');
             } else {
-                $em->persist($capteur);
+                $em->persist($capteurBruit);
                 $em->flush();
                 $this->addFlash('success', 'Capteur de bruit ajouté avec succès !');
                 return $this->redirectToRoute('ajouter_objet');
@@ -202,7 +202,7 @@ class ObjetConnecteController extends AbstractController
             'form' => $form->createView(),
             'form_camera' => $formCamera->createView(),
             'form_parking' => $formParking->createView(),
-            'form_capteur' => $formCapteur->createView(),
+            'form_capteur_bruit' => $formCapteurBruit->createView(),
             'form_abribus' => $formAbribus->createView(),
             'form_borneRecharge' => $formBorneRecharge->createView(),
             'form_capteur_qualite_air' => $formCapteurQualiteAir->createView(),

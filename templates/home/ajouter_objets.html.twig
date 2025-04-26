@@ -62,7 +62,9 @@
             {{ form_row(form.connectivite) }}
             {{ form_row(form.batteriePct) }}
             {{ form_row(form.actif) }}
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveObjet) }}
+            </div>
         {{ form_end(form) }}
 
         <hr>
@@ -74,22 +76,26 @@
             {{ form_row(form_camera.detection_mouvement) }}
             {{ form_row(form_camera.vision_nocturne) }}
             {{ form_row(form_camera.angle_vision) }}
-            <button type="submit" class="btn btn-primary">Ajouter caméra</button>
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveCamera) }}
+            </div>
         {{ form_end(form_camera) }}
 
         <hr>
 
         <h2>Ajouter un capteur de qualité de l'air</h2>
-        {{ form_start(form_capteur) }}
-            {{ form_row(form_capteur.objet) }}
-            {{ form_row(form_capteur.niveauPm25) }}
-            {{ form_row(form_capteur.niveauPm10) }}
-            {{ form_row(form_capteur.niveauCo2) }}
-            {{ form_row(form_capteur.niveauO3) }}
-            {{ form_row(form_capteur.qualiteGlobale) }}
-            {{ form_row(form_capteur.derniereMesure) }}
-            <button type="submit" class="btn btn-primary">Ajouter capteur</button>
-        {{ form_end(form_capteur) }}
+        {{ form_start(form_capteur_qualite_air) }}
+            {{ form_row(form_capteur_qualite_air.objet) }}
+            {{ form_row(form_capteur_qualite_air.niveauPm25) }}
+            {{ form_row(form_capteur_qualite_air.niveauPm10) }}
+            {{ form_row(form_capteur_qualite_air.niveauCo2) }}
+            {{ form_row(form_capteur_qualite_air.niveauO3) }}
+            {{ form_row(form_capteur_qualite_air.qualiteGlobale) }}
+            {{ form_row(form_capteur_qualite_air.derniereMesure) }}
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveCamera) }}
+            </div>
+        {{ form_end(form_capteur_qualite_air) }}
 
         <hr>
 
@@ -101,7 +107,9 @@
             {{ form_row(form_feu.dureeCycle) }}
             {{ form_row(form_feu.prioriteTransportCommun) }}
             {{ form_row(form_feu.detectionVehicules) }}
-            <button type="submit" class="btn btn-primary">Ajouter feu</button>
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveCamera) }}
+            </div>
         {{ form_end(form_feu) }}
 
         <hr>
@@ -114,7 +122,9 @@
             {{ form_row(form_lampadaire.capteurMouvement) }}
             {{ form_row(form_lampadaire.capteurLuminosite) }}
             {{ form_row(form_lampadaire.heuresFonctionnement) }}
-            <button type="submit" class="btn btn-primary">Ajouter lampadaire</button>
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveCamera) }}
+            </div>
         {{ form_end(form_lampadaire) }}
 
         <hr>
@@ -127,7 +137,9 @@
             {{ form_row(form_poubelle.typeDechets) }}
             {{ form_row(form_poubelle.derniereCollecte) }}
             {{ form_row(form_poubelle.compacteur) }}
-            <button type="submit" class="btn btn-primary">Ajouter poubelle</button>
+            <div class="text-center mt-3">
+                    {{ form_row(form_parking.saveCamera) }}
+            </div>
         {{ form_end(form_poubelle) }}
 
         <hr>
@@ -144,17 +156,6 @@
             <button type="submit" class="btn btn-primary">Ajouter borne</button>
         {{ form_end(form_borne) }}
     </section>
-
-<<<<<<< HEAD
-        <h2>Ajouter une caméra de surveillance</h2>
-        {{ form_start(form_camera) }}
-            {{ form_row(form_camera.objet) }}
-            {{ form_row(form_camera.resolution) }}
-            {{ form_row(form_camera.detection_mouvement) }}
-            {{ form_row(form_camera.vision_nocturne) }}
-            {{ form_row(form_camera.angle_vision) }}
-            <button type="submit" class="btn btn-primary">Ajouter caméra</button>
-        {{ form_end(form_camera) }}
         
         <hr>
 
@@ -186,21 +187,21 @@
                 <h3>Ajouter un capteur de bruit</h3>
             </div>
             <div class="card-body">
-                {{ form_start(form_capteur) }}
+                {{ form_start(form_capteur_bruit) }}
                 <div class="row">
                     <div class="col-md-6">
-                        {{ form_row(form_capteur.objet) }}
-                        {{ form_row(form_capteur.niveau_decibel) }}
+                        {{ form_row(form_capteur_bruit.objet) }}
+                        {{ form_row(form_capteur_bruit.niveau_decibel) }}
                     </div>
                     <div class="col-md-6">
-                        {{ form_row(form_capteur.seuil_alerte) }}
-                        {{ form_row(form_capteur.derniere_alerte) }}
+                        {{ form_row(form_capteur_bruit.seuil_alerte) }}
+                        {{ form_row(form_capteur_bruit.derniere_alerte) }}
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                    {{ form_row(form_capteur.saveCapteur) }}
+                    {{ form_row(form_capteur_bruit.saveCapteurBruit) }}
                 </div>
-                {{ form_end(form_capteur) }}
+                {{ form_end(form_capteur_bruit) }}
             </div>
         </div>
 
@@ -227,8 +228,7 @@
             </div>
         </div>
     </section>
-=======
->>>>>>> 1db8ea382df210f8aa92102a7adf951a66809609
+
 
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
