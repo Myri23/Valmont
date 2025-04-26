@@ -68,7 +68,6 @@ final class AdminController extends AbstractController
             'connexions' => $connexions,
         ]);
     }
-    
 #[Route('/admin/utilisateur/{id}/modifier', name: 'admin_utilisateur_modifier')]
 public function modifierNiveauExperience(Utilisateur $utilisateur, Request $request, EntityManagerInterface $entityManager): Response
 {
@@ -76,10 +75,23 @@ public function modifierNiveauExperience(Utilisateur $utilisateur, Request $requ
 
     if ($request->isMethod('POST')) {
         $nouveauNiveau = $request->request->get('niveau_experience');
+        $nouveauxPointsConnexion = $request->request->get('points_connexion');
+        $nouveauxPointsConsultation = $request->request->get('points_consultation');
+        
         $utilisateur->setNiveauExperience($nouveauNiveau);
+        
+        // Vérifier que les valeurs sont numériques
+        if (is_numeric($nouveauxPointsConnexion)) {
+            $utilisateur->setPointsConnexion((float)$nouveauxPointsConnexion);
+        }
+        
+        if (is_numeric($nouveauxPointsConsultation)) {
+            $utilisateur->setPointsConsultation((float)$nouveauxPointsConsultation);
+        }
+        
         $entityManager->flush();
 
-        $this->addFlash('success', 'Niveau d\'expérience mis à jour !');
+        $this->addFlash('success', 'Utilisateur mis à jour avec succès !');
         return $this->redirectToRoute('admin');
     }
 

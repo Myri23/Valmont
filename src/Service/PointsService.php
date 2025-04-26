@@ -38,22 +38,21 @@ class PointsService
         $this->entityManager->flush();
     }
     
-    private function updateUserLevel(Utilisateur $utilisateur): void
-    {
-        $totalPoints = $utilisateur->getPointsConnexion() + $utilisateur->getPointsConsultation();
-        
-        $niveau = 'débutant'; // Niveau par défaut
-        
-        foreach (self::NIVEAUX as $nom => $seuil) {
-            if ($totalPoints >= $seuil) {
-                $niveau = $nom;
-            } else {
-                break;
-            }
+private function updateUserLevel(Utilisateur $utilisateur): void
+{
+    $totalPoints = $utilisateur->getPointsConnexion() + $utilisateur->getPointsConsultation();
+    
+    $niveau = 'débutant'; // Niveau par défaut
+    
+    // Parcourir tous les niveaux et trouver le plus élevé correspondant
+    foreach (self::NIVEAUX as $nom => $seuil) {
+        if ($totalPoints >= $seuil) {
+            $niveau = $nom;
         }
-        
-        $utilisateur->setNiveauExperience($niveau);
     }
+    
+    $utilisateur->setNiveauExperience($niveau);
+}
     
     public function getTotalPoints(Utilisateur $utilisateur): float
     {

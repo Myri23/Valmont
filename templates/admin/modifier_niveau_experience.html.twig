@@ -1,24 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier Niveau d'Expérience{% endblock %}
+{% block title %}Modifier l'utilisateur{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1>Modifier le niveau d'expérience de {{ utilisateur.login }}</h1>
-
-    <form method="post">
-        <div class="form-group">
-            <label for="niveau_experience">Niveau d'expérience :</label>
-            <select name="niveau_experience" id="niveau_experience" class="form-control">
-                <option value="Débutant" {% if utilisateur.niveauExperience == 'Débutant' %}selected{% endif %}>Débutant</option>
-                <option value="Intermédiaire" {% if utilisateur.niveauExperience == 'Intermédiaire' %}selected{% endif %}>Intermédiaire</option>
-                <option value="Avancé" {% if utilisateur.niveauExperience == 'Avancé' %}selected{% endif %}>Avancé</option>
-            </select>
+    <h1 class="mb-4">Modifier l'utilisateur</h1>
+    
+    <div class="card">
+        <div class="card-header">
+            Informations de l'utilisateur: {{ utilisateur.login }}
         </div>
-
-        <button type="submit" class="btn btn-success mt-3">Enregistrer</button>
-        <a href="{{ path('admin') }}" class="btn btn-secondary mt-3">Annuler</a>
-    </form>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="niveau_experience">Niveau d'expérience</label>
+                    <select class="form-control" id="niveau_experience" name="niveau_experience">
+                        <option value="débutant" {% if utilisateur.niveauExperience == 'débutant' %}selected{% endif %}>Débutant</option>
+                        <option value="intermédiaire" {% if utilisateur.niveauExperience == 'intermédiaire' %}selected{% endif %}>Intermédiaire</option>
+                        <option value="avancé" {% if utilisateur.niveauExperience == 'avancé' %}selected{% endif %}>Avancé</option>
+                        <option value="expert" {% if utilisateur.niveauExperience == 'expert' %}selected{% endif %}>Expert</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="points_connexion">Points de connexion</label>
+                    <input type="number" step="0.01" class="form-control" id="points_connexion" name="points_connexion" value="{{ utilisateur.pointsConnexion }}">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="points_consultation">Points de consultation</label>
+                    <input type="number" step="0.01" class="form-control" id="points_consultation" name="points_consultation" value="{{ utilisateur.pointsConsultation }}">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label>Total des points</label>
+                    <input type="text" class="form-control" readonly value="{{ (utilisateur.pointsConnexion + utilisateur.pointsConsultation)|number_format(2, ',', ' ') }}">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                <a href="{{ path('admin') }}" class="btn btn-secondary">Retour</a>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script>
+    // Script pour calculer le total des points en temps réel
+    document.addEventListener('DOMContentLoaded', function() {
+        const pointsConnexion = document.getElementById('points_connexion');
+        const pointsConsultation = document.getElementById('points_consultation');
+        const totalPoints = document.querySelector('input[readonly]');
+        
+        function updateTotal() {
+            const total = (parseFloat(pointsConnexion.value) || 0) + (parseFloat(pointsConsultation.value) || 0);
+            totalPoints.value = total.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).replace('.', ',');
+        }
+        
+        pointsConnexion.addEventListener('input', updateTotal);
+        pointsConsultation.addEventListener('input', updateTotal);
+    });
+</script>
 {% endblock %}
 
