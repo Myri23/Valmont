@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil - Valmont{% endblock %}
+
+{% block body %}
+<body>
+    <header class="hero">
+        <h1>Valmont - Modifier mon profil</h1>
+    </header>
+
+    <main class="container-form">
+        <section class="card-form">
+            <div class="container-form">
+                <h1>Modifier mon profil</h1>
+                
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                
+                {{ form_start(form) }}
+                    <div class="form-group">
+                        {{ form_label(form.login) }}
+                        {{ form_widget(form.login) }}
+                        {{ form_errors(form.login) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.mot_de_passe) }}
+                        {{ form_widget(form.mot_de_passe) }}
+                        {{ form_errors(form.mot_de_passe) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_label(form.prenom) }}
+                        {{ form_widget(form.prenom) }}
+                        {{ form_errors(form.prenom) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form_label(form.photo_url) }}
+                        {{ form_widget(form.photo_url) }}
+                        {{ form_errors(form.photo_url) }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
+</body>
+{% endblock %}
+

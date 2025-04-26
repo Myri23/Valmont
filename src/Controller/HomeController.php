@@ -9,7 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\ObjetConnecte;
 use App\Form\ObjetConnecteType;
+use App\Form\ModifierProfilType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class HomeController extends AbstractController
@@ -142,25 +145,52 @@ class HomeController extends AbstractController
     }
     
     #[Route('/modifier_profil', name: 'modifier_profil')]
-    public function modifierProfil(Request $request)
+    public function modifierProfil(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
-        $user = $this->getUser();  // Utilisateur connecté
-        $form = $this->createForm(UtilisateurType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-
-            return $this->redirectToRoute('accueil');
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('connexion');
         }
-
-        return $this->render('modifier_profil.html.twig', [
+        
+        $form = $this->createForm(ModifierProfilType::class, $user);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer l'upload de la photo si nécessaire
+            $photoFile = $form->get('photo_url')->getData();
+            
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // Sécuriser le nom du fichier
+                $safeFilename = $slugger->slug($originalFilename);
+                // Générer un nom unique pour éviter les collisions
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+                
+                try {
+                    // Déplacer le fichier dans le répertoire où sont stockées les images
+                    $photoFile->move(
+                        $this->getParameter('images_directory'), // Défini dans services.yaml
+                        $newFilename
+                    );
+                    
+                    // Mettre à jour l'utilisateur avec le nouveau nom de fichier
+                    $user->setPhotoUrl($newFilename);
+                    
+                } catch (FileException $e) {
+                    // Gérer l'erreur si l'upload échoue
+                    $this->addFlash('error', "Une erreur est survenue lors de l'upload de l'image.");
+                }
+            }
+            
+            $entityManager->flush();
+            $this->addFlash('success', 'Profil mis à jour avec succès !');
+            return $this->redirectToRoute('home');
+        }
+        
+        return $this->render('home/modifier_profil.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
 
 }
 
