@@ -210,20 +210,11 @@ class ObjetConnecteController extends AbstractController
     #[Route('/objets', name: 'objets')]
     public function liste(ObjetConnecteRepository $repository): Response
     {
-        // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
             $this->addFlash('error', 'Veuillez vous connecter pour accéder à cette page.');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('connexion'); 
         }
-        
-        // Commentez cette partie si votre entité User n'a pas encore la méthode getNiveau()
-        /*
-        if ($this->getUser()->getNiveau() !== 'avance' && $this->getUser()->getNiveau() !== 'expert') {
-            $this->addFlash('error', 'Vous n\'avez pas le niveau requis pour accéder à cette page.');
-            return $this->redirectToRoute('home');
-        }
-        */
-        
+
         $objets = $repository->findAll();
 
         return $this->render('home/objets.html.twig', [
