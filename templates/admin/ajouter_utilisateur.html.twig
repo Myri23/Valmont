@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header class="hero">
+        <h1>Valmont - Ajouter un utilisateur</h1>
+    </header>
+
+    <main class="container-form">
+        <section class="card-form">
+            <h2 class="title-form">Ajouter un utilisateur</h2>
+
+            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+            <fieldset class="fieldset-form">
+
+                {{ form_row(form.login) }}
+                {{ form_row(form.mot_de_passe) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.date_naissance) }}
+                {{ form_row(form.sexe) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.type_membre) }}
+                {{ form_row(form.photo_url) }}
+
+                <div class="btn-form">
+                    <button type="submit">Ajouter</button>
+                    <button type="reset">Réinitialiser</button>
+                </div>
+
+            </fieldset>
+            {{ form_end(form) }}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+{% endblock %}
+

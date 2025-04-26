@@ -26,3 +26,8 @@ services:
     App\EventListener\SessionIdChangeListener:
         tags:
             - { name: kernel.event_subscriber }
+            
+# Ajoutez cette configuration
+    App\EventListener\AuthentificationSuccessListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login', method: 'onSecurityInteractiveLogin' }

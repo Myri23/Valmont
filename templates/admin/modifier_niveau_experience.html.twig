@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Niveau d'Expérience{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Modifier le niveau d'expérience de {{ utilisateur.login }}</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="niveau_experience">Niveau d'expérience :</label>
+            <select name="niveau_experience" id="niveau_experience" class="form-control">
+                <option value="Débutant" {% if utilisateur.niveauExperience == 'Débutant' %}selected{% endif %}>Débutant</option>
+                <option value="Intermédiaire" {% if utilisateur.niveauExperience == 'Intermédiaire' %}selected{% endif %}>Intermédiaire</option>
+                <option value="Avancé" {% if utilisateur.niveauExperience == 'Avancé' %}selected{% endif %}>Avancé</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Enregistrer</button>
+        <a href="{{ path('admin') }}" class="btn btn-secondary mt-3">Annuler</a>
+    </form>
+</div>
+{% endblock %}
+
