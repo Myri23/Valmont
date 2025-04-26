@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Musées</title>
-    <link rel="stylesheet" href="{{ asset('styles/musees.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
+{% extends 'base.html.twig' %}
 
+{% block body %}
+<body>
     <header class="hero">
         <h1>Les Musées de Valmont</h1>
         <p>Plongez dans la culture et l'histoire locale à travers nos musées emblématiques.</p>
     </header>
 
-    <section class="container grid-musees">
-        <div class="card">
+    <section class="container-musees">
+        <div class="card-musees">
             <img src="{{ asset('images/musee_histoire.jpg') }}"  alt="Musée d'Histoire de Valmont">
             <div class="musee-info">
                 <h2>Musée d'Histoire de Valmont</h2>
@@ -43,7 +18,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-musees">
             <img src="{{ asset('images/musee_science.jpg') }}"  alt="Musée des Sciences & Nature">
             <div class="musee-info">
                 <h2>Musée Sciences & Nature</h2>
@@ -53,7 +28,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-musees">
             <img src="{{ asset('images/musee_orangerie.jpg') }}"  alt="Musée d’Art Contemporain">
             <div class="musee-info">
                 <h2>Musée du Citronnier</h2>
@@ -68,5 +43,8 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

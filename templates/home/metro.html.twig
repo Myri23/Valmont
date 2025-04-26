@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horaires du Métro</title>
-    <link rel="stylesheet" href="{{ asset('styles/ville.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
+{% extends 'base.html.twig' %}
 
-    <header>
+{% block body %}
+<body>
+    <header class="hero">
         <h1>Horaires du Métro</h1>
     </header>
 
@@ -43,11 +18,14 @@
             <p>Pour plus d'informations, contactez notre service clientèle ou consultez les panneaux d'information en station.</p>
         </div>
 
-        <a class="btn btn-primary" href="{{ path('home') }}">Retour à l'accueil</a>
+        <a class="btn btn-primary" href="{{ path('ville') }}">Retour à l'accueil</a>
     </section>
 
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

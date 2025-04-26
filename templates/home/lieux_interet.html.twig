@@ -1,40 +1,14 @@
-{# templates/home/lieux_interet.html.twig #}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Lieux d'intérêt</title>
-    <link rel="stylesheet" href="{{ asset('styles/lieux_interet.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
+{% extends 'base.html.twig' %}
 
+{% block body %}
+<body>
     <header class="hero">
         <h1>Les Lieux d'Intérêt de Valmont</h1>
         <p>Explorez les trésors de la ville : culture, nature, gastronomie et détente.</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-lieu">
+        <div class="card-lieu">
             <img src="{{ asset('images/musee_histoire.jpg') }}" alt="Musée d'Histoire de Valmont">
             <div class="card-text">
                 <h3>Musées</h3>
@@ -43,7 +17,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/parc_MLK.jpg') }}" alt="Parc Lidia Poët">
             <div class="card-text">
                 <h3>Parcs</h3>
@@ -52,7 +26,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/queen_resto.jpg') }}" alt="Queen">
             <div class="card-text">
                 <h3>Restaurants</h3>
@@ -61,7 +35,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-lieu">
             <img src="{{ asset('images/bibliotheque_universite.jpg') }}" alt="Bibliothèque Universitaire">
             <div class="card-text">
                 <h3>Bibliothèques</h3>
@@ -74,5 +48,8 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+    
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

@@ -1,32 +1,8 @@
-{# templates/home/index.html.twig #}
-
 {% extends 'base.html.twig' %}
-
-{% block title %}Valmont - Accueil{% endblock %}
 
 {% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero-video" id="accueil">
+    <header class="hero-video">
         <video autoplay muted loop playsinline class="video-background">
             <source src="{{ asset('video/valmont.mp4') }}" type="video/mp4">
             Votre navigateur ne supporte pas la vidéo HTML5.
@@ -37,6 +13,8 @@
             <a href="{{ path('ville') }}" class="btn btn-header">Découvrir</a>
         </div>
     </header>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
 {% endblock %}

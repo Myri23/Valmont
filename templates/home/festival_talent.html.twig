@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival de Talents</title>
-    <link rel="stylesheet" href="{{ asset('styles/ville.css') }}">
+{% extends 'base.html.twig' %}
 
-</head>
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-
     <header class="hero">
         <h1>Inscris-toi pour montrer ton talent !</h1>
     </header>
@@ -57,5 +31,8 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

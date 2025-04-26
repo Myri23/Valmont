@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Restaurants</title>
-    <link rel="stylesheet" href="{{ asset('styles/restaurants.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
+{% extends 'base.html.twig' %}
 
+{% block body %}
+<body>
     <header class="hero">
         <h1>Les Restaurants de Valmont</h1>
         <p>Découvrez les meilleures adresses pour ravir vos papilles, de la cuisine traditionnelle aux saveurs du monde.</p>
     </header>
 
-    <section class="container">
-        <div class="card">
+    <section class="container-resto">
+        <div class="card-resto">
             <img src="{{ asset('images/queen_resto.jpg') }}"  alt="Queen">
             <div class="restaurant-info">
                 <h2>Queen</h2>
@@ -73,7 +48,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-resto">
             <img src="{{ asset('images/la_belle_epoque_resto.jpg') }}"  alt="Restaurant La Belle Epoque">
             <div class="restaurant-info">
                 <h2>La Belle Epoque</h2>
@@ -113,7 +88,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card-resto">
             <img src="{{ asset('images/la_petite_sirene_resto.jpg') }}"  alt="La petite Sirène">
             <div class="restaurant-info">
                 <h2>La Petite Sirène</h2>
@@ -162,5 +137,8 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}

@@ -1,43 +1,17 @@
-{# templates/home/formulaire.html.twig #}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valmont - Formulaire</title>
-    <link rel="stylesheet" href="{{ asset('styles/formulaire.css') }}">
-</head>
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <body>
-    <nav class="navbar">
-        <div class="container-nav">
-            <a class="navbar-brand" href="#">Valmont</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Gestion</a>
-                <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
-            </div>
-            <div class="navbar-buttons">
-                <button class="btn btn-search">
-                    <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                </button>
-                <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
-            </div>
-        </div>
-    </nav>
-    
-    <header>
+    <header class="hero">
         <h1>Valmont - Inscription</h1>
     </header>
 
-    <main class="container">
-        <section class="card">
-            <h2>S'inscrire :</h2>
+    <main class="container-form">
+        <section class="card-form">
+            <h2 class="title-form">S'inscrire :</h2>
 
             {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
-            <fieldset>
+            <fieldset class="fieldset-form">
 
                 {{ form_row(form.login) }}
                 {{ form_row(form.mot_de_passe) }}
@@ -63,5 +37,7 @@
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
 
+    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>
+{% endblock %}
