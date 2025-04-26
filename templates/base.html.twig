@@ -13,11 +13,12 @@
                 <div class="navbar-links">
                     <a class="nav-link" href="{{ path('home') }}">Accueil</a>
                     <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                    <a class="nav-link active" href="{{ app.request.uri }}">Visualisation</a>
                     {% if is_granted('ROLE_AVANCE') or is_granted('ROLE_EXPERT') %}
                         <a class="nav-link" href="{{ path('objets') }}">Gestion</a>
                     {% endif %}
-                    <a class="nav-link active" href="{{ app.request.uri }}">Administration</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="nav-link" href="{{ path('admin') }}">Admin</a>
+                    {% endif %}
                 </div>
                 <div class="navbar-buttons">
                     <button id="btn-search" class="btn btn-search">

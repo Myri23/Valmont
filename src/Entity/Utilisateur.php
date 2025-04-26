@@ -122,6 +122,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = ['ROLE_USER']; // Tous les utilisateurs ont ROLE_USER
         
+        if ($this->type_utilisateur === 'administrateur'){
+        	$roles[] = 'ROLE_ADMIN';
+        }
         // Ajouter des rôles en fonction du niveau d'expérience
         switch($this->niveau_experience) {
             case 'intermédiaire':

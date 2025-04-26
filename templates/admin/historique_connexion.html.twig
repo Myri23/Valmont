@@ -1,0 +1,35 @@
+{# templates/admin/historique_connexion.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des connexions{% endblock %}
+
+{% block body %}
+    <h1>Historique des connexions</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Utilisateur</th>
+                <th>Date de Connexion</th>
+                <th>IP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for connexion in connexions %}
+                <tr>
+                    <td>{{ connexion.id }}</td>
+                    <td>{{ connexion.utilisateur.login }}</td>
+                    <td>{{ connexion.dateConnexion|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ connexion.ipConnexion }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucune connexion trouvée</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

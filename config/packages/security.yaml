@@ -58,9 +58,10 @@ security:
     
     # Configure la hiérarchie des rôles (optionnel)
     role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
         ROLE_INTERMEDIAIRE: [ROLE_USER]
-        ROLE_AVANCE:        [ROLE_INTERMEDIAIRE]
-        ROLE_EXPERT:        [ROLE_AVANCE]
+        ROLE_AVANCE: [ROLE_INTERMEDIAIRE]
+        ROLE_EXPERT: [ROLE_AVANCE]
 
 when@test:
     security:
