@@ -38,7 +38,7 @@ class PointsService
         $this->entityManager->flush();
     }
     
-private function updateUserLevel(Utilisateur $utilisateur): void
+public function updateUserLevel(Utilisateur $utilisateur): void
 {
     $totalPoints = $utilisateur->getPointsConnexion() + $utilisateur->getPointsConsultation();
     

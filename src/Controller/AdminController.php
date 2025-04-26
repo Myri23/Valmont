@@ -69,7 +69,12 @@ final class AdminController extends AbstractController
         ]);
     }
 #[Route('/admin/utilisateur/{id}/modifier', name: 'admin_utilisateur_modifier')]
-public function modifierNiveauExperience(Utilisateur $utilisateur, Request $request, EntityManagerInterface $entityManager): Response
+public function modifierNiveauExperience(
+    Utilisateur $utilisateur, 
+    Request $request, 
+    EntityManagerInterface $entityManager,
+    PointsService $pointsService // Ajoutez cette injection de dépendance
+): Response
 {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -77,8 +82,6 @@ public function modifierNiveauExperience(Utilisateur $utilisateur, Request $requ
         $nouveauNiveau = $request->request->get('niveau_experience');
         $nouveauxPointsConnexion = $request->request->get('points_connexion');
         $nouveauxPointsConsultation = $request->request->get('points_consultation');
-        
-        $utilisateur->setNiveauExperience($nouveauNiveau);
         
         // Vérifier que les valeurs sont numériques
         if (is_numeric($nouveauxPointsConnexion)) {
@@ -88,6 +91,9 @@ public function modifierNiveauExperience(Utilisateur $utilisateur, Request $requ
         if (is_numeric($nouveauxPointsConsultation)) {
             $utilisateur->setPointsConsultation((float)$nouveauxPointsConsultation);
         }
+        
+        // Mettre à jour le niveau en fonction des points (au lieu de prendre le niveau du formulaire)
+        $pointsService->updateUserLevel($utilisateur);
         
         $entityManager->flush();
 
