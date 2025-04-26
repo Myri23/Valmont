@@ -62,9 +62,7 @@
             {{ form_row(form.connectivite) }}
             {{ form_row(form.batteriePct) }}
             {{ form_row(form.actif) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveObjet) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter objet</button>
         {{ form_end(form) }}
 
         <hr>
@@ -76,9 +74,7 @@
             {{ form_row(form_camera.detection_mouvement) }}
             {{ form_row(form_camera.vision_nocturne) }}
             {{ form_row(form_camera.angle_vision) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveCamera) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter caméra de surveillance</button>
         {{ form_end(form_camera) }}
 
         <hr>
@@ -92,9 +88,7 @@
             {{ form_row(form_capteur_qualite_air.niveauO3) }}
             {{ form_row(form_capteur_qualite_air.qualiteGlobale) }}
             {{ form_row(form_capteur_qualite_air.derniereMesure) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveCamera) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter capteur qualité de l'air</button>
         {{ form_end(form_capteur_qualite_air) }}
 
         <hr>
@@ -107,9 +101,7 @@
             {{ form_row(form_feu.dureeCycle) }}
             {{ form_row(form_feu.prioriteTransportCommun) }}
             {{ form_row(form_feu.detectionVehicules) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveCamera) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter feu de circulation</button>
         {{ form_end(form_feu) }}
 
         <hr>
@@ -122,9 +114,7 @@
             {{ form_row(form_lampadaire.capteurMouvement) }}
             {{ form_row(form_lampadaire.capteurLuminosite) }}
             {{ form_row(form_lampadaire.heuresFonctionnement) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveCamera) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter lampadaire intelligent</button>
         {{ form_end(form_lampadaire) }}
 
         <hr>
@@ -137,9 +127,7 @@
             {{ form_row(form_poubelle.typeDechets) }}
             {{ form_row(form_poubelle.derniereCollecte) }}
             {{ form_row(form_poubelle.compacteur) }}
-            <div class="text-center mt-3">
-                    {{ form_row(form_parking.saveCamera) }}
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter poubelle connectée</button>
         {{ form_end(form_poubelle) }}
 
         <hr>
