@@ -87,7 +87,7 @@ class ObjetConnecteController extends AbstractController
             $em->persist($objet);
             $em->flush();
             $this->addFlash('success', 'Objet ajouté avec succès !');
-            return $this->redirectToRoute('ajouter_objet');
+            return $this->redirectToRoute('ajouter_objets');
         }
 
         if ($formCamera->get('saveCamera')->isClicked() && $formCamera->isValid()) {

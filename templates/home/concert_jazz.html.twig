@@ -12,7 +12,7 @@
             <p><strong>Date :</strong> 5 avril 2025</p>
             <p><strong>Lieu :</strong> Parc Lidia Poët, Valmont</p>
 
-            <form action="confirmation.html" method="POST">
+            <form id="reservationForm" method="POST">
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required>
 
@@ -33,6 +33,32 @@
     </footer>
 
     <script src="{{ asset('search-panel.js') }}"></script>
+<script>
+document.getElementById('reservationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('{{ path('concert_jazz') }}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text().then(message => ({ ok: response.ok, message })))
+    .then(({ ok, message }) => {
+        if (ok) {
+            alert(message); // "Réservation enregistrée ! 🎷"
+            document.getElementById('reservationForm').reset();
+        } else {
+            alert(message); // "Désolé, il n'y a plus assez de places disponibles. 😢"
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur réseau.');
+    });
+});
+</script>
+
 </body>
 </html>
 {% endblock %}
