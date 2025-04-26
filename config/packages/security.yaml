@@ -32,6 +32,9 @@ security:
                 username_parameter: utilisateur[login]  # Nom du champ login dans votre formulaire
                 password_parameter: utilisateur[mot_de_passe]  # Nom du champ mot de passe
                 default_target_path: home   # Page après connexion réussie
+                enable_csrf: true           # Activation de la protection CSRF
+                csrf_token_id: 'authenticate'  # ID du token CSRF
+                csrf_parameter: '_csrf_token'  # Nom du paramètre CSRF dans le formulaire
             
             # configuration de la déconnexion
             logout:

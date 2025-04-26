@@ -14,6 +14,16 @@
         </div>
     </header>
 
+    <div class="profile-sidebar">
+        {% if user %}
+        <h3>Bienvenue, {{ user.prenom }} {{ user.nom }}</h3>
+        <p>Email : {{ user.email }}</p>
+        <a href="{{ path('modifier_profil') }}" class="btn btn-profile">Modifier mon profil</a>
+        {% else %}
+        <p>Vous n'êtes pas connecté.</p>
+        {% endif %}
+    </div>
+
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 </html>

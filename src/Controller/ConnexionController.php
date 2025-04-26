@@ -1,46 +1,43 @@
 <?php
-
+// src/Controller/ConnexionController.php
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\ConnexionType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ConnexionController extends AbstractController
 {
     #[Route('/connexion', name: 'connexion')]
-    public function connexion(Request $request, EntityManagerInterface $em): Response
+    public function connexion(AuthenticationUtils $authenticationUtils): Response
     {
-        $form = $this->createForm(ConnexionType::class);
-        $form->handleRequest($request);
-
-        $error = null;
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            // Recherche de l'utilisateur dans la base
-            $user = $em->getRepository(Utilisateur::class)->findOneBy([
-                'login' => $data['login'],
-                'mot_de_passe' => $data['mot_de_passe'], // ⚠️ à sécuriser + hasher en vrai
-            ]);
-
-            if ($user) {
-                $this->addFlash('success', 'Connexion réussie !');
-                // ici tu peux enregistrer l'utilisateur en session par exemple
-                return $this->redirectToRoute('home');
-            } else {
-                $error = 'Identifiants invalides.';
-            }
-        }
-
+        // Récupérer l'erreur de connexion s'il y en a une
+        $error = $authenticationUtils->getLastAuthenticationError();
+        
+        // Dernier nom d'utilisateur saisi
+        $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('home/connexion.html.twig', [
-            'form' => $form->createView(),
+            'last_username' => $lastUsername,
             'error' => $error,
         ]);
+    }
+    
+    #[Route('/connexion_check', name: 'connexion_check')]
+    public function check()
+    {
+        // Cette méthode sera interceptée par le firewall
+        throw new \LogicException('Cette méthode ne doit jamais être appelée directement.');
+    }
+    
+    #[Route('/deconnexion', name: 'deconnexion')]
+    public function deconnexion()
+    {
+        // Cette méthode sera interceptée par le firewall
+        throw new \LogicException('Cette méthode ne doit jamais être appelée directement.');
     }
 }

@@ -117,7 +117,7 @@ footer {
     padding: 20px;
 }
 
-.container-grid, .container-grid2 {
+.container-grid2 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 60px;
@@ -126,6 +126,17 @@ footer {
     margin-top: 10px;
     padding: 20px;
   }
+
+.container-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 20px;
+}
+
 
 .card {
     background-color: white;

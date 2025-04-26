@@ -3,31 +3,36 @@
 {% block body %}
 <body>
     <header class="hero">
-        <h1>Valmont - Inscription</h1>
+        <h1>Valmont - Connexion</h1>
     </header>
-
 
     <main class="container-form">
         <section class="card-form">
             <h2 class="title-form">Se connecter :</h2>
 
             {% if error %}
-                <p style="color: red;">{{ error }}</p>
+                <p style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
             {% endif %}
 
-            {{ form_start(form) }}
-            <fieldset class="fieldset-form">
+            <form method="post" action="{{ path('connexion_check') }}">
+                <fieldset class="fieldset-form">
+                    <div class="form-group">
+                        <label for="login">Identifiant :</label>
+                        <input type="text" id="login" name="utilisateur[login]" value="{{ last_username }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" id="password" name="utilisateur[mot_de_passe]" required>
+                    </div>
 
-                {{ form_row(form.login) }}
-                {{ form_row(form.mot_de_passe) }}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <div class="btn-form">
-                    <button type="submit">Se connecter</button>
-                    <button type="reset">Réinitialiser</button>
-                </div>
-
-            </fieldset>
-            {{ form_end(form) }}
+                    <div class="btn-form">
+                        <button type="submit">Se connecter</button>
+                        <button type="reset">Réinitialiser</button>
+                    </div>
+                </fieldset>
+            </form>
         </section>
     </main>
 
@@ -37,5 +42,4 @@
 
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
-</html>
 {% endblock %}

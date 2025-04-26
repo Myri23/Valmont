@@ -17,8 +17,8 @@ class FormulaireController extends AbstractController
     #[Route('/formulaire', name: 'formulaire')]
     public function formulaire(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
-        $utilisateur = new Utilisateur();
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $user = new Utilisateur();
+        $form = $this->createForm(UtilisateurType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,18 +37,18 @@ class FormulaireController extends AbstractController
                     // Gérer l'erreur de téléchargement si nécessaire
                 }
 
-                $utilisateur->setPhotoUrl($newFilename);
+                $user->setPhotoUrl($newFilename);
             }
 
             // Champs non inclus dans le formulaire à remplir ici :
-            $utilisateur->setTypeUtilisateur('visiteur');
-            $utilisateur->setNiveauExperience('débutant');
-            $utilisateur->setPointsConnexion(0);
-            $utilisateur->setPointsConsultation(0);
-            $utilisateur->setCompteValide(false);
-            $utilisateur->setDateInscription(new \DateTime());
+            $user->setTypeUtilisateur('visiteur');
+            $user->setNiveauExperience('débutant');
+            $user->setPointsConnexion(0);
+            $user->setPointsConsultation(0);
+            $user->setCompteValide(false);
+            $user->setDateInscription(new \DateTime());
 
-            $em->persist($utilisateur);
+            $em->persist($user);
             $em->flush();
 
             $this->addFlash('success', 'Inscription réussie !');

@@ -44,7 +44,7 @@ class CameraSurveillanceType extends AbstractType
                 ]
             ])
             ->add('saveCamera', SubmitType::class, [
-    'label' => 'Ajouter la caméra',
+                'label' => 'Ajouter la caméra',
 ]);
 
     }

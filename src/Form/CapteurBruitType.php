@@ -41,7 +41,7 @@ class CapteurBruitType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
             ])
-            ->add('saveCapteur', SubmitType::class, [
+            ->add('saveCapteurBruit', SubmitType::class, [
                 'label' => 'Ajouter le capteur de bruit'
             ]);
     }

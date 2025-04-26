@@ -17,8 +17,13 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function home()
     {
-        return $this->render('home/index.html.twig');
+        $user = $this->getUser();  // Récupérer l'utilisateur connecté
+        return $this->render('home/index.html.twig', [
+            'user' => $user,
+        ]);
     }
+
+
 
     #[Route('/ville', name: 'ville')]
     public function ville()
@@ -135,7 +140,27 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-   
+    
+    #[Route('/modifier_profil', name: 'modifier_profil')]
+    public function modifierProfil(Request $request)
+    {
+        $user = $this->getUser();  // Utilisateur connecté
+        $form = $this->createForm(UtilisateurType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('modifier_profil.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
 
 }
 

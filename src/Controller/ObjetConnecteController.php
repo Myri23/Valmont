@@ -55,7 +55,7 @@ class ObjetConnecteController extends AbstractController
         $formParking = $this->createForm(ParkingIntelligentType::class, $parking);
         $formParking->handleRequest($request);
         
-        $capteur = new CapteurBruit();
+        $capteurBruit = new CapteurBruit();
         $formCapteurBruit = $this->createForm(CapteurBruitType::class, $capteurBruit);
         $formCapteurBruit->handleRequest($request);
         
