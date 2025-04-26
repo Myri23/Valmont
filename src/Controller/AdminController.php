@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\HistoriqueConnexion;  // Assure-toi que c'est bien ce namespace
+use App\Entity\HistoriqueConnexion;  
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

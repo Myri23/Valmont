@@ -12,6 +12,9 @@
                 <a class="navbar-brand" href="#">Valmont</a>
                 <div class="navbar-links">
                     <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('membres') }}">Membres</a>
+                    {% endif %}
                     <a class="nav-link active" href="{{ path('ville') }}">Information</a>
                     {% if is_granted('ROLE_AVANCE') or is_granted('ROLE_EXPERT') %}
                         <a class="nav-link" href="{{ path('objets') }}">Gestion</a>
@@ -24,8 +27,13 @@
                     <button id="btn-search" class="btn btn-search">
                         <img src="{{ asset('images/search.svg') }}" alt="Recherche">
                     </button>
-                    <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
-                    <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                    {% if app.user %}
+                        <a href="{{ path('profil') }}" class="btn btn-auth">Mon profil</a>
+                        <a href="{{ path('deconnexion') }}" class="btn btn-auth">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('formulaire') }}" class="btn btn-auth">S'inscrire</a>
+                        <a href="{{ path('connexion') }}" class="btn btn-auth">Se connecter</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
@@ -34,7 +42,7 @@
             <input type="text" name="q" placeholder="Rechercher...">
 
             <!-- Filtres -->
-            <label><input type="checkbox" name="tab[]" value="lieux"> Lieux d’intérêt</label>
+            <label><input type="checkbox" name="tab[]" value="lieux"> Lieux d'intérêt</label>
             <label><input type="checkbox" name="tab[]" value="evenements"> Événements</label>
             <label><input type="checkbox" name="tab[]" value="transports"> Transports</label>
             <label><input type="checkbox" name="tab[]" value="horaires"> Horaires</label>
