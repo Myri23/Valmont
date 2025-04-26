@@ -40,6 +40,8 @@ security:
             logout:
                 path: deconnexion           # Route pour se déconnecter
                 target: home                # Page après déconnexion
+                invalidate_session: true
+                clear_site_data: ['cookies']
             
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

@@ -35,9 +35,11 @@ class ConnexionController extends AbstractController
     }
     
     #[Route('/deconnexion', name: 'deconnexion')]
-    public function deconnexion()
+    public function deconnexion(): void
     {
         // Cette méthode sera interceptée par le firewall
         throw new \LogicException('Cette méthode ne doit jamais être appelée directement.');
     }
+
+
 }

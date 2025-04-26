@@ -14,32 +14,34 @@
         </div>
     </header>
 
+    {% if app.user %}
     <div class="profile-card">
-        <div class="profile-header">
-            {% if app.user.photoUrl %}
-            <img src="{{ asset('uploads/images/' ~ app.user.photoUrl) }}" alt="Photo de profil" class="profile-image">
-            {% else %}
-            <img src="{{ asset('images/default-avatar.png') }}" alt="Photo de profil par défaut" class="profile-image">
-            {% endif %}
-            <div class="profile-name">
-            <h2>{{ app.user.prenom }} {{ app.user.nom }}</h2>
-            <p>{{ app.user.login }}</p>
-            </div>
+    <div class="profile-header">
+        {% if app.user.photoUrl %}
+        <img src="{{ asset('uploads/images/' ~ app.user.photoUrl) }}" alt="Photo de profil" class="profile-image">
+        {% else %}
+        <img src="{{ asset('images/default-avatar.png') }}" alt="Photo de profil par défaut" class="profile-image">
+        {% endif %}
+        <div class="profile-name">
+        <h2>{{ app.user.prenom }} {{ app.user.nom }}</h2>
+        <p>{{ app.user.login }}</p>
         </div>
-        
-        <div class="profile-details">
-            <p><strong>Email:</strong> {{ app.user.email }}</p>
-            <p><strong>Type d'utilisateur:</strong> {{ app.user.typeUtilisateur }}</p>
-            <p><strong>Niveau d'expérience:</strong> {{ app.user.niveauExperience }}</p>
-            <p><strong>Points de connexion:</strong> {{ app.user.pointsConnexion }}</p>
-            <p><strong>Points de consultation:</strong> {{ app.user.pointsConsultation }}</p>
-        </div>
-        
-        <div class="profile-actions">
-            <a href="{{ path('modifier_profil') }}" class="btn btn-edit">Modifier le profil</a>
-            <a href="{{ path('deconnexion') }}" class="btn btn-logout">Déconnexion</a>
-        </div>
-        </div>
+    </div>
+    
+    <div class="profile-details">
+        <p><strong>Email:</strong> {{ app.user.email }}</p>
+        <p><strong>Type d'utilisateur:</strong> {{ app.user.typeUtilisateur }}</p>
+        <p><strong>Niveau d'expérience:</strong> {{ app.user.niveauExperience }}</p>
+        <p><strong>Points de connexion:</strong> {{ app.user.pointsConnexion }}</p>
+        <p><strong>Points de consultation:</strong> {{ app.user.pointsConsultation }}</p>
+    </div>
+    
+    <div class="profile-actions">
+        <a href="{{ path('modifier_profil') }}" class="btn btn-edit">Modifier le profil</a>
+        <a href="{{ path('deconnexion') }}" class="btn btn-logout">Déconnexion</a>
+    </div>
+    </div>
+    {% endif %}
 
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
