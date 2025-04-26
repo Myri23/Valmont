@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -112,4 +114,68 @@ class Utilisateur
 
     public function isCompteValide(): bool { return $this->compte_valide; }
     public function setCompteValide(bool $compte_valide): self { $this->compte_valide = $compte_valide; return $this; }
+
+    /**
+     * @return array<string>
+     */
+    public function getRoles(): array
+    {
+        $roles = ['ROLE_USER']; // Tous les utilisateurs ont ROLE_USER
+        
+        // Ajouter des rôles en fonction du niveau d'expérience
+        switch($this->niveau_experience) {
+            case 'intermédiaire':
+                $roles[] = 'ROLE_INTERMEDIAIRE';
+                break;
+            case 'avancé':
+                $roles[] = 'ROLE_AVANCE';
+                break;
+            case 'expert':
+                $roles[] = 'ROLE_EXPERT';
+                break;
+        }
+        
+        return array_unique($roles);
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->mot_de_passe;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3
+     */
+    public function getSalt(): ?string
+    {
+        return null; // Non nécessaire avec les algorithmes modernes (bcrypt, argon, etc.)
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // Si vous stockez des données temporaires sensibles
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->login; // Ou email si vous préférez l'authentification par email
+    }
+
+    /**
+     * @deprecated since Symfony 5.3
+     */
+    public function getUsername(): string
+    {
+        return $this->login;
+    }
 }

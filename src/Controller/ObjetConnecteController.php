@@ -139,7 +139,6 @@ class ObjetConnecteController extends AbstractController
         }
 
         if ($formBorneRecharge->get('saveBorneRecharge')->isClicked() && $formBorneRecharge->isValid()) {
-
             if (!$borneRecharge->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour la borne de recharge.');
             } else {
@@ -151,7 +150,6 @@ class ObjetConnecteController extends AbstractController
         }
 
         if ($formCapteurQualiteAir->get('saveCapteurQualiteAir')->isClicked() && $formCapteurQualiteAir->isValid()) {
-
             if (!$capteurQualiteAir->getObjet()) {
                 $this->addFlash('error', "Veuillez sélectionner un objet connecté pour le Capteur de Qualite d'Air.");
             } else {
@@ -163,7 +161,6 @@ class ObjetConnecteController extends AbstractController
         }
 
         if ($formFeuCirculation->get('saveFeuCirculation')->isClicked() && $formFeuCirculation->isValid()) {
-
             if (!$feuCirculation->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour le feu de circulation.');
             } else {
@@ -175,7 +172,6 @@ class ObjetConnecteController extends AbstractController
         }
 
         if ($formLampadaireIntelligent->get('saveLampadaireIntelligent')->isClicked() && $formLampadaireIntelligent->isValid()) {
-
             if (!$lampadaireIntelligent->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour le lampadaire intelligent.');
             } else {
@@ -187,7 +183,6 @@ class ObjetConnecteController extends AbstractController
         }
 
         if ($formPoubelleConnectee->get('savePoubelleConnectee')->isClicked() && $formPoubelleConnectee->isValid()) {
-
             if (!$poubelleConnectee->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour la poubelle connectee.');
             } else {
@@ -215,10 +210,81 @@ class ObjetConnecteController extends AbstractController
     #[Route('/objets', name: 'objets')]
     public function liste(ObjetConnecteRepository $repository): Response
     {
+        if (!$this->getUser()) {
+            $this->addFlash('error', 'Veuillez vous connecter pour accéder à cette page.');
+            return $this->redirectToRoute('connexion'); 
+        }
+
         $objets = $repository->findAll();
 
         return $this->render('home/objets.html.twig', [
             'objets' => $objets,
+        ]);
+    }
+
+    #[Route('/objets/{id}', name: 'objets_show', methods: ['GET'])]
+    public function show(ObjetConnecte $objet): Response
+    {
+        return $this->render('home/objets_show.html.twig', [
+            'objet' => $objet,
+        ]);
+    }
+
+    #[Route('/objets/{id}/edit', name: 'objets_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, ObjetConnecte $objet, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ObjetConnecteType::class, $objet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Objet modifié avec succès !');
+            return $this->redirectToRoute('objets');
+        }
+
+        return $this->render('home/objets_edit.html.twig', [
+            'objet' => $objet,
+            'form' => $form->createView(),
+        ]);
+    }
+    
+    #[Route('/objets/{id}/toggle-status', name: 'objets_toggle_status', methods: ['POST'])]
+    public function toggleStatus(ObjetConnecte $objet, EntityManagerInterface $entityManager): Response
+    {
+        // Inverser l'état actif/inactif de l'objet
+        $objet->setActif(!$objet->isActif());
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'État de l\'objet modifié avec succès !');
+        return $this->redirectToRoute('objets_show', ['id' => $objet->getId()]);
+    }
+    
+    #[Route('/objets/type/{type}', name: 'objets_by_type')]
+    public function listByType(string $type, ObjetConnecteRepository $repository): Response
+    {
+        $objets = $repository->findBy(['type' => $type]);
+        
+        return $this->render('home/objets.html.twig', [
+            'objets' => $objets,
+            'type_filtre' => $type
+        ]);
+    }
+    
+    #[Route('/objets/zone/{zoneId}', name: 'objets_by_zone')]
+    public function listByZone(int $zoneId, ObjetConnecteRepository $repository, ZoneRepository $zoneRepository): Response
+    {
+        $zone = $zoneRepository->find($zoneId);
+        
+        if (!$zone) {
+            $this->addFlash('error', 'Zone non trouvée.');
+            return $this->redirectToRoute('objets');
+        }
+        
+        $objets = $repository->findBy(['zone' => $zone]);
+        
+        return $this->render('home/objets.html.twig', [
+            'objets' => $objets,
+            'zone_filtre' => $zone->getNom()
         ]);
     }
 }
