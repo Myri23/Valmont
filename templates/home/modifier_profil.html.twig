@@ -25,6 +25,7 @@
                     </div>
                 {% endfor %}
                 
+
                 {{ form_start(form) }}
                     <div class="form-group">
                         {{ form_label(form.login) }}
@@ -61,8 +62,11 @@
                         {{ form_widget(form.photo_url) }}
                         {{ form_errors(form.photo_url) }}
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+
+                
+                    <div class="btn-form">
+                    <button type="submit">Enregistrer les modifications</button>
+                    </div>
                 {{ form_end(form) }}
             </div>
         </section>

@@ -1,5 +1,7 @@
 <?php
 
+// src/Controller/FormulaireController.php
+
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
@@ -11,11 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface; // Ajouter cette ligne
 
 class FormulaireController extends AbstractController
 {
     #[Route('/formulaire', name: 'formulaire')]
-    public function formulaire(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    public function formulaire(Request $request, EntityManagerInterface $em, SluggerInterface $slugger, UserPasswordHasherInterface $passwordHasher): Response // Injecter UserPasswordHasherInterface
     {
         $user = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $user);
@@ -40,6 +43,9 @@ class FormulaireController extends AbstractController
                 $user->setPhotoUrl($newFilename);
             }
 
+            // Hachage du mot de passe
+            $user->setMotDePasse($passwordHasher->hashPassword($user, $user->getMotDePasse()));
+
             // Champs non inclus dans le formulaire à remplir ici :
             $user->setTypeUtilisateur('visiteur');
             $user->setNiveauExperience('débutant');
@@ -60,3 +66,4 @@ class FormulaireController extends AbstractController
         ]);
     }
 }
+

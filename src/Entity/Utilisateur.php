@@ -60,8 +60,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeInterface $date_inscription = null;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => false])]
-    private bool $compte_valide = false;
+    #[ORM\Column(type: 'boolean', options: ['default' => true])]
+    private bool $compte_valide = true;
 
     // Getters et setters générés automatiquement
 
