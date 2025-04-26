@@ -10,19 +10,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Utilisateur</th>
                 <th>Date de Connexion</th>
-                <th>IP</th>
             </tr>
         </thead>
         <tbody>
             {% for connexion in connexions %}
                 <tr>
-                    <td>{{ connexion.id }}</td>
                     <td>{{ connexion.utilisateur.login }}</td>
                     <td>{{ connexion.dateConnexion|date('Y-m-d H:i:s') }}</td>
-                    <td>{{ connexion.ipConnexion }}</td>
                 </tr>
             {% else %}
                 <tr>
