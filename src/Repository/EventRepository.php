@@ -16,28 +16,21 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    //    /**
-    //     * @return Event[] Returns an array of Event objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function searchEvent($searchTerm): array
+    {
+        // Directement enlever les accents sans passer par une fonction
+        $searchTerm = \transliterator_transliterate('Any-Latin; Latin-ASCII', $searchTerm);
 
-    //    public function findOneBySomeField($value): ?Event
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $query = $this->createQueryBuilder('e')
+            ->where('e.type LIKE :searchTerm')
+            ->orWhere('e.nom LIKE :searchTerm')
+            ->orWhere('e.description LIKE :searchTerm')
+            ->orWhere('e.date LIKE :searchTerm')
+
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->getQuery();
+
+        dump($query->getDQL());
+        return $query->getResult();
+    }
 }

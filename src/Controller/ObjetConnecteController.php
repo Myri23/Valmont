@@ -12,7 +12,6 @@ use App\Entity\CapteurQualiteAir;
 use App\Entity\FeuCirculation;
 use App\Entity\LampadaireIntelligent;
 use App\Entity\PoubelleConnectee;
-use App\Entity\Zone;
 use App\Form\ObjetConnecteType;
 use App\Form\CameraSurveillanceType;
 use App\Form\ParkingIntelligentType;
@@ -30,7 +29,6 @@ use App\Repository\CapteurQualiteAirRepository;
 use App\Repository\FeuCirculationRepository;
 use App\Repository\LampadaireIntelligentRepository;
 use App\Repository\PoubelleConnecteeRepository;
-use App\Repository\ZoneRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -127,10 +125,6 @@ class ObjetConnecteController extends AbstractController
             if (!$abribus->getObjet()) {
                 $this->addFlash('error', 'Veuillez sélectionner un objet connecté pour l\'abribus intelligent.');
             } else {
-                $zone = $formAbribus->get('zone')->getData();
-                if ($zone) {
-                    $abribus->getObjet()->setZone($zone);
-                }
                 $em->persist($abribus);
                 $em->flush();
                 $this->addFlash('success', 'Abribus intelligent ajouté avec succès !');
@@ -267,24 +261,6 @@ class ObjetConnecteController extends AbstractController
         return $this->render('home/objets.html.twig', [
             'objets' => $objets,
             'type_filtre' => $type
-        ]);
-    }
-    
-    #[Route('/objets/zone/{zoneId}', name: 'objets_by_zone')]
-    public function listByZone(int $zoneId, ObjetConnecteRepository $repository, ZoneRepository $zoneRepository): Response
-    {
-        $zone = $zoneRepository->find($zoneId);
-        
-        if (!$zone) {
-            $this->addFlash('error', 'Zone non trouvée.');
-            return $this->redirectToRoute('objets');
-        }
-        
-        $objets = $repository->findBy(['zone' => $zone]);
-        
-        return $this->render('home/objets.html.twig', [
-            'objets' => $objets,
-            'zone_filtre' => $zone->getNom()
         ]);
     }
 }
