@@ -35,9 +35,12 @@
                     {% endif %}
                 </div>
                 <div class="navbar-buttons">
-                    <button id="btn-search" class="btn btn-search">
-                        <img src="{{ asset('images/search.svg') }}" alt="Recherche">
-                    </button>
+                    {% if app.request.pathinfo in ['/ville', '/lieux_interet', '/event', '/bus', '/metro', '/tram', '/search'] %}
+                        <button id="btn-search" class="btn btn-search">
+                            <img src="{{ asset('images/search.svg') }}" alt="Recherche">
+                        </button>
+                    {% endif %}
+
                     {% if app.user %}
                         <a href="{{ path('profil') }}" class="btn btn-auth">Mon profil</a>
                         <a href="{{ path('deconnexion') }}" class="btn btn-auth">Déconnexion</a>
