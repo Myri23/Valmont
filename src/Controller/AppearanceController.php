@@ -55,26 +55,35 @@ public function generateCss(AppearanceConfigRepository $repository): Response
     $config = $repository->findOneBy([]) ?? new AppearanceConfig();
     
     $css = "/* CSS généré dynamiquement */\n\n";
-    $css .= "body {\n";
-    $css .= "    font-family: Arial, sans-serif;\n";
-    $css .= "    margin: 0;\n";
-    $css .= "    padding: 0;\n";
-    $css .= "    background-color: " . $config->getPrimaryColor() . ";\n";
-    $css .= "    color: #2F3D46;\n";
-    $css .= "    line-height: 1.6;\n";
-    $css .= "    overflow-y: scroll;\n";
+    
+    // Appliquer la couleur principale à certains éléments spécifiques
+    $css .= ".navbar, header, .header, h1, h2, h3, h4, h5, h6, .btn, button, input[type='submit'], input[type='button'], .card-header {\n";
+    $css .= "    background-color: " . $config->getPrimaryColor() . " !important;\n";
+    $css .= "    border-color: " . $config->getPrimaryColor() . " !important;\n";
     $css .= "}\n\n";
     
-    $css .= ".navbar, footer {\n";
-    $css .= "    background-color: " . $config->getSecondaryColor() . ";\n";
-    $css .= "    color: white;\n";
+    // Appliquer la couleur secondaire à TOUS les conteneurs
+    $css .= "body, main, section, article, aside, div, footer, .card-body, .container, .content, .preview-box {\n";
+    $css .= "    background-color: " . $config->getSecondaryColor() . " !important;\n";
     $css .= "}\n\n";
     
-    // Ajoutez d'autres règles CSS basées sur votre configuration...
+    // Exceptions pour les éléments qui doivent rester blancs
+    $css .= "input[type='text'], input[type='email'], input[type='password'], textarea, select, .card, .white-bg, .form-control {\n";
+    $css .= "    background-color: #fff !important;\n";
+    $css .= "}\n\n";
+    
+    // S'assurer que le texte reste lisible
+    $css .= ".navbar, header, .header, h1, h2, h3, h4, h5, h6, .btn, button, input[type='submit'], input[type='button'] {\n";
+    $css .= "    color: #fff !important;\n";
+    $css .= "}\n\n";
+    
+    $css .= "body, main, section, article, aside, div, footer, p, span, a {\n";
+    $css .= "    color: #333 !important;\n";
+    $css .= "}\n\n";
     
     $response = new Response($css);
     $response->headers->set('Content-Type', 'text/css');
-    
+    $response->setMaxAge(5); // Cache court pour faciliter les tests
     return $response;
 }
 }

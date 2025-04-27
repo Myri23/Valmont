@@ -39,28 +39,31 @@ final class AdminController extends AbstractController
         ]);
     }
     
-    #[Route('/admin/utilisateur/{id}/supprimer', name: 'admin_utilisateur_supprimer')]
-    public function supprimer(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
-    {
-        // Vérifie que seuls les administrateurs peuvent accéder à cette page
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        
-        // Vérifier si l'utilisateur essaie de se supprimer lui-même
-        if ($utilisateur === $this->getUser()) {
-            $this->addFlash('error', 'Vous ne pouvez pas supprimer votre propre compte !');
-            return $this->redirectToRoute('admin');
-        }
-        
-        // Supprime l'utilisateur
-        $entityManager->remove($utilisateur);
-        $entityManager->flush();
-        
-        // Ajoute un message flash pour confirmer la suppression
-        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
-        
-        // Redirige vers la page d'administration
+#[Route('/admin/utilisateur/{id}/supprimer', name: 'admin_utilisateur_supprimer')]
+public function supprimer(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+    if ($utilisateur === $this->getUser()) {
+        $this->addFlash('error', 'Vous ne pouvez pas supprimer votre propre compte !');
         return $this->redirectToRoute('admin');
     }
+
+    // 👉 Supprimer d'abord les historiques de connexion liés à cet utilisateur
+    $connexions = $entityManager->getRepository(\App\Entity\HistoriqueConnexion::class)->findBy(['utilisateur' => $utilisateur]);
+    foreach ($connexions as $connexion) {
+        $entityManager->remove($connexion);
+    }
+
+    // Ensuite supprimer l'utilisateur
+    $entityManager->remove($utilisateur);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
+
+    return $this->redirectToRoute('admin');
+}
+
     
     #[Route('/admin/historique', name: 'admin_historique_connexion')]
     public function historiqueConnexions(EntityManagerInterface $entityManager): Response
