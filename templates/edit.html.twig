@@ -1,0 +1,54 @@
+{# templates/appearance/edit.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnalisation de l'apparence{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Personnalisation de l'apparence</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>Modifier l'apparence de la plateforme</h2>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h3>Thème général</h3>
+                        {{ form_row(form.themeName) }}
+                        {{ form_row(form.primaryColor) }}
+                        {{ form_row(form.secondaryColor) }}
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Aperçu</h3>
+                        <div class="preview-box" style="background-color: {{ form.vars.value.primaryColor }}; color: white; padding: 20px; border-radius: 5px;">
+                            Aperçu de la couleur principale
+                        </div>
+                        <div class="preview-box mt-3" style="background-color: {{ form.vars.value.secondaryColor }}; color: white; padding: 20px; border-radius: 5px;">
+                            Aperçu de la couleur secondaire
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Organisation des modules</h3>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <div class="card-header">Module Information</div>
+                            <div class="card-body">
+                                {{ form_row(form.informationModuleEnabled) }}
+                                {{ form_row(form.informationModuleOrder) }}
+                            </div>
+                        </div>
+                    </div>
+                    {# Répétez pour les autres modules #}
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
