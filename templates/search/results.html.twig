@@ -30,9 +30,32 @@
                 {% for lieu in lieux %}
                     <div class="card">
                         <h3>{{ lieu.nom }}</h3>
-                        <p><strong>Type :</strong> {{ lieu.type }}</p>
+                        <p><strong>Type de lieu:</strong> {{ lieu.type }}</p>
                         <p><strong>Description :</strong> {{ lieu.description }}</p>
-                        <p><strong>Horaire :</strong> {{ lieu.horaire }}</p>
+
+                        {% if lieu.horaire is not empty %}
+                            <p><strong>Horaire :</strong> {{ lieu.horaire }}</p>
+                        {% else %}
+                            <p><strong>Horaire : </strong>Pas d'horaire disponibles...</p>
+                        {% endif %}
+
+                        {% if lieu.acces is not empty %}
+                            <p><strong>Accès :</strong> {{ lieu.acces }}</p>
+                        {% else %}
+                            <p><strong>Accès : </strong>Pas d'informations sur les accès disponibles...</p>
+                        {% endif %}
+
+                        {% if lieu.menu is not empty %}
+                            <p><strong>Menu :</strong> {{ lieu.menu }}</p>
+                        {% endif %}
+
+                        {% if lieu.livre is not empty %}
+                            <p><strong>Livres disponibles:</strong> {{ lieu.livre }}</p>
+                        {% endif %}
+
+                        {% if lieu.auteur is not empty %}
+                            <p><strong>Auteurs :</strong> {{ lieu.auteur }}</p>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
