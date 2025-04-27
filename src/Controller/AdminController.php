@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\HistoriqueConnexion;  
+use App\Entity\HistoriqueConsultation;  // Ajoutez cet import ici
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -331,79 +332,112 @@ public function statistiques(EntityManagerInterface $entityManager): Response
         'total_connexions' => $totalConnexions,
     ]);
 }
-
-#[Route('/utilisateurs/en-attente', name: 'admin_users_pending')]
-public function pendingUsers(UtilisateurRepository $userRepository): Response
+#[Route('/admin/historique_consultation', name: 'admin_historique_consultation')]
+public function historiqueConsultations(Request $request, EntityManagerInterface $entityManager): Response
 {
-    $users = $userRepository->findBy(['statut_verification' => 'en_attente']);
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+    // Récupérer tous les utilisateurs pour le filtrage
+    $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
     
-    return $this->render('admin/pending_users.html.twig', [
-        'users' => $users,
+    // Récupérer les filtres
+    $userId = $request->query->get('utilisateur');
+    $typeElement = $request->query->get('type');
+    
+    // Construire les critères de recherche
+    $criteria = [];
+    if ($userId) {
+        $criteria['utilisateur'] = $userId;
+    }
+    if ($typeElement) {
+        $criteria['typeElement'] = $typeElement;
+    }
+    
+    // Récupérer les consultations avec tri par date (les plus récentes d'abord)
+    $consultations = $entityManager->getRepository(HistoriqueConsultation::class)
+        ->findBy($criteria, ['dateConsultation' => 'DESC']);
+
+    return $this->render('admin/historique_consultation.html.twig', [
+        'consultations' => $consultations,
+        'utilisateurs' => $utilisateurs,
+        'selectedUser' => $userId,
+        'selectedType' => $typeElement
     ]);
 }
 
-#[Route('/utilisateur/verifier/{id}', name: 'admin_verify_user')]
-public function verifyUser(
-    Utilisateur $user, 
-    Request $request, 
-    EntityManagerInterface $em,
-    MailerInterface $mailer
-): Response {
-    // Afficher les détails pour vérification
-    if ($request->isMethod('GET')) {
-        return $this->render('admin/verify_user.html.twig', [
-            'user' => $user,
+    #[Route('/utilisateurs/en-attente', name: 'admin_users_pending')]
+    public function pendingUsers(UtilisateurRepository $userRepository): Response
+    {
+        $users = $userRepository->findBy(['statut_verification' => 'en_attente']);
+        
+        return $this->render('admin/pending_users.html.twig', [
+            'users' => $users,
         ]);
     }
     
-    // Traiter la décision
-    $decision = $request->request->get('decision');
-    $message = $request->request->get('message');
-    
-    if ($decision === 'approve') {
-        $user->setStatutVerification('approuve');
-        $user->setCompteValide(true);
-        $this->sendApprovalEmail($user, $mailer);
-        $this->addFlash('success', 'Utilisateur approuvé avec succès');
-    } else {
-        $user->setStatutVerification('rejete');
-        $this->sendRejectionEmail($user, $message, $mailer);
-        $this->addFlash('warning', 'Utilisateur rejeté');
+    #[Route('/utilisateur/verifier/{id}', name: 'admin_verify_user')]
+    public function verifyUser(
+        Utilisateur $user, 
+        Request $request, 
+        EntityManagerInterface $em,
+        MailerInterface $mailer
+    ): Response {
+        // Afficher les détails pour vérification
+        if ($request->isMethod('GET')) {
+            return $this->render('admin/verify_user.html.twig', [
+                'user' => $user,
+            ]);
+        }
+        
+        // Traiter la décision
+        $decision = $request->request->get('decision');
+        $message = $request->request->get('message');
+        
+        if ($decision === 'approve') {
+            $user->setStatutVerification('approuve');
+            $user->setCompteValide(true);
+            $this->sendApprovalEmail($user, $mailer);
+            $this->addFlash('success', 'Utilisateur approuvé avec succès');
+        } else {
+            $user->setStatutVerification('rejete');
+            $this->sendRejectionEmail($user, $message, $mailer);
+            $this->addFlash('warning', 'Utilisateur rejeté');
+        }
+        
+        $em->flush();
+        
+        return $this->redirectToRoute('admin_users_pending');
     }
     
-    $em->flush();
+    private function sendApprovalEmail(Utilisateur $user, MailerInterface $mailer): void
+    {
+        $email = (new TemplatedEmail())
+            ->from('valmontcitynoreply@gmail.com')
+            ->to($user->getEmail())
+            ->subject('Votre compte Valmont a été approuvé')
+            ->htmlTemplate('admin/approval_email.html.twig')
+            ->context([
+                'user' => $user,
+                'loginUrl' => $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL)
+            ]);
+        
+        $mailer->send($email);
+    }
     
-    return $this->redirectToRoute('admin_users_pending');
-}
+    private function sendRejectionEmail(Utilisateur $user, string $message, MailerInterface $mailer): void
+    {
+        $email = (new TemplatedEmail())
+            ->from('valmontcitynoreply@gmail.com')
+            ->to($user->getEmail())
+            ->subject('Information concernant votre inscription à Valmont')
+            ->htmlTemplate('admin/rejection_email.html.twig')
+            ->context([
+                'user' => $user,
+                'message' => $message
+            ]);
+        
+        $mailer->send($email);
+    }
 
-private function sendApprovalEmail(Utilisateur $user, MailerInterface $mailer): void
-{
-    $email = (new TemplatedEmail())
-        ->from('valmontcitynoreply@gmail.com')
-        ->to($user->getEmail())
-        ->subject('Votre compte Valmont a été approuvé')
-        ->htmlTemplate('admin/approval_email.html.twig')
-        ->context([
-            'user' => $user,
-            'loginUrl' => $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL)
-        ]);
-    
-    $mailer->send($email);
-}
-
-private function sendRejectionEmail(Utilisateur $user, string $message, MailerInterface $mailer): void
-{
-    $email = (new TemplatedEmail())
-        ->from('valmontcitynoreply@gmail.com')
-        ->to($user->getEmail())
-        ->subject('Information concernant votre inscription à Valmont')
-        ->htmlTemplate('admin/rejection_email.html.twig')
-        ->context([
-            'user' => $user,
-            'message' => $message
-        ]);
-    
-    $mailer->send($email);
-}
 
 }
