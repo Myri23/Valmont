@@ -2,58 +2,68 @@
 
 namespace App\Form;
 
-use App\Entity\PoubelleConnectee;
+use App\Entity\ObjetConnecte;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PoubelleConnecteeType extends AbstractType
+class ObjetConnecteType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('niveauRemplissage', IntegerType::class, [
-                'label' => 'Niveau de remplissage actuel (%)',
-                'attr' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'step' => 1
+            ->add('idUnique', TextType::class)
+            ->add('nom', TextType::class)
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
+            ->add('type', TextType::class)
+            ->add('marque', TextType::class, [
+                'required' => false,
+            ])
+            ->add('etat', ChoiceType::class, [
+                'choices' => [
+                    'Actif' => 'Actif',
+                    'Inactif' => 'Inactif',
+                    'Connecté' => 'Connecté',
+                    'Déconnecté' => 'Déconnecté',
+                    'Maintenance' => 'Maintenance',
                 ]
             ])
-            ->add('capaciteTotale', IntegerType::class, [
-                'label' => 'Capacité totale (litres)',
+            ->add('localisation', TextType::class, [
+                'required' => false,
             ])
-            ->add('typeDechets', ChoiceType::class, [
-                'label' => 'Type de déchets',
-                'choices' => [
-                    'Ordures ménagères' => 'ordures',
-                    'Recyclable' => 'recyclable',
-                    'Verre' => 'verre',
-                    'Compost' => 'compost',
-                    'Mixte' => 'mixte',
-                ],
-            ])
-            ->add('derniereCollecte', DateTimeType::class, [
+            ->add('derniereInteraction', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required' => false,
-                'label' => 'Dernière collecte',
             ])
-            ->add('compacteur', CheckboxType::class, [
+            ->add('connectivite', TextType::class, [
                 'required' => false,
-                'label' => 'Équipé d\'un compacteur ?',
             ])
-        ;
+            ->add('batteriePct', IntegerType::class, [
+                'required' => false,
+                'label' => 'Batterie (%)',
+            ])
+            ->add('actif', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Actif ?',
+            ])
+             ->add('saveObjet', SubmitType::class, [
+            'label' => 'Ajouter l\'objet connecté',
+        ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => PoubelleConnectee::class,
+            'data_class' => ObjetConnecte::class,
         ]);
     }
 }
