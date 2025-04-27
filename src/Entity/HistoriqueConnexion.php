@@ -14,7 +14,7 @@ class HistoriqueConnexion
     private $id;
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private $utilisateur;
 
     #[ORM\Column(type: 'datetime')]

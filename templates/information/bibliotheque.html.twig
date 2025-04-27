@@ -13,6 +13,7 @@
             <div class="biblio-info">
                 <h3>Bibliothèque Centrale</h3>
                 <p>Le plus grand centre de lecture publique de Valmont, avec un large choix de livres, de périodiques et d'espaces de travail collaboratif.</p>
+                <a href="{{ path('bibliotheque_centrale') }}" class="btn btn-back">Consulter le catalogue</a>
                 <div class="coup-de-coeur">
                     <h2>❤️ Les coups de cœur des bibliothécaires</h2>
                     <div class="cadre-biblio">
@@ -28,7 +29,17 @@
                         <p>Une fresque puissante et féministe sur le destin d'une femme libre dans une Italie marquée par les soubresauts du XXe siècle. Inoubliable.</p>
                     </div>
                 </div>
-            </div>
+                <div class="cadre-biblio">
+                    <h2>Horaires d'ouverture</h2>
+                    <ul>
+                        <li>Mardi à vendredi : 10h - 13h et 15h - 19h</li>
+                        <li>Samedi : 9h - 18h</li>
+                        <li>Dimanche : 10h - 17h</li>
+                        <li>Fermée le lundi et les jours fériés</li>
+                    </ul>
+                </div></br>
+                <a href="{{ path('bibliotheque_jeunesse') }}" class="btn btn-back">Consulter le catalogue</a>
+            </div>    
         </div>
 
         <div class="card-biblio">
@@ -45,6 +56,16 @@
                         <li>📚 Club lecture ados : chaque premier jeudi du mois</li>
                     </ul>
                 </div>
+                <div class="cadre-biblio">
+                    <h2>Horaires d'ouverture</h2>
+                    <ul>
+                        <li>Mardi à vendredi : 10h - 13h et 15h - 19h</li>
+                        <li>Samedi : 9h - 18h</li>
+                        <li>Dimanche : 10h - 17h</li>
+                        <li>Fermée le lundi et les jours fériés</li>
+                    </ul>
+                </div></br>
+                <a href="{{ path('bibliotheque_jeunesse') }}" class="btn btn-back">Consulter le catalogue</a> 
             </div>
         </div>
 
@@ -57,14 +78,15 @@
                     <h2>Horaires d'ouverture</h2>
                     <ul>
                         <li>Lundi à vendredi : 8h30 - 20h</li>
-                        <li>Samedi : 9h - 18h</li>
-                        <li>Fermée le dimanche et les jours fériés</li>
+                        <li>Samedi : 9h - 19h</li>
+                        <li>Dimanche : 9h - 18h</li>
                     </ul>
                 </div>
                 <div class="cadre-biblio">
                     <h2>Accès</h2>
                     <p>La bibliothèque est située dans le bâtiment C du campus, au rez-de-chaussée. Elle est accessible à pied, à vélo ou via la navette universitaire. Stationnement vélo et consignes disponibles à l'entrée.</p>
-                </div>
+                </div></br>    
+                <a href="{{ path('bibliotheque_jeunesse') }}" class="btn btn-back">Consulter le catalogue</a>     
             </div>
         </div>
         <a href="{{ path('lieux_interet') }}" class="btn btn-back">Retourner aux lieux</a>

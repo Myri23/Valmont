@@ -6,6 +6,14 @@
         <h1>Valmont - Inscription</h1>
     </header>
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <main class="container-form">
         <section class="card-form">
             <h2 class="title-form">S'inscrire :</h2>
@@ -39,5 +47,8 @@
 
     <script src="{{ asset('search-panel.js') }}"></script>
 </body>
+
+
+
 </html>
 {% endblock %}

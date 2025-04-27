@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class VisualizationController extends AbstractController
+final class VisualisationController extends AbstractController
 {
-    #[Route('/visualization', name: 'app_visualization')]
+    #[Route('/visualisation', name: 'app_visualisation')]
     public function index(): Response
     {
-        return $this->render('visualization/index.html.twig', [
-            'controller_name' => 'VisualizationController',
+        return $this->render('visualisation/index.html.twig', [
+            'controller_name' => 'VisualisationController',
         ]);
     }
 }

@@ -63,7 +63,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $compte_valide = true;
 
-    // Getters et setters générés automatiquement
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    private ?string $confirmationToken = null;
+
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $isConfirmed = false;
+
+    // Getters et setters 
 
     public function getId(): ?int { return $this->id; }
 
@@ -181,4 +187,27 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->login;
     }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+        return $this;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
+        return $this;
+    }
+    
 }

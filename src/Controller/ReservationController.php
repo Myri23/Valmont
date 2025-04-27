@@ -45,7 +45,7 @@ public function reserver(Request $request, EntityManagerInterface $em): Response
         return new Response('Réservation enregistrée ! 🎷', 200);
     }
 
-    return $this->render('home/concert_jazz.html.twig');
+    return $this->render('information/concert_jazz.html.twig');
 }
 
 

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container">
+    <div class="card">
+        <img src="{{ asset('images/musee_orangerie.jpg') }}" alt="Musée du Citronnier" style="width:100%; border-radius: 15px;">
+        <h2>🍋 Musée du Citronnier</h2>
+            <p>
+                Dans le cadre enchanteur du Jardin des Pivoines, le Musée du Citronnier invite à un voyage au cœur de l’art contemporain. 
+                Ce lieu unique célèbre la créativité sous toutes ses formes, en mettant à l’honneur des œuvres audacieuses et sensibles d'artistes locaux, nationaux et internationaux.
+            </p>
+
+            <p>
+                Chaque salle du musée est une expérience sensorielle, où peintures, sculptures, installations multimédias et performances se rencontrent pour raconter les grands questionnements de notre époque. 
+                L’architecture lumineuse du bâtiment, en harmonie avec la nature environnante, offre un écrin idéal à ces créations modernes.
+            </p>
+
+            <p>
+                Le musée organise régulièrement des expositions temporaires, des rencontres avec les artistes, ainsi que des ateliers ouverts au public pour encourager l’expression artistique et le dialogue culturel.
+            </p>
+
+            <p>
+                Que vous soyez passionné d'art ou simple curieux, une visite au Musée du Citronnier est une immersion inspirante dans l'audace et la diversité de l'art d'aujourd'hui.
+            </p>
+        <div class="cadre-parcs">
+            <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Réserver une visite :</h3>
+        <form method="post" class="container-form">
+            <fieldset class="fieldset-form">
+                <div>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="date">Date souhaitée :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+            </fieldset>
+            <div class="btn-form">
+                <button type="submit">Réserver</button>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ path('musees') }}" class="btn-back">Retour aux musées</a>
+</section>
+{% endblock %}

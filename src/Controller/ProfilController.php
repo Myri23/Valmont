@@ -80,7 +80,7 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('home');
         }
         
-        return $this->render('home/modifier_profil.html.twig', [
+        return $this->render('visualisation/modifier_profil.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -93,7 +93,7 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('connexion');
         }
         
-        return $this->render('home/profil.html.twig', [
+        return $this->render('visualisation/profil.html.twig', [
             'user' => $user
         ]);
     }
@@ -105,7 +105,7 @@ class ProfilController extends AbstractController
         // Récupère tous les utilisateurs depuis la base de données
         $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
         
-        return $this->render('home/membres.html.twig', [
+        return $this->render('visualisation/membres.html.twig', [
             'utilisateurs' => $utilisateurs,
         ]);
     }

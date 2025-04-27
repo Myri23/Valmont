@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container">
+    <div class="card">
+        <img src="{{ asset('images/musee_science.jpg') }}" alt="Musée Sciences & Nature" style="width:100%; border-radius: 15px;">
+        <h2>🔬 Musée Sciences & Nature</h2>
+            <p>
+                Le Musée Sciences & Nature est une véritable passerelle entre le monde naturel et les avancées scientifiques modernes. 
+                Conçu pour émerveiller aussi bien les enfants que les adultes, il propose des expositions interactives, des expériences immersives et des collections inédites qui célèbrent la richesse de notre planète et la curiosité humaine.
+            </p>
+
+            <p>
+                De la biodiversité locale aux phénomènes géologiques fascinants, en passant par les innovations technologiques qui transforment notre quotidien, 
+                chaque espace du musée est une invitation à explorer, à toucher, à expérimenter.
+            </p>
+
+            <p>
+                Les visiteurs peuvent observer de véritables spécimens animaliers, découvrir les mystères des minéraux régionaux, participer à des ateliers scientifiques, 
+                et comprendre les grands défis environnementaux auxquels notre monde fait face.
+            </p>
+
+            <p>
+                Grâce à ses expositions temporaires, ses animations et ses conférences, le Musée Sciences & Nature renouvelle en permanence son regard sur l'univers qui nous entoure. 
+                Une destination incontournable pour les esprits curieux et les explorateurs de demain !
+            </p>
+        <div class="cadre-parcs">
+            <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Réserver une visite :</h3>
+        <form method="post" class="container-form">
+            <fieldset class="fieldset-form">
+                <div>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="date">Date souhaitée :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+            </fieldset>
+            <div class="btn-form">
+                <button type="submit">Réserver</button>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ path('musees') }}" class="btn-back">Retour aux musées</a>
+</section>
+{% endblock %}

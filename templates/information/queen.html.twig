@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container">
+    <div class="card">
+        <img src="{{ asset('images/queen_resto.jpg') }}" alt="Restaurant Queen" style="width:100%; border-radius: 15px;">
+        <h2>Queen</h2>
+        <p>
+            Situé au cœur de Valmont, Queen est un restaurant raffiné qui allie élégance contemporaine et art culinaire français. 
+            Avec sa terrasse baignée de soleil, il offre un cadre idéal pour savourer une cuisine moderne, créative et respectueuse des saisons. 
+            Chaque plat est élaboré avec des produits frais, soigneusement sélectionnés auprès de producteurs locaux, afin de garantir une expérience gustative authentique et raffinée.
+        </p>
+
+        <p>
+            Dans un décor chic et épuré, Queen vous invite à une parenthèse gastronomique, où la finesse des saveurs rencontre la générosité des assiettes. 
+            Que ce soit pour un déjeuner d'affaires, un dîner romantique ou une célébration entre amis, l’atmosphère élégante et décontractée du restaurant saura rendre chaque moment unique.
+        </p>
+
+        <p>
+            Laissez-vous séduire par une carte inventive et savoureuse, où les grands classiques de la cuisine française côtoient des créations audacieuses, 
+            pour un voyage culinaire tout en équilibre et en élégance.
+        </p>
+                <div class="menu-section">
+                    <h4>Entrées</h4>
+                    <div class="menu-item">
+                        <strong>Œuf parfait, émulsion de cèpes — 18,00€</strong>
+                        <span>Ingrédients : œuf bio, cèpes, crème, éclats de noisettes</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Langoustine rôtie, mousseline de petits pois — 24,00€</strong>
+                        <span>Ingrédients : langoustines, petits pois frais, menthe, citron</span>
+                    </div>
+
+                    <h4>Plats</h4>
+                    <div class="menu-item">
+                        <strong>Saint-Jacques snackées, risotto crémeux au safran — 32,00€</strong>
+                        <span>Ingrédients : noix de Saint-Jacques, riz arborio, parmesan, safran</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Filet de bœuf Rossini, purée de topinambours — 36,00€</strong>
+                        <span>Ingrédients : filet de bœuf, foie gras poêlé, topinambours, truffe</span>
+                    </div>
+
+                    <h4>Desserts</h4>
+                    <div class="menu-item">
+                        <strong>Tarte fine aux poires et caramel au beurre salé — 12,00€</strong>
+                        <span>Ingrédients : pâte feuilletée, poires pochées, caramel maison, crème chantilly</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Soufflé chaud au Grand Marnier — 14,00€</strong>
+                        <span>Ingrédients : œufs, sucre, zestes d'orange, liqueur Grand Marnier</span>
+                    </div>
+                </div>
+
+        <div class="cadre-parcs">
+            <p><strong>Horaires :</strong> Lundi au samedi : 12h00 - 14h30 / 19h00 - 23h00</p>
+            <p><strong>Adresse :</strong> 12 rue des Roses, Valmont</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Réserver une table :</h3>
+        <form method="post" class="container-form">
+            <fieldset class="fieldset-form">
+                <div>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="heure">Heure :</label>
+                    <input type="time" id="heure" name="heure" required>
+                </div>
+            </fieldset>
+            <div class="btn-form">
+                <button type="submit">Réserver</button>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ path('restaurants') }}" class="btn-back">Retour aux restaurants</a>
+</section>
+{% endblock %}

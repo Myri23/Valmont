@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container">
+    <div class="card">
+        <img src="{{ asset('images/la_belle_epoque_resto.jpg') }}" alt="La Belle Époque" style="width:100%; border-radius: 15px;">
+        <h2>La Belle Époque</h2>
+        <p>
+            Véritable institution à Valmont, La Belle Époque vous accueille dans une ambiance chaleureuse et authentique, où la convivialité est à l’honneur. 
+            Ici, la cuisine du terroir est mise à l’honneur avec des plats généreux, préparés à partir de produits frais et locaux, dans le respect des traditions culinaires françaises.
+        </p>
+
+        <p>
+            Dans un décor raffiné inspiré des cafés parisiens d'antan, c’est l’endroit idéal pour partager un déjeuner gourmand entre amis, un dîner cosy en famille ou une soirée romantique.
+            Chaque assiette raconte une histoire de saveurs, sublimée par un service attentionné et une atmosphère détendue où il fait bon prendre son temps.
+        </p>
+
+        <p>
+            Que vous soyez amateur de foie gras maison, de magret de canard ou encore de desserts traditionnels revisités avec finesse, 
+            La Belle Époque promet un voyage gustatif qui ravira toutes les générations.
+        </p>
+                <div class="menu-section">
+                    <h4>Entrées</h4>
+                    <div class="menu-item">
+                        <strong>Foie gras maison et chutney de figues — 14,50€</strong>
+                        <span>Ingrédients : foie gras, figues, pain brioché, épices douces</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Velouté de potimarron aux éclats de châtaigne — 9,90€</strong>
+                        <span>Ingrédients : potimarron, châtaignes, crème, muscade</span>
+                    </div>
+
+                    <h4>Plats</h4>
+                    <div class="menu-item">
+                        <strong>Filet de dorade, purée à l’huile de truffe — 19,90€</strong>
+                        <span>Ingrédients : dorade, purée maison, huile de truffe, herbes fraîches</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Magret de canard sauce framboise — 21,00€</strong>
+                        <span>Ingrédients : magret de canard, framboises, miel, vinaigre balsamique</span>
+                    </div>
+
+                    <h4>Desserts</h4>
+                    <div class="menu-item">
+                        <strong>Moelleux au chocolat cœur coulant — 8,50€</strong>
+                        <span>Ingrédients : chocolat noir, œufs, beurre, sucre</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Panna cotta vanille et coulis de mangue — 7,50€</strong>
+                        <span>Ingrédients : crème, vanille, sucre, mangue</span>
+                    </div>
+                </div>
+
+        <div class="cadre-parcs">
+            <p><strong>Horaires :</strong> Mardi au dimanche : 12h00 - 14h30 / 19h00 - 22h30</p>
+            <p><strong>Adresse :</strong> 5 place du Marché, Valmont</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Réserver une table :</h3>
+        <form method="post" class="container-form">
+            <fieldset class="fieldset-form">
+                <div>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="heure">Heure :</label>
+                    <input type="time" id="heure" name="heure" required>
+                </div>
+            </fieldset>
+            <div class="btn-form">
+                <button type="submit">Réserver</button>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ path('restaurants') }}" class="btn-back">Retour aux restaurants</a>
+</section>
+{% endblock %}

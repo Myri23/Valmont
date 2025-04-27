@@ -24,6 +24,7 @@ security:
         main:
             lazy: true
             provider: app_user_provider  # Utilise votre entité Utilisateur
+            user_checker: App\Security\UserChecker
             
             # configuration de la connexion par formulaire
             form_login:

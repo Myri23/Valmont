@@ -21,7 +21,7 @@ class ConnexionController extends AbstractController
         // Dernier nom d'utilisateur saisi
         $lastUsername = $authenticationUtils->getLastUsername();
         
-        return $this->render('home/connexion.html.twig', [
+        return $this->render('visualisation/connexion.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
