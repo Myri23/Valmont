@@ -16,28 +16,23 @@ class LieuRepository extends ServiceEntityRepository
         parent::__construct($registry, Lieu::class);
     }
 
-    //    /**
-    //     * @return Lieu[] Returns an array of Lieu objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('l.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function searchLieux($searchTerm): array
+    {
+        dump($searchTerm);
+        $query = $this->createQueryBuilder('l')
+            ->where('l.type LIKE :searchTerm')
+            ->orWhere('l.nom LIKE :searchTerm')
+            ->orWhere('l.description LIKE :searchTerm')
+            ->orWhere('l.horaire LIKE :searchTerm')
+            ->orWhere('l.acces LIKE :searchTerm')
+            ->orWhere('l.menu LIKE :searchTerm')
+            ->orWhere('l.livre LIKE :searchTerm')
+            ->orWhere('l.auteur LIKE :searchTerm')
 
-    //    public function findOneBySomeField($value): ?Lieu
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->getQuery();
+
+        dump($query->getDQL());
+        return $query->getResult();
+    }
 }
