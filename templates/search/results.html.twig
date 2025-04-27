@@ -25,16 +25,22 @@
             <p>Aucun filtre selectionné</p>
         {% endif %}
 
-        {% if results|trim is not empty %}
-            <div class="card">
-                <p>Ici sera présent le résultat de la recherche</p>
+        {% if lieux is not empty %}
+            <div class="results">
+                {% for lieu in lieux %}
+                    <div class="card">
+                        <h3>{{ lieu.nom }}</h3>
+                        <p><strong>Type :</strong> {{ lieu.type }}</p>
+                        <p><strong>Description :</strong> {{ lieu.description }}</p>
+                        <p><strong>Horaire :</strong> {{ lieu.horaire }}</p>
+                    </div>
+                {% endfor %}
             </div>
         {% else %}
             <div class="card">
                 <h1>Aucun résultat trouvé...</h1>
             </div>
         {% endif %}
-
     </section>
 
     <footer class="footer">

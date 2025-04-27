@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\LieuRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,34 +10,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchController extends AbstractController
 {
+    private $lieuRepository;
+
+    // Injecter le LieuRepository dans le constructeur
+    public function __construct(LieuRepository $lieuRepository)
+    {
+        $this->lieuRepository = $lieuRepository;
+    }
+
     #[Route('/search', name: 'search_results')]
     public function search(Request $request): Response
     {
         $query = trim($request->query->get('q')); // Récupérer la recherche textuelle
 
+        // Encodage explicite en UTF-8
+        $query = utf8_encode($query);
+
         // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
         $tab = $request->query->all('tab');
 
-        if (!is_array($tab)) {
-            $tab = [];
-        }
+       // Appeler la méthode searchLieux du LieuRepository
+        $lieux = $this->lieuRepository->searchLieux($query);
 
         return $this->render('search/results.html.twig', [
             'results' => $query,
-            'filters' => $tab
+            'filters' => $tab,
+            'lieux' => $lieux
         ]);
-    }
-
-    private function performSearch($query, $filters)
-    {
-        // Cette fonction devrait interroger la base de données ou une API selon tes critères
-        // Par exemple, en fonction de la recherche et des filtres
-
-        // Simulation de résultats en fonction de la recherche et des filtres
-        return [
-            'lieux' => ['Musée du Louvre', 'Parc des Buttes-Chaumont'],
-            'evenements' => ['Concert à l’Opéra', 'Marché de Noël'],
-            'transports' => ['Métro ligne 1', 'Bus 47'],
-        ];
     }
 }
