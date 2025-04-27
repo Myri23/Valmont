@@ -19,6 +19,12 @@ class LieuRepository extends ServiceEntityRepository
     public function searchLieux($searchTerm): array
     {
         dump($searchTerm);
+
+        // Directement enlever les accents sans passer par une fonction
+        $searchTerm = \transliterator_transliterate('Any-Latin; Latin-ASCII', $searchTerm);
+
+        dump($searchTerm);
+
         $query = $this->createQueryBuilder('l')
             ->where('l.type LIKE :searchTerm')
             ->orWhere('l.nom LIKE :searchTerm')

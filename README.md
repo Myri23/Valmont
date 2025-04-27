@@ -45,6 +45,10 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
     ```bash
     export PATH="$HOME/.symfony/bin:$PATH"
     ```    
+4. Extension PHP intl (Internationalization) installée et activée. Sous Ubuntu/Debian :
+    ```bash
+    sudo apt install php-intl
+    ```    
 
 ### Étapes d'installation
 1. Clonez le dépôt Git :

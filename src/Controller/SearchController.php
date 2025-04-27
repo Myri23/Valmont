@@ -23,9 +23,6 @@ class SearchController extends AbstractController
     {
         $query = trim($request->query->get('q')); // Récupérer la recherche textuelle
 
-        // Encodage explicite en UTF-8
-        $query = utf8_encode($query);
-
         // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
         $tab = $request->query->all('tab');
 
