@@ -17,7 +17,9 @@
                         <a class="nav-link" href="{{ path('membres') }}">Membres</a>
                     {% endif %}
                     <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                    
+                    {% if app.user %}
+                        <a class="nav-link" href="{{ path('visualisation') }}">Visualisation</a>
+                    {% endif %}
                     {# Condition pour afficher le lien Gestion uniquement pour certains utilisateurs #}
                     {% if app.user and (
                           app.user.typeUtilisateur == 'complexe' or 

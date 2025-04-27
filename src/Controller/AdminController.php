@@ -332,6 +332,78 @@ public function statistiques(EntityManagerInterface $entityManager): Response
     ]);
 }
 
+#[Route('/utilisateurs/en-attente', name: 'admin_users_pending')]
+public function pendingUsers(UtilisateurRepository $userRepository): Response
+{
+    $users = $userRepository->findBy(['statut_verification' => 'en_attente']);
+    
+    return $this->render('admin/pending_users.html.twig', [
+        'users' => $users,
+    ]);
+}
 
+#[Route('/utilisateur/verifier/{id}', name: 'admin_verify_user')]
+public function verifyUser(
+    Utilisateur $user, 
+    Request $request, 
+    EntityManagerInterface $em,
+    MailerInterface $mailer
+): Response {
+    // Afficher les détails pour vérification
+    if ($request->isMethod('GET')) {
+        return $this->render('admin/verify_user.html.twig', [
+            'user' => $user,
+        ]);
+    }
+    
+    // Traiter la décision
+    $decision = $request->request->get('decision');
+    $message = $request->request->get('message');
+    
+    if ($decision === 'approve') {
+        $user->setStatutVerification('approuve');
+        $user->setCompteValide(true);
+        $this->sendApprovalEmail($user, $mailer);
+        $this->addFlash('success', 'Utilisateur approuvé avec succès');
+    } else {
+        $user->setStatutVerification('rejete');
+        $this->sendRejectionEmail($user, $message, $mailer);
+        $this->addFlash('warning', 'Utilisateur rejeté');
+    }
+    
+    $em->flush();
+    
+    return $this->redirectToRoute('admin_users_pending');
+}
+
+private function sendApprovalEmail(Utilisateur $user, MailerInterface $mailer): void
+{
+    $email = (new TemplatedEmail())
+        ->from('valmontcitynoreply@gmail.com')
+        ->to($user->getEmail())
+        ->subject('Votre compte Valmont a été approuvé')
+        ->htmlTemplate('admin/approval_email.html.twig')
+        ->context([
+            'user' => $user,
+            'loginUrl' => $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL)
+        ]);
+    
+    $mailer->send($email);
+}
+
+private function sendRejectionEmail(Utilisateur $user, string $message, MailerInterface $mailer): void
+{
+    $email = (new TemplatedEmail())
+        ->from('valmontcitynoreply@gmail.com')
+        ->to($user->getEmail())
+        ->subject('Information concernant votre inscription à Valmont')
+        ->htmlTemplate('admin/rejection_email.html.twig')
+        ->context([
+            'user' => $user,
+            'message' => $message
+        ]);
+    
+    $mailer->send($email);
+}
 
 }

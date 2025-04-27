@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification de l'utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Vérification de l'utilisateur</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Informations utilisateur
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Login:</strong> {{ user.login }}</p>
+                    <p><strong>Nom:</strong> {{ user.nom }}</p>
+                    <p><strong>Prénom:</strong> {{ user.prenom }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Date de naissance:</strong> {{ user.dateNaissance ? user.dateNaissance|date('d/m/Y') : 'Non spécifié' }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Code ville:</strong> {{ user.codeVille }}</p>
+                    <p><strong>Adresse dans la ville:</strong> {{ user.adresseVille }}</p>
+                    <p><strong>Date d'inscription:</strong> {{ user.dateInscription|date('d/m/Y H:i') }}</p>
+                    {% if user.photoUrl %}
+                        <p><strong>Photo:</strong> <img src="{{ asset('uploads/photos/' ~ user.photoUrl) }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 150px"></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Vérification de résidence
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="decision" class="form-label">Décision:</label>
+                    <select name="decision" id="decision" class="form-control" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option value="approve">Approuver - L'utilisateur est bien un résident de la ville</option>
+                        <option value="reject">Rejeter - L'utilisateur n'est pas un résident de la ville</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="message" class="form-label">Message (en cas de rejet):</label>
+                    <textarea name="message" id="message" class="form-control" rows="3"></textarea>
+                    <small class="form-text text-muted">Ce message sera envoyé à l'utilisateur en cas de rejet de sa demande.</small>
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                    <a href="{{ path('admin_users_pending') }}" class="btn btn-secondary">Retour à la liste</a>
+                    <button type="submit" class="btn btn-primary">Soumettre la décision</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

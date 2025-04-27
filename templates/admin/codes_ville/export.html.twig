@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exporter les codes disponibles{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Exporter les codes disponibles</h1>
+    
+    <div class="mb-4">
+        <a href="{{ path('admin_codes_ville_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        
+        {% if codes|length > 0 %}
+            <button class="btn btn-primary ms-2" onclick="window.print()">Imprimer la liste</button>
+            <button class="btn btn-success ms-2" id="downloadCSV">Télécharger en CSV</button>
+        {% endif %}
+    </div>
+    
+    {% if codes|length > 0 %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{{ codes|length }} codes disponibles</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="codesTable">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Adresse</th>
+                                <th>Quartier</th>
+                                <th>Date de création</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for code in codes %}
+                            <tr>
+                                <td>{{ code.code }}</td>
+                                <td>{{ code.adresse }}</td>
+                                <td>{{ code.quartier }}</td>
+                                <td>{{ code.dateCreation|date('d/m/Y') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.getElementById('downloadCSV').addEventListener('click', function() {
+                // Fonction pour exporter le tableau en CSV
+                const table = document.getElementById('codesTable');
+                let csv = [];
+                const rows = table.querySelectorAll('tr');
+                
+                for (const row of rows) {
+                    const cols = row.querySelectorAll('td, th');
+                    const rowArray = [];
+                    
+                    for (const col of cols) {
+                        // Échapper les guillemets et ajouter des guillemets autour de chaque cellule
+                        let cellText = col.innerText;
+                        cellText = cellText.replace(/"/g, '""');
+                        rowArray.push(`"${cellText}"`);
+                    }
+                    
+                    csv.push(rowArray.join(','));
+                }
+                
+                // Créer un lien de téléchargement pour le CSV
+                const csvContent = csv.join('\n');
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                
+                // Créer un URL pour le Blob
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'codes_valmont_' + new Date().toISOString().slice(0, 10) + '.csv');
+                link.style.visibility = 'hidden';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        </script>
+    {% else %}
+        <div class="alert alert-info">
+            Aucun code disponible à exporter.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

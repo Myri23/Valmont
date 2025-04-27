@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Votre compte Valmont a été approuvé</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #28a745; color: white; padding: 15px; text-align: center; }
+        .content { padding: 20px; background-color: #f9f9f9; }
+        .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #666; }
+        .button { display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Votre compte a été approuvé !</h1>
+        </div>
+        <div class="content">
+            <p>Bonjour {{ user.prenom }} {{ user.nom }},</p>
+            
+            <p>Nous avons le plaisir de vous informer que votre statut de résident de Valmont a été confirmé par notre équipe. Votre compte est maintenant actif et vous pouvez accéder à toutes les fonctionnalités de notre plateforme.</p>
+            
+            <p>Valmont est une ville connectée qui offre à ses résidents de nombreux services numériques pour faciliter leur quotidien et renforcer les liens au sein de notre communauté.</p>
+            
+            <p style="text-align: center; margin-top: 25px;">
+                <a href="{{ loginUrl }}" class="button">Se connecter maintenant</a>
+            </p>
+            
+            <p>Nous vous remercions pour votre patience durant ce processus de vérification et vous souhaitons une excellente expérience sur notre plateforme.</p>
+            
+            <p>Cordialement,</p>
+            <p>L'équipe Valmont</p>
+        </div>
+        <div class="footer">
+            <p>Si vous avez des questions, n'hésitez pas à contacter le support à support@valmont-city.com</p>
+            <p>&copy; 2025 - Valmont | Ville connectée</p>
+        </div>
+    </div>
+</body>
+</html>
