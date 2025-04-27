@@ -1,0 +1,92 @@
+{# templates/admin/backups.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des sauvegardes - Administration{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Gestion des sauvegardes</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Actions
+        </div>
+        <div class="card-body">
+            <a href="{{ path('admin_backup_create') }}" class="btn btn-primary">
+                <i class="fas fa-database"></i> Créer une nouvelle sauvegarde
+            </a>
+            <p class="mt-3 mb-0 text-muted">
+                <small>
+                    Les sauvegardes sont stockées dans le répertoire <code>var/backups</code> du projet.
+                </small>
+            </p>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            Sauvegardes disponibles
+        </div>
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+            {% if backups|length > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nom du fichier</th>
+                                <th>Date</th>
+                                <th>Taille</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for backup in backups %}
+                                <tr>
+                                    <td>{{ backup.filename }}</td>
+                                    <td>{{ backup.date|date('d/m/Y H:i:s') }}</td>
+                                    <td>{{ (backup.size / 1024 / 1024)|number_format(2, '.', ' ') }} MB</td>
+                                    <td>
+                                        <a href="{{ path('admin_backup_download', {'filename': backup.filename}) }}" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-download"></i> Télécharger
+                                        </a>
+                                        <a href="{{ path('admin_backup_delete', {'filename': backup.filename}) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette sauvegarde ?');">
+                                            <i class="fas fa-trash"></i> Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Aucune sauvegarde disponible.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="card mt-4">
+        <div class="card-header">
+            Sauvegardes automatiques
+        </div>
+        <div class="card-body">
+            <p>Pour configurer des sauvegardes automatiques, vous pouvez ajouter une tâche cron sur votre serveur :</p>
+            <pre><code>0 2 * * * php /chemin/vers/votre/projet/bin/console app:database:backup</code></pre>
+            <p class="text-muted">Cette commande effectuera une sauvegarde tous les jours à 2h du matin.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

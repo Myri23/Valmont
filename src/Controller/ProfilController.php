@@ -35,17 +35,25 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifier si le mot de passe a été modifié
-            $motDePasseSaisi = $user->getMotDePasse();
+            // Récupérer le mot de passe actuel saisi et le nouveau mot de passe
+            $motDePasseActuelSaisi = $form->get('mot_de_passe_actuel')->getData();
+            $nouveauMotDePasse = $form->get('nouveau_mot_de_passe')->getData();
             
-            // Si le mot de passe saisi est différent du mot de passe haché stocké en base,
-            // c'est qu'il a été modifié dans le formulaire, donc on le hache
-            if ($motDePasseSaisi !== $motDePasseActuel) {
-                // Hacher le nouveau mot de passe
-                $hashedPassword = $passwordHasher->hashPassword($user, $motDePasseSaisi);
+            // Vérifier si l'utilisateur souhaite changer son mot de passe
+            if ($nouveauMotDePasse) {
+                // Vérifier si le mot de passe actuel saisi est correct
+                if (!$passwordHasher->isPasswordValid($user, $motDePasseActuelSaisi)) {
+                    $this->addFlash('error', 'Le mot de passe actuel est incorrect.');
+                    return $this->render('home/modifier_profil.html.twig', [
+                        'form' => $form->createView(),
+                    ]);
+                }
+                
+                // Si le mot de passe actuel est correct, hasher le nouveau mot de passe
+                $hashedPassword = $passwordHasher->hashPassword($user, $nouveauMotDePasse);
                 $user->setMotDePasse($hashedPassword);
             } else {
-                // Si identique, on restaure l'ancien mot de passe haché
+                // Si l'utilisateur ne change pas de mot de passe, conserver l'ancien
                 $user->setMotDePasse($motDePasseActuel);
             }
             

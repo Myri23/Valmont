@@ -33,11 +33,19 @@
                     {{ form_errors(form.login) }}
                 </div>
 
-                <div class="form-group">
-                    {{ form_label(form.mot_de_passe, 'Mot de passe') }}
-                    {{ form_widget(form.mot_de_passe, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe actuel si vous ne souhaitez pas le modifier'}}) }}
-                    {{ form_errors(form.mot_de_passe) }}
-                </div>
+                {# Remplacer le bloc du mot de passe actuel par ceci #}
+<div class="form-group">
+    {{ form_label(form.mot_de_passe_actuel, 'Mot de passe actuel') }}
+    {{ form_widget(form.mot_de_passe_actuel, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe actuel'}}) }}
+    {{ form_errors(form.mot_de_passe_actuel) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.nouveau_mot_de_passe, 'Nouveau mot de passe') }}
+    {{ form_widget(form.nouveau_mot_de_passe, {'attr': {'class': 'form-control', 'placeholder': 'Laissez vide si vous ne souhaitez pas le modifier'}}) }}
+    {{ form_errors(form.nouveau_mot_de_passe) }}
+</div>
+
 
                 <div class="form-group">
                     {{ form_label(form.nom, 'Nom') }}

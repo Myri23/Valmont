@@ -1,4 +1,5 @@
 <?php
+
 // src/Form/ModifierProfilType.php
 
 namespace App\Form;
@@ -22,12 +23,19 @@ class ModifierProfilType extends AbstractType
                 'label' => 'Identifiant',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('mot_de_passe', PasswordType::class, [
-                'label' => 'Mot de passe',
+            ->add('mot_de_passe_actuel', PasswordType::class, [
+                'label' => 'Mot de passe actuel',
+                'mapped' => false,
+                'required' => true,
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('nouveau_mot_de_passe', PasswordType::class, [
+                'label' => 'Nouveau mot de passe',
                 'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Laissez vide pour conserver votre mot de passe actuel'
+                    'placeholder' => 'Laissez vide si vous ne souhaitez pas modifier votre mot de passe'
                 ],
                 'constraints' => [
                     new Length([
@@ -35,7 +43,6 @@ class ModifierProfilType extends AbstractType
                         'minMessage' => 'Le mot de passe doit comporter au moins {{ limit }} caractères',
                     ]),
                 ],
-                'empty_data' => '',
             ])
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
