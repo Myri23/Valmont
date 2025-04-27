@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref} % Pour des liens cliquables dans le sommaire
+
+
+\begin{document}
+	
+	% Page de garde
+	\begin{titlepage}
+		\centering
+		\vspace*{2cm}
+		\Huge{\textbf{Projet Développement Web}} \\[1cm]
+		\Large{Professeur : Mahdi Mariem} \\[2cm]
+		\vfill
+		\Large{
+			Classe : ING 1 GIA 2 \\
+			Auteur : Balit Ilian, Éléonore GEORGEL, Inès RIBAR, Myriam SAADI, Zerrouki Abbes \\
+			Date : \today \\
+		}
+	\end{titlepage}
+	
+	% Sommaire
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction et Contexte}
+	
+	\subsection{Présentation générale du projet}
+	
+	Ce projet s'inscrit dans le cadre d'un travail scolaire ambitieux visant à concevoir et développer une plateforme numérique intelligente. Cette plateforme répond aux besoins spécifiques des utilisateurs d'une ville intelligente en apportant des solutions numériques novatrices et accessibles. Dans un contexte où les technologies évoluent rapidement, les villes et villages sont de plus en plus appelés à s'adapter aux attentes croissantes des citoyens, notamment en termes de services, de connectivité, et de gestion des ressources.
+	
+	L’objectif principal de ce projet est de créer une solution numérique intégrée qui regroupe une variété de services et fonctionnalités. Ces services doivent améliorer la qualité de vie des citoyens en facilitant leur accès à l’information, à des services locaux, et en optimisant la gestion des ressources. La plateforme a été pensée comme un outil centralisé qui permette aux utilisateurs d’accéder rapidement à des informations pertinentes, d’interagir avec les services locaux, et de gérer leurs profils et leurs ressources de manière intuitive.
+	
+	\subsection{Objectifs}
+	
+	Ce projet a plusieurs objectifs stratégiques bien définis :
+	
+	\begin{itemize}
+		\item \textbf{Centraliser l'information locale :} Regrouper toutes les informations pertinentes, telles que les événements locaux, les alertes, les services disponibles, et les horaires des transports, afin de faciliter l’accès des citoyens à ces données.
+		\item \textbf{Faciliter la gestion des services publics :} Offrir une plateforme unique permettant aux citoyens de gérer et accéder à des services partagés comme des outils ou équipements publics.
+		\item \textbf{Permettre une gestion centralisée et efficace :} Les administrateurs auront la possibilité de superviser et de gérer l’ensemble du système, des utilisateurs, des services et des objets partagés, tout en garantissant un environnement sécurisé.
+		\item \textbf{Optimiser l'expérience utilisateur :} Mettre en place une interface moderne, intuitive et responsive qui facilite la navigation et l’interaction avec la plateforme, et qui répond aux attentes des utilisateurs en termes de rapidité et d’accessibilité.
+	\end{itemize}
+	
+	\subsection{Enjeux}
+	
+	Dans une ville intelligente, l'intégration des technologies au quotidien devient essentielle pour offrir aux citoyens des services efficaces et simplifiés. Ce projet se base sur cette vision en cherchant à répondre à plusieurs enjeux importants :
+	
+	\begin{itemize}
+		\item \textbf{Accessibilité à l’information locale :} Les citoyens ont besoin d’un accès rapide et facile aux informations locales telles que les événements, les horaires des transports publics, les alertes locales, etc. Cette plateforme vise à centraliser toutes ces informations afin de les rendre accessibles à tout moment.
+		\item \textbf{Optimisation des services urbains :} Une autre dimension du projet est de faciliter l’interaction des citoyens avec les différents services de la ville. Que ce soit pour la gestion de l’espace public, des outils partagés, ou des équipements spécifiques, la plateforme permet une gestion simplifiée et efficace.
+		\item \textbf{Amélioration de l’expérience citoyenne :} À travers une interface simple et conviviale, la plateforme cherche à améliorer l’expérience des utilisateurs. Cela inclut une navigation fluide, des services interactifs et personnalisés, et un accès à des outils variés pour gérer des objets ou services.
+		\item \textbf{Gestion intelligente des ressources et des utilisateurs :} Un des objectifs clés du projet est de permettre aux administrateurs de gérer de manière centralisée les différents aspects de la ville ou du village. Cela inclut la gestion des utilisateurs, des services offerts, et des objets partagés, tout en garantissant la sécurité des données et la confidentialité des informations.
+	\end{itemize}
+	
+	Ainsi, cette plateforme numérique vise à simplifier et enrichir la vie quotidienne des citoyens en intégrant des technologies intelligentes et en leur offrant un accès direct à une multitude de services et d'informations. L’optimisation des processus administratifs et l'amélioration de la gestion des ressources sont également au cœur de ce projet, qui a pour ambition de créer un environnement plus connecté, plus efficace, et plus réactif aux besoins des citoyens.
+	
+	\subsection{Choix du thème du projet}
+	
+	Le choix du thème de ce projet, centré sur le développement d'une plateforme numérique intelligente pour une ville ou un village intelligent, a été guidé par plusieurs facteurs pertinents, à la fois académiques, technologiques et sociétaux.
+	
+	\begin{itemize}
+		\item \textbf{1. Contexte technologique actuel} Dans un monde où les technologies évoluent rapidement, les villes et villages intelligents représentent une évolution majeure de l'urbanisme et de la gestion des espaces publics. L'essor des technologies numériques, l'Internet des objets (IoT) et la gestion intelligente des données offrent de nouvelles possibilités pour améliorer la qualité de vie des citoyens. En choisissant ce thème, nous avons voulu explorer les enjeux de l'intégration de ces technologies dans le quotidien des habitants, en utilisant des outils modernes comme les bases de données, les frameworks web (Symfony) et les langages de programmation tels que HTML, CSS, JavaScript.
+		\item \textbf{2. Pertinence par rapport aux besoins actuels} Les villes modernes font face à des défis croissants liés à la gestion des services publics, de l'information locale et des ressources. En parallèle, les citoyens cherchent de plus en plus à bénéficier de services intelligents qui leur facilitent la vie quotidienne, que ce soit pour accéder à des informations locales, gérer leurs déplacements ou interagir avec des services publics. Ce projet répond à ces besoins en proposant une plateforme numérique centralisée, qui permet à la fois une meilleure gestion des ressources locales et une expérience citoyenne améliorée grâce à une interface simple et accessible.
+		\item \textbf{3. L'importance de l'innovation dans le domaine de l'urbanisme} 	Le thème choisi s'inscrit également dans une tendance plus large d'innovation dans le domaine de l'urbanisme et du développement des villes intelligentes. En proposant une solution intégrée qui centralise diverses fonctionnalités telles que l'accès à l'information locale, la gestion des services publics et la possibilité d'interagir avec différents objets et outils, ce projet contribue à une réflexion sur l'avenir des villes connectées et intelligentes. Ce choix permet aussi de traiter des enjeux environnementaux, économiques et sociaux, en rendant les services urbains plus efficaces, durables et accessibles.
+	\end{itemize}	
+	
+	\subsection{Outils et technologies choisis}
+	
+	Pour le développement de cette plateforme, plusieurs technologies ont été employées :
+	
+	\begin{itemize}
+		\item  HTML et CSS pour la structure et la mise en forme du site.
+		\item JavaScript pour l'interactivité et la gestion dynamique des éléments sur la page.
+		\item Symfony, un framework PHP, est utilisé pour la gestion des fonctionnalités côté serveur et la création d'une architecture robuste et évolutive.
+		\item Une base de données pour stocker et gérer les informations des utilisateurs, objets, services, et autres données essentielles à la plateforme.
+	\end{itemize}
+	
+	\newpage
+	
+	\section{Répartition des tâches entre les membres du groupe}
+	
+	\subsection{Répartition des responsabilités}
+	% Utiliser ici un graphique du type Gantt
+	
+	\subsection{Contributions de chaque membres}
+	
+	\newpage
+	
+	\section{Étapes réalisées}
+	
+	\subsection{Différentes étapes du projet}
+	
+	\newpage
+	
+	\section{Conclusion et perspectives}
+	
+	\subsection{Conclusion générale}
+	
+	\subsection{Perspectives d'amélioration}
+
+	
+\end{document}
