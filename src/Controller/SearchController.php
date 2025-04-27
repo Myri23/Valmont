@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\LieuRepository;
 use App\Repository\TransportRepository;
+use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +14,14 @@ class SearchController extends AbstractController
 {
     private $lieuRepository;
     private $transportRepository;
+    private $eventRepository;
 
     // Injecter le LieuRepository et TransportRepository dans le constructeur
-    public function __construct(LieuRepository $lieuRepository, TransportRepository $transportRepository)
+    public function __construct(LieuRepository $lieuRepository, TransportRepository $transportRepository, EventRepository $eventRepository)
     {
         $this->lieuRepository = $lieuRepository;
         $this->transportRepository = $transportRepository;
+        $this->eventRepository = $eventRepository;
     }
 
     #[Route('/search', name: 'search_results')]
@@ -34,11 +37,14 @@ class SearchController extends AbstractController
 
         $transports = $this->transportRepository->searchTransport($query);
 
+        $events = $this->eventRepository->searchEvent($query);
+
         return $this->render('search/results.html.twig', [
             'results' => $query,
             'filters' => $tab,
             'lieux' => $lieux,
-            'transports' => $transports
+            'transports' => $transports,
+            'events' => $events
         ]);
     }
 }

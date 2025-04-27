@@ -18,16 +18,12 @@ class TransportRepository extends ServiceEntityRepository
 
     public function searchTransport($searchTerm): array
     {
-        dump($searchTerm);
-
         // Directement enlever les accents sans passer par une fonction
         $searchTerm = \transliterator_transliterate('Any-Latin; Latin-ASCII', $searchTerm);
 
-        dump($searchTerm);
-
-        $query = $this->createQueryBuilder('l')
-            ->where('l.type LIKE :searchTerm')
-            ->orWhere('l.description LIKE :searchTerm')
+        $query = $this->createQueryBuilder('t')
+            ->where('t.type LIKE :searchTerm')
+            ->orWhere('t.description LIKE :searchTerm')
 
             ->setParameter('searchTerm', '%'.$searchTerm.'%')
             ->getQuery();
