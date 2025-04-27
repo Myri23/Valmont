@@ -86,10 +86,6 @@ class ObjetConnecte
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: PoubelleConnectee::class, cascade: ['persist', 'remove'])]
     private Collection $poubelleConnectee;
 
-    #[ORM\ManyToOne(inversedBy: 'objetsConnectes')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Zone $zone = null;
-
     public function __construct()
     {
         $this->parkings = new ArrayCollection();
@@ -228,17 +224,6 @@ class ObjetConnecte
         $this->actif = $actif;
         return $this;
     }
-
-    public function getZone(): ?Zone
-{
-    return $this->zone;
-}
-
-public function setZone(?Zone $zone): self
-{
-    $this->zone = $zone;
-    return $this;
-}
 
     /**
      * @return Collection<int, ParkingIntelligent>

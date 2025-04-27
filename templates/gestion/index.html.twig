@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion - Ville Intelligente{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Tableau de bord de gestion</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Gestion des objets connectés</h2>
+                </div>
+                <div class="card-body">
+                    <p>Gérez les différents objets connectés de la ville intelligente.</p>
+                    <a href="{{ path('objets') }}" class="btn btn-primary">Voir tous les objets</a>
+                    <a href="{{ path('ajouter_objet') }}" class="btn btn-success">Ajouter un objet</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="h5 mb-0">Statistiques</h2>
+                </div>
+                <div class="card-body">
+                    <p>Consultez les statistiques des objets connectés de la ville.</p>
+                    <a href="#" class="btn btn-info">Voir les statistiques</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% if utilisateur.typeUtilisateur == 'administrateur' %}
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h2 class="h5 mb-0">Administration</h2>
+                </div>
+                <div class="card-body">
+                    <p>Options d'administration supplémentaires.</p>
+                    <a href="#" class="btn btn-warning">Gestion des utilisateurs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
