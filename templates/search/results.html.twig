@@ -59,6 +59,15 @@
                     </div>
                 {% endfor %}
             </div>
+        {% elseif transports is not empty %}
+            <div class="results">
+                {% for transport in transports %}
+                    <div class="card">
+                        <h3>{{ transport.type }}</h3>
+                        <p><strong>Description :</strong> {{ transport.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <div class="card">
                 <h1>Aucun résultat trouvé...</h1>
