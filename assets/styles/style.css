@@ -1,0 +1,82 @@
+.weather-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.weather-icon {
+    font-size: 4em;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.weather-icon.wi-day-sunny {
+    color: #ffd700;
+}
+
+.weather-icon.wi-night-clear {
+    color: #4169e1;
+}
+
+.weather-icon.wi-day-cloudy,
+.weather-icon.wi-night-cloudy {
+    color: #a9a9a9;
+}
+
+.weather-icon.wi-showers,
+.weather-icon.wi-day-rain,
+.weather-icon.wi-night-rain {
+    color: #1e90ff;
+}
+
+.weather-icon.wi-thunderstorm {
+    color: #4b0082;
+}
+
+.weather-icon.wi-snow {
+    color: #ffffff;
+}
+
+.weather-icon.wi-fog {
+    color: #d3d3d3;
+}
+
+.weather-details {
+    width: 100%;
+}
+
+.weather-details .temperature {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+}
+
+.weather-details .description {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #666;
+}
+
+.weather-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+#meteo.card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#meteo.card h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}

@@ -320,13 +320,14 @@ button.btn-search[type="submit"]:hover {
 
 .container-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
     max-width: 1200px;
     margin: auto;
     margin-top: 10px;
     padding: 20px;
 }
+
 
 
 .card {
@@ -447,7 +448,7 @@ form {
 /* === Page lieux_interet.html.twig & event.html.twig === */
 .container-lieu {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(2, 1fr); 
     gap: 60px;
     max-width: 1200px;
     margin: auto;
