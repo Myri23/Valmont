@@ -121,11 +121,16 @@ final class InformationController extends AbstractController
     }
 
 
-    #[Route('/objets', name: 'objets')]
-    public function objets()
-    {
-        return $this->render('information/objets.html.twig');
-    }
+#[Route('/objets', name: 'objets')]
+public function objets(EntityManagerInterface $entityManager)
+{
+
+    $objets = $entityManager->getRepository(ObjetConnecte::class)->findAll();
+    
+    return $this->render('information/objets.html.twig', [
+        'objets' => $objets,  // Passer la variable 'objets' au template
+    ]);
+}
 
     #[Route('/parcs', name: 'parcs')]
     public function parcs()
