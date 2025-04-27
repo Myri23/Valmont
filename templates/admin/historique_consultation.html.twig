@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des consultations{% endblock %}
+
+{% block body %}
+    <h1>Historique des consultations</h1>
+    
+    <div class="mb-4">
+        <form method="get" class="form-inline">
+            <div class="form-group mr-2">
+                <label for="utilisateur">Filtrer par utilisateur :</label>
+                <select name="utilisateur" id="utilisateur" class="form-control ml-2">
+                    <option value="">Tous les utilisateurs</option>
+                    {% for user in utilisateurs %}
+                        <option value="{{ user.id }}" {% if selectedUser == user.id ~ '' %}selected{% endif %}>
+                            {{ user.login }} ({{ user.nom }} {{ user.prenom }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group mr-2">
+                <label for="type">Type d'élément :</label>
+                <select name="type" id="type" class="form-control ml-2">
+                    <option value="">Tous les types</option>
+                    <option value="Musée" {% if selectedType == 'Musée' %}selected{% endif %}>Musées</option>
+                    <option value="Parc" {% if selectedType == 'Parc' %}selected{% endif %}>Parcs</option>
+                    <option value="Restaurant" {% if selectedType == 'Restaurant' %}selected{% endif %}>Restaurants</option>
+                    <option value="Bibliothèque" {% if selectedType == 'Bibliothèque' %}selected{% endif %}>Bibliothèques</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+            <a href="{{ path('admin_historique_consultation') }}" class="btn btn-secondary ml-2">Réinitialiser</a>
+        </form>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Type d'élément</th>
+                <th>Élément consulté</th>
+                <th>Date de consultation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consultation in consultations %}
+                <tr>
+                    <td>{{ consultation.utilisateur.login }}</td>
+                    <td>{{ consultation.typeElement }}</td>
+                    <td>{{ consultation.nomElement ?: 'ID: ' ~ consultation.elementId }}</td>
+                    <td>{{ consultation.dateConsultation|date('d/m/Y H:i') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucune consultation enregistrée</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

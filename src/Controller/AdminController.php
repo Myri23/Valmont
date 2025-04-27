@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use App\Entity\HistoriqueConnexion;  
+use App\Entity\HistoriqueConsultation;  // Ajoutez cet import ici
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -331,7 +332,37 @@ public function statistiques(EntityManagerInterface $entityManager): Response
         'total_connexions' => $totalConnexions,
     ]);
 }
+#[Route('/admin/historique_consultation', name: 'admin_historique_consultation')]
+public function historiqueConsultations(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+    // Récupérer tous les utilisateurs pour le filtrage
+    $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
+    
+    // Récupérer les filtres
+    $userId = $request->query->get('utilisateur');
+    $typeElement = $request->query->get('type');
+    
+    // Construire les critères de recherche
+    $criteria = [];
+    if ($userId) {
+        $criteria['utilisateur'] = $userId;
+    }
+    if ($typeElement) {
+        $criteria['typeElement'] = $typeElement;
+    }
+    
+    // Récupérer les consultations avec tri par date (les plus récentes d'abord)
+    $consultations = $entityManager->getRepository(HistoriqueConsultation::class)
+        ->findBy($criteria, ['dateConsultation' => 'DESC']);
 
+    return $this->render('admin/historique_consultation.html.twig', [
+        'consultations' => $consultations,
+        'utilisateurs' => $utilisateurs,
+        'selectedUser' => $userId,
+        'selectedType' => $typeElement
+    ]);
+}
 
 }
