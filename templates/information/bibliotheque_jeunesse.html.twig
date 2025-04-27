@@ -1,0 +1,802 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body>
+    <link rel="stylesheet" href="{{ asset('styles/bibliotheque.css') }}">
+    <header class="hero">
+        <h1>Catalogue - Bibliothèque Jeunesse de Valmont</h1>
+        <p>Découvrez notre collection et trouvez votre prochaine lecture</p>
+    </header>
+
+    <section class="container-catalogue">
+        <div class="search-panel">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Rechercher un titre, un auteur, un genre...">
+                <button id="search-button"><i class="fas fa-search"></i> Rechercher</button>
+            </div>
+            <div class="filters">
+                <select id="filter-category">
+                    <option value="">Toutes les catégories</option>
+                    <option value="roman">Roman</option>
+                    <option value="essai">Essai</option>
+                    <option value="bd">Bande Dessinée</option>
+                    <option value="jeunesse">Jeunesse</option>
+                    <option value="science">Sciences</option>
+                    <option value="histoire">Histoire</option>
+                </select>
+                <select id="filter-availability">
+                    <option value="">Toutes disponibilités</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="reserve">Réservé</option>
+                    <option value="emprunte">Emprunté</option>
+                </select>
+                <button id="reset-filters">Réinitialiser les filtres</button>
+            </div>
+        </div>
+
+        <div class="results-info">
+            <p><span id="results-count">185</span> résultats trouvés</p>
+            <div class="sort-options">
+                <label for="sort-by">Trier par :</label>
+                <select id="sort-by">
+                    <option value="title-asc">Titre (A-Z)</option>
+                    <option value="title-desc">Titre (Z-A)</option>
+                    <option value="author-asc">Auteur (A-Z)</option>
+                    <option value="date-desc">Date de publication (récent)</option>
+                    <option value="date-asc">Date de publication (ancien)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="catalogue-table">
+        <!-- 1. Modification de la structure du tableau dans le HTML -->
+        <table id="books-table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Catégorie</th>
+                    <th>Année</th>
+                    <th>Disponibilité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-id="1">
+                    <td>Chanson douce</td>
+                    <td>Leïla Slimani</td>
+                    <td>Roman</td>
+                    <td>2016</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+                <tr data-id="2">
+                    <td>La Peste</td>
+                    <td>Albert Camus</td>
+                    <td>Roman</td>
+                    <td>1947</td>
+                    <td><span class="status emprunte">Emprunté</span></td>
+                    <td><button class="btn-waitlist">Liste d'attente</button></td>
+                </tr>
+                <tr data-id="3">
+                    <td>L'Art de la joie</td>
+                    <td>Goliarda Sapienza</td>
+                    <td>Roman</td>
+                    <td>1998</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+                <tr data-id="4">
+                    <td>Sapiens : Une brève histoire de l'humanité</td>
+                    <td>Yuval Noah Harari</td>
+                    <td>Essai</td>
+                    <td>2011</td>
+                    <td><span class="status reserve">Réservé</span></td>
+                    <td><button class="btn-waitlist">Liste d'attente</button></td>
+                </tr>
+                <tr data-id="5">
+                    <td>Les Misérables</td>
+                    <td>Victor Hugo</td>
+                    <td>Roman</td>
+                    <td>1862</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+                <tr data-id="6">
+                    <td>Le Petit Prince</td>
+                    <td>Antoine de Saint-Exupéry</td>
+                    <td>Jeunesse</td>
+                    <td>1943</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+                <tr data-id="7">
+                    <td>Astérix et Obélix : Le Papyrus de César</td>
+                    <td>Jean-Yves Ferri</td>
+                    <td>BD</td>
+                    <td>2015</td>
+                    <td><span class="status emprunte">Emprunté</span></td>
+                    <td><button class="btn-waitlist">Liste d'attente</button></td>
+                </tr>
+                <tr data-id="8">
+                    <td>Une vie</td>
+                    <td>Simone Veil</td>
+                    <td>Autobiographie</td>
+                    <td>2007</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+                <tr data-id="9">
+                    <td>Le Seigneur des Anneaux</td>
+                    <td>J.R.R. Tolkien</td>
+                    <td>Roman</td>
+                    <td>1954</td>
+                    <td><span class="status emprunte">Emprunté</span></td>
+                    <td><button class="btn-waitlist">Liste d'attente</button></td>
+                </tr>
+                <tr data-id="10">
+                    <td>Petit Pays</td>
+                    <td>Gaël Faye</td>
+                    <td>Roman</td>
+                    <td>2016</td>
+                    <td><span class="status disponible">Disponible</span></td>
+                    <td><button class="btn-reserve">Réserver</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="pagination">
+            <button class="page-btn" disabled>❮ Précédent</button>
+            <div class="page-numbers">
+                <button class="page-number active">1</button>
+                <button class="page-number">2</button>
+                <button class="page-number">3</button>
+                <span>...</span>
+                <button class="page-number">19</button>
+            </div>
+            <button class="page-btn">Suivant ❯</button>
+        </div>
+
+        <div class="book-detail-modal" id="book-detail-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="book-detail-container">
+
+                    <div class="book-info-detailed">
+                        <h2 id="modal-title">Chanson douce</h2>
+                        <p class="author">par <span id="modal-author">Leïla Slimani</span></p>
+                        <p class="publication">Édition: <span id="modal-edition">Gallimard</span>, <span id="modal-year">2016</span></p>
+                        <p class="isbn">ISBN: <span id="modal-isbn">978-2070196678</span></p>
+                        <div class="availability">
+                            <p>Disponibilité: <span id="modal-availability" class="status disponible">Disponible</span></p>
+                            <p id="modal-location">Emplacement: Section Roman, Étagère B, Rangée 3</p>
+                        </div>
+                        <div class="description">
+                            <h3>Description</h3>
+                            <p id="modal-description">Lorsque Myriam, mère de deux jeunes enfants, décide malgré les réticences de son mari de reprendre son activité au sein d'un cabinet d'avocats, le couple se met à la recherche d'une nounou. Après un casting sévère, ils engagent Louise, qui conquiert très vite l'affection des enfants et occupe progressivement une place centrale dans le foyer. Peu à peu le piège de la dépendance mutuelle va se refermer, jusqu'au drame...</p>
+                        </div>
+                        <div class="actions">
+                            <button class="btn-large-reserve">Réserver ce livre</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path('bibliotheque') }}" class="btn btn-back">Retour aux bibliothèques</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Variable d'état pour simuler la connexion (normalement cela viendrait d'une session serveur)
+        let isUserLoggedIn = false;
+        {% if app.user %}
+            isUserLoggedIn = true;
+        {% endif %}
+        
+        // Données des livres pour le modal
+                const booksData = {
+                    1: {
+                        title: "Chanson douce",
+                        author: "Leïla Slimani",
+                        edition: "Gallimard",
+                        year: "2016",
+                        isbn: "978-2070196678",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère B, Rangée 3",
+                        description: "Lorsque Myriam, mère de deux jeunes enfants, décide malgré les réticences de son mari de reprendre son activité au sein d'un cabinet d'avocats, le couple se met à la recherche d'une nounou. Après un casting sévère, ils engagent Louise, qui conquiert très vite l'affection des enfants et occupe progressivement une place centrale dans le foyer. Peu à peu le piège de la dépendance mutuelle va se refermer, jusqu'au drame..."
+                    },
+                    2: {
+                        title: "La Peste",
+                        author: "Albert Camus",
+                        edition: "Gallimard",
+                        year: "1947",
+                        isbn: "978-2070360420",
+                        availability: "emprunte",
+                        location: "Section Roman, Étagère A, Rangée 1",
+                        description: "La Peste est un roman d'Albert Camus publié en 1947 qui raconte l'histoire d'une épidémie de peste bubonique qui frappe la ville d'Oran, en Algérie. À travers cette allégorie, Camus explore des thèmes philosophiques tels que l'absurde, la solidarité face à la souffrance collective et la condition humaine."
+                    },
+                    3: {
+                        title: "L'Art de la joie",
+                        author: "Goliarda Sapienza",
+                        edition: "Le Tripode",
+                        year: "1998",
+                        isbn: "978-2370550163",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère C, Rangée 4",
+                        description: "Modesta naît en Sicile le premier jour du vingtième siècle. D'origine modeste, elle s'affranchit très tôt de sa condition en éliminant tous les obstacles sur sa route. Sa vie est une conquête, rythmée par les deuils, les passions amoureuses et politiques. Un roman-fleuve féministe et puissant sur la quête du bonheur et de la liberté."
+                    },
+                    4: {
+                        title: "Sapiens : Une brève histoire de l'humanité",
+                        author: "Yuval Noah Harari",
+                        edition: "Albin Michel",
+                        year: "2011",
+                        isbn: "978-2226257017",
+                        availability: "reserve",
+                        location: "Section Essai, Étagère D, Rangée 2",
+                        description: "Il y a 100 000 ans, la Terre était habitée par au moins six espèces d'hominidés. Une seule a survécu. Nous, les Homo sapiens. Comment notre espèce a-t-elle réussi à dominer la planète ? Pourquoi nos ancêtres ont-ils uni leurs forces pour créer villes et royaumes ? Comment en sommes-nous arrivés à créer les concepts de religion, de nation, de droits de l'homme ? À dépendre de l'argent, des livres et des lois ?"
+                    },
+                    5: {
+                        title: "Les Misérables",
+                        author: "Victor Hugo",
+                        edition: "Livre de Poche",
+                        year: "1862",
+                        isbn: "978-2253096344",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère A, Rangée 5",
+                        description: "Le destin de Jean Valjean, forçat échappé du bagne, est bouleversé par sa rencontre avec Fantine. Mourante et sans le sou, celle-ci lui demande de prendre soin de Cosette, sa fille confiée aux Thénardier. Ce couple d'aubergistes, malhonnête et sans scrupules, exploitent la fillette jusqu'à ce que Jean Valjean tienne sa promesse et l'adopte. Pourchassé par l'inspecteur Javert et fasciné par Cosette, il n'aura de cesse de protéger celle-ci."
+                    },
+                    6: {
+                        title: "Le Petit Prince",
+                        author: "Antoine de Saint-Exupéry",
+                        edition: "Gallimard",
+                        year: "1943",
+                        isbn: "978-2070612758",
+                        availability: "disponible",
+                        location: "Section Jeunesse, Étagère B, Rangée 1",
+                        description: "Le Petit Prince est une œuvre de langue française, la plus connue d'Antoine de Saint-Exupéry. Publié en 1943 à New York simultanément en anglais et en français, c'est un conte poétique et philosophique sous l'apparence d'un conte pour enfants."
+                    },
+                    7: {
+                        title: "Astérix et Obélix : Le Papyrus de César",
+                        author: "Jean-Yves Ferri",
+                        edition: "Albert René",
+                        year: "2015",
+                        isbn: "978-2864972716",
+                        availability: "emprunte",
+                        location: "Section BD, Étagère A, Rangée 3",
+                        description: "Dans cette aventure, Jules César vient de terminer d'écrire ses Commentaires sur la Guerre des Gaules où il relate sa vision de cette guerre et de la conquête de la Gaule. Son éditeur, Bonus Promoplus, lui conseille de cacher l'existence du village gaulois qui résiste encore et toujours à l'envahisseur afin de préserver son image. César accepte et fait retirer la page mentionnant le village d'Astérix et ses habitants."
+                    },
+                    8: {
+                        title: "Une vie",
+                        author: "Simone Veil",
+                        edition: "Stock",
+                        year: "2007",
+                        isbn: "978-2253127765",
+                        availability: "disponible",
+                        location: "Section Autobiographie, Étagère C, Rangée 2",
+                        description: "Simone Veil accepte de se raconter à la première personne. Personnage au destin exceptionnel, elle est la femme politique dont la légitimité est la moins contestée, en France et à l'étranger ; son autobiographie est attendue depuis longtemps."
+                    },
+                    9: {
+                        title: "Le Seigneur des Anneaux",
+                        author: "J.R.R. Tolkien",
+                        edition: "Pocket",
+                        year: "1954",
+                        isbn: "978-2266154116",
+                        availability: "emprunte",
+                        location: "Section Fantasy, Étagère D, Rangée 5",
+                        description: "Le Seigneur des Anneaux est un roman de fantasy en trois volumes de l'écrivain britannique J. R. R. Tolkien. L'histoire reprend certains des personnages présentés dans Le Hobbit, premier roman de l'auteur publié en 1937, mais l'œuvre est plus complexe et plus sombre."
+                    },
+                    10: {
+                        title: "Petit Pays",
+                        author: "Gaël Faye",
+                        edition: "Grasset",
+                        year: "2016",
+                        isbn: "978-2253070443",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère B, Rangée 6",
+                        description: "En 1992, Gabriel, dix ans, vit au Burundi avec son père français, entrepreneur, sa mère rwandaise et sa petite sœur, Ana, dans un confortable quartier d'expatriés. Gabriel passe le plus clair de son temps avec ses copains, une joyeuse bande occupée à faire les quatre cents coups. Un quotidien paisible, une enfance douce qui vont se disloquer en même temps que ce « petit pays » d'Afrique brutalement malmené par l'Histoire."
+                    },
+                    11: {
+                        title: "1984",
+                        author: "George Orwell",
+                        edition: "Gallimard",
+                        year: "1949",
+                        isbn: "978-2070368228",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère D, Rangée 2",
+                        description: "Dans une dystopie totalitaire, Winston Smith, employé au ministère de la Vérité, falsifie l'Histoire. Mais il se met à douter du système et entame une rébellion vouée à l'échec. Ce roman d'anticipation décrit un monde où la surveillance est omniprésente et où la liberté de pensée est réprimée."
+                    },
+                    12: {
+                        title: "Notre-Dame de Paris",
+                        author: "Victor Hugo",
+                        edition: "Pocket",
+                        year: "1831",
+                        isbn: "978-2266234078",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère A, Rangée 6",
+                        description: "Dans le Paris du XVe siècle, une jeune gitane, Esméralda, fait la rencontre de Quasimodo, le sonneur de cloches de Notre-Dame, et de Claude Frollo, l'archidiacre de la cathédrale. Ce roman historique dépeint un triangle amoureux tragique dans un Paris médiéval vibrant et mystérieux."
+                    },
+                    13: {
+                        title: "Le Comte de Monte-Cristo",
+                        author: "Alexandre Dumas",
+                        edition: "Livre de Poche",
+                        year: "1844",
+                        isbn: "978-2253098058",
+                        availability: "emprunte",
+                        location: "Section Roman, Étagère B, Rangée 2",
+                        description: "Edmond Dantès, injustement emprisonné au château d'If, s'évade après quatorze ans de captivité. Devenu riche et puissant, il revient sous l'identité du comte de Monte-Cristo pour se venger de ceux qui l'ont trahi. Un récit d'aventure et de vengeance qui traverse l'Europe du XIXe siècle."
+                    },
+                    14: {
+                        title: "Harry Potter à l'école des sorciers",
+                        author: "J.K. Rowling",
+                        edition: "Gallimard Jeunesse",
+                        year: "1997",
+                        isbn: "978-2070643028",
+                        availability: "reserve",
+                        location: "Section Jeunesse, Étagère C, Rangée 1",
+                        description: "Le jour de ses onze ans, Harry Potter découvre qu'il est le fils de deux puissants sorciers et qu'il possède lui aussi des pouvoirs magiques. Il intègre l'école de sorcellerie Poudlard où il se lie d'amitié avec Ron Weasley et Hermione Granger. Ensemble, ils affrontent Lord Voldemort, mage noir responsable de la mort des parents de Harry."
+                    },
+                    15: {
+                        title: "Germinal",
+                        author: "Émile Zola",
+                        edition: "Livre de Poche",
+                        year: "1885",
+                        isbn: "978-2253004226",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère C, Rangée 5",
+                        description: "Étienne Lantier, jeune chômeur devenu mineur, découvre dans le Nord de la France les conditions de vie misérables des travailleurs. Il décide de s'engager dans la lutte ouvrière et participe à une grève qui tourne au drame. Ce roman dépeint avec réalisme la condition des mineurs au XIXe siècle."
+                    },
+                    16: {
+                        title: "Bel-Ami",
+                        author: "Guy de Maupassant",
+                        edition: "Flammarion",
+                        year: "1885",
+                        isbn: "978-2081275008",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère B, Rangée 4",
+                        description: "Georges Duroy, ancien sous-officier devenu journaliste, utilise son charme pour séduire les femmes influentes et grimper dans l'échelle sociale du Paris de la Belle Époque. Ce roman décrit l'ascension sociale d'un arriviste sans scrupules dans un monde dominé par l'argent et les apparences."
+                    },
+                    17: {
+                        title: "Les Fleurs du Mal",
+                        author: "Charles Baudelaire",
+                        edition: "Pocket",
+                        year: "1857",
+                        isbn: "978-2266171229",
+                        availability: "disponible",
+                        location: "Section Poésie, Étagère A, Rangée 1",
+                        description: "Recueil poétique majeur de Charles Baudelaire, Les Fleurs du Mal explore des thèmes comme la beauté, la mélancolie, l'érotisme et la mort. À sa parution, l'œuvre fait scandale et certains poèmes sont censurés pour outrage à la morale publique, avant de devenir un monument de la poésie française."
+                    },
+                    18: {
+                        title: "L'Étranger",
+                        author: "Albert Camus",
+                        edition: "Gallimard",
+                        year: "1942",
+                        isbn: "978-2070360024",
+                        availability: "emprunte",
+                        location: "Section Roman, Étagère A, Rangée 2",
+                        description: "Meursault, employé de bureau algérois, apprend le décès de sa mère. Le jour de l'enterrement, il ne pleure pas et va à la plage le lendemain. Plus tard, il tue un Arabe sans raison apparente. Lors de son procès, c'est son indifférence plus que son crime qui le condamne. Ce roman existentialiste illustre l'absurdité de la condition humaine."
+                    },
+                    19: {
+                        title: "Tintin au Tibet",
+                        author: "Hergé",
+                        edition: "Casterman",
+                        year: "1960",
+                        isbn: "978-2203001190",
+                        availability: "disponible",
+                        location: "Section BD, Étagère B, Rangée 1",
+                        description: "Apprenant que son ami Tchang a disparu dans un accident d'avion en Himalaya, Tintin est persuadé qu'il est encore vivant. Accompagné du capitaine Haddock et du sherpa Tharkey, il part pour le Tibet à sa recherche. Cette aventure spirituelle est considérée comme l'une des plus personnelles et émouvantes de la série."
+                    },
+                    20: {
+                        title: "L'Écume des jours",
+                        author: "Boris Vian",
+                        edition: "Livre de Poche",
+                        year: "1947",
+                        isbn: "978-2253010692",
+                        availability: "disponible",
+                        location: "Section Roman, Étagère C, Rangée 3",
+                        description: "Colin, jeune homme fortuné, rencontre Chloé dont il tombe éperdument amoureux. Ils se marient, mais Chloé développe une étrange maladie : un nénuphar pousse dans son poumon. Pour la soigner, Colin dépense toute sa fortune. Ce roman surréaliste mêle amour, jazz et fantaisie dans un univers qui se dégrade peu à peu."
+                    },
+
+                };
+        
+        // Fonction pour ouvrir le modal avec détails du livre
+        function openBookDetails(bookId) {
+            const book = booksData[bookId];
+            if (book) {
+                document.getElementById('modal-title').textContent = book.title;
+                document.getElementById('modal-author').textContent = book.author;
+                document.getElementById('modal-edition').textContent = book.edition;
+                document.getElementById('modal-year').textContent = book.year;
+                document.getElementById('modal-isbn').textContent = book.isbn;
+                
+                const availabilitySpan = document.getElementById('modal-availability');
+                availabilitySpan.textContent = book.availability === 'disponible' ? 'Disponible' : 
+                                            book.availability === 'emprunte' ? 'Emprunté' : 'Réservé';
+                availabilitySpan.className = 'status ' + book.availability;
+                
+                document.getElementById('modal-location').textContent = 'Emplacement: ' + book.location;
+                document.getElementById('modal-description').textContent = book.description;
+                
+                document.getElementById('book-detail-modal').style.display = 'block';
+            } else {
+                // Si le livre n'est pas trouvé, afficher un message générique
+                document.getElementById('modal-title').textContent = "Détails du livre";
+                document.getElementById('modal-author').textContent = "Auteur";
+                document.getElementById('modal-edition').textContent = "Édition";
+                document.getElementById('modal-year').textContent = "Année";
+                document.getElementById('modal-isbn').textContent = "ISBN";
+                
+                const availabilitySpan = document.getElementById('modal-availability');
+                availabilitySpan.textContent = "Information non disponible";
+                availabilitySpan.className = 'status';
+                
+                document.getElementById('modal-location').textContent = "Emplacement non disponible";
+                document.getElementById('modal-description').textContent = "Information détaillée non disponible pour ce livre.";
+                
+                document.getElementById('book-detail-modal').style.display = 'block';
+            }
+        }
+        
+        // Fonction pour attacher les événements aux boutons de réservation
+        function attachReservationButtonEvents(buttons) {
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Empêcher l'ouverture du modal
+                    
+                    // Vérifier si l'utilisateur est connecté
+                    if (!isUserLoggedIn) {
+                        alert('Veuillez vous connecter pour réserver un livre.');
+                        // Rediriger vers la page de connexion (en conditions réelles)
+                        // window.location.href = '/login';
+                        return;
+                    }
+                    
+                    // Si l'utilisateur est connecté, procéder à la réservation
+                    alert('Votre demande de réservation a été enregistrée. Vous recevrez une confirmation par email.');
+                    
+                    // Mise à jour visuelle (pour la démo)
+                    const statusCell = this.parentElement.previousElementSibling;
+                    const statusSpan = statusCell.querySelector('.status');
+                    
+                    statusSpan.textContent = 'Réservé';
+                    statusSpan.className = 'status reserve';
+                    
+                    this.textContent = 'Annuler';
+                    this.className = 'btn-waitlist';
+                });
+            });
+        }
+        
+        // Simuler des données pour différentes pages
+        function generatePageData(pageNumber) {
+            // Pages de données simulées pour la démonstration
+                    const pageData = {
+                        1: [
+                            { id: 1, title: "Chanson douce", author: "Leïla Slimani", category: "Roman", year: "2016", availability: "disponible" },
+                            { id: 2, title: "La Peste", author: "Albert Camus", category: "Roman", year: "1947", availability: "emprunte" },
+                            { id: 3, title: "L'Art de la joie", author: "Goliarda Sapienza", category: "Roman", year: "1998", availability: "disponible" },
+                            { id: 4, title: "Sapiens : Une brève histoire de l'humanité", author: "Yuval Noah Harari", category: "Essai", year: "2011", availability: "reserve" },
+                            { id: 5, title: "Les Misérables", author: "Victor Hugo", category: "Roman", year: "1862", availability: "disponible" },
+                            { id: 6, title: "Le Petit Prince", author: "Antoine de Saint-Exupéry", category: "Jeunesse", year: "1943", availability: "disponible" },
+                            { id: 7, title: "Astérix et Obélix : Le Papyrus de César", author: "Jean-Yves Ferri", category: "BD", year: "2015", availability: "emprunte" },
+                            { id: 8, title: "Une vie", author: "Simone Veil", category: "Autobiographie", year: "2007", availability: "disponible" },
+                            { id: 9, title: "Le Seigneur des Anneaux", author: "J.R.R. Tolkien", category: "Roman", year: "1954", availability: "emprunte" },
+                            { id: 10, title: "Petit Pays", author: "Gaël Faye", category: "Roman", year: "2016", availability: "disponible" }
+                        ],
+                        2: [
+                            { id: 11, title: "1984", author: "George Orwell", category: "Roman", year: "1949", availability: "disponible" },
+                            { id: 12, title: "Notre-Dame de Paris", author: "Victor Hugo", category: "Roman", year: "1831", availability: "disponible" },
+                            { id: 13, title: "Le Comte de Monte-Cristo", author: "Alexandre Dumas", category: "Roman", year: "1844", availability: "emprunte" },
+                            { id: 14, title: "Harry Potter à l'école des sorciers", author: "J.K. Rowling", category: "Jeunesse", year: "1997", availability: "reserve" },
+                            { id: 15, title: "Germinal", author: "Émile Zola", category: "Roman", year: "1885", availability: "disponible" },
+                            { id: 16, title: "Bel-Ami", author: "Guy de Maupassant", category: "Roman", year: "1885", availability: "disponible" },
+                            { id: 17, title: "Les Fleurs du Mal", author: "Charles Baudelaire", category: "Poésie", year: "1857", availability: "disponible" },
+                            { id: 18, title: "L'Étranger", author: "Albert Camus", category: "Roman", year: "1942", availability: "emprunte" },
+                            { id: 19, title: "Tintin au Tibet", author: "Hergé", category: "BD", year: "1960", availability: "disponible" },
+                            { id: 20, title: "L'Écume des jours", author: "Boris Vian", category: "Roman", year: "1947", availability: "disponible" }
+                        ],
+                        3: [
+                            { id: 21, title: "Madame Bovary", author: "Gustave Flaubert", category: "Roman", year: "1857", availability: "disponible" },
+                            { id: 22, title: "Le Rouge et le Noir", author: "Stendhal", category: "Roman", year: "1830", availability: "emprunte" },
+                            { id: 23, title: "Candide", author: "Voltaire", category: "Roman", year: "1759", availability: "disponible" },
+                            { id: 24, title: "Voyage au bout de la nuit", author: "Louis-Ferdinand Céline", category: "Roman", year: "1932", availability: "disponible" },
+                            { id: 25, title: "Les Contemplations", author: "Victor Hugo", category: "Poésie", year: "1856", availability: "disponible" },
+                            { id: 26, title: "Le Grand Meaulnes", author: "Alain-Fournier", category: "Roman", year: "1913", availability: "reserve" },
+                            { id: 27, title: "Les Trois Mousquetaires", author: "Alexandre Dumas", category: "Roman", year: "1844", availability: "disponible" },
+                            { id: 28, title: "Bonjour tristesse", author: "Françoise Sagan", category: "Roman", year: "1954", availability: "emprunte" },
+                            { id: 29, title: "Au Bonheur des Dames", author: "Émile Zola", category: "Roman", year: "1883", availability: "disponible" },
+                            { id: 30, title: "Cyrano de Bergerac", author: "Edmond Rostand", category: "Théâtre", year: "1897", availability: "disponible" }
+                        ]
+                    };
+            
+            // Retourner les données de la page demandée, ou la première page si non disponible
+            return pageData[pageNumber] || pageData[1];
+        }
+
+        // Fonction pour mettre à jour la table avec les nouvelles données
+        function updateTableContent(pageNumber) {
+            const data = generatePageData(pageNumber);
+            const tbody = document.querySelector('#books-table tbody');
+            
+            // Vider le contenu actuel de la table
+            tbody.innerHTML = '';
+            
+            // Ajouter les nouvelles lignes
+            data.forEach(book => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-id', book.id);
+                
+                // Statut du livre en français
+                const statusText = book.availability === 'disponible' ? 'Disponible' : 
+                                book.availability === 'emprunte' ? 'Emprunté' : 'Réservé';
+                
+                // Bouton selon la disponibilité
+                const buttonText = book.availability === 'disponible' ? 'Réserver' : 'Liste d\'attente';
+                const buttonClass = book.availability === 'disponible' ? 'btn-reserve' : 'btn-waitlist';
+                
+                row.innerHTML = `
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.category}</td>
+                    <td>${book.year}</td>
+                    <td><span class="status ${book.availability}">${statusText}</span></td>
+                    <td><button class="${buttonClass}">${buttonText}</button></td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Réinitialiser les gestionnaires d'événements sur les nouvelles lignes
+            const newTableRows = document.querySelectorAll('#books-table tbody tr');
+            newTableRows.forEach(row => {
+                row.addEventListener('click', function(e) {
+                    if (!e.target.matches('button')) {
+                        const bookId = this.getAttribute('data-id');
+                        openBookDetails(bookId);
+                    }
+                });
+                row.style.cursor = 'pointer';
+            });
+            
+            // Ajouter les événements aux boutons de réservation
+            const newReserveButtons = document.querySelectorAll('.btn-reserve');
+            attachReservationButtonEvents(newReserveButtons);
+            
+            // Mettre à jour le compteur de résultats
+            document.getElementById('results-count').textContent = data.length;
+        }
+        
+        // Initialiser les écouteurs pour les lignes du tableau initial
+        const tableRows = document.querySelectorAll('#books-table tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('click', function(e) {
+                if (!e.target.matches('button')) {
+                    const bookId = this.getAttribute('data-id');
+                    openBookDetails(bookId);
+                }
+            });
+            row.style.cursor = 'pointer';
+        });
+        
+        // Fermer le modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('book-detail-modal').style.display = 'none';
+        });
+        
+        // Fermer le modal si on clique en dehors
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('book-detail-modal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Fonction de recherche
+        document.getElementById('search-button').addEventListener('click', performSearch);
+        document.getElementById('search-input').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const categoryFilter = document.getElementById('filter-category').value.toLowerCase();
+            const availabilityFilter = document.getElementById('filter-availability').value;
+            
+            const currentRows = document.querySelectorAll('#books-table tbody tr');
+            let visibleCount = 0;
+            
+            currentRows.forEach(row => {
+                const title = row.cells[0].textContent.toLowerCase();
+                const author = row.cells[1].textContent.toLowerCase();
+                const category = row.cells[2].textContent.toLowerCase();
+                const availability = row.cells[4].querySelector('.status').classList[1];
+                
+                const matchesSearch = searchTerm === '' || 
+                                    title.includes(searchTerm) || 
+                                    author.includes(searchTerm);
+                
+                const matchesCategory = categoryFilter === '' || category === categoryFilter;
+                
+                const matchesAvailability = availabilityFilter === '' || availability === availabilityFilter;
+                
+                if (matchesSearch && matchesCategory && matchesAvailability) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('results-count').textContent = visibleCount;
+        }
+        
+        // Réinitialiser les filtres
+        document.getElementById('reset-filters').addEventListener('click', function() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('filter-category').selectedIndex = 0;
+            document.getElementById('filter-availability').selectedIndex = 0;
+            
+            const currentRows = document.querySelectorAll('#books-table tbody tr');
+            currentRows.forEach(row => {
+                row.style.display = '';
+            });
+            
+            document.getElementById('results-count').textContent = currentRows.length;
+        });
+        
+        // Tri du tableau
+        document.getElementById('sort-by').addEventListener('change', function() {
+            const sortValue = this.value;
+            const tbody = document.querySelector('#books-table tbody');
+            const currentRows = Array.from(document.querySelectorAll('#books-table tbody tr'));
+            
+            currentRows.sort((a, b) => {
+                let valueA, valueB;
+                
+                if (sortValue === 'title-asc' || sortValue === 'title-desc') {
+                    valueA = a.cells[0].textContent;
+                    valueB = b.cells[0].textContent;
+                } else if (sortValue === 'author-asc') {
+                    valueA = a.cells[1].textContent;
+                    valueB = b.cells[1].textContent;
+                } else if (sortValue === 'date-asc' || sortValue === 'date-desc') {
+                    valueA = parseInt(a.cells[3].textContent);
+                    valueB = parseInt(b.cells[3].textContent);
+                }
+                
+                if (sortValue === 'title-desc' || sortValue === 'date-desc') {
+                    return valueB.localeCompare ? valueB.localeCompare(valueA) : valueB - valueA;
+                } else {
+                    return valueA.localeCompare ? valueA.localeCompare(valueB) : valueA - valueB;
+                }
+            });
+            
+            // Réorganiser les lignes dans le tableau
+            currentRows.forEach(row => {
+                tbody.appendChild(row);
+            });
+        });
+        
+        // Pagination
+        const pageButtons = document.querySelectorAll('.page-number');
+        pageButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Retirer la classe active de tous les boutons
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Ajouter la classe active au bouton cliqué
+                this.classList.add('active');
+                
+                // Charger les données de la page sélectionnée
+                const pageNumber = parseInt(this.textContent);
+                updateTableContent(pageNumber);
+                
+                // Mettre à jour les boutons précédent/suivant
+                const prevButton = document.querySelector('.page-btn:first-child');
+                const nextButton = document.querySelector('.page-btn:last-child');
+                
+                if (pageNumber === 1) {
+                    prevButton.disabled = true;
+                } else {
+                    prevButton.disabled = false;
+                }
+                
+                if (pageNumber === 19) {
+                    nextButton.disabled = true;
+                } else {
+                    nextButton.disabled = false;
+                }
+            });
+        });
+
+        // Navigation pagination (précédent/suivant)
+        const prevButton = document.querySelector('.page-btn:first-child');
+        const nextButton = document.querySelector('.page-btn:last-child');
+
+        prevButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                const activePage = document.querySelector('.page-number.active');
+                const prevPage = activePage.previousElementSibling;
+                
+                if (prevPage && prevPage.classList.contains('page-number')) {
+                    activePage.classList.remove('active');
+                    prevPage.classList.add('active');
+                    
+                    // Charger les données de la page précédente
+                    const pageNumber = parseInt(prevPage.textContent);
+                    updateTableContent(pageNumber);
+                    
+                    if (pageNumber === 1) {
+                        this.disabled = true;
+                    }
+                    
+                    nextButton.disabled = false;
+                }
+            }
+        });
+
+        nextButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                const activePage = document.querySelector('.page-number.active');
+                const nextPage = activePage.nextElementSibling;
+                
+                if (nextPage && nextPage.classList.contains('page-number')) {
+                    activePage.classList.remove('active');
+                    nextPage.classList.add('active');
+                    
+                    // Charger les données de la page suivante
+                    const pageNumber = parseInt(nextPage.textContent);
+                    updateTableContent(pageNumber);
+                    
+                    if (nextPage.textContent === '19') {
+                        this.disabled = true;
+                    }
+                    
+                    prevButton.disabled = false;
+                }
+            }
+        });
+        
+        // Boutons de réservation initiaux
+        const reserveButtons = document.querySelectorAll('.btn-reserve');
+        attachReservationButtonEvents(reserveButtons);
+        
+        // Bouton de réservation dans le modal
+        document.querySelector('.btn-large-reserve').addEventListener('click', function() {
+            // Vérifier si l'utilisateur est connecté
+            if (!isUserLoggedIn) {
+                alert('Veuillez vous connecter pour réserver un livre.');
+                // Rediriger vers la page de connexion (en conditions réelles)
+                // window.location.href = '/login';
+                return;
+            }
+            
+            // Si l'utilisateur est connecté, procéder à la réservation
+            alert('Votre demande de réservation a été enregistrée. Vous recevrez une confirmation par email.');
+            
+            const availabilitySpan = document.getElementById('modal-availability');
+            availabilitySpan.textContent = 'Réservé';
+            availabilitySpan.className = 'status reserve';
+            
+            this.textContent = 'Annuler la réservation';
+        });
+    });
+    </script>
+</body>
+<footer class="footer">
+    <p>&copy; 2025 - Valmont | Ville connectée</p>
+</footer>
+
+<script src="{{ asset('search-panel.js') }}"></script>
+</html>
+{% endblock %}

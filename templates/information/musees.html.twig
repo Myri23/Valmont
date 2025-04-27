@@ -10,31 +10,28 @@
     <section class="container-musees">
         <div class="card-musees">
             <img src="{{ asset('images/musee_histoire.jpg') }}"  alt="Musée d'Histoire de Valmont">
-            <div class="musee-info">
+            <div class="musee-info1">
                 <h2>Musée d'Histoire de Valmont</h2>
                 <p>Ce musée retrace l’évolution de la ville de Valmont à travers les siècles. De la préhistoire à l’ère industrielle, découvrez une riche collection d’objets et de témoignages.</p>
-                <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
-                <a href="#" class="btn btn-primary">Découvrir</a>
+                <a href="{{ path('musee_histoire') }}" class="btn btn-primary">Découvrir</a>
             </div>
         </div>
 
         <div class="card-musees">
             <img src="{{ asset('images/musee_science.jpg') }}"  alt="Musée des Sciences & Nature">
-            <div class="musee-info">
+            <div class="musee-info1">
                 <h2>Musée Sciences & Nature</h2>
                 <p>Un lieu fascinant pour petits et grands, avec des expositions interactives sur la biodiversité, la géologie régionale et les innovations scientifiques.</p>
-                <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
-                <a href="#" class="btn btn-primary">Découvrir</a>
+                <a href="{{ path('musee_science') }}" class="btn btn-primary">Découvrir</a>
             </div>
         </div>
 
         <div class="card-musees">
             <img src="{{ asset('images/musee_orangerie.jpg') }}"  alt="Musée d’Art Contemporain">
-            <div class="musee-info">
+            <div class="musee-info1">
                 <h2>Musée du Citronnier</h2>
                 <p>Au cœur du Jardin des Pivoines, ce musée met en lumière les artistes locaux et internationaux à travers des expositions audacieuses et des installations modernes.</p>
-                <p><strong>Horaires :</strong> Mardi à dimanche : 10h - 18h | Fermé le lundi</p>
-                <a href="#" class="btn btn-primary">En savoir plus</a>
+                <a href="{{ path('musee_citronnier') }}" class="btn btn-primary">Découvrir</a>
             </div>
         </div>
         <a href="{{ path('lieux_interet') }}" class="btn btn-back">Retourner aux lieux</a>

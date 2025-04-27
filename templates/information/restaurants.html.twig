@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body>
+    <header class="hero">
+        <h1>Les Restaurants de Valmont</h1>
+        <p>Découvrez les meilleures adresses pour ravir vos papilles, de la cuisine traditionnelle aux saveurs du monde.</p>
+    </header>
+
+    <section class="container-resto">
+        <div class="card-resto">
+            <img src="{{ asset('images/queen_resto.jpg') }}"  alt="Queen">
+            <div class="restaurant-info">
+                <h2>Queen</h2>
+                <p>Restaurant raffiné avec une terrasse ensoleillée, proposant une cuisine française moderne à base de produits frais et locaux.</p>
+                <a href="{{ path('restaurant_queen') }}" class="btn btn-primary">>En savoir plus</a>
+            </div>
+        </div>
+
+        <div class="card-resto">
+            <img src="{{ asset('images/la_belle_epoque_resto.jpg') }}"  alt="Restaurant La Belle Epoque">
+            <div class="restaurant-info">
+                <h2>La Belle Epoque</h2>
+                <p>Ambiance conviviale et cuisine du terroir au rendez-vous. Parfait pour un déjeuner entre amis ou un dîner en famille.</p>
+                <a href="{{ path('restaurant_belle_epoque') }}" class="btn btn-primary">En savoir plus</a>
+            </div>
+        </div>
+
+        <div class="card-resto">
+            <img src="{{ asset('images/la_petite_sirene_resto.jpg') }}"  alt="La petite Sirène">
+            <div class="restaurant-info">
+                <h2>La Petite Sirène</h2>
+                <p>Un restaurant spécialisé dans les délices de la mer, des sushis aux fruits de mer grillés, le tout servi dans une atmosphère zen et raffinée.</p>
+                <a href="{{ path('restaurant_petite_sirene') }}" class="btn btn-primary">En savoir plus</a>
+            </div>
+        </div>
+        <a href="{{ path('lieux_interet') }}" class="btn btn-back">Retourner aux lieux</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 - Valmont | Ville connectée</p>
+    </footer>
+
+    <script src="{{ asset('search-panel.js') }}"></script>
+</body>
+</html>
+{% endblock %}

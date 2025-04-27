@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container">
+    <div class="card">
+        <img src="{{ asset('images/la_petite_sirene_resto.jpg') }}" alt="La Petite Sirène" style="width:100%; border-radius: 15px;">
+        <h2>La Petite Sirène</h2>
+        <p>
+            Niché au cœur de Valmont, La Petite Sirène est un véritable havre pour les amoureux de la mer. 
+            Ce restaurant spécialisé propose une cuisine raffinée autour des trésors marins, alliant tradition japonaise et inspirations méditerranéennes. 
+            Vous y dégusterez des sushis délicatement préparés, des fruits de mer grillés à la perfection, ainsi que des ramens généreux aux saveurs authentiques.
+        </p>
+
+        <p>
+            Dans une atmosphère zen, épurée et apaisante, chaque plat est une invitation au voyage, à la découverte des goûts subtils et des textures marines. 
+            La décoration, inspirée des éléments naturels, contribue à créer une expérience culinaire sereine, idéale pour un déjeuner en toute quiétude ou un dîner élégant au clair de lune.
+        </p>
+
+        <p>
+            Que vous soyez amateur de spécialités japonaises, curieux de saveurs nouvelles ou simplement à la recherche d’un lieu cosy pour savourer les délices de la mer, 
+            La Petite Sirène vous promet une parenthèse gourmande et inoubliable.
+        </p>
+
+
+                <div class="menu-section">
+                    <h4>Entrées</h4>
+                    <div class="menu-item">
+                        <strong>Assortiment de sushis — 12,90€</strong>
+                        <span>Ingrédients : riz vinaigré, saumon, thon, crevette, algue nori</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Soupe miso aux fruits de mer — 7,50€</strong>
+                        <span>Ingrédients : bouillon miso, moules, crevettes, tofu, algues</span>
+                    </div>
+
+                    <h4>Plats</h4>
+                    <div class="menu-item">
+                        <strong>Tempura de crevettes et légumes — 15,00€</strong>
+                        <span>Ingrédients : crevettes, courgettes, patates douces, pâte à tempura</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Ramen aux fruits de mer — 16,50€</strong>
+                        <span>Ingrédients : bouillon maison, nouilles, moules, calamar, crevettes</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Saumon grillé sauce teriyaki — 17,90€</strong>
+                        <span>Ingrédients : saumon, sauce soja sucrée, riz vapeur, légumes sautés</span>
+                    </div>
+
+                    <h4>Desserts</h4>
+                    <div class="menu-item">
+                        <strong>Mochis glacés (thé vert / mangue) — 6,50€</strong>
+                        <span>Ingrédients : riz gluant, crème glacée, arômes naturels</span>
+                    </div>
+                    <div class="menu-item">
+                        <strong>Cheesecake au yuzu — 7,90€</strong>
+                        <span>Ingrédients : fromage frais, yuzu, biscuit sablé, chantilly</span>
+                    </div>
+                </div>
+
+        <div class="cadre-parcs">
+            <p><strong>Horaires :</strong> Tous les jours : 11h30 - 22h00</p>
+            <p><strong>Adresse :</strong> 18 quai de la Mer, Valmont</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Réserver une table :</h3>
+        <form method="post" class="container-form">
+            <fieldset class="fieldset-form">
+                <div>
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div>
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="heure">Heure :</label>
+                    <input type="time" id="heure" name="heure" required>
+                </div>
+            </fieldset>
+            <div class="btn-form">
+                <button type="submit">Réserver</button>
+                <button type="reset">Annuler</button>
+            </div>
+        </form>
+    </div>
+    <a href="{{ path('restaurants') }}" class="btn-back">Retour aux restaurants</a>
+</section>
+{% endblock %}
