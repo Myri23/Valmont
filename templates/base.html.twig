@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Valmont - Accueil{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('styles/index.css') }}">
-        <link rel="stylesheet" href="{{ path('admin_dynamic_css') }}">  <!-- Ajoutez cette ligne -->
+        <link rel="stylesheet" href="{{ path('admin_dynamic_css') }}"> 
     </head>
     <body>
         <nav class="navbar">
@@ -17,9 +17,17 @@
                         <a class="nav-link" href="{{ path('membres') }}">Membres</a>
                     {% endif %}
                     <a class="nav-link active" href="{{ path('ville') }}">Information</a>
-                    {% if is_granted('ROLE_AVANCE') or is_granted('ROLE_EXPERT') %}
+                    
+                    {# Condition pour afficher le lien Gestion uniquement pour certains utilisateurs #}
+                    {% if app.user and (
+                          app.user.typeUtilisateur == 'complexe' or 
+                          app.user.typeUtilisateur == 'administrateur' or 
+                          app.user.niveauExperience == 'avancé' or 
+                          app.user.niveauExperience == 'complexe'
+                        ) %}
                         <a class="nav-link" href="{{ path('objets') }}">Gestion</a>
                     {% endif %}
+                    
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="nav-link" href="{{ path('admin') }}">Admin</a>
                     {% endif %}

@@ -2,27 +2,61 @@
 
 {% block body %}
 <body>
+    <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+    
     <header class="hero">
         <h1>Valmont - Information</h1>
-        <p>Une ville connectée, dynamique et tournée vers l’avenir.</p>
+        <p>Une ville connectée, dynamique et tournée vers l'avenir.</p>
     </header>
 
     <section class="container-grid">
+        {% if weather %}
+        <div id="meteo" class="card">
+            <h2>Météo actuelle</h2>
+            <div class="weather-info">
+                <i class="wi {{ weather.icon }} weather-icon"></i>
+                <div class="weather-details">
+                    <p class="temperature">{{ weather.temperature }}°C</p>
+                    <p class="description">{{ weather.description|capitalize }}</p>
+                    <p>Humidité : {{ weather.humidity }}%</p>
+                    <p>Vent : {{ weather.wind_speed }} km/h</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <div id="lieux" class="card">
             <h2>Lieux d'Intérêt</h2>
-            <p>Découvrez les musées, parcs, restaurants et bibliothèques à proximité.</p>
+            <p>
+                Partez à la découverte des richesses de Valmont : musées fascinants, parcs verdoyants, restaurants chaleureux et bibliothèques accueillantes vous ouvrent leurs portes.  
+            </p>
+            <p>    Que vous soyez passionné d'art, amoureux de nature, fin gourmet ou amateur de lecture, vous trouverez toujours un lieu à explorer pour enrichir votre expérience dans notre ville.
+            </p>
+
             <a href="{{ path('lieux_interet') }}" class="btn btn-primary">Explorer les lieux</a>
         </div>
 
         <div id="evenements" class="card">
             <h2>Événements Locaux</h2>
-            <p>Restez informé des festivals, marchés et concerts à venir.</p>
+            <p>
+                Ne manquez aucun événement à Valmont ! Festivals colorés, marchés animés, concerts en plein air et spectacles culturels rythment la vie de notre ville tout au long de l'année.  
+            </p>
+            <p>
+                Venez partager des moments uniques en famille ou entre amis et découvrez une programmation riche et variée qui fait vibrer Valmont.
+            </p>
+
             <a href="{{ path('event') }}" class="btn btn-primary">Voir les événements</a>
         </div>
 
         <div id="transports" class="card">
             <h2>Transports Publics</h2>
-            <p>Consultez les horaires et localisations des bus, tramways et métros.</p>
+            <p>
+                Planifiez vos déplacements en toute simplicité grâce à nos informations sur les transports en commun. 
+            </p>
+            <p>
+                Retrouvez les horaires actualisés ainsi que les localisations des arrêts de bus, de tramways et de métros pour circuler facilement dans toute la ville de Valmont et ses environs.
+            </p>
             <a class="btn btn-primary" href="{{ path('bus') }}">Bus</a>
             <a class="btn btn-primary" href="{{ path('tram') }}">TramWay</a>
             <a class="btn btn-primary" href="{{ path('metro') }}">Metro</a>
@@ -45,7 +79,7 @@
                 <li><strong>Maire :</strong> Abdelah EL HARSAL (mandat 2020–2026)</li>
                 <li><strong>Adjoint du maire :</strong> Ayman OUGUERD (mandat 2020–2026)</li>
                 <li><strong>Secrétaire :</strong> Louaye SAGHIR</li>
-                <li><strong>Responsable communication :</strong> Younes SABRI</li>
+                <li><strong>Responsable sécurité :</strong> Younes SABRI</li>
                 <li><strong>Horaires de la mairie :</strong> Lundi à vendredi, 8h30–12h / 14h–17h30</li>
             </ul>
         </div>

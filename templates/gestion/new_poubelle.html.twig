@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une poubelle connectée{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Ajouter une poubelle connectée</h1>
+    
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(objetConnecteForm) }}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Informations générales de l'objet connecté</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(objetConnecteForm.idUnique) }}
+                            {{ form_row(objetConnecteForm.nom) }}
+                            {{ form_row(objetConnecteForm.description) }}
+                            {{ form_row(objetConnecteForm.marque) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(objetConnecteForm.etat) }}
+                            {{ form_row(objetConnecteForm.localisation) }}
+                            {{ form_row(objetConnecteForm.connectivite) }}
+                            {{ form_row(objetConnecteForm.batteriePct) }}
+                            {{ form_row(objetConnecteForm.actif) }}
+                            {{ form_row(objetConnecteForm.derniereInteraction) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_end(objetConnecteForm) }}
+            
+            {{ form_start(poubelleForm) }}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Caractéristiques spécifiques de la poubelle</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(poubelleForm.niveauRemplissage) }}
+                            {{ form_row(poubelleForm.capaciteTotale) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(poubelleForm.typeDechets) }}
+                            {{ form_row(poubelleForm.derniereCollecte) }}
+                            {{ form_row(poubelleForm.compacteur) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                <button type="submit" class="btn btn-primary">Enregistrer la poubelle connectée</button>
+                <a href="{{ path('app_objets_select_type') }}" class="btn btn-secondary ms-2">Retour à la sélection</a>
+            </div>
+            {{ form_end(poubelleForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
