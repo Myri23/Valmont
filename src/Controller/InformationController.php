@@ -12,9 +12,19 @@ use App\Form\ModifierProfilType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class InformationController extends AbstractController
 {
+    private $client;
+    private $apiKey;
+
+    public function __construct(HttpClientInterface $client)
+    {
+        $this->client = $client;
+        $this->apiKey = '117f375b15f90916c7cceaeb7095b905';
+    }
+
     #[Route('/information', name: 'app_information')]
     public function index(): Response
     {
@@ -24,9 +34,60 @@ final class InformationController extends AbstractController
     }
 
     #[Route('/ville', name: 'ville')]
-    public function ville()
+    public function ville(): Response
     {
-        return $this->render('information/ville.html.twig');
+        try {
+            $response = $this->client->request(
+                'GET',
+                'https://api.openweathermap.org/data/2.5/weather?q=Battambang&appid=' . $this->apiKey . '&units=metric&lang=fr'
+            );
+
+            $data = json_decode($response->getContent(), true);
+            
+            // Adaptation des données pour Valmont
+            $weatherData = [
+                'city' => 'Valmont',
+                'temperature' => round($data['main']['temp']),
+                'description' => $data['weather'][0]['description'],
+                'humidity' => $data['main']['humidity'],
+                'wind_speed' => round($data['wind']['speed'] * 3.6), // Conversion en km/h
+                'icon' => $this->getWeatherIconClass($data['weather'][0]['icon'])
+            ];
+
+            return $this->render('information/ville.html.twig', [
+                'weather' => $weatherData
+            ]);
+        } catch (\Exception $e) {
+            return $this->render('information/ville.html.twig', [
+                'weather' => null
+            ]);
+        }
+    }
+
+    private function getWeatherIconClass($iconCode): string
+    {
+        $iconMap = [
+            '01d' => 'wi-day-sunny',
+            '01n' => 'wi-night-clear',
+            '02d' => 'wi-day-cloudy',
+            '02n' => 'wi-night-cloudy',
+            '03d' => 'wi-cloud',
+            '03n' => 'wi-cloud',
+            '04d' => 'wi-cloudy',
+            '04n' => 'wi-cloudy',
+            '09d' => 'wi-showers',
+            '09n' => 'wi-showers',
+            '10d' => 'wi-day-rain',
+            '10n' => 'wi-night-rain',
+            '11d' => 'wi-thunderstorm',
+            '11n' => 'wi-thunderstorm',
+            '13d' => 'wi-snow',
+            '13n' => 'wi-snow',
+            '50d' => 'wi-fog',
+            '50n' => 'wi-fog'
+        ];
+
+        return $iconMap[$iconCode] ?? 'wi-day-sunny';
     }
 
     #[Route('/lieux_interet', name: 'lieux_interet')]
