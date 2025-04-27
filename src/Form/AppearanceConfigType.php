@@ -21,9 +21,7 @@ class AppearanceConfigType extends AbstractType
                 'label' => 'Thème',
                 'choices' => [
                     'Thème par défaut' => 'default',
-                    'Thème sombre' => 'dark',
-                    'Thème clair' => 'light',
-                    'Thème haute visibilité' => 'high_contrast'
+                    'Thème personnalisé' => 'dark',
                 ]
             ])
             ->add('primaryColor', ColorType::class, [
@@ -44,7 +42,6 @@ class AppearanceConfigType extends AbstractType
                 'data' => $options['data']->getModuleLayout()['information']['order'] ?? 1,
                 'attr' => ['min' => 1, 'max' => 4]
             ])
-            // Répétez pour les autres modules (visualisation, gestion, administration)
         ;
     }
 

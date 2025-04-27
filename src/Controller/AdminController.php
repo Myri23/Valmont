@@ -272,5 +272,66 @@ public function modifierProfil(
     ]);
 }
 
+#[Route('/admin/statistiques', name: 'admin_statistiques')]
+public function statistiques(EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+    // Calculer la date de début de la semaine dernière (7 jours en arrière)
+    $dateSeuil = new \DateTime();
+    $dateSeuil->modify('-7 days');  // Cela retourne la date de 7 jours avant aujourd'hui
+
+    // Récupérer le nombre total de connexions
+    $totalConnexions = $entityManager->createQueryBuilder()
+        ->select('COUNT(h.id)')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    // Récupérer les connexions par utilisateur et leur nombre total de connexions
+    $connexions = $entityManager->createQueryBuilder()
+        ->select('u.id, u.login, u.email, u.nom, u.prenom, COUNT(h.id) AS nb_connexions')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->join('h.utilisateur', 'u')
+        ->groupBy('u.id')
+        ->getQuery()
+        ->getResult();
+
+    // Récupérer les connexions de la dernière semaine
+    $connexionsSemaine = $entityManager->createQueryBuilder()
+        ->select('u.id, COUNT(h.id) AS connexions_semaine')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->join('h.utilisateur', 'u')
+        ->where('h.dateConnexion >= :dateSeuil')
+        ->setParameter('dateSeuil', $dateSeuil)
+        ->groupBy('u.id')
+        ->getQuery()
+        ->getResult();
+
+    // Organiser les données par utilisateur
+    foreach ($connexions as &$connexion) {
+        $connexion['connexions_semaine'] = 0; // Initialiser à 0
+        $connexion['pourcentage_connexions'] = 0;
+
+        // Trouver le nombre de connexions dans la dernière semaine
+        foreach ($connexionsSemaine as $connexionSemaine) {
+            if ($connexionSemaine['id'] === $connexion['id']) {
+                $connexion['connexions_semaine'] = $connexionSemaine['connexions_semaine'];
+                break;
+            }
+        }
+
+        // Calculer le pourcentage de connexions
+        $connexion['pourcentage_connexions'] = ($totalConnexions > 0) ? ($connexion['nb_connexions'] / $totalConnexions) * 100 : 0;
+    }
+
+    // Passer les données à la vue
+    return $this->render('admin/statistiques.html.twig', [
+        'connexions' => $connexions, // Passer la variable correctement
+        'total_connexions' => $totalConnexions,
+    ]);
+}
+
+
 
 }
