@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques de Connexions{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Statistiques de Connexions</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Login</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Nombre de connexions</th>
+                <th>Pourcentage de connexions</th>
+                <th>Fréquence de connexions (dernière semaine)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for connexion in connexions %}
+                <tr>
+                    <td>{{ connexion.login }}</td>
+                    <td>{{ connexion.email }}</td>
+                    <td>{{ connexion.nom }}</td>
+                    <td>{{ connexion.prenom }}</td>
+                    <td>{{ connexion.nb_connexions }}</td>
+                    <td>{{ connexion.pourcentage_connexions | number_format(2) }}%</td>
+<td>{{ connexion.connexions_semaine }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <h4>Total des connexions : {{ total_connexions }}</h4>
+    </div>
+</div>
+{% endblock %}
+

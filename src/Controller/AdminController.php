@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use App\Service\PointsService;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -35,28 +39,31 @@ final class AdminController extends AbstractController
         ]);
     }
     
-    #[Route('/admin/utilisateur/{id}/supprimer', name: 'admin_utilisateur_supprimer')]
-    public function supprimer(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
-    {
-        // Vérifie que seuls les administrateurs peuvent accéder à cette page
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        
-        // Vérifier si l'utilisateur essaie de se supprimer lui-même
-        if ($utilisateur === $this->getUser()) {
-            $this->addFlash('error', 'Vous ne pouvez pas supprimer votre propre compte !');
-            return $this->redirectToRoute('admin');
-        }
-        
-        // Supprime l'utilisateur
-        $entityManager->remove($utilisateur);
-        $entityManager->flush();
-        
-        // Ajoute un message flash pour confirmer la suppression
-        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
-        
-        // Redirige vers la page d'administration
+#[Route('/admin/utilisateur/{id}/supprimer', name: 'admin_utilisateur_supprimer')]
+public function supprimer(Utilisateur $utilisateur, EntityManagerInterface $entityManager, Request $request): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+    if ($utilisateur === $this->getUser()) {
+        $this->addFlash('error', 'Vous ne pouvez pas supprimer votre propre compte !');
         return $this->redirectToRoute('admin');
     }
+
+    // 👉 Supprimer d'abord les historiques de connexion liés à cet utilisateur
+    $connexions = $entityManager->getRepository(\App\Entity\HistoriqueConnexion::class)->findBy(['utilisateur' => $utilisateur]);
+    foreach ($connexions as $connexion) {
+        $entityManager->remove($connexion);
+    }
+
+    // Ensuite supprimer l'utilisateur
+    $entityManager->remove($utilisateur);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
+
+    return $this->redirectToRoute('admin');
+}
+
     
     #[Route('/admin/historique', name: 'admin_historique_connexion')]
     public function historiqueConnexions(EntityManagerInterface $entityManager): Response
@@ -68,12 +75,13 @@ final class AdminController extends AbstractController
             'connexions' => $connexions,
         ]);
     }
+
 #[Route('/admin/utilisateur/{id}/modifier', name: 'admin_utilisateur_modifier')]
 public function modifierNiveauExperience(
     Utilisateur $utilisateur, 
     Request $request, 
     EntityManagerInterface $entityManager,
-    PointsService $pointsService // Ajoutez cette injection de dépendance
+    PointsService $pointsService
 ): Response
 {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -92,7 +100,7 @@ public function modifierNiveauExperience(
             $utilisateur->setPointsConsultation((float)$nouveauxPointsConsultation);
         }
         
-        // Mettre à jour le niveau en fonction des points (au lieu de prendre le niveau du formulaire)
+        // Mettre à jour le niveau en fonction des points
         $pointsService->updateUserLevel($utilisateur);
         
         $entityManager->flush();
@@ -173,6 +181,154 @@ public function ajouterUtilisateur(Request $request, EntityManagerInterface $ent
 
     return $this->render('admin/ajouter_utilisateur.html.twig', [
         'form' => $form->createView(),
+    ]);
+}
+
+#[Route('/admin/utilisateur/{id}/modifier-profil', name: 'admin_utilisateur_modifier_profil')]
+public function modifierProfil(
+    Utilisateur $utilisateur, 
+    Request $request, 
+    EntityManagerInterface $entityManager,
+    UserPasswordHasherInterface $passwordHasher
+): Response {
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+    
+    // Stocker le mot de passe actuel haché
+    $motDePasseActuel = $utilisateur->getMotDePasse();
+    
+    // Créer le formulaire
+    $form = $this->createFormBuilder($utilisateur)
+        ->add('login', TextType::class)
+        ->add('mot_de_passe', PasswordType::class, [
+            'required' => false,
+            'mapped' => true,
+            'attr' => ['placeholder' => 'Entrez un nouveau mot de passe si vous souhaitez le modifier']
+        ])
+        ->add('nom', TextType::class, ['required' => false])
+        ->add('prenom', TextType::class, ['required' => false])
+        ->add('email', EmailType::class)
+        ->add('type_utilisateur', ChoiceType::class, [
+            'choices' => [
+                'Visiteur' => 'visiteur',
+                'Administrateur' => 'administrateur'
+            ]
+        ])
+        ->add('type_membre', TextType::class, ['required' => false])
+        ->add('photo_url', FileType::class, [
+            'label' => 'Photo de profil',
+            'required' => false,
+            'mapped' => false,
+            'attr' => ['accept' => 'image/*']
+        ])
+        ->add('save', SubmitType::class, ['label' => 'Enregistrer les modifications'])
+        ->getForm();
+    
+    $form->handleRequest($request);
+    
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Vérifier si le mot de passe a été modifié
+        $motDePasseSaisi = $utilisateur->getMotDePasse();
+        
+        // Si le mot de passe saisi est différent du mot de passe haché stocké en base,
+        // c'est qu'il a été modifié dans le formulaire, donc on le hache
+        if ($motDePasseSaisi !== $motDePasseActuel) {
+            // Hacher le nouveau mot de passe
+            $hashedPassword = $passwordHasher->hashPassword($utilisateur, $motDePasseSaisi);
+            $utilisateur->setMotDePasse($hashedPassword);
+        } else {
+            // Si identique, on restaure l'ancien mot de passe haché
+            $utilisateur->setMotDePasse($motDePasseActuel);
+        }
+        
+        // Gérer l'upload de la photo si nécessaire
+        $photoFile = $form->get('photo_url')->getData();
+        
+        if ($photoFile) {
+            $newFilename = uniqid() . '.' . $photoFile->guessExtension();
+            
+            try {
+                // Déplacer le fichier
+                $photoFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                
+                // Mettre à jour la photo
+                $utilisateur->setPhotoUrl($newFilename);
+                
+            } catch (FileException $e) {
+                $this->addFlash('error', "Une erreur est survenue lors de l'upload de l'image.");
+            }
+        }
+        
+        $entityManager->flush();
+        $this->addFlash('success', 'Profil de l\'utilisateur mis à jour avec succès !');
+        return $this->redirectToRoute('admin');
+    }
+    
+    return $this->render('admin/modifier_profil.html.twig', [
+        'utilisateur' => $utilisateur,
+        'form' => $form->createView(),
+    ]);
+}
+
+#[Route('/admin/statistiques', name: 'admin_statistiques')]
+public function statistiques(EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+    // Calculer la date de début de la semaine dernière (7 jours en arrière)
+    $dateSeuil = new \DateTime();
+    $dateSeuil->modify('-7 days');  // Cela retourne la date de 7 jours avant aujourd'hui
+
+    // Récupérer le nombre total de connexions
+    $totalConnexions = $entityManager->createQueryBuilder()
+        ->select('COUNT(h.id)')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    // Récupérer les connexions par utilisateur et leur nombre total de connexions
+    $connexions = $entityManager->createQueryBuilder()
+        ->select('u.id, u.login, u.email, u.nom, u.prenom, COUNT(h.id) AS nb_connexions')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->join('h.utilisateur', 'u')
+        ->groupBy('u.id')
+        ->getQuery()
+        ->getResult();
+
+    // Récupérer les connexions de la dernière semaine
+    $connexionsSemaine = $entityManager->createQueryBuilder()
+        ->select('u.id, COUNT(h.id) AS connexions_semaine')
+        ->from(HistoriqueConnexion::class, 'h')
+        ->join('h.utilisateur', 'u')
+        ->where('h.dateConnexion >= :dateSeuil')
+        ->setParameter('dateSeuil', $dateSeuil)
+        ->groupBy('u.id')
+        ->getQuery()
+        ->getResult();
+
+    // Organiser les données par utilisateur
+    foreach ($connexions as &$connexion) {
+        $connexion['connexions_semaine'] = 0; // Initialiser à 0
+        $connexion['pourcentage_connexions'] = 0;
+
+        // Trouver le nombre de connexions dans la dernière semaine
+        foreach ($connexionsSemaine as $connexionSemaine) {
+            if ($connexionSemaine['id'] === $connexion['id']) {
+                $connexion['connexions_semaine'] = $connexionSemaine['connexions_semaine'];
+                break;
+            }
+        }
+
+        // Calculer le pourcentage de connexions
+        $connexion['pourcentage_connexions'] = ($totalConnexions > 0) ? ($connexion['nb_connexions'] / $totalConnexions) * 100 : 0;
+    }
+
+    // Passer les données à la vue
+    return $this->render('admin/statistiques.html.twig', [
+        'connexions' => $connexions, // Passer la variable correctement
+        'total_connexions' => $totalConnexions,
     ]);
 }
 

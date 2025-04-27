@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le profil - Administration{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Modifier le profil de {{ utilisateur.login }}</h1>
+    
+    <div class="card">
+        <div class="card-header">
+            Informations de l'utilisateur
+        </div>
+        <div class="card-body">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            
+            {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+                <div class="form-group mb-3">
+                    {{ form_label(form.login, 'Nom d\'utilisateur') }}
+                    {{ form_widget(form.login, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.login) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.mot_de_passe, 'Mot de passe') }}
+                    {{ form_widget(form.mot_de_passe, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.mot_de_passe) }}
+                    <small class="form-text text-muted">Laissez vide pour conserver le mot de passe actuel</small>
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.nom, 'Nom') }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.nom) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.prenom, 'Prénom') }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.prenom) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.email, 'Email') }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                
+                <div class="form-group mb-3">
+                    {{ form_label(form.type_utilisateur, 'Type d\'utilisateur') }}
+                    {{ form_widget(form.type_utilisateur, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.type_utilisateur) }}
+                </div>
+                
+                <div class="form-group mb-3">
+                    {{ form_label(form.type_membre, 'Type de membre') }}
+                    {{ form_widget(form.type_membre, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.type_membre) }}
+                </div>
+
+                <div class="form-group mb-3">
+                    {{ form_label(form.photo_url, 'Photo de profil') }}
+                    {{ form_widget(form.photo_url, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.photo_url) }}
+                    
+                    {% if utilisateur.photoUrl %}
+                        <div class="mt-2">
+                            <img src="{{ asset('uploads/images/' ~ utilisateur.photoUrl) }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 150px;">
+                            <p class="text-muted">Photo actuelle</p>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    <a href="{{ path('admin') }}" class="btn btn-secondary">Retour</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
