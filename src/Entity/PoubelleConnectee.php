@@ -13,9 +13,10 @@ class PoubelleConnectee
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'poubellesConnectees')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private ?ObjetConnecte $objet = null;
+    #[ORM\ManyToOne(inversedBy: 'poubelleConnectee')]
+#[ORM\JoinColumn(name: "objet_id", referencedColumnName: "id", nullable: false, onDelete: 'CASCADE')]
+private ?ObjetConnecte $objet = null;
+
 
     #[ORM\Column(type: 'integer')]
     private int $niveauRemplissage;
@@ -32,9 +33,9 @@ class PoubelleConnectee
     #[ORM\Column(type: 'boolean')]
     private bool $compacteur = false;
 
-    public function getId(): ?int
+    public function getIdUnique(): ?int
     {
-        return $this->id;
+        return $this->idUnique;
     }
 
     public function getObjet(): ?ObjetConnecte

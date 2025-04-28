@@ -111,11 +111,11 @@ footer {
 }
 
 /* Panel Recherche */
-.hidden {
+#search-panel.hidden, #search-panel-objects.hidden {
     visibility: hidden;
 }
 
-#search-panel {
+#search-panel, #search-panel-objects {
     height: 10vh;
     background-color: #2F3D46;
     position: fixed;
@@ -123,39 +123,45 @@ footer {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-#search-panel input[type="text"], #search-panel label {
+#search-panel input[type="text"], #search-panel label,
+#search-panel-objects input[type="text"], #search-panel-objects label {
     padding: 10px;
     color: white;
     font-size: 20px;
     border: none;
 }
 
-#search-panel input[type="text"] {
+#search-panel input[type="text"],
+#search-panel-objects input[type="text"] {
     margin-left: 100px;
     width: 40%;
     opacity: 0.8;
     background-color: #2F3D46;
 }
 
-#search-panel label {
+#search-panel label,
+#search-panel-objects label {
     text-align: center;
     width: 10%;
     background-color: #84A98D;
     border-radius: 30px;
 }
 
-#search-panel label:hover {
+#search-panel label:hover,
+#search-panel-objects label:hover {
     background-color: white;
     color: #84A98D;
 }
 
-#search-panel input[type="text"]::placeholder {
+#search-panel input[type="text"]::placeholder,
+#search-panel-objects input[type="text"]::placeholder {
     color: white;
     font-size: 20px;
     border: none;
 }
 
-#search-panel input[type="text"]:focus, #search-panel label:focus {
+#search-panel input[type="text"]:focus, #search-panel label:focus,
+#search-panel-objects input[type="text"]:focus, #search-panel-objects label:focus {
     outline: none;
 }
 
@@ -818,4 +824,10 @@ form {
     margin: 20px;
     border-radius: 5px;
   }
+
+  .logo-small {
+    width: 100px;  /* Ajustez la largeur selon vos besoins */
+    height: auto;  /* Maintient les proportions de l'image */
+  }
+
 

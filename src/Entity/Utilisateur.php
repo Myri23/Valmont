@@ -69,6 +69,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isConfirmed = false;
 
+    // Champ pour le statut de vérification
+    #[ORM\Column(type: 'string', length: 20, options: ['default' => 'en_attente'])]
+    private string $statut_verification = 'en_attente';
+
     // Getters et setters 
 
     public function getId(): ?int { return $this->id; }
@@ -120,6 +124,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isCompteValide(): bool { return $this->compte_valide; }
     public function setCompteValide(bool $compte_valide): self { $this->compte_valide = $compte_valide; return $this; }
+
+    public function getStatutVerification(): string { return $this->statut_verification; }
+    public function setStatutVerification(string $statut_verification): self { $this->statut_verification = $statut_verification; return $this; }
 
     /**
      * @return array<string>
@@ -209,5 +216,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isConfirmed = $isConfirmed;
         return $this;
     }
-    
+
 }

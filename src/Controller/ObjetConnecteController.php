@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ObjetConnecteController extends AbstractController
 {
-#[Route('/gestion/objets', name: 'app_objets_list')]
+    #[Route('/gestion/objets', name: 'app_objets_list')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $objets = $entityManager->getRepository(ObjetConnecte::class)->findAll();
@@ -23,7 +23,7 @@ class ObjetConnecteController extends AbstractController
             'objets' => $objets,
         ]);
     }
-
+    
     #[Route('/objets/select-type', name: 'app_objets_select_type')]
     public function selectType(): Response
     {
@@ -33,27 +33,29 @@ class ObjetConnecteController extends AbstractController
     #[Route('/objets/ajouter-poubelle', name: 'app_poubelle_connectee_new')]
     public function newPoubelle(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Création d'un nouvel objet connecté (parent)
+        // Création d'un nouvel objet connecté
         $objetConnecte = new ObjetConnecte();
-        $objetConnecteForm = $this->createForm(ObjetConnecteType::class, $objetConnecte);
-        $objetConnecteForm->handleRequest($request);
+        
+        // Pré-remplir le type - idUnique sera auto-incrémenté
+        $objetConnecte->setType('Poubelle');
         
         // Création d'une nouvelle poubelle connectée
         $poubelleConnectee = new PoubelleConnectee();
-        $poubelleForm = $this->createForm(PoubelleConnecteeType::class, $poubelleConnectee);
-        $poubelleForm->handleRequest($request);
         
-        if ($objetConnecteForm->isSubmitted() && $objetConnecteForm->isValid() && 
-            $poubelleForm->isSubmitted() && $poubelleForm->isValid()) {
-            
-            // Définir le type d'objet comme "Poubelle"
-            $objetConnecte->setType('Poubelle');
-            
+        // Créer un seul formulaire combiné
+        $form = $this->createFormBuilder(['objet' => $objetConnecte, 'poubelle' => $poubelleConnectee])
+            ->add('objet', ObjetConnecteType::class)
+            ->add('poubelle', PoubelleConnecteeType::class)
+            ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
             // Enregistrer l'objet connecté
             $entityManager->persist($objetConnecte);
             $entityManager->flush();
             
-            // Associer la poubelle à l'objet connecté
+            // Associer la poubelle à l'objet connecté après avoir persisté l'objet
             $poubelleConnectee->setObjet($objetConnecte);
             
             // Enregistrer la poubelle connectée
@@ -66,8 +68,7 @@ class ObjetConnecteController extends AbstractController
         }
         
         return $this->render('gestion/new_poubelle.html.twig', [
-            'objetConnecteForm' => $objetConnecteForm->createView(),
-            'poubelleForm' => $poubelleForm->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

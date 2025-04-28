@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email confirmé{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Email confirmé avec succès</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success" role="alert">
+                        <h5 class="alert-heading">Félicitations {{ user.prenom }} !</h5>
+                        <p>Votre adresse email a bien été confirmée.</p>
+                    </div>
+                    
+                    <h5>Prochaine étape : Vérification de votre résidence</h5>
+                    <p>Un administrateur de la ville de Valmont va maintenant vérifier votre statut de résident en examinant les informations que vous avez fournies.</p>
+                    
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Processus de vérification
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="text-success mr-3">
+                                    <i class="fas fa-check-circle"></i> <!-- Vous pouvez remplacer par une image si FontAwesome n'est pas disponible -->
+                                </div>
+                                <div>
+                                    <strong>Étape 1 :</strong> Création du compte et confirmation de l'email
+                                    <div class="text-muted small">Terminé</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="text-warning mr-3">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <strong>Étape 2 :</strong> Vérification de résidence par l'administration
+                                    <div class="text-muted small">En cours</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <div class="text-secondary mr-3">
+                                    <i class="fas fa-hourglass-start"></i>
+                                </div>
+                                <div>
+                                    <strong>Étape 3 :</strong> Activation complète du compte
+                                    <div class="text-muted small">En attente</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p>Vous recevrez un email dès que votre compte aura été vérifié et activé. Cela peut prendre jusqu'à 48 heures ouvrables.</p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{{ path('home') }}" class="btn btn-primary">Retour à l'accueil</a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Besoin d'aide ? Contactez-nous à <a href="mailto:support@valmont-city.com">support@valmont-city.com</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,275 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vérification de l'utilisateur{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+
+<style>
+    .user-verification-container {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .user-card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 25px;
+    }
+    
+    .user-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, #0066cc 0%, #004e99 100%);
+        color: white;
+        font-weight: 600;
+        border-radius: 8px 8px 0 0 !important;
+        padding: 15px 20px;
+    }
+    
+    .profile-image-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .user-info-item {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+    }
+    
+    .user-info-item:last-child {
+        border-bottom: none;
+    }
+    
+    .user-info-label {
+        font-weight: 600;
+        color: #495057;
+        min-width: 140px;
+    }
+    
+    .user-info-value {
+        color: #212529;
+    }
+    
+    .decision-form {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .decision-select {
+        height: 50px;
+        border: 2px solid #e9ecef;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+    
+    .decision-select:focus {
+        border-color: #0066cc;
+        box-shadow: none;
+    }
+    
+    .decision-textarea {
+        border: 2px solid #e9ecef;
+        border-radius: 6px;
+        resize: none;
+        min-height: 120px;
+    }
+    
+    .decision-textarea:focus {
+        border-color: #0066cc;
+        box-shadow: none;
+    }
+    
+    .btn-action {
+        padding: 10px 25px;
+        font-weight: 600;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+    }
+    
+    .btn-approve {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+    
+    .btn-approve:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+    
+    .btn-reject {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+    
+    .btn-reject:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    
+    .btn-back {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+    }
+    
+    .btn-back:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+    
+    .page-title {
+        font-weight: 700;
+        color: #0066cc;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .page-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: #0066cc;
+        border-radius: 2px;
+    }
+    
+    .verification-status {
+        font-size: 1.1rem;
+        font-weight: 600;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .status-pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    
+    /* Animation pour les boutons */
+    .btn-action {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-action:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+    }
+    
+    .btn-action:hover:after {
+        animation: ripple 1s;
+    }
+    
+    @keyframes ripple {
+        0% {
+            transform: scale(0, 0);
+            opacity: 0.5;
+        }
+        20% {
+            transform: scale(25, 25);
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 0;
+            transform: scale(40, 40);
+        }
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1>Vérification de l'utilisateur</h1>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Informations utilisateur
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Login:</strong> {{ user.login }}</p>
+                    <p><strong>Nom:</strong> {{ user.nom }}</p>
+                    <p><strong>Prénom:</strong> {{ user.prenom }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Date de naissance:</strong> {{ user.dateNaissance ? user.dateNaissance|date('d/m/Y') : 'Non spécifié' }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Date d'inscription:</strong> {{ user.dateInscription|date('d/m/Y H:i') }}</p>
+                    {% if user.photoUrl %}
+                        <p><strong>Photo:</strong> <img src="{{ asset('uploads/photos/' ~ user.photoUrl) }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 150px"></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            Vérification de résidence
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="decision" class="form-label">Décision:</label>
+                    <select name="decision" id="decision" class="form-control" required>
+                        <option value="">-- Sélectionner --</option>
+                        <option value="approve">Approuver - L'utilisateur est bien un résident de la ville</option>
+                        <option value="reject">Rejeter - L'utilisateur n'est pas un résident de la ville</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="message" class="form-label">Message (en cas de rejet):</label>
+                    <textarea name="message" id="message" class="form-control" rows="3"></textarea>
+                    <small class="form-text text-muted">Ce message sera envoyé à l'utilisateur en cas de rejet de sa demande.</small>
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                    <a href="{{ path('admin_users_pending') }}" class="btn btn-secondary">Retour à la liste</a>
+                    <button type="submit" class="btn btn-primary">Soumettre la décision</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

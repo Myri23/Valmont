@@ -17,11 +17,16 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\HistoriqueConnexion;  
 use App\Entity\HistoriqueConsultation;  // Ajoutez cet import ici
 use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 
 final class AdminController extends AbstractController
@@ -382,5 +387,80 @@ public function historiqueConsultations(Request $request, EntityManagerInterface
         'selectedType' => $typeElement
     ]);
 }
+
+    #[Route('/utilisateurs/en-attente', name: 'admin_users_pending')]
+    public function pendingUsers(UtilisateurRepository $userRepository): Response
+    {
+        $users = $userRepository->findBy(['statut_verification' => 'en_attente']);
+        
+        return $this->render('admin/pending_users.html.twig', [
+            'users' => $users,
+        ]);
+    }
+    
+    #[Route('/utilisateur/verifier/{id}', name: 'admin_verify_user')]
+    public function verifyUser(
+        Utilisateur $user, 
+        Request $request, 
+        EntityManagerInterface $em,
+        MailerInterface $mailer
+    ): Response {
+        // Afficher les détails pour vérification
+        if ($request->isMethod('GET')) {
+            return $this->render('admin/verify_user.html.twig', [
+                'user' => $user,
+            ]);
+        }
+        
+        // Traiter la décision
+        $decision = $request->request->get('decision');
+        $message = $request->request->get('message');
+        
+        if ($decision === 'approve') {
+            $user->setStatutVerification('approuve');
+            $user->setCompteValide(true);
+            $this->sendApprovalEmail($user, $mailer);
+            $this->addFlash('success', 'Utilisateur approuvé avec succès');
+        } else {
+            $user->setStatutVerification('rejete');
+            $user->setIsConfirmed(false);
+            $this->sendRejectionEmail($user, $message, $mailer);
+            $this->addFlash('warning', 'Utilisateur rejeté');
+        }
+        
+        $em->flush();
+        
+        return $this->redirectToRoute('admin_users_pending');
+    }
+    
+    private function sendApprovalEmail(Utilisateur $user, MailerInterface $mailer): void
+    {
+        $email = (new TemplatedEmail())
+            ->from('valmontcitynoreply@gmail.com')
+            ->to($user->getEmail())
+            ->subject('Votre compte Valmont a été approuvé')
+            ->htmlTemplate('admin/approval_email.html.twig')
+            ->context([
+                'user' => $user,
+            ]);
+        
+        $mailer->send($email);
+    }
+    
+    private function sendRejectionEmail(Utilisateur $user, string $message, MailerInterface $mailer): void
+    {
+        $email = (new TemplatedEmail())
+            ->from('valmontcitynoreply@gmail.com')
+            ->to($user->getEmail())
+            ->subject('Information concernant votre inscription à Valmont')
+            ->htmlTemplate('admin/rejection_email.html.twig')
+            ->context([
+                'user' => $user,
+                'message' => $message
+            ]);
+        
+        $mailer->send($email);
+    }
+
 
 }

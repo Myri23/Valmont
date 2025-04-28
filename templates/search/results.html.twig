@@ -20,7 +20,94 @@
             {% for val in filters %}
                 {{ val }}
             {% endfor %}
-            </p>
+
+            {% for val in filters %}
+
+                {% if val == 'evenements' %}
+                    {% if events is not empty %}
+                    <div class="results">
+                    
+                        {% for event in events %}
+                            <div class="card">
+                                <h3>{{ event.nom }}</h3>
+                                <p><strong>Type d'évenements:</strong> {{ event.type }}</p>
+                                <p><strong>Description :</strong> {{ event.description }}</p>
+                                <p><strong>Date :</strong> {{ event.date }}</p>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    {% else  %}
+                        <div class="card">
+                            <p>Pas de résultats de recherche avec le filtre : {{ val }}</p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if val == 'lieux' %}
+                    {% if lieux is not empty %}
+                        <div class="results">
+
+                            {% for lieu in lieux %}
+
+                                <div class="card">
+                                    <h3>{{ lieu.nom }}</h3>
+                                    <p><strong>Type de lieu:</strong> {{ lieu.type }}</p>
+                                    <p><strong>Description :</strong> {{ lieu.description }}</p>
+
+                                    {% if lieu.horaire is not empty %}
+                                        <p><strong>Horaire :</strong> {{ lieu.horaire }}</p>
+                                    {% else %}
+                                        <p><strong>Horaire : </strong>Pas d'horaire disponibles...</p>
+                                    {% endif %}
+
+                                    {% if lieu.acces is not empty %}
+                                        <p><strong>Accès :</strong> {{ lieu.acces }}</p>
+                                    {% else %}
+                                        <p><strong>Accès : </strong>Pas d'informations sur les accès disponibles...</p>
+                                    {% endif %}
+
+                                    {% if lieu.menu is not empty %}
+                                        <p><strong>Menu :</strong> {{ lieu.menu }}</p>
+                                    {% endif %}
+
+                                    {% if lieu.livre is not empty %}
+                                        <p><strong>Livres disponibles:</strong> {{ lieu.livre }}</p>
+                                    {% endif %}
+
+                                    {% if lieu.auteur is not empty %}
+                                        <p><strong>Auteurs :</strong> {{ lieu.auteur }}</p>
+                                    {% endif %}
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="card">
+                            <p>Pas de résultats de recherche avec le filtre : {{ val }}</p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if val == 'transports' %}
+                    {% if transports is not empty %}
+                        <div class="results">
+                            {% for transport in transports %}
+                                <div class="card">
+                                    <h3>{{ transport.type }}</h3>
+                                    <p><strong>Description :</strong> {{ transport.description }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else  %}
+                        <div class="card">
+                            <p>Pas de résultats de recherche avec le filtre : {{ val }}</p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+            {% endfor %}
+
         {% else %}
             <p>Aucun filtre selectionné</p>
 
@@ -93,7 +180,5 @@
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
-
-    <script src="{{ asset('search-panel.js') }}"></script>
 </body>
 {% endblock %}
