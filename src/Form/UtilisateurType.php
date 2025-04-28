@@ -48,16 +48,6 @@ class UtilisateurType extends AbstractType
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('code_ville', TextType::class, [
-                'label' => 'Code de vérification de résidence',
-                'help' => 'Code fourni par la municipalité à chaque résident',
-                'required' => true,
-            ])
-            ->add('adresse_ville', TextType::class, [
-                'label' => 'Adresse dans la ville',
-                'help' => 'Votre adresse physique dans la ville de Valmont',
-                'required' => true,
-            ])
         ;
     }
 

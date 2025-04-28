@@ -69,14 +69,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isConfirmed = false;
 
-    // Code de vérification fourni par la ville
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
-    private ?string $code_ville = null;
-
-    // Adresse physique dans la ville
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $adresse_ville = null;
-
     // Champ pour le statut de vérification
     #[ORM\Column(type: 'string', length: 20, options: ['default' => 'en_attente'])]
     private string $statut_verification = 'en_attente';
@@ -132,12 +124,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isCompteValide(): bool { return $this->compte_valide; }
     public function setCompteValide(bool $compte_valide): self { $this->compte_valide = $compte_valide; return $this; }
-
-    public function getCodeVille(): ?string { return $this->code_ville; }
-    public function setCodeVille(?string $code_ville): self { $this->code_ville = $code_ville; return $this; }
-
-    public function getAdresseVille(): ?string { return $this->adresse_ville; }
-    public function setAdresseVille(?string $adresse_ville): self { $this->adresse_ville = $adresse_ville; return $this; }
 
     public function getStatutVerification(): string { return $this->statut_verification; }
     public function setStatutVerification(string $statut_verification): self { $this->statut_verification = $statut_verification; return $this; }

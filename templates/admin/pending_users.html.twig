@@ -25,8 +25,6 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
-                <th>Code ville</th>
-                <th>Adresse</th>
                 <th>Date d'inscription</th>
                 <th>Actions</th>
             </tr>
@@ -39,8 +37,6 @@
                     <td>{{ user.nom }}</td>
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.codeVille }}</td>
-                    <td>{{ user.adresseVille }}</td>
                     <td>{{ user.dateInscription|date('d/m/Y H:i') }}</td>
                     <td>
                         <a href="{{ path('admin_verify_user', {'id': user.id}) }}" class="btn btn-primary">Vérifier</a>

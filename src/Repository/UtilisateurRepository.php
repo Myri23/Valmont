@@ -16,5 +16,14 @@ class UtilisateurRepository extends ServiceEntityRepository
         parent::__construct($registry, Utilisateur::class);
     }
 
-    // Tu peux ajouter des méthodes personnalisées ici plus tard
+
+    public function findByRole(string $role): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u.email, u.prenom, u.nom')
+            ->where('u.type_utilisateur = :type')
+            ->setParameter('type', 'administrateur');
+        
+        return $qb->getQuery()->getResult();
+    }
 }

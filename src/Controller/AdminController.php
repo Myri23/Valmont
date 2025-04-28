@@ -17,11 +17,16 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\HistoriqueConnexion;  
 use App\Entity\HistoriqueConsultation;  // Ajoutez cet import ici
 use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 final class AdminController extends AbstractController
 {
@@ -400,6 +405,7 @@ public function historiqueConsultations(Request $request, EntityManagerInterface
             $this->addFlash('success', 'Utilisateur approuvé avec succès');
         } else {
             $user->setStatutVerification('rejete');
+            $user->setIsConfirmed(false);
             $this->sendRejectionEmail($user, $message, $mailer);
             $this->addFlash('warning', 'Utilisateur rejeté');
         }
@@ -418,7 +424,6 @@ public function historiqueConsultations(Request $request, EntityManagerInterface
             ->htmlTemplate('admin/approval_email.html.twig')
             ->context([
                 'user' => $user,
-                'loginUrl' => $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL)
             ]);
         
         $mailer->send($email);
