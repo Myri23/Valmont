@@ -56,8 +56,7 @@ class ObjetConnecteType extends AbstractType
                 'attr' => ['class' => 'form-check-input']
             ])
         ;
-        
-        // Nous ne permettons pas la modification de idUnique car il est auto-incrémenté
+
     }
     public function configureOptions(OptionsResolver $resolver): void
     {

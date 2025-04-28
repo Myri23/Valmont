@@ -41,7 +41,7 @@
                         </button>
                     {% endif %}
 
-                    {% if app.request.pathinfo == '/visualisation' %}
+                    {% if app.request.pathinfo in ['/visualisation', '/searchObjects'] %}
                         <button id="btn-search-objects" class="btn btn-search">
                             <img src="{{ asset('images/search.svg') }}" alt="Recherche">
                         </button>
@@ -74,12 +74,12 @@
         </form>
 
         <form id="search-panel-objects" class="hidden" method="GET" action="{{ path('search_results-objects') }}">
-            <input type="text" name="q" placeholder="Rechercher...">
+            <input type="text" name="q-object" placeholder="Rechercher...">
 
             <!-- Filtres -->
-            <label><input type="checkbox" name="tab[]" value="maison"> Maison & Mobilité</label>
-            <label><input type="checkbox" name="tab[]" value="vie"> Vie quotidienne</label>
-            <label><input type="checkbox" name="tab[]" value="loisir"> Loisirs & Sécurité</label>
+            <label><input type="checkbox" name="tab-object[]" value="type"> Type </label>
+            <label><input type="checkbox" name="tab-object[]" value="marque"> Marque </label>
+            <label><input type="checkbox" name="tab-object[]" value="localisation"> Localisation </label>
 
             <button type="submit" class="btn-search">Rechercher</button>
         
@@ -90,7 +90,7 @@
 
         {% block body %}{% endblock %}
 
-        {% if app.request.pathinfo in ['/ville', '/lieux_interet', '/event', '/bus', '/metro', '/tram', '/search', '/visualisation'] %}
+        {% if app.request.pathinfo in ['/ville', '/lieux_interet', '/event', '/bus', '/metro', '/tram', '/search', '/visualisation', '/searchObjects'] %}
             <script src="{{ asset('search-panel.js') }}"></script>
         {% endif %}
     </body>

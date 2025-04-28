@@ -13,14 +13,18 @@ class ObjetConnecteRepository extends ServiceEntityRepository
         parent::__construct($registry, ObjetConnecte::class);
     }
 
-    public function searchTransport($searchTerm): array
+    public function searchObject($searchTerm): array
     {
         // Directement enlever les accents sans passer par une fonction
         $searchTerm = \transliterator_transliterate('Any-Latin; Latin-ASCII', $searchTerm);
 
+        dump($searchTerm);
+
         $query = $this->createQueryBuilder('o')
-            ->where('t.type LIKE :searchTerm')
-            ->orWhere('t.description LIKE :searchTerm')
+            ->where('o.nom LIKE :searchTerm')
+            ->orWhere('o.type LIKE :searchTerm')
+            ->orWhere('o.marque LIKE :searchTerm')
+            ->orWhere('o.localisation LIKE :searchTerm')
 
             ->setParameter('searchTerm', '%'.$searchTerm.'%')
             ->getQuery();
