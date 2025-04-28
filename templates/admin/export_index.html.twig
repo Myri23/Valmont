@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Export de rapports{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Export de rapports d'utilisation</h1>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Vue d'ensemble</h2>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="stats-card bg-light p-3 text-center">
+                        <h3>{{ stats.total_utilisateurs }}</h3>
+                        <p>Utilisateurs enregistrés</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="stats-card bg-light p-3 text-center">
+                        <h3>{{ stats.total_connexions }}</h3>
+                        <p>Connexions totales</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="stats-card bg-light p-3 text-center">
+                        <h3>{{ stats.total_consultations }}</h3>
+                        <p>Consultations totales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulaire d'exportation -->
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Exporter des données</h2>
+            <p class="mb-4">Générez des rapports détaillés sur l'utilisation de la plateforme et exportez-les au format CSV pour analyse.</p>
+            
+            <form action="{{ path('export_generer') }}" method="get">
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <label for="type" class="form-label">Type de rapport</label>
+                        <select name="type" id="type" class="form-control">
+                            <option value="connexions">Historique des connexions</option>
+                            <option value="consultations">Historique des consultations</option>
+                            <option value="utilisateurs">Liste des utilisateurs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label for="format" class="form-label">Format d'export</label>
+                        <select name="format" id="format" class="form-control">
+                            <option value="csv">CSV</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-export">Générer et télécharger le rapport</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="mt-4 text-center">
+        <a href="{{ path('admin') }}" class="btn-back">Retour au panneau d'administration</a>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+    }
+    
+    h1, h2 {
+        color: #354E52;
+    }
+    
+    .card {
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    
+    .card-body {
+        padding: 25px;
+    }
+    
+    .stats-card {
+        border-radius: 10px;
+        height: 100%;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stats-card h3 {
+        font-size: 2rem;
+        color: #354E52;
+        margin-bottom: 10px;
+    }
+    
+    .stats-card p {
+        color: #555;
+        margin: 0;
+    }
+    
+    /* Style pour le bouton d'export */
+    .btn-export {
+        background-color: #2F3D46;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    
+    .btn-export:hover {
+        background-color: #527970;
+    }
+    
+    .btn-back {
+        background-color: #84A98D;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s;
+        font-weight: bold;
+    }
+    
+    .btn-back:hover {
+        background-color: #52796F;
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* Formulaire */
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        color: #354E52;
+        font-weight: bold;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f9fa;
+        font-size: 1rem;
+    }
+    
+    .form-control:focus {
+        border-color: #84A98D;
+        outline: none;
+    }
+</style>
+{% endblock %}

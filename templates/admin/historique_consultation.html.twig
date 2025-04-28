@@ -3,60 +3,282 @@
 {% block title %}Historique des consultations{% endblock %}
 
 {% block body %}
-    <h1>Historique des consultations</h1>
+<div class="container">
+    <h1 class="consultation-title">Historique des consultations</h1>
     
-    <div class="mb-4">
-        <form method="get" class="form-inline">
-            <div class="form-group mr-2">
-                <label for="utilisateur">Filtrer par utilisateur :</label>
-                <select name="utilisateur" id="utilisateur" class="form-control ml-2">
-                    <option value="">Tous les utilisateurs</option>
-                    {% for user in utilisateurs %}
-                        <option value="{{ user.id }}" {% if selectedUser == user.id ~ '' %}selected{% endif %}>
-                            {{ user.login }} ({{ user.nom }} {{ user.prenom }})
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            
-            <div class="form-group mr-2">
-                <label for="type">Type d'élément :</label>
-                <select name="type" id="type" class="form-control ml-2">
-                    <option value="">Tous les types</option>
-                    <option value="Musée" {% if selectedType == 'Musée' %}selected{% endif %}>Musées</option>
-                    <option value="Parc" {% if selectedType == 'Parc' %}selected{% endif %}>Parcs</option>
-                    <option value="Restaurant" {% if selectedType == 'Restaurant' %}selected{% endif %}>Restaurants</option>
-                    <option value="Bibliothèque" {% if selectedType == 'Bibliothèque' %}selected{% endif %}>Bibliothèques</option>
-                </select>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Filtrer</button>
-            <a href="{{ path('admin_historique_consultation') }}" class="btn btn-secondary ml-2">Réinitialiser</a>
-        </form>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get">
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <label for="utilisateur">Filtrer par utilisateur :</label>
+                        <select name="utilisateur" id="utilisateur" class="filter-select">
+                            <option value="">Tous les utilisateurs</option>
+                            {% for user in utilisateurs %}
+                                <option value="{{ user.id }}" {% if selectedUser == user.id ~ '' %}selected{% endif %}>
+                                    {{ user.login }} ({{ user.nom }} {{ user.prenom }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="type">Type d'élément :</label>
+                        <select name="type" id="type" class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="Musée" {% if selectedType == 'Musée' %}selected{% endif %}>Musées</option>
+                            <option value="Parc" {% if selectedType == 'Parc' %}selected{% endif %}>Parcs</option>
+                            <option value="Restaurant" {% if selectedType == 'Restaurant' %}selected{% endif %}>Restaurants</option>
+                            <option value="Bibliothèque" {% if selectedType == 'Bibliothèque' %}selected{% endif %}>Bibliothèques</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-buttons">
+                        <button type="submit" class="btn-filter">Filtrer</button>
+                        <a href="{{ path('admin_historique_consultation') }}" class="btn-reset">Réinitialiser</a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Utilisateur</th>
-                <th>Type d'élément</th>
-                <th>Élément consulté</th>
-                <th>Date de consultation</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for consultation in consultations %}
-                <tr>
-                    <td>{{ consultation.utilisateur.login }}</td>
-                    <td>{{ consultation.typeElement }}</td>
-                    <td>{{ consultation.nomElement ?: 'ID: ' ~ consultation.elementId }}</td>
-                    <td>{{ consultation.dateConsultation|date('d/m/Y H:i') }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4" class="text-center">Aucune consultation enregistrée</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="consultation-table">
+                    <thead>
+                        <tr>
+                            <th>Utilisateur</th>
+                            <th>Type d'élément</th>
+                            <th>Élément consulté</th>
+                            <th>Date de consultation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for consultation in consultations %}
+                            <tr>
+                                <td><strong>{{ consultation.utilisateur.login }}</strong></td>
+                                <td>
+                                    {# Déterminer le type en fonction de l'élément consulté #}
+                                    {% set displayType = consultation.typeElement %}
+                                    {% set badgeClass = 'type-autre' %}
+                                    
+                                    {# Si c'est "Catégorie" et que c'est un parc, on change l'affichage #}
+                                    {% if displayType == 'Catégorie' and consultation.nomElement is not null and 'parcs' in consultation.nomElement %}
+                                        {% set displayType = 'Parc' %}
+                                        {% set badgeClass = 'type-parc' %}
+                                    {% elseif displayType == 'Musée' %}
+                                        {% set badgeClass = 'type-musee' %}
+                                    {% elseif displayType == 'Restaurant' %}
+                                        {% set badgeClass = 'type-restaurant' %}
+                                    {% elseif displayType == 'Bibliothèque' %}
+                                        {% set badgeClass = 'type-bibliotheque' %}
+                                    {% endif %}
+                                    
+                                    <span class="type-badge {{ badgeClass }}">
+                                        {{ displayType }}
+                                    </span>
+                                </td>
+                                <td>{{ consultation.nomElement ?: 'ID: ' ~ consultation.elementId }}</td>
+                                <td>{{ consultation.dateConsultation|date('d/m/Y H:i') }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">Aucune consultation enregistrée</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Conteneur principal */
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+    
+    /* Titre */
+    .consultation-title {
+        color: #354E52;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+    
+    /* Cartes */
+    .card {
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 40px;
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    
+    .card-body {
+        padding: 0;
+    }
+    
+    /* Formulaire de filtrage */
+    .filter-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .filter-group label {
+        margin-bottom: 8px;
+        color: #2F3D46;
+        font-weight: bold;
+    }
+    
+    .filter-select {
+        background-color: #CAD2C5;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        width: 100%;
+        transition: border-color 0.3s;
+    }
+    
+    .filter-select:focus {
+        border-color: #84A98D;
+        outline: none;
+    }
+    
+    .filter-buttons {
+        display: flex;
+        gap: 10px;
+        align-self: flex-end;
+        margin-top: 32px;
+    }
+    
+    /* Boutons */
+    .btn-filter, .btn-reset {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        min-width: 120px;
+    }
+    
+    .btn-filter {
+        background-color: #2F3D46;
+        border: none;
+    }
+    
+    .btn-reset {
+        background-color: #2F3D46;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-filter:hover, .btn-reset:hover {
+        background-color: #527970;
+        transform: translateY(-2px);
+    }
+    
+    /* Tableau */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    .consultation-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 0;
+    }
+    
+    .consultation-table th {
+        background-color: #354E52;
+        color: white;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: bold;
+        border: none;
+    }
+    
+    .consultation-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #E0E1DD;
+        vertical-align: middle;
+    }
+    
+    .consultation-table tr:hover {
+        background-color: #f5f5f5;
+    }
+    
+    .consultation-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* Badges pour les types */
+    .type-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+    
+    .type-musee {
+        background-color: #84A98D;
+    }
+    
+    .type-parc {
+        background-color: #52796F;
+    }
+    
+    .type-restaurant {
+        background-color: #6B9080;
+    }
+    
+    .type-bibliotheque {
+        background-color: #7D9D9C;
+    }
+    
+    .type-autre {
+        background-color: #354E52;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .filter-container {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .filter-buttons {
+            align-self: stretch;
+            margin-top: 15px;
+        }
+        
+        .btn-filter, .btn-reset {
+            flex: 1;
+        }
+    }
+</style>
 {% endblock %}
