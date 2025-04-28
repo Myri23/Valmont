@@ -23,6 +23,23 @@
                 {{ val }}
             {% endfor %}
 
+			{% if objets is not empty %}
+                <div class="results">
+                    {% for objet in objets %}
+                        <div class="card">
+                            <h3>{{ objet.nom }}</h3>
+                            <p><strong>Type :</strong> {{ objet.type }}</p>
+                            <p><strong>Marque :</strong> {{ objet.marque }}</p>
+							<p><strong>Localisation :</strong> {{ objet.localisation }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card">
+                    <h1>Aucun résultat trouvé...</h1>
+                </div>
+            {% endif %}
+
         {% else %}
             <p>Aucun filtre selectionné</p>
 
