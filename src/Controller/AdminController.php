@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 final class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
@@ -66,16 +67,33 @@ public function supprimer(Utilisateur $utilisateur, EntityManagerInterface $enti
 }
 
     
-    #[Route('/admin/historique', name: 'admin_historique_connexion')]
-    public function historiqueConnexions(EntityManagerInterface $entityManager): Response
-    {
-        // Utiliser le repository de l'entité HistoriqueConnexion
-        $connexions = $entityManager->getRepository(HistoriqueConnexion::class)->findAll();
+#[Route('/admin/historique', name: 'admin_historique_connexion')]
+public function historiqueConnexions(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        return $this->render('admin/historique_connexion.html.twig', [
-            'connexions' => $connexions,
-        ]);
+    // Récupérer tous les utilisateurs pour le filtrage
+    $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
+    
+    // Récupérer le filtre utilisateur
+    $userId = $request->query->get('utilisateur');
+    
+    // Construire les critères de recherche
+    $criteria = [];
+    if ($userId) {
+        $criteria['utilisateur'] = $userId;
     }
+    
+    // Récupérer les connexions avec tri par date (les plus récentes d'abord)
+    $connexions = $entityManager->getRepository(HistoriqueConnexion::class)
+        ->findBy($criteria, ['dateConnexion' => 'DESC']);
+
+    return $this->render('admin/historique_connexion.html.twig', [
+        'connexions' => $connexions,
+        'utilisateurs' => $utilisateurs,
+        'selectedUser' => $userId
+    ]);
+}
 
 #[Route('/admin/utilisateur/{id}/modifier', name: 'admin_utilisateur_modifier')]
 public function modifierNiveauExperience(
@@ -332,7 +350,7 @@ public function statistiques(EntityManagerInterface $entityManager): Response
         'total_connexions' => $totalConnexions,
     ]);
 }
-#[Route('/admin/historique_consultation', name: 'admin_historique_consultation')]
+#[Route('/admin/historique-consultation', name: 'admin_historique_consultation')]
 public function historiqueConsultations(Request $request, EntityManagerInterface $entityManager): Response
 {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');

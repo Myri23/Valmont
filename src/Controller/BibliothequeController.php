@@ -27,31 +27,14 @@ class BibliothequeController extends AbstractController
         $this->historiqueService = $historiqueService;
     }
 
-    #[Route('/bibliotheques', name: 'bibliotheques')]
-    public function index(): Response
-    {
-        return $this->render('information/bibliotheque.html.twig');
-    }
+#[Route('/bibliotheque', name: 'bibliotheques')]
+public function index(): Response
+{
+    // Enregistrer la consultation pour la page d'index des bibliothèques
+    $this->historiqueService->enregistrerConsultation('Bibliothèque', 4, 'Liste des bibliothèques');
     
-    // Ajoutez cette route pour correspondre au lien dans lieux_interet.html.twig
-    #[Route('/bibliotheque', name: 'bibliotheque')]
-    public function bibliothequeIndex(): Response
-    {
-        try {
-            // Enregistrer la consultation pour la page d'index des bibliothèques
-            $this->historiqueService->enregistrerConsultation('Catégorie', 4, 'Liste des bibliothèques');
-            
-            // Rediriger vers la route bibliotheques 
-            return $this->redirectToRoute('bibliotheques');
-        } catch (\Exception $e) {
-            // Log l'erreur pour le débogage
-            error_log("Erreur dans bibliotheque: " . $e->getMessage());
-            
-            // Retourner une réponse d'erreur avec plus de détails
-            return new Response(
-                'Une erreur s\'est produite: ' . $e->getMessage() . 
-                '<br><br>Trace: <pre>' . $e->getTraceAsString() . '</pre>'
-            );
-        }
-    }
+    return $this->render('information/bibliotheque.html.twig');
+}
+    
+
 }

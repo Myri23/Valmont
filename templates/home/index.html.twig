@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body>
+    <header class="hero-video">
+        <video autoplay muted loop playsinline class="video-background">
+            <source src="{{ asset('video/valmont.mp4') }}" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+        <div class="hero-content">
+            <h1>Bienvenue sur Valmont</h1>
+            <p>Explorez les informations locales et restez à jour sur votre ville connectée.</p>
+            <a href="{{ path('ville') }}" class="btn btn-header">Découvrir</a>
+        </div>
+    </header>
+
+
+    <script src="{{ asset('search-panel.js') }}"></script>
+</body>
+</html>
+{% endblock %}

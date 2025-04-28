@@ -8,15 +8,13 @@
     
     <h2 class="mb-3">Liste des utilisateurs</h2>
     
-    <a href="{{ path('admin_historique_connexion') }}" class="btn btn-info mb-3">Historique des connexions</a>
-    <a href="{{ path('admin_utilisateur_ajouter') }}" class="btn btn-primary mb-3">Ajouter un utilisateur</a>
-    <a href="{{ path('admin_appearance_edit') }}" class="btn btn-success mb-3">Personnaliser la plateforme</a>
-    <a href="{{ path('admin_statistiques') }}" class="btn btn-warning mb-3">Statistiques de connexion</a>
-    <a href="{{ path('admin_backups') }}" class="btn btn-secondary mb-3">Sauvegardes de la base de données</a>
-<a href="{{ path('admin_integrite_donnees') }}" class="btn btn-danger mb-3">Vérifier l'intégrité des données</a>
-        <a href="{{ path('admin_historique_consultation') }}" class="list-group-item list-group-item-action">
-            Voir l'historique des consultations
-        </a>
+<a href="{{ path('admin_historique_connexion') }}" class="btn btn-primary mb-3">Historique des connexions</a>
+<a href="{{ path('admin_utilisateur_ajouter') }}" class="btn btn-primary mb-3">Ajouter un utilisateur</a>
+<a href="{{ path('admin_appearance_edit') }}" class="btn btn-primary mb-3">Personnaliser la plateforme</a>
+<a href="{{ path('admin_statistiques') }}" class="btn btn-primary mb-3">Statistiques de connexion</a>
+<a href="{{ path('admin_backups') }}" class="btn btn-primary mb-3">Sauvegardes de la base de données</a>
+<a href="{{ path('admin_integrite_donnees') }}" class="btn btn-primary mb-3">Vérifier l'intégrité des données</a>
+<a href="{{ path('admin_historique_consultation') }}" class="btn btn-primary mb-3">Voir l'historique des consultations</a>
 
 
     <div class="table-responsive">
@@ -51,14 +49,14 @@
             	 	<td class="px-4">{{ utilisateur.pointsConsultation|number_format(2, ',', ' ') }}</td>
                         <td class="px-4">
     			<a href="{{ path('admin_utilisateur_supprimer', {'id': utilisateur.id}) }}" 
-       		            class="btn btn-sm btn-danger"
+       		            class="btn btn-primary mb-3"
                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
 			<td class="px-4">
     		     	    <a href="{{ path('admin_utilisateur_modifier', {'id': utilisateur.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
 			</td>
 			<td class="px-4">
                     <a href="{{ path('admin_utilisateur_modifier_profil', {'id': utilisateur.id}) }}" 
-                       class="btn btn-sm btn-success">Modifier profil</a>
+                       class="btn btn-primary mb-3">Modifier profil</a>
 			</td>
 
                     </tr>
