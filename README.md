@@ -49,6 +49,10 @@ Il a été réalisé dans le cadre d’un projet de développement web, avec une
     ```bash
     sudo apt install php-intl
     ```    
+5. Installer le transport mailer spécifique pour Gmail :
+    ```bash
+    composer require symfony/google-mailer
+    ```
 
 ### Étapes d'installation
 1. Clonez le dépôt Git :
