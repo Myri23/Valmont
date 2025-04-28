@@ -12,7 +12,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    {{ form_row(form.objet.idUnique, {'attr': {'readonly': true}}) }}
                     {{ form_row(form.objet.nom) }}
                     {{ form_row(form.objet.marque) }}
                 </div>
@@ -40,7 +39,6 @@
                 </div>
                 <div class="col-md-6">
                     {{ form_row(form.poubelle.typeDechets) }}
-                    {{ form_row(form.poubelle.derniereCollecte) }}
                     {{ form_row(form.poubelle.compacteur) }}
                 </div>
             </div>

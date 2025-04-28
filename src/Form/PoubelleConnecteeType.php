@@ -15,7 +15,6 @@ class PoubelleConnecteeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('objet')
             ->add('niveauRemplissage')
             ->add('capaciteTotale')
             ->add('typeDechets', ChoiceType::class, [

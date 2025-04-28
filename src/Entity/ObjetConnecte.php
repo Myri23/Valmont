@@ -11,16 +11,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\PoubelleConnectee;
 
 #[ORM\Entity(repositoryClass: ObjetConnecteRepository::class)]
+#[ORM\HasLifecycleCallbacks] 
 class ObjetConnecte
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column]
     private ?int $id = null;
     
-    #[ORM\Column(length: 255, unique: true)]
-    private ?string $idUnique = null;
+#[ORM\Column(length: 255, unique: true)]
+private ?string $idUnique = null;
     
+    #[ORM\PrePersist]
+public function generateIdUnique(): void
+{
+    if ($this->idUnique === null) {
+ 	$prefix = $this->type ? strtoupper(substr($this->type, 0, 3)) : 'OBJ';
+        $this->idUnique = $prefix . '-' . date('Ymd') . '-' . uniqid();
+    }
+}
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
@@ -44,13 +53,26 @@ class ObjetConnecte
 
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: PoubelleConnectee::class, cascade: ['persist', 'remove'])]
     private Collection $poubelleConnectee;
+    
+    #[ORM\Column(type: 'datetime', nullable: true)]
+private ?\DateTimeInterface $derniereInteraction = null;
 
     public function __construct()
     {
         $this->poubelleConnectee = new ArrayCollection();
     }
+    public function getDerniereInteraction(): ?\DateTimeInterface
+{
+    return $this->derniereInteraction;
+}
 
-    public function getIdUnique(): ?int
+public function setDerniereInteraction(?\DateTimeInterface $derniereInteraction): self
+{
+    $this->derniereInteraction = $derniereInteraction;
+    return $this;
+}
+
+    public function getIdUnique(): ?string
     {
         return $this->idUnique;
     }

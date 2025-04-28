@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Form;
 
 use App\Entity\ObjetConnecte;
@@ -17,9 +16,11 @@ class ObjetConnecteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            
             ->add('type', HiddenType::class, [
                 'data' => 'Poubelle',
             ])
+            
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
                 'attr' => ['class' => 'form-control']
@@ -58,7 +59,6 @@ class ObjetConnecteType extends AbstractType
         
         // Nous ne permettons pas la modification de idUnique car il est auto-incrémenté
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
