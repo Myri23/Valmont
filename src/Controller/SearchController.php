@@ -47,4 +47,20 @@ class SearchController extends AbstractController
             'events' => $events
         ]);
     }
+
+    #[Route('/search', name: 'search_results-objects')]
+    public function search_objects(Request $request): Response
+    {
+        $query = trim($request->query->get('q')); // Récupérer la recherche textuelle
+
+        // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
+        $tab = $request->query->all('tab');
+
+        // Appeler la méthode searchLieux du LieuRepository
+
+        return $this->render('search/results-objects.html.twig', [
+            'results' => $query,
+            'filters' => $tab,
+        ]);
+    }
 }
