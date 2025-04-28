@@ -819,3 +819,9 @@ form {
     border-radius: 5px;
   }
 
+  .logo-small {
+    width: 100px;  /* Ajustez la largeur selon vos besoins */
+    height: auto;  /* Maintient les proportions de l'image */
+  }
+
+
