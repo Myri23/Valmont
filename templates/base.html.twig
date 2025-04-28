@@ -41,6 +41,12 @@
                         </button>
                     {% endif %}
 
+                    {% if app.request.pathinfo == '/visualisation' %}
+                        <button id="btn-search-objects" class="btn btn-search">
+                            <img src="{{ asset('images/search.svg') }}" alt="Recherche">
+                        </button>
+                    {% endif %}
+
                     {% if app.user %}
                         <a href="{{ path('profil') }}" class="btn btn-auth">Mon profil</a>
                         <a href="{{ path('deconnexion') }}" class="btn btn-auth">Déconnexion</a>
@@ -67,6 +73,25 @@
             </button>
         </form>
 
+        <form id="search-panel-objects" class="hidden" method="GET" action="{{ path('search_results-objects') }}">
+            <input type="text" name="q" placeholder="Rechercher...">
+
+            <!-- Filtres -->
+            <label><input type="checkbox" name="tab[]" value="maison"> Maison & Mobilité</label>
+            <label><input type="checkbox" name="tab[]" value="vie"> Vie quotidienne</label>
+            <label><input type="checkbox" name="tab[]" value="loisir"> Loisirs & Sécurité</label>
+
+            <button type="submit" class="btn-search">Rechercher</button>
+        
+            <button type="button" id="btn-close-objects" class="btn btn-close">
+                <img src="{{ asset('images/close.svg') }}" alt="Fermerture">
+            </button>
+        </form>
+
         {% block body %}{% endblock %}
+
+        {% if app.request.pathinfo in ['/ville', '/lieux_interet', '/event', '/bus', '/metro', '/tram', '/search', '/visualisation'] %}
+            <script src="{{ asset('search-panel.js') }}"></script>
+        {% endif %}
     </body>
 </html>
