@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use App\Entity\PoubelleConnectee;
+use App\Entity\ParkingIntelligent;
 
 #[ORM\Entity(repositoryClass: ObjetConnecteRepository::class)]
 #[ORM\HasLifecycleCallbacks] 
@@ -19,17 +20,18 @@ class ObjetConnecte
     #[ORM\Column]
     private ?int $id = null;
     
-#[ORM\Column(length: 255, unique: true)]
-private ?string $idUnique = null;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $idUnique = null;
     
     #[ORM\PrePersist]
-public function generateIdUnique(): void
-{
-    if ($this->idUnique === null) {
- 	$prefix = $this->type ? strtoupper(substr($this->type, 0, 3)) : 'OBJ';
-        $this->idUnique = $prefix . '-' . date('Ymd') . '-' . uniqid();
+    public function generateIdUnique(): void
+    {
+        if ($this->idUnique === null) {
+            $prefix = $this->type ? strtoupper(substr($this->type, 0, 3)) : 'OBJ';
+            $this->idUnique = $prefix . '-' . date('Ymd') . '-' . uniqid();
+        }
     }
-}
+    
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
@@ -54,23 +56,28 @@ public function generateIdUnique(): void
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: PoubelleConnectee::class, cascade: ['persist', 'remove'])]
     private Collection $poubelleConnectee;
     
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: ParkingIntelligent::class, cascade: ['persist', 'remove'])]
+    private Collection $parkingIntelligent;
+    
     #[ORM\Column(type: 'datetime', nullable: true)]
-private ?\DateTimeInterface $derniereInteraction = null;
+    private ?\DateTimeInterface $derniereInteraction = null;
 
     public function __construct()
     {
         $this->poubelleConnectee = new ArrayCollection();
+        $this->parkingIntelligent = new ArrayCollection();
     }
+    
     public function getDerniereInteraction(): ?\DateTimeInterface
-{
-    return $this->derniereInteraction;
-}
+    {
+        return $this->derniereInteraction;
+    }
 
-public function setDerniereInteraction(?\DateTimeInterface $derniereInteraction): self
-{
-    $this->derniereInteraction = $derniereInteraction;
-    return $this;
-}
+    public function setDerniereInteraction(?\DateTimeInterface $derniereInteraction): self
+    {
+        $this->derniereInteraction = $derniereInteraction;
+        return $this;
+    }
 
     public function getIdUnique(): ?string
     {
@@ -180,7 +187,37 @@ public function setDerniereInteraction(?\DateTimeInterface $derniereInteraction)
                 $poubelleConnectee->setObjet(null);
             }
         }
+        
+        return $this;
+    }
     
+    /**
+     * @return Collection<int, ParkingIntelligent>
+     */
+    public function getParkingIntelligent(): Collection
+    {
+        return $this->parkingIntelligent;
+    }
+    
+    public function addParkingIntelligent(ParkingIntelligent $parkingIntelligent): self
+    {
+        if (!$this->parkingIntelligent->contains($parkingIntelligent)) {
+            $this->parkingIntelligent->add($parkingIntelligent);
+            $parkingIntelligent->setObjet($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeParkingIntelligent(ParkingIntelligent $parkingIntelligent): self
+    {
+        if ($this->parkingIntelligent->removeElement($parkingIntelligent)) {
+            // set the owning side to null (unless already changed)
+            if ($parkingIntelligent->getObjet() === $this) {
+                $parkingIntelligent->setObjet(null);
+            }
+        }
+        
         return $this;
     }
 }
