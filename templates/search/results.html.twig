@@ -15,7 +15,10 @@
     <section class="container">
         <h2>Résultats de la recherche : </h2>
 
-        {% if filters is not empty %}
+        {% if results is empty %}
+			<p>Aucune recherche effectué</p>
+            
+        {% elseif filters is not empty %}
             <p>Filtre(s) selectionné(s) :
             {% for val in filters %}
                 {{ val }}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\LieuRepository;
 use App\Repository\TransportRepository;
 use App\Repository\EventRepository;
+use App\Repository\ObjetConnecteRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,11 +18,12 @@ class SearchController extends AbstractController
     private $eventRepository;
 
     // Injecter le LieuRepository et TransportRepository dans le constructeur
-    public function __construct(LieuRepository $lieuRepository, TransportRepository $transportRepository, EventRepository $eventRepository)
+    public function __construct(LieuRepository $lieuRepository, TransportRepository $transportRepository, EventRepository $eventRepository, ObjetConnecteRepository $objetRepository)
     {
         $this->lieuRepository = $lieuRepository;
         $this->transportRepository = $transportRepository;
         $this->eventRepository = $eventRepository;
+        $this->objetRepository = $objetRepository;
     }
 
     #[Route('/search', name: 'search_results')]
@@ -48,19 +50,23 @@ class SearchController extends AbstractController
         ]);
     }
 
-    #[Route('/search', name: 'search_results-objects')]
+    #[Route('/searchObjects', name: 'search_results-objects')]
     public function search_objects(Request $request): Response
     {
-        $query = trim($request->query->get('q')); // Récupérer la recherche textuelle
+        $queryObjects = trim($request->query->get('q-object')); // Récupérer la recherche textuelle
 
         // Récupérer les filtres (tableau vide si aucun filtre sélectionné)
-        $tab = $request->query->all('tab');
+        $tabObjects = $request->query->all('tab-object');
 
-        // Appeler la méthode searchLieux du LieuRepository
+        dump($queryObjects);
+
+        // Appeler la méthode searchObject du LieuRepository
+        $objects = $this->objetRepository->searchObject($queryObjects);
 
         return $this->render('search/results-objects.html.twig', [
-            'results' => $query,
-            'filters' => $tab,
+            'results' => $queryObjects,
+            'filters' => $tabObjects,
+            'objets' => $objects
         ]);
     }
 }
