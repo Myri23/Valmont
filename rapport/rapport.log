@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.16)  29 APR 2025 23:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.16)  30 APR 2025 00:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -298,7 +298,7 @@ l.33 	\newpage
 <images/logoCY.png, id=106, 310.15875pt x 163.61125pt>
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 56.
+Package pdftex.def Info: images/logoCY.png  used on input line 53.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -311,7 +311,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [2{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/logoCY.png>]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 71.
+Package pdftex.def Info: images/logoCY.png  used on input line 73.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -322,18 +322,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-22.36798pt}.
 
 [3]
-Overfull \hbox (5.80942pt too wide) in paragraph at lines 72--73
+Overfull \hbox (5.80942pt too wide) in paragraph at lines 74--75
 []\OT1/cmr/bx/n/12 3. L'importance de l'innovation dans le do-maine de l'urbanisme
  []
 
 
-Overfull \hbox (25.64986pt too wide) in paragraph at lines 72--73
+Overfull \hbox (25.64986pt too wide) in paragraph at lines 74--75
 \OT1/cmr/m/n/12 Le th^^Reme choisi s'inscrit ^^Segalement dans une ten-dance plus large d'innovation
  []
 
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 84.
+Package pdftex.def Info: images/logoCY.png  used on input line 85.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -345,7 +345,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 86.
+Package pdftex.def Info: images/logoCY.png  used on input line 88.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -358,7 +358,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 95.
+Package pdftex.def Info: images/logoCY.png  used on input line 97.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -371,7 +371,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [6]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 119.
+Package pdftex.def Info: images/logoCY.png  used on input line 121.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -382,13 +382,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-22.36798pt}.
 
 [7]
-Overfull \hbox (0.32234pt too wide) in paragraph at lines 127--128
+Overfull \hbox (0.32234pt too wide) in paragraph at lines 129--130
 []\OT1/cmr/m/n/12 Des tests d'utilisation ont ^^Segalement ^^Set^^Se r^^Sealis^^Ses pour iden-ti-fier d'^^Seventuels
  []
 
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 148.
+Package pdftex.def Info: images/logoCY.png  used on input line 150.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -400,7 +400,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [8]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 160.
+Package pdftex.def Info: images/logoCY.png  used on input line 162.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -411,18 +411,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-22.36798pt}.
 
 [9]
-Overfull \hbox (14.52219pt too wide) in paragraph at lines 179--180
+Overfull \hbox (14.52219pt too wide) in paragraph at lines 181--182
 \OT1/cmr/m/n/12 no-tam-ment au niveau de la ges-tion des acc^^Res et des donn^^Sees, on s'assurerait
  []
 
 
-Overfull \hbox (1.9927pt too wide) in paragraph at lines 181--182
+Overfull \hbox (1.9927pt too wide) in paragraph at lines 183--184
 []\OT1/cmr/bx/n/12 Rendre l'interface en-core plus in-tu-itive \OT1/cmr/m/n/12 : Tra-vailler sur l'apparence
  []
 
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 187.
+Package pdftex.def Info: images/logoCY.png  used on input line 189.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -434,7 +434,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [10]
 File: images/logoCY.png Graphic file (type png)
 <use images/logoCY.png>
-Package pdftex.def Info: images/logoCY.png  used on input line 189.
+Package pdftex.def Info: images/logoCY.png  used on input line 191.
 (pdftex.def)             Requested size: 56.9055pt x 30.01794pt.
 
 
@@ -461,7 +461,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,15n,79p,841b,517s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on rapport.pdf (12 pages, 99424 bytes).
+Output written on rapport.pdf (12 pages, 99530 bytes).
 PDF statistics:
  186 PDF objects out of 1000 (max. 8388607)
  158 compressed objects within 2 object streams
