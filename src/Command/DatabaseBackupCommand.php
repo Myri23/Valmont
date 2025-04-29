@@ -57,10 +57,11 @@ protected function execute(InputInterface $input, OutputInterface $output): int
     try {
         // Se connecter avec timeout augmenté
         $dsn = sprintf(
-            '%s:host=%s;dbname=%s;connect_timeout=60',
+            '%s:host=%s;dbname=%s;port=%s;connect_timeout=60',
             $dbParams['driver'],
             $dbParams['host'],
-            $dbParams['dbname']
+            $dbParams['dbname'],
+            $dbParams['port']
         );
         
         $io->text("Connexion à la base de données...");
@@ -85,7 +86,14 @@ protected function execute(InputInterface $input, OutputInterface $output): int
         
         // Ouvrir le fichier
         $io->text("Création du fichier de sauvegarde...");
+
+        // Ajout sécurité
         $file = fopen($backupPath, 'w');
+        if ($file === false) {
+            $io->error('Impossible de créer le fichier de sauvegarde.');
+            return Command::FAILURE;
+        }
+
         
         // En-tête
         fwrite($file, "-- Sauvegarde de {$dbParams['dbname']}\n");
