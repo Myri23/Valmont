@@ -1,15 +1,19 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Historique des consultations{% endblock %}
 
 {% block body %}
 <div class="container">
+    {# Titre principal #}
     <h1 class="consultation-title">Historique des consultations</h1>
     
+    {# Formulaire de filtrage par utilisateur et par type d'élément #}    
     <div class="card mb-4">
         <div class="card-body">
             <form method="get">
                 <div class="filter-container">
+                    {# Filtre utilisateur #}                
                     <div class="filter-group">
                         <label for="utilisateur">Filtrer par utilisateur :</label>
                         <select name="utilisateur" id="utilisateur" class="filter-select">
@@ -21,7 +25,8 @@
                             {% endfor %}
                         </select>
                     </div>
-                    
+                   
+                    {# Filtre type d'élément (Musée, Parc, Restaurant, Bibliothèque) #}                   
                     <div class="filter-group">
                         <label for="type">Type d'élément :</label>
                         <select name="type" id="type" class="filter-select">
@@ -33,6 +38,7 @@
                         </select>
                     </div>
                     
+                    {# Boutons de filtrage #}                    
                     <div class="filter-buttons">
                         <button type="submit" class="btn-filter">Filtrer</button>
                         <a href="{{ path('admin_historique_consultation') }}" class="btn-reset">Réinitialiser</a>
@@ -42,6 +48,7 @@
         </div>
     </div>
 
+    {# Tableau listant les consultations enregistrées #}
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -59,11 +66,10 @@
                             <tr>
                                 <td><strong>{{ consultation.utilisateur.login }}</strong></td>
                                 <td>
-                                    {# Déterminer le type en fonction de l'élément consulté #}
+                                    {# Détermination dynamique du type affiché #}
                                     {% set displayType = consultation.typeElement %}
                                     {% set badgeClass = 'type-autre' %}
                                     
-                                    {# Si c'est "Catégorie" et que c'est un parc, on change l'affichage #}
                                     {% if displayType == 'Catégorie' and consultation.nomElement is not null and 'parcs' in consultation.nomElement %}
                                         {% set displayType = 'Parc' %}
                                         {% set badgeClass = 'type-parc' %}
@@ -79,10 +85,13 @@
                                         {{ displayType }}
                                     </span>
                                 </td>
+                                
+                                {# Affichage du nom de l'élément consulté, sinon l'ID #}                                
                                 <td>{{ consultation.nomElement ?: 'ID: ' ~ consultation.elementId }}</td>
                                 <td>{{ consultation.dateConsultation|date('d/m/Y H:i') }}</td>
                             </tr>
                         {% else %}
+                        {# Message si aucune consultation trouvée #}
                             <tr>
                                 <td colspan="4" class="text-center">Aucune consultation enregistrée</td>
                             </tr>
@@ -94,6 +103,7 @@
     </div>
 </div>
 
+{# Styles CSS spécifiques à la page #}
 <style>
     /* Conteneur principal */
     .container {

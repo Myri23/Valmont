@@ -1,9 +1,12 @@
+{# On étend le template de base pour garder la structure globale du site#}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Vérification de l'utilisateur{% endblock %}
 {% block stylesheets %}
 {{ parent() }}
 
+{# Style intégré pour l'email de notification d'une nouvelle inscription #}    
 <style>
     .user-verification-container {
         background-color: #f8f9fa;
@@ -218,6 +221,7 @@
 {% endblock %}
 {% block body %}
 <div class="container mt-4">
+    {# Titre principal #}
     <h1>Vérification de l'utilisateur</h1>
     
     <div class="card mb-4">
@@ -226,6 +230,8 @@
         </div>
         <div class="card-body">
             <div class="row">
+            
+                {# Partie gauche : login, nom, prénom, email, date de naissance #}            
                 <div class="col-md-6">
                     <p><strong>Login:</strong> {{ user.login }}</p>
                     <p><strong>Nom:</strong> {{ user.nom }}</p>
@@ -233,6 +239,8 @@
                     <p><strong>Email:</strong> {{ user.email }}</p>
                     <p><strong>Date de naissance:</strong> {{ user.dateNaissance ? user.dateNaissance|date('d/m/Y') : 'Non spécifié' }}</p>
                 </div>
+                
+                {# Partie droite : date d'inscription, et éventuellement la photo de profil #}                
                 <div class="col-md-6">
                     <p><strong>Date d'inscription:</strong> {{ user.dateInscription|date('d/m/Y H:i') }}</p>
                     {% if user.photoUrl %}
@@ -244,11 +252,13 @@
     </div>
     
     <div class="card mb-4">
+    {# Formulaire pour prendre une décision : approuver ou rejeter #}    
         <div class="card-header">
             Vérification de résidence
         </div>
         <div class="card-body">
             <form method="post">
+                {# Sélection de la décision #}            
                 <div class="form-group mb-3">
                     <label for="decision" class="form-label">Décision:</label>
                     <select name="decision" id="decision" class="form-control" required>
@@ -258,12 +268,13 @@
                     </select>
                 </div>
                 
+                {# Message facultatif en cas de rejet #}                
                 <div class="form-group mb-3">
                     <label for="message" class="form-label">Message (en cas de rejet):</label>
                     <textarea name="message" id="message" class="form-control" rows="3"></textarea>
                     <small class="form-text text-muted">Ce message sera envoyé à l'utilisateur en cas de rejet de sa demande.</small>
                 </div>
-                
+                {# Boutons pour retourner à la liste ou soumettre la décision #}                
                 <div class="d-flex justify-content-between">
                     <a href="{{ path('admin_users_pending') }}" class="btn btn-secondary">Retour à la liste</a>
                     <button type="submit" class="btn btn-primary">Soumettre la décision</button>

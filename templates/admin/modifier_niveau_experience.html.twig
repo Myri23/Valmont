@@ -1,17 +1,25 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
+
 
 {% block title %}Modifier l'utilisateur{% endblock %}
 
+
 {% block body %}
 <div class="container mt-4">
+    {# Titre de la page #}
     <h1 class="mb-4">Modifier l'utilisateur</h1>
     
+    {# Carte contenant le formulaire de modification #}
     <div class="card">
         <div class="card-header">
+            {# Affiche le login de l'utilisateur modifié #}
             Informations de l'utilisateur: {{ utilisateur.login }}
         </div>
         <div class="card-body">
             <form method="post">
+                
+                {# Sélection du niveau d'expérience #}
                 <div class="form-group mb-3">
                     <label for="niveau_experience">Niveau d'expérience</label>
                     <select class="form-control" id="niveau_experience" name="niveau_experience">
@@ -22,21 +30,25 @@
                     </select>
                 </div>
                 
+                {# Saisie des points de connexion #}
                 <div class="form-group mb-3">
                     <label for="points_connexion">Points de connexion</label>
                     <input type="number" step="0.01" class="form-control" id="points_connexion" name="points_connexion" value="{{ utilisateur.pointsConnexion }}">
                 </div>
                 
+                {# Saisie des points de consultation #}
                 <div class="form-group mb-3">
                     <label for="points_consultation">Points de consultation</label>
                     <input type="number" step="0.01" class="form-control" id="points_consultation" name="points_consultation" value="{{ utilisateur.pointsConsultation }}">
                 </div>
                 
+                {# Affichage du total des points #}
                 <div class="form-group mb-3">
                     <label>Total des points</label>
                     <input type="text" class="form-control" readonly value="{{ (utilisateur.pointsConnexion + utilisateur.pointsConsultation)|number_format(2, ',', ' ') }}">
                 </div>
                 
+                {# Boutons pour soumettre ou revenir au tableau d'administration #}
                 <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
                 <a href="{{ path('admin') }}" class="btn btn-secondary">Retour</a>
             </form>
@@ -44,8 +56,8 @@
     </div>
 </div>
 
+{# Script JS pour mettre à jour le total des points en temps réel #}
 <script>
-    // Script pour calculer le total des points en temps réel
     document.addEventListener('DOMContentLoaded', function() {
         const pointsConnexion = document.getElementById('points_connexion');
         const pointsConsultation = document.getElementById('points_consultation');

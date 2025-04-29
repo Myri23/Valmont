@@ -1,27 +1,35 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Export de rapports{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
+    {# Titre principal de la page #}
     <h1 class="mb-4">Export de rapports d'utilisation</h1>
-    
+
+    {# Carte affichant les statistiques globales #}
     <div class="card mb-4">
         <div class="card-body">
             <h2 class="card-title mb-4">Vue d'ensemble</h2>
             <div class="row">
+                {# Statistique : Nombre d'utilisateurs enregistrés #}            
                 <div class="col-md-4 mb-3">
                     <div class="stats-card bg-light p-3 text-center">
                         <h3>{{ stats.total_utilisateurs }}</h3>
                         <p>Utilisateurs enregistrés</p>
                     </div>
                 </div>
+                
+                {# Statistique : Nombre total de connexions #}                
                 <div class="col-md-4 mb-3">
                     <div class="stats-card bg-light p-3 text-center">
                         <h3>{{ stats.total_connexions }}</h3>
                         <p>Connexions totales</p>
                     </div>
                 </div>
+                
+                {# Statistique : Nombre total de consultations #}                
                 <div class="col-md-4 mb-3">
                     <div class="stats-card bg-light p-3 text-center">
                         <h3>{{ stats.total_consultations }}</h3>
@@ -32,8 +40,9 @@
         </div>
     </div>
     
-    <!-- Formulaire d'exportation -->
+    {# Formulaire permettant d'exporter les données en CSV #}
     <div class="card">
+        {# Sélection du type de rapport à exporter #}    
         <div class="card-body">
             <h2 class="card-title mb-4">Exporter des données</h2>
             <p class="mb-4">Générez des rapports détaillés sur l'utilisation de la plateforme et exportez-les au format CSV pour analyse.</p>
@@ -48,7 +57,8 @@
                             <option value="utilisateurs">Liste des utilisateurs</option>
                         </select>
                     </div>
-                    
+
+                    {# Sélection du format de fichier (uniquement CSV disponible) #}
                     <div class="col-md-6 mb-3">
                         <label for="format" class="form-label">Format d'export</label>
                         <select name="format" id="format" class="form-control">
@@ -56,17 +66,20 @@
                         </select>
                     </div>
                 </div>
-                
+
+                {# Bouton pour soumettre le formulaire d'exportation #}
                 <button type="submit" class="btn-export">Générer et télécharger le rapport</button>
             </form>
         </div>
     </div>
-    
+
+    {# Bouton pour revenir au panneau d'administration #}    
     <div class="mt-4 text-center">
         <a href="{{ path('admin') }}" class="btn-back">Retour au panneau d'administration</a>
     </div>
 </div>
 
+{# Styles CSS spécifiques à cette page #}
 <style>
     .container {
         max-width: 1000px;

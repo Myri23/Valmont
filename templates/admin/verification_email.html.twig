@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Nouvelle inscription à vérifier</title>
+    {# Style intégré pour l'email de notification d'une nouvelle inscription #}    
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -18,11 +19,14 @@
         <div class="header">
             <h1>Nouvelle inscription à vérifier</h1>
         </div>
+        
+        {# Contenu du mail #}        
         <div class="content">
             <p>Bonjour Administrateur,</p>
             
             <p>Une nouvelle personne s'est inscrite sur la plateforme Valmont et attend la vérification de sa résidence.</p>
             
+            {# Détail de l'utilisateur inscrit #}            
             <div class="info-box">
                 <p><strong>Utilisateur:</strong> {{ user.nom }} {{ user.prenom }}</p>
                 <p><strong>Email:</strong> {{ user.email }}</p>
@@ -31,7 +35,7 @@
             </div>
             
             <p>Veuillez vérifier que cette personne est bien un résident de la ville de Valmont avant de valider son inscription.</p>
-            
+            {# Bouton pour rediriger l'admin directement vers la vérification #}            
             <p style="text-align: center; margin-top: 25px;">
                 <a href="{{ verificationUrl }}" class="button">Procéder à la vérification</a>
             </p>

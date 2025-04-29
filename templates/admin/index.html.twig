@@ -1,13 +1,17 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Administration - Utilisateurs{% endblock %}
 
 {% block body %}
-<div class="container-fluid mt-4">  <!-- Changé container en container-fluid pour plus d'espace -->
+<div class="container-fluid mt-4">  
+    {# Titre principal de la page #}
     <h1 class="mb-4 text-center">Panneau d'administration</h1>
-    
+
+    {# Sous-titre pour la liste des utilisateurs #}
     <h2 class="mb-3 text-center">Liste des utilisateurs</h2>
-    
+
+    {# Liens vers les différentes sections de l'administration #}
     <div class="text-center mb-4">
         <a href="{{ path('admin_historique_connexion') }}" class="btn btn-primary btn-sm m-1">Historique des connexions</a>
         <a href="{{ path('admin_utilisateur_ajouter') }}" class="btn btn-primary btn-sm m-1">Ajouter un utilisateur</a>
@@ -16,25 +20,26 @@
         <a href="{{ path('admin_backups') }}" class="btn btn-primary btn-sm m-1">Sauvegardes de la base de données</a>
         <a href="{{ path('admin_integrite_donnees') }}" class="btn btn-primary btn-sm m-1">Vérifier l'intégrité des données</a>
         <a href="{{ path('admin_historique_consultation') }}" class="btn btn-primary btn-sm m-1">Voir l'historique des consultations</a>
-        <a href="{{ path('export_index') }}" class="btn btn-primary btn-sm m-1 btn-report">Exporter des rapports</a>
+ <a href="{{ path('export_index') }}" class="btn btn-primary btn-sm m-1">Exporter des rapports</a>
     </div>
 
-    <div class="table-responsive">  <!-- Supprimé max-width pour utiliser tout l'espace disponible -->
-        <table class="table table-striped table-hover table-sm">  <!-- Ajouté table-sm pour réduire l'espacement -->
+    {# Tableau responsive des utilisateurs #}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>  <!-- Supprimé px-4 pour réduire l'espace -->
+                    <th>ID</th>
                     <th>Login</th>
                     <th>Email</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>Type</th>  <!-- Raccourci pour gagner de l'espace -->
-                    <th>Niveau</th>  <!-- Raccourci pour gagner de l'espace -->
-                    <th>Points consultation</th>  <!-- Raccourci pour gagner de l'espace -->
-                    <th>Points connexion</th>  <!-- Raccourci pour gagner de l'espace -->
+                    <th>Type</th>  
+                    <th>Niveau</th> 
+                    <th>Points consultation</th>  
+                    <th>Points connexion</th>
                     <th>Supprimer</th>
-                    <th>Modifier point</th>  <!-- Raccourci pour gagner de l'espace -->
-                    <th>Modifier Profil</th>  <!-- Raccourci pour gagner de l'espace -->
+                    <th>Modifier point</th>
+                    <th>Modifier Profil</th> 
                 </tr>
             </thead>
             <tbody>
@@ -47,22 +52,31 @@
                         <td>{{ utilisateur.prenom }}</td>
                         <td>{{ utilisateur.typeUtilisateur }}</td>
                         <td>{{ utilisateur.niveauExperience }}</td>
+                        
+                        {# Affichage des points avec deux décimales #}                        
                         <td>{{ utilisateur.pointsConnexion|number_format(2, ',', ' ') }}</td>
                         <td>{{ utilisateur.pointsConsultation|number_format(2, ',', ' ') }}</td>
+                        
+                        {# Bouton pour supprimer l'utilisateur avec confirmation #}                        
                         <td>
                             <a href="{{ path('admin_utilisateur_supprimer', {'id': utilisateur.id}) }}" 
                                class="btn btn-primary btn-sm"
                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
                         </td>
+                        
+                        {# Bouton pour modifier les points de l'utilisateur #}                        
                         <td>
                             <a href="{{ path('admin_utilisateur_modifier', {'id': utilisateur.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
                         </td>
+                        
+                        {# Bouton pour modifier le profil complet de l'utilisateur #}                        
                         <td>
                             <a href="{{ path('admin_utilisateur_modifier_profil', {'id': utilisateur.id}) }}" 
                                class="btn btn-primary btn-sm">Profil</a>
                         </td>
                     </tr>
                 {% else %}
+                    {# Message affiché si aucun utilisateur n'est trouvé #}                
                     <tr>
                         <td colspan="12" class="text-center">Aucun utilisateur trouvé</td>
                     </tr>
@@ -72,8 +86,9 @@
     </div>
 </div>
 
+{# Styles personnalisés pour le tableau et les boutons #}
 <style>
-    /* Styles personnalisés pour réduire la taille du tableau */
+
     .table-sm th, .table-sm td {
         padding: 1.3rem;
         font-size: 1rem;
@@ -83,27 +98,17 @@
         background-color: rgba(0, 0, 0, 0.075);
     }
     
-    /* Style pour les boutons plus petits */
+
     .btn-sm {
         padding: 0.9rem 0.4rem;
         font-size: 0.75rem;
     }
     
-    /* Assurer que les boutons ne soient pas trop larges */
+
     td .btn {
         width: auto;
         white-space: nowrap;
     }
     
-    /* Style pour mettre en évidence le bouton de rapport */
-    .btn-report {
-        background-color: #2F3D46;
-        border-color: #2F3D46;
-    }
-    
-    .btn-report:hover {
-        background-color: #527970;
-        border-color: #527970;
-    }
-</style>
+
 {% endblock %}
