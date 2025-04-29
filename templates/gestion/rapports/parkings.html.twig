@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titre }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+        h1 { color: #354E52; text-align: center; margin-bottom: 5px; }
+        .date { text-align: center; color: #666; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background-color: #52796F; color: white; font-weight: bold; text-align: left; padding: 8px; border: 1px solid #ddd; }
+        td { padding: 8px; border: 1px solid #ddd; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .footer { text-align: center; font-size: 12px; color: #666; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>{{ titre }}</h1>
+    <p class="date">Généré le {{ date|date('d/m/Y à H:i') }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Localisation</th>
+                <th>Localisation précise</th>
+                <th>Places totales</th>
+                <th>Places disponibles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parking in parkings %}
+                <tr>
+                    <td>{{ parking.objet.idUnique }}</td>
+                    <td>{{ parking.objet.nom }}</td>
+                    <td>{{ parking.objet.localisation }}</td>
+                    <td>{{ parking.localisationPrecise }}</td>
+                    <td>{{ parking.placesTotales }}</td>
+                    <td>{{ parking.placesDisponibles }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>Ville intelligente - Rapport des parkings intelligents</p>
+        <p>Ce document a été généré automatiquement.</p>
+    </div>
+</body>
+</html>
+

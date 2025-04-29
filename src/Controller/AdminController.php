@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\HistoriqueConnexion;  
 use App\Entity\HistoriqueConsultation;  // Ajoutez cet import ici
 use App\Entity\Utilisateur;
-use App\Entity\ObjetConnecte;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -463,27 +462,5 @@ public function historiqueConsultations(Request $request, EntityManagerInterface
         $mailer->send($email);
     }
 
-    #[Route('/utilisateurs_gestion', name: 'utilisateurs_gestion')]
-    public function utilisateurs_gestion(EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer tous les objets connectés
-        $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
-        
-        return $this->render('admin/utilisateurs_gestion.html.twig', [
-            'utilisateurs' => $utilisateurs
-        ]);
-    }
-
-
-    #[Route('/objets_gestion', name: 'objets_gestion')]
-    public function objets_gestion(EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer tous les objets connectés
-        $objets = $entityManager->getRepository(ObjetConnecte::class)->findAll();
-        
-        return $this->render('admin/objets_gestion.html.twig', [
-            'objets' => $objets
-        ]);
-    }
 
 }

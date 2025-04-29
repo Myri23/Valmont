@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titre }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.5;
+        }
+        h1 {
+            color: #354E52;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .date {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #84A98D;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ titre }}</h1>
+    <p class="date">Généré le {{ date|date('d/m/Y à H:i') }}</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Localisation</th>
+                <th>État</th>
+                <th>Batterie</th>
+                <th>Dernière interaction</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for objet in objets %}
+                <tr>
+                    <td>{{ objet.idUnique }}</td>
+                    <td>{{ objet.nom }}</td>
+                    <td>{{ objet.type }}</td>
+                    <td>{{ objet.localisation }}</td>
+                    <td>{{ objet.etat }}</td>
+                    <td>{{ objet.batteriePct }}%</td>
+                    <td>{{ objet.derniereInteraction|date('d/m/Y H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p>Ville intelligente - Gestion des objets connectés</p>
+        <p>Ce document a été généré automatiquement.</p>
+    </div>
+</body>
+</html>

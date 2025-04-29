@@ -46,8 +46,37 @@
             </div>
         </div>
     </div>
-        
-        <!-- Réservez de la place pour d'autres types d'objets à l'avenir -->
+
+    <!-- Nouvel encadré pour les rapports -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card bg-info text-white mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Rapports PDF</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Télécharger les données sous forme de rapports PDF</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{{ path('app_gestion_rapport_objets') }}" class="btn btn-light">
+                            <i class="fas fa-file-pdf"></i> Tous les objets
+                        </a>
+                        <a href="{{ path('app_gestion_rapport_poubelles') }}" class="btn btn-light">
+                            <i class="fas fa-trash"></i> Poubelles
+                        </a>
+                        <a href="{{ path('app_gestion_rapport_parkings') }}" class="btn btn-light">
+                            <i class="fas fa-parking"></i> Parkings
+                        </a>
+                        <a href="{{ path('app_gestion_rapport_lampadaires') }}" class="btn btn-light">
+                            <i class="fas fa-lightbulb"></i> Lampadaires
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Réservez de la place pour d'autres types d'objets à l'avenir -->
+    <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card bg-light">
                 <div class="card-body text-center">

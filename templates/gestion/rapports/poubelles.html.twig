@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titre }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.5;
+        }
+        h1 {
+            color: #354E52;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .date {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #84A98D;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ titre }}</h1>
+    <p class="date">Généré le {{ date|date('d/m/Y à H:i') }}</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Localisation</th>
+                <th>Type de déchets</th>
+                <th>Capacité</th>
+                <th>Niveau de remplissage</th>
+                <th>Compacteur</th>
+                <th>Dernière collecte</th>
+                <th>État</th>
+                <th>Batterie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for poubelle in poubelles %}
+                <tr>
+                    <td>{{ poubelle.objet.idUnique }}</td>
+                    <td>{{ poubelle.objet.nom }}</td>
+                    <td>{{ poubelle.objet.localisation }}</td>
+                    <td>{{ poubelle.typeDechets }}</td>
+                    <td>{{ poubelle.capaciteTotale }} L</td>
+                    <td>{{ poubelle.niveauRemplissage }}%</td>
+                    <td>{{ poubelle.compacteur ? 'Oui' : 'Non' }}</td>
+                    <td>
+                        {% if poubelle.derniereCollecte %}
+                            {{ poubelle.derniereCollecte|date('d/m/Y') }}
+                        {% else %}
+                            Non renseignée
+                        {% endif %}
+                    </td>
+                    <td>{{ poubelle.objet.etat }}</td>
+                    <td>{{ poubelle.objet.batteriePct }}%</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p>Ville intelligente - Gestion des poubelles connectées</p>
+        <p>Ce document a été généré automatiquement.</p>
+    </div>
+</body>
+</html>

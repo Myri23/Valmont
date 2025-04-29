@@ -182,27 +182,36 @@ public function showPoubelle(string $idUnique, EntityManagerInterface $entityMan
     ]);
 }
 
-#[Route('/objets/poubelles/{id}/edit', name: 'app_poubelle_connectee_edit')]
-public function editPoubelle(Request $request, PoubelleConnectee $poubelle, EntityManagerInterface $entityManager): Response
+#[Route('/objets/poubelles/{idUnique}/edit', name: 'app_poubelle_connectee_edit')]
+public function editPoubelle(string $idUnique, Request $request, EntityManagerInterface $entityManager): Response
 {
-    $objetForm = $this->createForm(ObjetConnecteType::class, $poubelle->getObjet());
-    $poubelleForm = $this->createForm(PoubelleConnecteeType::class, $poubelle);
-    
-    $form = $this->createFormBuilder(['objet' => $poubelle->getObjet(), 'poubelle' => $poubelle])
+    $objet = $entityManager->getRepository(ObjetConnecte::class)->findOneBy(['idUnique' => $idUnique]);
+
+    if (!$objet) {
+        throw $this->createNotFoundException('Objet connecté non trouvé.');
+    }
+
+    $poubelle = $entityManager->getRepository(PoubelleConnectee::class)->findOneBy(['objet' => $objet]);
+
+    if (!$poubelle) {
+        throw $this->createNotFoundException('Poubelle connectée non trouvée.');
+    }
+
+    // Formulaire combiné
+    $form = $this->createFormBuilder(['objet' => $objet, 'poubelle' => $poubelle])
         ->add('objet', ObjetConnecteType::class)
         ->add('poubelle', PoubelleConnecteeType::class)
         ->getForm();
-    
+
     $form->handleRequest($request);
-    
+
     if ($form->isSubmitted() && $form->isValid()) {
         $entityManager->flush();
-        
+
         $this->addFlash('success', 'La poubelle connectée a été modifiée avec succès.');
-        
         return $this->redirectToRoute('app_poubelle_connectee_list');
     }
-    
+
     return $this->render('gestion/edit_poubelle.html.twig', [
         'form' => $form->createView(),
         'poubelle' => $poubelle,
