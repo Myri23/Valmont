@@ -12,6 +12,4 @@ class LampadaireIntelligentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, LampadaireIntelligent::class);
     }
-
-    // Ajoute ici des méthodes personnalisées si besoin
 }

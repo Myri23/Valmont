@@ -1,13 +1,14 @@
-{# templates/admin/historique_connexion.html.twig #}
-
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Historique des connexions{% endblock %}
 
 {% block body %}
     <div class="container">
+        {# Titre principal #}    
         <h1 class="mb-4">Historique des connexions</h1>
-        
+ 
+        {# Formulaire de filtrage par utilisateur #} 
         <div class="card mb-4">
             <div class="card-body">
                 <form method="get" class="mb-3">
@@ -17,6 +18,7 @@
                                 <label for="utilisateur" class="me-2">Filtrer par utilisateur :</label>
                                 <select name="utilisateur" id="utilisateur" class="form-control">
                                     <option value="">Tous les utilisateurs</option>
+                                    {# Boucle sur les utilisateurs pour les afficher dans la liste déroulante #}                                    
                                     {% for user in utilisateurs %}
                                         <option value="{{ user.id }}" {% if selectedUser == user.id ~ '' %}selected{% endif %}>
                                             {{ user.login }} ({{ user.nom }} {{ user.prenom }})
@@ -25,6 +27,7 @@
                                 </select>
                             </div>
                         </div>
+                        {# Boutons Filtrer et Réinitialiser #}                        
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <button type="submit" class="filtrer-btn me-2">Filtrer</button>
@@ -36,6 +39,7 @@
             </div>
         </div>
 
+        {# Tableau des connexions #}
         <div class="card">
             <div class="card-body">
                 <table class="table table-striped table-hover">
@@ -46,6 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {# Boucle sur les connexions enregistrées #}                    
                         {% for connexion in connexions %}
                             <tr>
                                 <td><strong>{{ connexion.utilisateur.login }}</strong></td>
@@ -62,6 +67,7 @@
         </div>
     </div>
     
+    {# Style spécifique à cette page #}    
     <style>
         /* Style pour le bouton Filtrer */
         .filtrer-btn {

@@ -27,6 +27,17 @@
             </div>
         </div>
         
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lampadaire Intelligent</h5>
+                    <p class="card-text">Système d'éclairage automatisé avec programmation de l'heure d'allumage et de la durée.</p>
+                    <a href="{{ path('app_lampadaire_intelligent_new') }}" class="btn btn-primary">Ajouter un lampadaire</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        
         <!-- Réservez de la place pour d'autres types d'objets à l'avenir -->
         <div class="col-md-4 mb-4">
             <div class="card bg-light">
@@ -39,7 +50,7 @@
     </div>
     
     <div class="mt-3">
-        <a href="{{ path('app_objets_list') }}" class="btn btn-secondary">Retour à la liste</a>
+        <a href="{{ path('app_objets_list') }}" class="btn btn-primary">Retour à la liste</a>
     </div>
 </div>
 {% endblock %}

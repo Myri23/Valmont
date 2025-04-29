@@ -1,11 +1,15 @@
+{# On étend le template de base pour garder la structure globale du site#}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Statistiques de Connexions{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
+    {# Titre principal #}
     <h1 class="mb-4">Statistiques de Connexions</h1>
-
+    
+    {# Carte contenant le tableau des connexions #}
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -30,6 +34,7 @@
                                 <td>{{ connexion.prenom }}</td>
                                 <td>{{ connexion.nb_connexions }}</td>
                                 <td>
+                                {# ProgressBar indiquant le pourcentage de connexions #}                                
                                     <div class="progress" style="height: 20px;">
                                         <div class="progress-bar" role="progressbar" 
                                              style="width: {{ connexion.pourcentage_connexions }}%; background-color: #84A98D;" 
@@ -49,12 +54,14 @@
     </div>
 
     <div class="card mt-4">
+    {# Carte affichant le total des connexions #}    
         <div class="card-body">
             <h4 class="m-0">Total des connexions : <span class="text-primary">{{ total_connexions }}</span></h4>
         </div>
     </div>
 </div>
 
+{# Styles spécifiques à cette page #}
 <style>
     .container {
         max-width: 1200px;

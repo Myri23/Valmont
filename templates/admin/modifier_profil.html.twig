@@ -1,9 +1,11 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Modifier le profil - Administration{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
+    {# Titre principal affichant le login de l'utilisateur #}
     <h1 class="mb-4">Modifier le profil de {{ utilisateur.login }}</h1>
     
     <div class="card">
@@ -11,25 +13,31 @@
             Informations de l'utilisateur
         </div>
         <div class="card-body">
+            {# Affichage des messages flash de succès #}        
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success">
                     {{ message }}
                 </div>
             {% endfor %}
 
+            {# Affichage des messages flash d'erreur #}
             {% for message in app.flashes('error') %}
                 <div class="alert alert-danger">
                     {{ message }}
                 </div>
             {% endfor %}
             
+            {# Début du formulaire #}            
             {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+            
+                {# Champ login (nom d'utilisateur) #}            
                 <div class="form-group mb-3">
                     {{ form_label(form.login, 'Nom d\'utilisateur') }}
                     {{ form_widget(form.login, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.login) }}
                 </div>
 
+                {# Champ mot de passe #}
                 <div class="form-group mb-3">
                     {{ form_label(form.mot_de_passe, 'Mot de passe') }}
                     {{ form_widget(form.mot_de_passe, {'attr': {'class': 'form-control'}}) }}
@@ -37,41 +45,48 @@
                     <small class="form-text text-muted">Laissez vide pour conserver le mot de passe actuel</small>
                 </div>
 
+                {# Champ nom #}
                 <div class="form-group mb-3">
                     {{ form_label(form.nom, 'Nom') }}
                     {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.nom) }}
                 </div>
 
+                {# Champ prénom #}
                 <div class="form-group mb-3">
                     {{ form_label(form.prenom, 'Prénom') }}
                     {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.prenom) }}
                 </div>
 
+                {# Champ email #}
                 <div class="form-group mb-3">
                     {{ form_label(form.email, 'Email') }}
                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.email) }}
                 </div>
                 
+                {# Sélection du type d'utilisateur #}               
                 <div class="form-group mb-3">
                     {{ form_label(form.type_utilisateur, 'Type d\'utilisateur') }}
                     {{ form_widget(form.type_utilisateur, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.type_utilisateur) }}
                 </div>
                 
+                {# Sélection du type de membre #}                
                 <div class="form-group mb-3">
                     {{ form_label(form.type_membre, 'Type de membre') }}
                     {{ form_widget(form.type_membre, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.type_membre) }}
                 </div>
 
+                {# Upload de la photo de profil #}
                 <div class="form-group mb-3">
                     {{ form_label(form.photo_url, 'Photo de profil') }}
                     {{ form_widget(form.photo_url, {'attr': {'class': 'form-control'}}) }}
                     {{ form_errors(form.photo_url) }}
                     
+                    {# Affichage de la photo actuelle si elle existe #}                    
                     {% if utilisateur.photoUrl %}
                         <div class="mt-2">
                             <img src="{{ asset('uploads/images/' ~ utilisateur.photoUrl) }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 150px;">
@@ -80,6 +95,7 @@
                     {% endif %}
                 </div>
                 
+                {# Boutons d'action (enregistrer ou revenir en arrière) #}                
                 <div class="d-flex justify-content-between mt-4">
                     {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
                     <a href="{{ path('admin') }}" class="btn btn-secondary">Retour</a>

@@ -1,23 +1,28 @@
+{# On étend le template de base pour garder la structure globale du site#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Utilisateurs en attente de vérification{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
+    {# Titre principal #}
     <h1>Utilisateurs en attente de vérification</h1>
     
+    {# Affichage des messages flashs de succès #}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %}
     
+    {# Affichage des messages flashs d'avertissement #}    
     {% for message in app.flashes('warning') %}
         <div class="alert alert-warning">
             {{ message }}
         </div>
     {% endfor %}
-    
+
+    {# Tableau listant les utilisateurs en attente #}
     <table class="table">
         <thead>
             <tr>
@@ -30,6 +35,8 @@
             </tr>
         </thead>
         <tbody>
+        
+        {# Si des utilisateurs existent, on les affiche #}        
         {% if users|length > 0 %}
             {% for user in users %}
                 <tr>
@@ -38,11 +45,14 @@
                     <td>{{ user.prenom }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.dateInscription|date('d/m/Y H:i') }}</td>
+                    
+                    {# Lien pour vérifier/valider l'utilisateur #}                    
                     <td>
                         <a href="{{ path('admin_verify_user', {'id': user.id}) }}" class="btn btn-primary">Vérifier</a>
                     </td>
                 </tr>
             {% endfor %}
+        {# Sinon, message indiquant qu'il n'y a personne à vérifier #}            
         {% else %}
             <tr>
                 <td colspan="8" class="text-center">Aucun utilisateur en attente de vérification</td>

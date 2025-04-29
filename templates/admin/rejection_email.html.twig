@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Information concernant votre inscription à Valmont</title>
+    
+    {# Styles internes pour l'email #}    
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
@@ -15,10 +17,13 @@
 </head>
 <body>
     <div class="container">
+    
+        {# En-tête de l'email #}    
         <div class="header">
             <h1>Information concernant votre inscription</h1>
         </div>
         <div class="content">
+            {# Salutation personnalisée #}        
             <p>Bonjour {{ user.prenom }} {{ user.nom }},</p>
             
             <p>Nous avons examiné votre demande d'inscription à la plateforme de la ville de Valmont.</p>
@@ -31,9 +36,9 @@
                     <p>{{ message }}</p>
                 </div>
             {% endif %}
-            
+            {# Invitation à contacter l'assistance #}            
             <p>Si vous pensez qu'il s'agit d'une erreur ou si vous souhaitez fournir des informations complémentaires pour prouver votre résidence à Valmont, vous pouvez contacter notre service d'assistance.</p>
-            
+            {# Bouton pour envoyer un mail à l'assistance #}            
             <p style="text-align: center; margin-top: 25px;">
                 <a href="mailto:assistance@valmont-city.com" class="contact-button">Contacter l'assistance</a>
             </p>
