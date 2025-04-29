@@ -9,12 +9,24 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
+/**
+ * Listener pour les événements de connexion réussie
+ * 
+ * Ce listener est déclenché lorsqu'un utilisateur se connecte avec succès.
+ * Il enregistre l'historique de connexion et attribue des points à l'utilisateur
+ * dans le cadre du système de gamification.
+ */
 class AuthentificationSuccessListener
 {
     private EntityManagerInterface $entityManager;
     private RequestStack $requestStack;
     private PointsService $pointsService;
 
+    /**
+     * @param EntityManagerInterface $entityManager Gestionnaire d'entités Doctrine
+     * @param RequestStack $requestStack Stack de requêtes pour accéder à la requête courante
+     * @param PointsService $pointsService Service de gestion des points de gamification
+     */
     public function __construct(
         EntityManagerInterface $entityManager, 
         RequestStack $requestStack,
@@ -25,6 +37,13 @@ class AuthentificationSuccessListener
         $this->pointsService = $pointsService;
     }
 
+
+    /**
+     * Méthode exécutée lors d'une connexion interactive réussie
+     * 
+     * @param InteractiveLoginEvent $event L'événement de connexion
+     * @return void
+     */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event): void
     {
         $user = $event->getAuthenticationToken()->getUser();

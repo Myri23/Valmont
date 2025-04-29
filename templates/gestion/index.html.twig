@@ -130,8 +130,15 @@
 {% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <div class="container">
     <h1>Gestion des Objets Connectés</h1>
+=======
+
+
+<div class="container mt-4">
+    <h1 class="mb-4">Gestion des Objets Connectés</h1>
+>>>>>>> 1ea1ac5af7854aadf638de8363e40159a9c9fabb
     <p class="lead">Surveillez, contrôlez et gérez l'ensemble de vos objets connectés en toute simplicité.</p>
 
     <div class="mb-4">
@@ -142,6 +149,7 @@
         <div class="card-header" style="background-color: #354E52; color: white; padding: 12px 15px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
             <h2 style="margin: 0; font-size: 1.25rem;">Liste des objets connectés</h2>
         </div>
+<<<<<<< HEAD
         <div class="card-body">
             {% if objets is defined and objets is not empty %}
                 <div class="table-responsive">
@@ -211,7 +219,89 @@
             {% else %}
                 <p class="text-muted text-center">Aucun objet connecté enregistré.</p>
             {% endif %}
+=======
+        <!-- Le tableau des objets-->
+    <div class="section-card">
+        <h3 class="h5 mb-4">Liste des objets connectés</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle" id="objetConnectesTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Marque</th>
+                        <th>État</th>
+                        <th>Localisation</th>
+                        <th>Batterie</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for objet in objets %}
+                        <tr data-type="{{ objet.type }}" data-id="{{ objet.id }}">
+                            <!-- Le contenu des cellules reste le même -->
+                            <td>{{ objet.idUnique }}</td>
+                            <td>{{ objet.nom }}</td>
+                            <td>
+                                {% if objet.type == 'Poubelle' %}
+                                    <span class="type-badge type-poubelle">
+                                        <i class="fas fa-trash-alt me-1"></i> {{ objet.type }}
+                                    </span>
+                                {% elseif objet.type == 'Parking' %}
+                                    <span class="type-badge type-parking">
+                                        <i class="fas fa-parking me-1"></i> {{ objet.type }}
+                                    </span>
+                                {% elseif objet.type == 'Lampadaire' %}
+                                    <span class="type-badge type-lampadaire">
+                                        <i class="fas fa-lightbulb me-1"></i> {{ objet.type }}
+                                    </span>
+                                {% else %}
+                                    <span class="type-badge type-autre">
+                                        <i class="fas fa-cog me-1"></i> {{ objet.type }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>{{ objet.marque }}</td>
+                            <td>
+                                <span class="badge {% if objet.etat == 'Actif' %}bg-success{% elseif objet.etat == 'Maintenance' %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ objet.etat }}
+                                </span>
+                            </td>
+                            <td>{{ objet.localisation }}</td>
+                            <td>
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar {% if objet.batteriePct < 20 %}bg-danger{% elseif objet.batteriePct < 50 %}bg-warning{% else %}bg-success{% endif %}" style="width: {{ objet.batteriePct }}%">
+                                        {{ objet.batteriePct }}%
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="#" class="btn btn-edit" title="Modifier">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <!-- rajouter un bouton pour demander la suppresion de l'objet a l'administrateur -->
+                                        <button type="submit" class="btn btn-delete" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                <i class="fas fa-info-circle me-2 fa-lg"></i>
+                                Aucun objet connecté trouvé.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+>>>>>>> 1ea1ac5af7854aadf638de8363e40159a9c9fabb
         </div>
+    </div>
     </div>
 </div>
 {% endblock %}

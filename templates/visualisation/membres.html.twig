@@ -3,8 +3,10 @@
 {% block title %}Administration - Utilisateurs{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1 class="mb-4">Membres de Valmont</h1>
+<div class="background-image-container">
+
+    <div class="container mt-4 py-5" style="background: rgba(255, 255, 255, 0.90); border-radius: 15px; text-align: center;">
+    <h1 class="mb-4"> 👤 Membres de Valmont</h1>
     
     
     <div class="table-responsive">
@@ -23,11 +25,11 @@
                 {% for utilisateur in utilisateurs %}
                     <tr>
                         <td class="px-4">
-                            {% if utilisateur.getPhotoUrl() %}
-                                <img src="{{ utilisateur.getPhotoUrl() }}" alt="Photo de profil" class="img-fluid" style="max-width: 100px; max-height: 100px;">
-                            {% else %}
-                                <img src="{{ asset('images/pdp.jpg') }}" alt="Photo de profil" class="img-fluid" style="max-width: 100px; max-height: 100px;">
-                            {% endif %}
+                        {% if utilisateur.photoUrl %}
+                        <img src="{{ asset('uploads/images/' ~ utilisateur.photoUrl) }}" alt="Photo de profil" class="profile-image">
+                        {% else %}
+                        <img src="{{ asset('images/pdp.jpg') }}" alt="Photo de profil par défaut" class="profile-image">
+                        {% endif %}
                         </td>
                         <td class="px-4">{{ utilisateur.login }}</td>
                         <td class="px-4">
@@ -46,9 +48,17 @@
         </table>
     </div>
 </div>
+</div>
 
 <style>
-    /* Styles personnalisés pour ajouter plus d'espace */
+    .background-image-container {
+        background-image: url('{{ asset('images/valmont_membres.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* effet de défilement parallax */
+        min-height: 100vh;
+        padding: 30px 0;
+    }
     .table {
         border-spacing: 0 8px;
         border-collapse: separate;

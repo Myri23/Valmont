@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+/**
+ * Service de vérification et réparation de l'intégrité du système
+ */
 class IntegriteService
 {
     private $entityManager;
@@ -21,29 +24,32 @@ class IntegriteService
         $this->params = $params;
         $this->filesystem = $filesystem;
     }
-    
-public function verifierIntegrite(): array
-{
-    $resultats = [];
-    
-    // 1. Vérifier les utilisateurs (emails invalides, données manquantes)
-    $resultats['utilisateurs'] = $this->verifierUtilisateurs();
-    
-    // 2. Vérifier les fichiers médias (vidéos, images manquantes)
-    $resultats['medias'] = $this->verifierMedias();
-    
-    // Suppression de la vérification des événements qui cause l'erreur
-    // $resultats['evenements'] = $this->verifierEvenements();
-    
-    return $resultats;
-}
 
+   /**
+     * @param EntityManagerInterface $entityManager Gestionnaire d'entités Doctrine
+     * @param ParameterBagInterface $params Accès aux paramètres de l'application
+     * @param Filesystem $filesystem Service de gestion de fichiers
+     */
+    public function verifierIntegrite(): array
+    {
+        $resultats = [];
     
+        $resultats['utilisateurs'] = $this->verifierUtilisateurs();
+    
+        $resultats['medias'] = $this->verifierMedias();
+    
+        return $resultats;
+    }
+
+    /**
+     * Vérifie l'intégrité des données utilisateurs
+     * 
+     * @return array Problèmes détectés concernant les utilisateurs
+     */    
     private function verifierUtilisateurs(): array
     {
         $problemes = [];
         
-        // Exemple: trouver des emails invalides
         $utilisateursAvecEmailsInvalides = $this->entityManager->createQuery(
             'SELECT u FROM App\Entity\Utilisateur u WHERE u.email NOT LIKE \'%@%\''
         )->getResult();
@@ -56,17 +62,22 @@ public function verifierIntegrite(): array
             ];
         }
         
-        // Autres vérifications possibles...
-        
         return $problemes;
     }
     
+    /**
+     * Vérifie l'intégrité des fichiers médias
+     * 
+     * Vérifie la présence des fichiers médias essentiels au fonctionnement
+     * de l'application, comme la vidéo d'accueil.
+     * 
+     * @return array Problèmes détectés concernant les fichiers médias
+     */    
     private function verifierMedias(): array
     {
         $problemes = [];
         $publicDir = $this->params->get('kernel.project_dir') . '/public';
         
-        // Vérifier si la vidéo d'accueil existe
         if (!$this->filesystem->exists($publicDir . '/video/valmont.mp4')) {
             $problemes['video_accueil'] = [
                 'description' => 'La vidéo d\'accueil est manquante',
@@ -74,23 +85,22 @@ public function verifierIntegrite(): array
             ];
         }
         
-        // Autres vérifications possibles...
-        
         return $problemes;
     }
     
-    
+    /**
+     * Tente de réparer un problème d'intégrité spécifique
+     * 
+     * @param string $type Type de problème à réparer (ex: 'emails_invalides', 'video_accueil')
+     * @return void
+     */    
     public function reparer(string $type): void
     {
-        // Logique de réparation selon le type
         switch ($type) {
             case 'emails_invalides':
-                // Code pour corriger les emails
                 break;
             case 'video_accueil':
-                // Code pour signaler le problème
                 break;
-            // Autres cas...
         }
     }
 }

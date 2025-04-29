@@ -27,7 +27,6 @@
                                 <th>État</th>
                                 <th>Batterie</th>
                                 <th>Dernière interaction</th>
-                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,19 +61,6 @@
                                         </div>
                                     </td>
                                     <td>{{ objet.derniereInteraction|date('d/m/Y H:i') }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="#" class="btn btn-sm btn-info">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -88,4 +74,5 @@
 <footer class="footer">
     <p>&copy; 2025 - Valmont | Ville connectée</p>
 </footer>
+
 {% endblock %}
