@@ -617,8 +617,7 @@ final class AdminController extends AbstractController
     }
 
 
-<<<<<<< HEAD
-=======
+
 
     #[Route('/objets_gestion', name: 'objets_gestion')]
     public function objets_gestion(EntityManagerInterface $entityManager): Response
@@ -631,5 +630,5 @@ final class AdminController extends AbstractController
         ]);
     }
 
->>>>>>> 1ea1ac5af7854aadf638de8363e40159a9c9fabb
+
 }
