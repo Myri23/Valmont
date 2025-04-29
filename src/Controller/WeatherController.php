@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+/**
+ * Contrôleur gérant les données météo.
+ */
 class WeatherController extends AbstractController
 {
     private $client;
@@ -18,6 +21,11 @@ class WeatherController extends AbstractController
         $this->apiKey = '117f375b15f90916c7cceaeb7095b905'; 
     }
 
+    /**
+     * Affiche les informations météorologiques.
+     * 
+     * @return Response
+     */
     #[Route('/meteo', name: 'meteo')]
     public function index(): Response
     {
@@ -43,6 +51,7 @@ class WeatherController extends AbstractController
                 'weather' => $weatherData
             ]);
         } catch (\Exception $e) {
+            // En cas d'erreur, rendu du template sans données météo        
             return $this->render('information/ville.html.twig', [
                 'weather' => null
             ]);

@@ -12,6 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+* Contrôleur pour l'exportation des données
+* 
+* Ce contrôleur permet aux administrateurs d'exporter des données
+* du système au format CSV pour analyse externe
+*/
 class ExportController extends AbstractController
 {
     private $entityManager;
@@ -19,46 +25,69 @@ class ExportController extends AbstractController
     private $historiqueConnexionRepository;
     private $historiqueConsultationRepository;
 
+   /**
+    * Constructeur du contrôleur avec injection des dépendances
+    * 
+    * @param EntityManagerInterface $entityManager Gestionnaire d'entités
+    * @param UtilisateurRepository $utilisateurRepository Repository des utilisateurs
+    * @param HistoriqueConnexionRepository $historiqueConnexionRepository Repository des connexions
+    * @param HistoriqueConsultationRepository $historiqueConsultationRepository Repository des consultations
+    */
     public function __construct(
         EntityManagerInterface $entityManager,
         UtilisateurRepository $utilisateurRepository,
         HistoriqueConnexionRepository $historiqueConnexionRepository,
         HistoriqueConsultationRepository $historiqueConsultationRepository
     ) {
+       /* Initialisation des repositories et du gestionnaire d'entités */    
         $this->entityManager = $entityManager;
         $this->utilisateurRepository = $utilisateurRepository;
         $this->historiqueConnexionRepository = $historiqueConnexionRepository;
         $this->historiqueConsultationRepository = $historiqueConsultationRepository;
     }
 
+   /**
+    * Affiche la page d'index des exports
+    * 
+    * Cette méthode affiche la page avec les statistiques de base
+    * et les options d'exportation disponibles
+    * 
+    * @return Response La réponse HTTP
+    */
     #[Route('/export', name: 'export_index')]
     public function index(): Response
     {
-        // Vérification que l'utilisateur est admin
+       /* Vérification que l'utilisateur est administrateur */
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
-        // Données de base pour la page
+       /* Préparation des statistiques de base pour la page */
         $stats = [
             'total_utilisateurs' => $this->utilisateurRepository->count([]),
             'total_connexions' => $this->historiqueConnexionRepository->count([]),
             'total_consultations' => $this->historiqueConsultationRepository->count([]),
         ];
-
+       /* Affichage du template avec les statistiques */
         return $this->render('admin/export_index.html.twig', [
             'stats' => $stats,
         ]);
     }
 
+   /**
+    * Génère et télécharge le fichier d'export CSV
+    * 
+    * @param Request $request La requête HTTP
+    * @return Response La réponse HTTP avec le fichier CSV
+    */
     #[Route('/export/generer', name: 'export_generer')]
     public function generer(Request $request): Response
     {
-        // Vérification que l'utilisateur est admin
+       /* Vérification que l'utilisateur est administrateur */
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
         $format = $request->query->get('format', 'csv');
         $type = $request->query->get('type', 'connexions');
         
-        // Récupérer les données selon le type de rapport
+       /* Récupération des données selon le type de rapport demandé */
         switch ($type) {
             case 'connexions':
                 $data = $this->getConnexionsData();
@@ -82,9 +111,10 @@ class ExportController extends AbstractController
                 throw $this->createNotFoundException('Type de rapport inconnu.');
         }
 
-        // Exporter les données au format CSV (le plus simple)
+       /* Génération du contenu CSV en commençant par les en-têtes */
         $csv = implode(',', $headers) . "\n";
-        
+
+       /* Ajout des lignes de données */
         foreach ($data as $row) {
             $csv .= implode(',', array_map(function($cell) {
                 // Échapper les virgules et les guillemets
@@ -96,6 +126,8 @@ class ExportController extends AbstractController
         }
         
         $response = new Response($csv);
+        
+       /* Configuration des en-têtes pour le téléchargement du fichier */        
         $disposition = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             $filename . '.csv'
@@ -107,8 +139,14 @@ class ExportController extends AbstractController
         return $response;
     }
 
+   /**
+    * Récupère les données d'historique de connexions
+    * 
+    * @return array Tableau de données formatées
+    */
     private function getConnexionsData(): array
     {
+       /* Création de la requête pour récupérer les données */    
         $qb = $this->historiqueConnexionRepository->createQueryBuilder('c')
             ->select('c.id', 'u.login', 'c.dateConnexion', 'c.ipConnexion')
             ->leftJoin('c.utilisateur', 'u')
@@ -117,7 +155,7 @@ class ExportController extends AbstractController
         
         $result = $qb->getQuery()->getArrayResult();
         
-        // Formatage des données
+       /* Formatage des données pour l'export CSV */
         $data = [];
         foreach ($result as $row) {
             $data[] = [
@@ -131,6 +169,15 @@ class ExportController extends AbstractController
         return $data;
     }
 
+
+   /**
+    * Récupère les données d'historique de consultations
+    * 
+    * Cette méthode privée récupère et formate les données
+    * d'historique de consultations pour l'export
+    * 
+    * @return array Tableau de données formatées
+    */
     private function getConsultationsData(): array
     {
         $qb = $this->historiqueConsultationRepository->createQueryBuilder('c')
@@ -141,7 +188,7 @@ class ExportController extends AbstractController
         
         $result = $qb->getQuery()->getArrayResult();
         
-        // Formatage des données
+       /* Formatage des données pour l'export CSV */
         $data = [];
         foreach ($result as $row) {
             $data[] = [
@@ -156,31 +203,39 @@ class ExportController extends AbstractController
         return $data;
     }
 
-private function getUtilisateursData(): array
-{
-    $qb = $this->utilisateurRepository->createQueryBuilder('u')
-        ->select('u.id', 'u.login', 'u.nom', 'u.prenom', 'u.email', 'u.type_utilisateur', 
-                 'u.niveau_experience', 'u.points_connexion', 'u.pointsConsultation')
-        ->orderBy('u.id', 'ASC');
+   /**
+    * Récupère les données des utilisateurs
+    * 
+    * Cette méthode privée récupère et formate les données
+    * des utilisateurs pour l'export
+    * 
+    * @return array Tableau de données formatées
+    */
+    private function getUtilisateursData(): array
+    {
+        $qb = $this->utilisateurRepository->createQueryBuilder('u')
+            ->select('u.id', 'u.login', 'u.nom', 'u.prenom', 'u.email', 'u.type_utilisateur', 
+                     'u.niveau_experience', 'u.points_connexion', 'u.pointsConsultation')
+            ->orderBy('u.id', 'ASC');
+       /* Exécution de la requête */    
+        $result = $qb->getQuery()->getArrayResult();
     
-    $result = $qb->getQuery()->getArrayResult();
+       /* Formatage des données pour l'export CSV */
+       $data = [];
+       foreach ($result as $row) {
+           $data[] = [
+               $row['id'],
+               $row['login'],
+               $row['nom'],
+               $row['prenom'],
+               $row['email'],
+               $row['type_utilisateur'],
+               $row['niveau_experience'],
+               $row['points_connexion'],
+               $row['pointsConsultation']
+            ];
+        }
     
-    // Formatage des données
-    $data = [];
-    foreach ($result as $row) {
-        $data[] = [
-            $row['id'],
-            $row['login'],
-            $row['nom'],
-            $row['prenom'],
-            $row['email'],
-            $row['type_utilisateur'],
-            $row['niveau_experience'],
-            $row['points_connexion'],
-            $row['pointsConsultation']
-        ];
+        return $data;
     }
-    
-    return $data;
-}
 }

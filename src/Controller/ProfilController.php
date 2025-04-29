@@ -13,8 +13,20 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * Contrôleur gérant les fonctionnalités liées au profil utilisateur.
+ */
 class ProfilController extends AbstractController
 {
+    /**
+     * Permet à l'utilisateur de modifier ses informations de profil.
+     *
+     * @param Request $request La requête HTTP
+     * @param EntityManagerInterface $entityManager Gestionnaire d'entités Doctrine
+     * @param SluggerInterface $slugger Service pour sécuriser les noms de fichiers
+     * @param UserPasswordHasherInterface $passwordHasher Service de hashage des mots de passe
+     * @return Response Réponse HTTP (redirection ou formulaire avec erreurs)
+     */
     #[Route('/modifier_profil', name: 'modifier_profil')]
     public function modifier_profil(
         Request $request, 
@@ -57,7 +69,7 @@ class ProfilController extends AbstractController
                 $user->setMotDePasse($motDePasseActuel);
             }
             
-            // Gérer l'upload de la photo si nécessaire
+            // Gérer l'upload de la photo
             $photoFile = $form->get('photo_url')->getData();
             
             if ($photoFile) {
@@ -92,7 +104,12 @@ class ProfilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+   /**
+     * Affiche le profil de l'utilisateur connecté.
+     * 
+     * @return Response Réponse HTTP contenant la page de profil ou redirection vers la page de connexion
+     */
     #[Route('/profil', name: 'profil')]
     public function profil(): Response
     {
@@ -106,6 +123,12 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    /**
+     * Affiche la liste de tous les membres de l'application.
+     *
+     * @param EntityManagerInterface $entityManager Gestionnaire d'entités Doctrine
+     * @return Response Réponse HTTP contenant la liste des membres
+     */
     #[Route('/membres', name: 'membres')]
     public function membres(EntityManagerInterface $entityManager): Response
     {

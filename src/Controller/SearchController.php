@@ -11,13 +11,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Contrôleur gérant les fonctionnalités de recherche.
+ */
 class SearchController extends AbstractController
 {
     private $lieuRepository;
     private $transportRepository;
     private $eventRepository;
 
-    // Injecter le LieuRepository et TransportRepository dans le constructeur
+
+    /**
+     * Constructeur avec injection des repositories.
+     * 
+     * @param LieuRepository $lieuRepository Repository pour les lieux
+     * @param TransportRepository $transportRepository Repository pour les transports
+     * @param EventRepository $eventRepository Repository pour les événements
+     * @param ObjetConnecteRepository $objetRepository Repository pour les objets connectés
+     */
     public function __construct(LieuRepository $lieuRepository, TransportRepository $transportRepository, EventRepository $eventRepository, ObjetConnecteRepository $objetRepository)
     {
         $this->lieuRepository = $lieuRepository;
@@ -26,6 +37,12 @@ class SearchController extends AbstractController
         $this->objetRepository = $objetRepository;
     }
 
+    /**
+     * Traite la recherche générale (lieux, transports, événements).
+     * 
+     * @param Request $request Requête HTTP contenant les paramètres de recherche
+     * @return Response Réponse HTTP avec les résultats de recherche
+     */
     #[Route('/search', name: 'search_results')]
     public function search(Request $request): Response
     {
@@ -50,6 +67,12 @@ class SearchController extends AbstractController
         ]);
     }
 
+    /**
+     * Traite la recherche spécifique aux objets connectés.
+     * 
+     * @param Request $request Requête HTTP contenant les paramètres de recherche
+     * @return Response Réponse HTTP avec les résultats de recherche d'objets
+     */
     #[Route('/searchObjects', name: 'search_results-objects')]
     public function search_objects(Request $request): Response
     {
