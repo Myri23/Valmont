@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\ObjetConnecte;
 use App\Entity\PoubelleConnectee;
 use App\Entity\ParkingIntelligent;
+use App\Entity\LampadaireIntelligent;
 
 use App\Form\ObjetConnecteType;
 use App\Form\PoubelleConnecteeType;
 use App\Form\ParkingIntelligentType;
+use App\Form\LampadaireIntelligentType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -110,5 +112,47 @@ class ObjetConnecteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    #[Route('/objets/ajouter-lampadaire', name: 'app_lampadaire_intelligent_new')]
+public function newLampadaire(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Création d'un nouvel objet connecté
+    $objetConnecte = new ObjetConnecte();
+    
+    // Pré-remplir le type - idUnique sera auto-incrémenté
+    $objetConnecte->setType('Lampadaire');
+    
+    // Création d'un nouveau lampadaire intelligent
+    $lampadaireIntelligent = new LampadaireIntelligent();
+    
+    // Créer un seul formulaire combiné
+    $form = $this->createFormBuilder(['objet' => $objetConnecte, 'lampadaire' => $lampadaireIntelligent])
+        ->add('objet', ObjetConnecteType::class)
+        ->add('lampadaire', LampadaireIntelligentType::class)
+        ->getForm();
+    
+    $form->handleRequest($request);
+    
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Enregistrer l'objet connecté
+        $entityManager->persist($objetConnecte);
+        $entityManager->flush();
+        
+        // Associer le lampadaire à l'objet connecté après avoir persisté l'objet
+        $lampadaireIntelligent->setObjet($objetConnecte);
+        
+        // Enregistrer le lampadaire intelligent
+        $entityManager->persist($lampadaireIntelligent);
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'Le lampadaire intelligent a été ajouté avec succès.');
+        
+        return $this->redirectToRoute('app_objets_list');
+    }
+    
+    return $this->render('gestion/new_lampadaire.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
     
 }

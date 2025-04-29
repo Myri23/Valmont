@@ -59,6 +59,9 @@ class ObjetConnecte
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: ParkingIntelligent::class, cascade: ['persist', 'remove'])]
     private Collection $parkingIntelligent;
     
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: LampadaireIntelligent::class, cascade: ['persist', 'remove'])]
+private Collection $lampadaireIntelligent;
+    
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $derniereInteraction = null;
 
@@ -66,6 +69,7 @@ class ObjetConnecte
     {
         $this->poubelleConnectee = new ArrayCollection();
         $this->parkingIntelligent = new ArrayCollection();
+        $this->lampadaireIntelligent = new ArrayCollection();
     }
     
     public function getDerniereInteraction(): ?\DateTimeInterface
@@ -220,4 +224,35 @@ class ObjetConnecte
         
         return $this;
     }
+    
+    /**
+ * @return Collection<int, LampadaireIntelligent>
+ */
+public function getLampadaireIntelligent(): Collection
+{
+    return $this->lampadaireIntelligent;
+}
+
+public function addLampadaireIntelligent(LampadaireIntelligent $lampadaireIntelligent): self
+{
+    if (!$this->lampadaireIntelligent->contains($lampadaireIntelligent)) {
+        $this->lampadaireIntelligent->add($lampadaireIntelligent);
+        $lampadaireIntelligent->setObjet($this);
+    }
+
+    return $this;
+}
+
+public function removeLampadaireIntelligent(LampadaireIntelligent $lampadaireIntelligent): self
+{
+    if ($this->lampadaireIntelligent->removeElement($lampadaireIntelligent)) {
+        // set the owning side to null (unless already changed)
+        if ($lampadaireIntelligent->getObjet() === $this) {
+            $lampadaireIntelligent->setObjet(null);
+        }
+    }
+    
+    return $this;
+}
+    
 }
