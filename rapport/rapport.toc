@@ -13,6 +13,6 @@
 \contentsline {subsection}{\numberline {0.3.3}Phase de développement}{7}{subsection.0.3.3}%
 \contentsline {subsection}{\numberline {0.3.4}Phase de tests et de validation}{8}{subsection.0.3.4}%
 \contentsline {subsection}{\numberline {0.3.5}Résultats obtenus}{8}{subsection.0.3.5}%
-\contentsline {section}{\numberline {0.4}Conclusion et perspectives}{9}{section.0.4}%
-\contentsline {subsection}{\numberline {0.4.1}Conclusion générale}{9}{subsection.0.4.1}%
-\contentsline {subsection}{\numberline {0.4.2}Perspectives d'amélioration}{9}{subsection.0.4.2}%
+\contentsline {section}{\numberline {0.4}Conclusion et perspectives}{10}{section.0.4}%
+\contentsline {subsection}{\numberline {0.4.1}Conclusion générale}{10}{subsection.0.4.1}%
+\contentsline {subsection}{\numberline {0.4.2}Perspectives d'amélioration}{10}{subsection.0.4.2}%
