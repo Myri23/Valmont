@@ -1,225 +1,365 @@
-/* === Styles généraux === */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #CAD2C5; /* Vert pâle */
-  color: #2F3D46; /* Vert très foncé pour le texte */
-  line-height: 1.6;
-  overflow-y: scroll;
+
+.section-card {
+    background: #ffffff;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-h1, h2 {
-  color: #354E52; /* Vert foncé pour les titres */
-  margin-bottom: 20px;
+.section-inner {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-header, section {
-  padding: 20px;
+.section-filter {
+    background: #e9f5ec;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 15px;
 }
 
-header {
-  background-color: #84A98D;
-  color: white;
-  text-align: center;
+.btn-back {
+    background-color: #527970;
+    color: white;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
 }
 
-footer {
-  background-color: #354E52;
-  color: white;
-  text-align: center;
-  padding: 20px;
+.btn-back:hover {
+    background-color: #354E52;
+    color: white;
 }
 
-/* === Barre de navigation === */
-.navbar {
-  background-color: #354E52;
-  position: sticky;
-  top: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 10px 0px;
+.btn-add {
+    background-color: #84A98D;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
 }
 
-.container-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 80px;
-  position: relative;
+.btn-add:hover {
+    background-color: #527970;
+    color: white;
 }
 
-.navbar-brand {
-  font-size: 1.8rem;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
+.btn-danger-outline {
+    background-color: transparent;
+    color: #fa5252;
+    border: 2px solid #fa5252;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
 }
 
-/* Liens de navigation */
-.navbar-links {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.btn-danger-outline:hover {
+    background-color: #fa5252;
+    color: white;
 }
 
-.navbar-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 10px 25px;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+.btn-filter {
+    background-color: #527970;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
 }
 
-.navbar-links a:hover {
-  background-color: #527970;
-  color: #CAD2C5;
+.btn-filter:hover {
+    background-color: #354E52;
+    color: white;
 }
 
-/* === Boutons Barre Navigation === */
-.navbar-buttons {
-  display: flex;
-  gap: 1rem;
+.btn-reset {
+    background-color: transparent;
+    color: #527970;
+    font-weight: bold;
+    border: 2px solid #527970;
+    padding: 10px 20px;
+    border-radius: 30px;
 }
 
-.btn-search {
-  background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-right: 15px;
+.btn-reset:hover {
+    background-color: #527970;
+    color: white;
 }
 
-.btn-search:hover {
-  transform: translateY(-2px);
+.btn-delete, .btn-view, .btn-edit {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: white;
 }
 
-.btn-auth {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  border: 1px solid white;
-  border-radius: 30px;
-  padding: 10px 20px;
+.btn-view {
+    background-color: #527970;
 }
 
-.btn-auth:hover {
-  background-color: white;
-  color: #354E52;
-  border: 1px solid #354E52;
+.btn-edit {
+    background-color: #84A98D;
 }
 
-/* Contenu principal */
-.container {
-  display: flex;
-  flex-direction: column;
-  max-width: 1200px;
-  margin: auto;
-  margin-top: 10px;
-  padding: 20px;
+.btn-delete {
+    background-color: #fa5252;
 }
 
-.card {
-  background-color: white;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 40px;
-  transition: transform 0.3s ease;
+.btn-view:hover, .btn-edit:hover, .btn-delete:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    color: white;
 }
 
-.card:hover {
-  box-shadow: 0 10px 16px rgba(0,0,0,0.15);
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
 }
 
-/* Boutons */
-.btn-primary {
-  padding: 10px 20px;
-  width: fit-content;
-  align-self: center;
-  border-radius: 15px;
-  border: none;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 25px;
-  background-color: #84A98D;
-  margin-bottom: 20px;
+.table thead th, .table tbody td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 15px;
 }
 
-.btn-primary:hover {
-  background-color: #527970;
-  transform: translateY(-2px);
-  cursor: pointer;
+.table thead th {
+    background-color: #354E52;
+    color: white;
 }
 
-/* Panel Recherche */
-.hidden {
-  visibility: hidden;
+h1, h2, h3, h5 {
+    font-weight: bold;
 }
 
-#search-panel {
-  height: 10vh;
-  background-color: #2F3D46;
-  position: fixed;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+button.btn, a.btn {
+    transition: all 0.3s ease;
 }
 
-#search-panel input, #search-panel select {
-  padding: 10px;
-  color: white;
-  font-size: 20px;
-  border: none;
+button.btn:hover, a.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-#search-panel input {
-  width: 60%;
-  margin-left: 70px;
-  opacity: 0.8;
-  background-color: #2F3D46;
+.type-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85em;
+    text-align: center;
+    display: inline-block;
 }
 
-#search-panel select {
-  text-align: center;
-  width: 10%;
-  background-color: #84A98D;
-  border-radius: 30px;
-  appearance: none; /* Masque la flèche sur la plupart des navigateurs modernes */
-  -webkit-appearance: none; /* Safari */
-  -moz-appearance: none; /* Firefox */
+.type-poubelle {
+    background-color: #e9f5ec;
+    color: #3CB371;
+    border: 1px solid #3CB371;
 }
 
-#search-panel select:hover {
-  background-color: white;
-  color: #84A98D;
+.type-parking {
+    background-color: #e3efff;
+    color: #1E90FF;
+    border: 1px solid #1E90FF;
 }
 
-#search-panel option {
-  background-color: #354E52;
-  color: white;
-  border: none;
-}  
-
-#search-panel input::placeholder {
-  color: white;
-  font-size: 20px;
-  border: none;
+.type-lampadaire {
+    background-color: #fff7e0;
+    color: #FFA000;
+    border: 1px solid #FFA000;
 }
 
-#search-panel input:focus, #search-panel select:focus {
-  outline: none;
+.type-autre {
+    background-color: #f8eeff;
+    color: #8A2BE2;
+    border: 1px solid #8A2BE2;
 }
 
-/* Bouton fermeture */
-.btn-close {
-  height: 10vh;
-  width: 10%;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.warning-text {
+    background-color: #FFF3CD;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #F0AD4E;
 }
 
-.btn-close:hover {
-  transform: translateY(-2px);
+.category-stat-card {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.category-icon {
+    background-color: #84A98D;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+.blue-icon {
+    background-color: #1E90FF;
+}
+
+.yellow-icon {
+    background-color: #FFA000;
+}
+
+.purple-icon {
+    background-color: #8A2BE2;
+}
+
+.category-details {
+    flex: 1;
+}
+
+.category-details h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #354E52;
+}
+
+.stat-numbers {
+    display: flex;
+    align-items: baseline;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2F3D46;
+    margin-right: 5px;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 350px;
+    border-left: 4px solid;
+    border-radius: 5px;
+}
+
+.alert-success {
+    border-left-color: #28a745;
+}
+
+.alert-danger {
+    border-left-color: #dc3545;
+}
+
+.confirmation-input {
+    border-radius: 10px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.confirmation-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+    border-color: #dc3545;
+}
+
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    overflow: hidden;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 20px 30px;
+}
+
+.modal-body {
+    padding: 20px 30px;
+}
+
+.modal-footer {
+    padding: 15px 30px 25px 30px;
+}
+
+.btn-danger {
+    background-color: #fa5252;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: #e03131;
+    transform: translateY(-2px);
+}
+
+.btn-danger:disabled {
+    background-color: #f1aeb5;
+    border: none;
+}
+
+/* Style pour les objets à supprimer */
+/* Style pour les objets à supprimer */
+.object-item {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    background-color: #fff;
+    border-left: 3px solid #fa5252;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Animation pour les lignes pendant la suppression */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fading-out {
+    animation: fadeOut 0.5s forwards;
+    background-color: #ffe5e5;
+}
+
+/* Style pour indiquer le survol en mode sélection */
+tr.selectable:hover {
+    cursor: pointer;
+    background-color: #f0f9f4 !important;
+}
+
+tr.selected {
+    background-color: #e5f7ed !important;
 }
