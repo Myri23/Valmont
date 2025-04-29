@@ -25,11 +25,11 @@
                 {% for utilisateur in utilisateurs %}
                     <tr>
                         <td class="px-4">
-                            {% if utilisateur.getPhotoUrl() %}
-                                <img src="{{ utilisateur.getPhotoUrl() }}" alt="Photo de profil" class="img-fluid" style="max-width: 100px; max-height: 100px;">
-                            {% else %}
-                                <img src="{{ asset('images/pdp.jpg') }}" alt="Photo de profil" class="img-fluid" style="max-width: 100px; max-height: 100px;">
-                            {% endif %}
+                        {% if utilisateur.photoUrl %}
+                        <img src="{{ asset('uploads/images/' ~ utilisateur.photoUrl) }}" alt="Photo de profil" class="profile-image">
+                        {% else %}
+                        <img src="{{ asset('images/pdp.jpg') }}" alt="Photo de profil par défaut" class="profile-image">
+                        {% endif %}
                         </td>
                         <td class="px-4">{{ utilisateur.login }}</td>
                         <td class="px-4">

@@ -61,8 +61,23 @@ class FormulaireController extends AbstractController
 
         /* Vérification si le formulaire est soumis et valide */
         if ($form->isSubmitted() && $form->isValid()) {
-            // Code existant pour le traitement de la photo...
-            
+            $imageFile = $form->get('photo_url')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Gérer l'erreur de téléchargement si nécessaire
+                }
+
+                $user->setPhotoUrl($newFilename);
+            }
             // Hachage du mot de passe
             $user->setMotDePasse($passwordHasher->hashPassword($user, $user->getMotDePasse()));
 
