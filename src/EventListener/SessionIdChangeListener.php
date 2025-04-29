@@ -6,8 +6,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * Listener pour gérer les changements d'ID de session
+ */
 class SessionIdChangeListener implements EventSubscriberInterface
 {
+    /**
+     * Définit les événements auxquels ce listener s'abonne
+     * 
+     * @return array Liste des événements et des méthodes associées
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -15,6 +23,12 @@ class SessionIdChangeListener implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Méthode exécutée lors de la génération de la réponse
+     * 
+     * @param ResponseEvent $event L'événement de réponse
+     * @return void
+     */
     public function onKernelResponse(ResponseEvent $event)
     {
         if (!$event->isMainRequest()) {

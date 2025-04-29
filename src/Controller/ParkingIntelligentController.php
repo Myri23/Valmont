@@ -12,15 +12,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Contrôleur pour la gestion des parkings intelligents
+ */
 class ParkingIntelligentController extends AbstractController
 {
+    /**
+     * Crée un nouveau parking intelligent
+     * 
+     * Cette méthode permet de créer à la fois un objet connecté
+     * et un parking intelligent associé à cet objet
+     * 
+     * @param Request $request La requête HTTP
+     * @param EntityManagerInterface $entityManager Gestionnaire d'entités Doctrine
+     * @return Response Réponse HTTP
+     */
     #[Route('/objets/ajouter-parking', name: 'app_parking_intelligent_new')]
     public function newParking(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Création d'un nouvel objet connecté
         $objetConnecte = new ObjetConnecte();
         
-        // Pré-remplir le type - idUnique sera auto-incrémenté
         $objetConnecte->setType('Parking');
         
         // Création d'un nouveau parking intelligent
