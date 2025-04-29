@@ -630,5 +630,12 @@ final class AdminController extends AbstractController
         ]);
     }
 
-
+#[Route('/admin/utilisateurs', name: 'utilisateurs_gestion')]
+public function gestionUtilisateurs(): Response
+{
+    // Pour l'instant, on passe une liste vide pour ne pas casser la vue
+    return $this->render('admin/utilisateurs_gestion.html.twig', [
+        'utilisateurs' => [],
+    ]);
+}
 }
