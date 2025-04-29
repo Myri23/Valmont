@@ -825,9 +825,105 @@ form {
     border-radius: 5px;
   }
 
-  .logo-small {
-    width: 100px;  /* Ajustez la largeur selon vos besoins */
-    height: auto;  /* Maintient les proportions de l'image */
-  }
+  .team-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Espacement entre les membres */
+}
+
+.photo-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 15px; /* Espacement entre la photo et le texte */
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pour que l'image couvre entièrement le cadre sans déformation */
+}
+
+.photo-container2 {
+    overflow: hidden;
+    text-align: center; /* Centrer le texte et l'image */
+    margin-bottom: 15px; /* Espacement entre la photo et le texte */
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style pour les liens email */
+.email-link {
+    color: green;  /* Change la couleur du lien en vert */
+    text-decoration: none;  /* Retire le soulignement par défaut */
+}
+
+.email-link:hover {
+    text-decoration: underline;  /* Ajoute un soulignement au survol */
+}
+
+/* Pour aligner le logo email et le texte à la même ligne */
+.member-info a {
+    vertical-align: middle;  /* Aligne l'icône avec le texte */
+}
+
+.container-grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crée 3 colonnes de taille égale */
+    gap: 20px;  /* Espacement entre les cartes */
+}
+
+.card2 {
+    background-color: #fff; /* Fond blanc pour chaque carte */
+    padding: 20px;
+    border-radius: 10px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte et l'image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.photo2 {
+    width: 200px;  /* Largeur de l'image */
+    height: 200px; /* Hauteur de l'image */
+    object-fit: cover; /* Adapter l'image au cadre sans la déformer */
+}
+
+.container-grid4 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: space-between; /* Équilibre l'espace entre les éléments */
+    gap: 20px;  /* Espacement entre la vidéo et le texte */
+}
+
+.card4 {
+    display: flex;
+    flex-direction: column; /* Alignement vertical des éléments dans chaque carte */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;  /* Chaque carte prend environ la moitié de la largeur disponible */
+}
+
+.video-container2 {
+    width: 100%;
+    height: 250px; /* Hauteur de la vidéo */
+    overflow: hidden; /* Cache toute partie de la vidéo qui dépasse */
+    margin-bottom: 20px; /* Espacement entre la vidéo et le texte */
+}
+
+video {
+    width: 100%; /* La vidéo occupe toute la largeur disponible */
+    height: 100%; /* La vidéo occupe toute la hauteur du conteneur */
+    object-fit: cover; /* La vidéo est ajustée pour couvrir le conteneur sans déformation */
+}
+
+
+
+
+
 
 

@@ -11,20 +11,22 @@
     </header>
 
     <section class="container-grid">
-        {% if weather %}
-        <div id="meteo" class="card">
-            <h2>Météo actuelle</h2>
-            <div class="weather-info">
-                <i class="wi {{ weather.icon }} weather-icon"></i>
-                <div class="weather-details">
-                    <p class="temperature">{{ weather.temperature }}°C</p>
-                    <p class="description">{{ weather.description|capitalize }}</p>
-                    <p>Humidité : {{ weather.humidity }}%</p>
-                    <p>Vent : {{ weather.wind_speed }} km/h</p>
-                </div>
+        <div class="card">
+            <h2>À propos de Valmont</h2>
+            <p>Située entre mer et collines, Valmont est une ville à taille humaine où il fait bon vivre. Connue pour ses parcs verdoyants, son patrimoine culturel riche et son engagement pour le développement durable, elle accueille chaque année des milliers de visiteurs et nouveaux habitants.</p>
+        </div>
+
+        <div class="card2">
+            <h2>Maire de Valmont</h2>
+            <div class="photo-container2">
+                    <img src="{{ asset('images/Abdelah.jpeg') }}" alt="Abdelah EL HARSAL" class="photo2"></br>
+                    <strong>Abdelah EL HARSAL</strong></br>
+                    (mandat 2020–2026)
             </div>
         </div>
-        {% endif %}
+    </section>
+
+    <section class="container-grid">
 
         <div id="lieux" class="card">
             <h2>Lieux d'Intérêt</h2>
@@ -62,21 +64,36 @@
             <a class="btn btn-primary" href="{{ path('metro') }}">Metro</a>
         </div>
 
+        {% if weather %}
+        <div id="meteo" class="card">
+            <h2>Météo actuelle</h2>
+            <div class="weather-info">
+                <i class="wi {{ weather.icon }} weather-icon"></i>
+                <div class="weather-details">
+                    <p class="temperature">{{ weather.temperature }}°C</p>
+                    <p class="description">{{ weather.description|capitalize }}</p>
+                    <p>Humidité : {{ weather.humidity }}%</p>
+                    <p>Vent : {{ weather.wind_speed }} km/h</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
     </section>
 
     <section class="container-grid2">
         <div class="card">
-            <h2>À propos de Valmont</h2>
-            <p>Située entre mer et collines, Valmont est une ville à taille humaine où il fait bon vivre. Connue pour ses parcs verdoyants, son patrimoine culturel riche et son engagement pour le développement durable, elle accueille chaque année des milliers de visiteurs et nouveaux habitants.</p>
-        </div>
-
-        <div class="card">
+            <div class="video-container2">
+                <video autoplay muted loop>
+                    <source src="{{ asset('video/valmont2.mp4') }}" type="video/mp4">
+                    Votre navigateur ne supporte pas la balise vidéo.
+                </video>
+            </div>
             <h2>Informations pratiques</h2>
             <ul>
                 <li><strong>Population :</strong> environ 35 000 habitants</li>
                 <li><strong>Code postal :</strong> 12345</li>
                 <li><strong>Région :</strong>Côte d'Azur</li>
-                <li><strong>Maire :</strong> Abdelah EL HARSAL (mandat 2020–2026)</li>
                 <li><strong>Adjoint du maire :</strong> Ayman OUGUERD (mandat 2020–2026)</li>
                 <li><strong>Secrétaire :</strong> Louaye SAGHIR</li>
                 <li><strong>Responsable sécurité :</strong> Younes SABRI</li>
@@ -84,6 +101,7 @@
             </ul>
         </div>
     </section>
+
 
     <section class="container-grid2">
         <div class="card">
@@ -93,23 +111,57 @@
                 Ce site internet a été imaginé, conçu et développé par notre équipe dans le cadre d'un projet dédié à la ville de Valmont.  
                 Si vous rencontrez un problème technique, une erreur ou si vous souhaitez nous faire part d'une amélioration, n'hésitez pas à contacter l'un des membres ci-dessous :  
             </p>
-            <ul>
-                <li><strong>Myriam SAADI</strong> — Cheffe de projet numérique<br>
-                    📧 <a href="mailto:myriam.saadi@etu.cyu.fr">myriam.saadi@ville-valmont.fr</a>
-                </li>
-                <li><strong>Inès RIBAR</strong> — Responsable contenus et design culturel<br>
-                    📧 <a href="mailto:ines.ribar@etu.cyu.fr">ines.ribar@ville-valmont.fr</a>
-                </li>
-                <li><strong>Éléonore GEORGEL</strong> — Responsable développement technique<br>
-                    📧 <a href="mailto:eleonore.georgel@etu.cyu.fr">eleonore.georgel@ville-valmont.fr</a>
-                </li>
-                <li><strong>Ilian BALIT</strong> — Responsable animation et dynamisation du site<br>
-                    📧 <a href="mailto:ilian.balit@etu.cyu.fr">ilian.balit@ville-valmont.fr</a>
-                </li>
-                <li><strong>Abbes ZERROUKI</strong> — Chargée de l'expérience utilisateur (UX)<br>
-                    📧 <a href="mailto:abbess.zerrouki@etu.cyu.fr">abbess.zerrouki@ville-valmont.fr</a>
-                </li>
-            </ul>
+            <div class="team-member">
+                <div class="photo-container">
+                    <img src="{{ asset('images/Myriam.jpeg') }}" alt="Myriam SAADI" class="photo">
+                </div>
+                <div class="member-info">
+                    <strong>Myriam SAADI</strong> — Cheffe de projet numérique</br>
+                    <a href="mailto:myriam.saadi@etu.cyu.fr" class="email-link">📧 myriam.saadi@ville-valmont.fr</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="photo-container">
+                    <img src="{{ asset('images/Ines.jpeg') }}" alt="Inès RIBAR" class="photo">
+                </div>
+                <div class="member-info">
+                    <strong>Inès RIBAR</strong> — Responsable contenus et design culturel</br>
+                    <a href="mailto:ines.ribar@etu.cyu.fr" class="email-link">📧 ines.ribar@ville-valmont.fr</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="photo-container">
+                    <img src="{{ asset('images/Eleonore.jpeg') }}" alt="Éléonore GEORGEL" class="photo">
+                </div>
+                <div class="member-info">
+                    <strong>Éléonore GEORGEL</strong> — Responsable développement technique</br>
+                    <a href="mailto:eleonore.georgel@etu.cyu.fr" class="email-link">📧 eleonore.georgel@ville-valmont.fr</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="photo-container">
+                    <img src="{{ asset('images/Ilian.jpeg') }}" alt="Ilian BALIT" class="photo">
+                </div>
+                <div class="member-info">
+                    <strong>Ilian BALIT</strong> — Responsable animation et dynamisation du site</br>
+                    <a href="mailto:ilian.balit@etu.cyu.fr" class="email-link">📧 ilian.balit@ville-valmont.fr</a>
+                </div>
+            </div>
+
+            <div class="team-member">
+                <div class="photo-container">
+                    <img src="{{ asset('images/pdp.jpg') }}" alt="Abbes ZERROUKI" class="photo">
+                </div>
+                <div class="member-info">
+                    <strong>Abbes ZERROUKI</strong> — Chargée de l'expérience utilisateur (UX)</br>
+                    <a href="mailto:abbess.zerrouki@etu.cyu.fr" class="email-link">📧 abbess.zerrouki@ville-valmont.fr</a>
+                </div>
+            </div>
+
+
             <a href="mailto:valmontcitynoreply@gmail.com" class="btn btn-primary">Contact général</a>
         </div>
     </section>
