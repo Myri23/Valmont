@@ -10,9 +10,7 @@
 <link rel="stylesheet" href="{{ asset('styles/objets.css') }}">
 
 <div class="container mt-5">
-    <h1 class="mb-4 text-center">Panneau d'administration</h1>
-    
-    <h2 class="mb-3 text-center">Liste des utilisateurs</h2>
+    <!-- Le reste du code reste identique jusqu'à la section des statistiques des catégories -->
     
     <!-- Statistiques des catégories -->
     <div class="section-card">
@@ -163,70 +161,68 @@
 
 
 
-
-
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const deleteForms = document.querySelectorAll('.delete-form');
-
-    deleteForms.forEach(form => {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            if (!confirm('Êtes-vous sûr de vouloir supprimer cet objet ?')) {
-                return;
-            }
-
-            const row = form.closest('tr');
-            const actionUrl = form.getAttribute('action');
-
-            fetch(actionUrl, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Échec de la suppression.');
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteForms = document.querySelectorAll('.delete-form');
+    
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+    
+                if (!confirm('Êtes-vous sûr de vouloir supprimer cet objet ?')) {
+                    return;
                 }
-
-                // Animation de suppression
-                row.classList.add('fading-out');
-                setTimeout(() => {
-                    row.remove();
-                    showNotification('Objet supprimé avec succès.');
-                }, 300);
-            })
-            .catch(error => {
-                console.error(error);
-                showNotification("Une erreur est survenue lors de la suppression.", 'danger');
+    
+                const row = form.closest('tr');
+                const actionUrl = form.getAttribute('action');
+    
+                fetch(actionUrl, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Échec de la suppression.');
+                    }
+    
+                    // Animation de suppression
+                    row.classList.add('fading-out');
+                    setTimeout(() => {
+                        row.remove();
+                        showNotification('Objet supprimé avec succès.');
+                    }, 300);
+                })
+                .catch(error => {
+                    console.error(error);
+                    showNotification("Une erreur est survenue lors de la suppression.", 'danger');
+                });
             });
         });
+    
+        function showNotification(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.setAttribute('role', 'alert');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.bottom = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.maxWidth = '350px';
+            alertDiv.style.zIndex = '1050';
+    
+            alertDiv.innerHTML = `
+                <strong>${type === 'success' ? 'Succès' : 'Erreur'} :</strong> ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+    
+            document.body.appendChild(alertDiv);
+    
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 5000);
+        }
     });
-
-    function showNotification(message, type = 'success') {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
-        alertDiv.setAttribute('role', 'alert');
-        alertDiv.style.position = 'fixed';
-        alertDiv.style.bottom = '20px';
-        alertDiv.style.right = '20px';
-        alertDiv.style.maxWidth = '350px';
-        alertDiv.style.zIndex = '1050';
-
-        alertDiv.innerHTML = `
-            <strong>${type === 'success' ? 'Succès' : 'Erreur'} :</strong> ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-
-        document.body.appendChild(alertDiv);
-
-        setTimeout(() => {
-            if (alertDiv.parentNode) {
-                alertDiv.parentNode.removeChild(alertDiv);
-            }
-        }, 5000);
-    }
-});
-
-</script>
+    </script>
+    
 {% endblock %}
