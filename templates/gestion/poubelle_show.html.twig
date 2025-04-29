@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Poubelle Connectée{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Détails de la Poubelle Connectée</h1>
+    
+    <div class="mb-4">
+        <a href="{{ path('app_poubelle_connectee_list') }}" class="btn-header">Retour à la liste</a>
+        <a href="{{ path('app_poubelle_connectee_edit', {'id': poubelle.id}) }}" class="btn-header">Modifier</a>
+    </div>
+    
+    <div class="row">
+        <!-- Informations générales -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #354E52; color: white; padding: 12px 15px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h2 style="margin: 0; font-size: 1.25rem;">Informations générales</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <td>{{ poubelle.objet.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ poubelle.objet.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Marque</th>
+                                <td>{{ poubelle.objet.marque }}</td>
+                            </tr>
+                            <tr>
+                                <th>Localisation</th>
+                                <td>{{ poubelle.objet.localisation }}</td>
+                            </tr>
+                            <tr>
+                                <th>Type de déchets</th>
+                                <td>
+                                    {% set typeLabel = {
+                                        'ordures': 'Ordures',
+                                        'recyclable': 'Recyclable',
+                                        'verre': 'Verre',
+                                        'compost': 'Compost',
+                                        'mixte': 'Mixte'
+                                    } %}
+                                    {{ typeLabel[poubelle.typeDechets] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>État</th>
+                                <td>
+                                    <span class="badge {% if poubelle.objet.actif %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ poubelle.objet.actif ? 'Actif' : 'Inactif' }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- État technique -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header" style="background-color: #354E52; color: white; padding: 12px 15px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                    <h2 style="margin: 0; font-size: 1.25rem;">État technique</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5>Niveau de batterie</h5>
+                        <div class="progress">
+                            <div class="progress-bar 
+                                {% if poubelle.objet.batteriePct < 20 %}
+                                    bg-danger
+                                {% elseif poubelle.objet.batteriePct < 50 %}
+                                    bg-warning
+                                {% else %}
+                                    bg-success
+                                {% endif %}" 
+                                role="progressbar" 
+                                style="width: {{ poubelle.objet.batteriePct }}%"
+                                aria-valuenow="{{ poubelle.objet.batteriePct }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                                {{ poubelle.objet.batteriePct }}%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Niveau de remplissage</h5>
+                        <div class="progress">
+                            <div class="progress-bar 
+                                {% if poubelle.niveauRemplissage > 80 %}
+                                    bg-danger
+                                {% elseif poubelle.niveauRemplissage > 50 %}
+                                    bg-warning
+                                {% else %}
+                                    bg-success
+                                {% endif %}" 
+                                role="progressbar" 
+                                style="width: {{ poubelle.niveauRemplissage }}%"
+                                aria-valuenow="{{ poubelle.niveauRemplissage }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                                {{ poubelle.niveauRemplissage }}%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Capacité totale</th>
+                                <td>{{ poubelle.capaciteTotale }} L</td>
+                            </tr>
+                            <tr>
+                                <th>Compacteur</th>
+                                <td>
+                                    <span class="badge {% if poubelle.compacteur %}bg-success{% else %}bg-secondary{% endif %}">
+                                        {{ poubelle.compacteur ? 'Actif' : 'Inactif' }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Dernière collecte</th>
+                                <td>{{ poubelle.derniereCollecte ? poubelle.derniereCollecte|date('d/m/Y H:i') : 'Non disponible' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="card mb-4">
+        <div class="card-header" style="background-color: #354E52; color: white; padding: 12px 15px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            <h2 style="margin: 0; font-size: 1.25rem;">Actions</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <a href="{{ path('app_poubelle_connectee_edit', {'id': poubelle.id}) }}" class="btn btn-warning btn-block w-100">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <form method="post" action="{{ path('app_poubelle_connectee_delete', {'id': poubelle.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette poubelle connectée ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ poubelle.id) }}">
+                        <button class="btn btn-danger btn-block w-100">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a href="{{ path('app_poubelle_connectee_list') }}" class="btn btn-secondary btn-block w-100">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
