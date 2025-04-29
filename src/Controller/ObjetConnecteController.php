@@ -182,5 +182,87 @@ public function newLampadaire(Request $request, EntityManagerInterface $entityMa
         'form' => $form->createView(),
     ]);
 }
+
+#[Route('/objets/poubelles', name: 'app_poubelle_connectee_list')]
+public function listPoubelles(EntityManagerInterface $entityManager): Response
+{
+    // Récupérer toutes les poubelles connectées
+    $poubelles = $entityManager->getRepository(PoubelleConnectee::class)->findAll();
+    
+    return $this->render('gestion/poubelle_list.html.twig', [
+        'poubelles' => $poubelles,
+    ]);
+}
+
+#[Route('/objets/poubelles/{idUnique}', name: 'app_poubelle_connectee_show')]
+public function showPoubelle(string $idUnique, EntityManagerInterface $entityManager): Response
+{
+    $poubelle = $entityManager->getRepository(PoubelleConnectee::class)
+        ->findOneBy(['objet' => $entityManager->getRepository(ObjetConnecte::class)
+        ->findOneBy(['idUnique' => $idUnique])]);
+    
+    if (!$poubelle) {
+        throw $this->createNotFoundException('Poubelle non trouvée');
+    }
+    
+    return $this->render('gestion/poubelle_show.html.twig', [
+        'poubelle' => $poubelle,
+    ]);
+}
+
+#[Route('/objets/poubelles/{idUnique}/edit', name: 'app_poubelle_connectee_edit')]
+public function editPoubelle(string $idUnique, Request $request, EntityManagerInterface $entityManager): Response
+{
+    $objet = $entityManager->getRepository(ObjetConnecte::class)->findOneBy(['idUnique' => $idUnique]);
+
+    if (!$objet) {
+        throw $this->createNotFoundException('Objet connecté non trouvé.');
+    }
+
+    $poubelle = $entityManager->getRepository(PoubelleConnectee::class)->findOneBy(['objet' => $objet]);
+
+    if (!$poubelle) {
+        throw $this->createNotFoundException('Poubelle connectée non trouvée.');
+    }
+
+    // Formulaire combiné
+    $form = $this->createFormBuilder(['objet' => $objet, 'poubelle' => $poubelle])
+        ->add('objet', ObjetConnecteType::class)
+        ->add('poubelle', PoubelleConnecteeType::class)
+        ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->flush();
+
+        $this->addFlash('success', 'La poubelle connectée a été modifiée avec succès.');
+        return $this->redirectToRoute('app_poubelle_connectee_list');
+    }
+
+    return $this->render('gestion/edit_poubelle.html.twig', [
+        'form' => $form->createView(),
+        'poubelle' => $poubelle,
+    ]);
+}
+
+#[Route('/objets/poubelles/{id}/delete', name: 'app_poubelle_connectee_delete')]
+public function deletePoubelle(Request $request, PoubelleConnectee $poubelle, EntityManagerInterface $entityManager): Response
+{
+    // Récupérer l'objet connecté associé
+    $objet = $poubelle->getObjet();
+    
+    // Supprimer la poubelle
+    $entityManager->remove($poubelle);
+    
+    // Supprimer l'objet connecté (cela peut être fait automatiquement si vous avez configuré CASCADE)
+    $entityManager->remove($objet);
+    
+    $entityManager->flush();
+    
+    $this->addFlash('success', 'La poubelle connectée a été supprimée avec succès.');
+    
+    return $this->redirectToRoute('app_poubelle_connectee_list');
+}
     
 }

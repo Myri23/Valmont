@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rapports et Statistiques{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Rapports et Statistiques</h1>
+    <p class="lead">Générez des rapports PDF détaillés pour vos objets connectés.</p>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Rapports d'objets</h2>
+                </div>
+                <div class="card-body">
+                    <p>Générez des rapports complets pour tous vos objets connectés.</p>
+                    <a href="{{ path('app_rapports_tous_objets') }}" class="btn btn-primary">
+                        <i class="fas fa-file-pdf"></i> Rapport de tous les objets
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2 class="h5 mb-0">Rapports par type</h2>
+                </div>
+                <div class="card-body">
+                    <p>Générez des rapports spécifiques par type d'objet connecté.</p>
+                    <div class="list-group">
+                        <a href="{{ path('app_rapports_poubelles') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-trash"></i> Poubelles connectées
+                        </a>
+                        <a href="{{ path('app_rapports_parkings') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-parking"></i> Parkings intelligents
+                        </a>
+                        <a href="{{ path('app_rapports_lampadaires') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-lightbulb"></i> Lampadaires intelligents
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-warning text-white">
+                    <h2 class="h5 mb-0">Rapports d'état</h2>
+                </div>
+                <div class="card-body">
+                    <p>Générez des rapports sur l'état des objets connectés.</p>
+                    <div class="list-group">
+                        <a href="{{ path('app_rapports_batterie_faible') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-battery-quarter"></i> Objets avec batterie faible
+                        </a>
+                        <a href="{{ path('app_rapports_maintenance') }}" class="list-group-item list-group-item-action">
+                            <i class="fas fa-tools"></i> Objets en maintenance
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h2 class="h5 mb-0">Rapport de statistiques</h2>
+        </div>
+        <div class="card-body">
+            <p>Générez un rapport statistique global sur l'ensemble de vos objets connectés.</p>
+            <a href="{{ path('app_rapports_statistiques') }}" class="btn btn-info">
+                <i class="fas fa-chart-pie"></i> Générer le rapport statistique
+            </a>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{{ path('app_objets_list') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour à la gestion des objets
+        </a>
+    </div>
+</div>
+{% endblock %}

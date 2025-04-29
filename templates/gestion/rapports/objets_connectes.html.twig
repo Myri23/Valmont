@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport - Objets Connectés</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .title {
+            color: #2F3D46;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+        }
+        .subtitle {
+            color: #84A98D;
+            font-size: 18px;
+            margin: 0 0 5px 0;
+        }
+        .date {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+        h2 {
+            color: #2F3D46;
+            font-size: 18px;
+            margin: 25px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .summary {
+            background-color: #f7f7f7;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .summary-item {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #84A98D;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        th {
+            background-color: #84A98D;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+        }
+        .status-active {
+            background-color: #84A98D;
+        }
+        .status-maintenance {
+            background-color: #E9C46A;
+        }
+        .status-inactive {
+            background-color: #E76F51;
+        }
+        .battery-level {
+            display: inline-block;
+            width: 50px;
+            height: 12px;
+            background-color: #eee;
+            border-radius: 6px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .battery-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+        .battery-good { background-color: #84A98D; }
+        .battery-medium { background-color: #E9C46A; }
+        .battery-low { background-color: #E76F51; }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .stat-box {
+            width: 30%;
+            text-align: center;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #84A98D;
+            margin: 5px 0;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Rapport des Objets Connectés</h1>
+        <p class="subtitle">Ville intelligente - Système de gestion</p>
+        <p class="date">Généré le {{ date|date('d/m/Y à H:i') }}</p>
+    </div>
+    
+    <div class="summary">
+        <h2>Résumé des objets connectés</h2>
+        <div class="stat-row">
+            <div class="stat-box">
+                <div class="stat-value">{{ objets|length }}</div>
+                <div class="stat-label">Objets au total</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">{{ objets|filter(o => o.actif)|length }}</div>
+                <div class="stat-label">Objets actifs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">{{ objets|filter(o => o.batteriePct < 25)|length }}</div>
+                <div class="stat-label">Batterie faible</div>
+            </div>
+        </div>
+        
+        <h3>Répartition par type</h3>
+        <ul>
+            {% for type, count in countByType %}
+                <li><span class="highlight">{{ type }}:</span> {{ count }} objet(s)</li>
+            {% endfor %}
+        </ul>
+        
+        <h3>Répartition par état</h3>
+        <ul>
+            {% for etat, count in countByEtat %}
+                <li><span class="highlight">{{ etat }}:</span> {{ count }} objet(s)</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <h2>Liste détaillée des objets connectés</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Localisation</th>
+                <th>État</th>
+                <th>Batterie</th>
+                <th>Dernière activité</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for objet in objets %}
+                <tr>
+                    <td>{{ objet.idUnique }}</td>
+                    <td>{{ objet.nom }}</td>
+                    <td>{{ objet.type }}</td>
+                    <td>{{ objet.localisation }}</td>
+                    <td>
+                        {% if objet.etat == 'Actif' %}
+                            <span class="status-badge status-active">{{ objet.etat }}</span>
+                        {% elseif objet.etat == 'Maintenance' %}
+                            <span class="status-badge status-maintenance">{{ objet.etat }}</span>
+                        {% else %}
+                            <span class="status-badge status-inactive">{{ objet.etat }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="battery-level">
+                            <div class="battery-fill 
+                                {% if objet.batteriePct < 25 %}
+                                    battery-low
+                                {% elseif objet.batteriePct < 50 %}
+                                    battery-medium
+                                {% else %}
+                                    battery-good
+                                {% endif %}" 
+                                style="width: {{ objet.batteriePct }}%">
+                            </div>
+                        </div>
+                        {{ objet.batteriePct }}%
+                    </td>
+                    <td>{{ objet.derniereInteraction|date('d/m/Y H:i') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p>Ce rapport a été généré automatiquement. Ville intelligente - Tous droits réservés.</p>
+        <p>Page 1</p>
+    </div>
+</body>
+</html>

@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\HistoriqueConnexion;  
 use App\Entity\HistoriqueConsultation;
 use App\Entity\Utilisateur;
-use App\Entity\ObjetConnecte;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -617,16 +616,7 @@ final class AdminController extends AbstractController
         $mailer->send($email);
     }
 
-    #[Route('/utilisateurs_gestion', name: 'utilisateurs_gestion')]
-    public function utilisateurs_gestion(EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer tous les objets connectés
-        $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
-        
-        return $this->render('admin/utilisateurs_gestion.html.twig', [
-            'utilisateurs' => $utilisateurs
-        ]);
-    }
+
 
 
     #[Route('/objets_gestion', name: 'objets_gestion')]
@@ -640,4 +630,12 @@ final class AdminController extends AbstractController
         ]);
     }
 
+#[Route('/admin/utilisateurs', name: 'utilisateurs_gestion')]
+public function gestionUtilisateurs(): Response
+{
+    // Pour l'instant, on passe une liste vide pour ne pas casser la vue
+    return $this->render('admin/utilisateurs_gestion.html.twig', [
+        'utilisateurs' => [],
+    ]);
+}
 }

@@ -1,0 +1,121 @@
+/* Styles pour la page Objets Connectés */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #354E52;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.bg-success {
+    background-color: #84A98D;
+}
+
+.bg-warning {
+    background-color: #F6BD60;
+}
+
+.bg-danger {
+    background-color: #E07A5F;
+}
+
+.progress {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-sm {
+    font-size: 0.8em;
+}
+
+.btn-info {
+    background-color: #4dabf7;
+}
+
+.btn-warning {
+    background-color: #F6BD60;
+}
+
+.btn-danger {
+    background-color: #E07A5F;
+}
+
+.btn-header {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #84A98D;
+    color: white;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-header:hover {
+    background-color: white;
+    color: #84A98D;
+    border: 1px solid #84A98D;
+}
+
+.fas {
+    font-family: sans-serif;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.text-center {
+    text-align: center;
+}

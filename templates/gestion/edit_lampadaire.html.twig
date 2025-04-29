@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier un lampadaire intelligent{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Modifier un lampadaire intelligent</h1>
+    
+    {{ form_start(form) }}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Informations générales de l'objet connecté</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.objet.nom) }}
+                    {{ form_row(form.objet.marque) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.objet.etat) }}
+                    {{ form_row(form.objet.localisation) }}
+                    {{ form_row(form.objet.batteriePct) }}
+                    {{ form_row(form.objet.actif) }}
+                </div>
+            </div>
+            {# Champ type caché mais préconfiguré #}
+            {{ form_widget(form.objet.type, {'attr': {'class': 'd-none'}}) }}
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Caractéristiques spécifiques du lampadaire</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.lampadaire.heureAllumage) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.lampadaire.dureeAllumage) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center mb-4">
+        <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+        <a href="{{ path('app_lampadaire_intelligent_list') }}" class="btn-secondary ms-2">Retour à la liste</a>
+    </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

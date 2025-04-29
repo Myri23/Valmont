@@ -1,0 +1,289 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Lampadaire Intelligent{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Détails du Lampadaire Intelligent</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h5 mb-0">Informations générales</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>ID Unique</th>
+                                <td>{{ lampadaire.objet.idUnique }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ lampadaire.objet.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Marque</th>
+                                <td>{{ lampadaire.objet.marque }}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{ lampadaire.objet.type }}</td>
+                            </tr>
+                            <tr>
+                                <th>Localisation</th>
+                                <td>{{ lampadaire.objet.localisation }}</td>
+                            </tr>
+                            <tr>
+                                <th>État</th>
+                                <td>
+                                    <span class="badge {% if lampadaire.objet.etat == 'Actif' %}bg-success{% elseif lampadaire.objet.etat == 'Maintenance' %}bg-warning{% else %}bg-danger{% endif %}">
+                                        {{ lampadaire.objet.etat }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Batterie</th>
+                                <td>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar 
+                                            {% if lampadaire.objet.batteriePct < 20 %}
+                                                bg-danger
+                                            {% elseif lampadaire.objet.batteriePct < 50 %}
+                                                bg-warning
+                                            {% else %}
+                                                bg-success
+                                            {% endif %}" 
+                                            role="progressbar" 
+                                            style="width: {{ lampadaire.objet.batteriePct }}%"
+                                            aria-valuenow="{{ lampadaire.objet.batteriePct }}" 
+                                            aria-valuemin="0" 
+                                            aria-valuemax="100">
+                                            {{ lampadaire.objet.batteriePct }}%
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Actif</th>
+                                <td>
+                                    {% if lampadaire.objet.actif %}
+                                        <span class="badge bg-success">Oui</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Non</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h2 class="h5 mb-0">Caractéristiques spécifiques</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Heure d'allumage</th>
+                                <td>
+                                    {% if lampadaire.heureAllumage %}
+                                        {{ lampadaire.heureAllumage|date('H:i') }}
+                                    {% else %}
+                                        <span class="text-muted">Non programmé</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Durée d'allumage</th>
+                                <td>
+                                    {% if lampadaire.dureeAllumage > 0 %}
+                                        {{ lampadaire.dureeAllumage }} minutes
+                                        {% if lampadaire.dureeAllumage >= 60 %}
+                                            ({{ (lampadaire.dureeAllumage / 60)|round(1, 'floor') }}h{{ lampadaire.dureeAllumage % 60 > 0 ? (lampadaire.dureeAllumage % 60) : '' }})
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">Non définie</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Heure d'extinction estimée</th>
+                                <td>
+                                    {% if lampadaire.heureAllumage and lampadaire.dureeAllumage > 0 %}
+                                        {% set heureAllumage = lampadaire.heureAllumage %}
+                                        {% set dureeMinutes = lampadaire.dureeAllumage %}
+                                        {% set heureExtinction = heureAllumage|date_modify("+" ~ dureeMinutes ~ " minutes") %}
+                                        {{ heureExtinction|date('H:i') }}
+                                    {% else %}
+                                        <span class="text-muted">Non calculable</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Statut actuel</th>
+                                <td id="status-display">
+                                    <span class="badge bg-secondary">Éteint</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="h5 mb-0">Actions</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button id="toggle-button" class="btn btn-primary">
+                            Allumer le lampadaire
+                        </button>
+                        <a href="{{ path('app_lampadaire_intelligent_edit', {'id': lampadaire.id}) }}" class="btn btn-warning">
+                            Modifier le lampadaire
+                        </a>
+                        <a href="{{ path('app_lampadaire_intelligent_delete', {'id': lampadaire.id}) }}" class="btn btn-danger" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lampadaire ?');">
+                            Supprimer le lampadaire
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h2 class="h5 mb-0">Journal d'activité du lampadaire</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="activities-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Date et heure</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activities-body">
+                        <tr id="no-activities-row">
+                            <td colspan="3" class="text-center text-muted">Aucune activité enregistrée.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <a href="{{ path('app_lampadaire_intelligent_list') }}" class="btn btn-primary">Retour à la liste</a>
+    </div>
+</div>
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // État du lampadaire (allumé/éteint)
+        let isLampadaireOn = false;
+        
+        // Journal d'activité
+        let activitiesLog = [];
+        
+        // Bouton pour allumer/éteindre le lampadaire
+        const toggleButton = document.getElementById('toggle-button');
+        const statusDisplay = document.getElementById('status-display');
+        
+        toggleButton.addEventListener('click', function() {
+            // Inverser l'état
+            isLampadaireOn = !isLampadaireOn;
+            
+            // Mettre à jour l'affichage
+            if (isLampadaireOn) {
+                toggleButton.textContent = 'Éteindre le lampadaire';
+                toggleButton.classList.remove('btn-primary');
+                toggleButton.classList.add('btn-danger');
+                statusDisplay.innerHTML = '<span class="badge bg-success">Allumé</span>';
+                
+                // Ajouter au journal d'activité
+                addActivityLog('Allumage', 'Allumé');
+            } else {
+                toggleButton.textContent = 'Allumer le lampadaire';
+                toggleButton.classList.remove('btn-danger');
+                toggleButton.classList.add('btn-primary');
+                statusDisplay.innerHTML = '<span class="badge bg-secondary">Éteint</span>';
+                
+                // Ajouter au journal d'activité
+                addActivityLog('Extinction', 'Éteint');
+            }
+        });
+        
+        // Fonction pour ajouter une entrée au journal d'activité
+        function addActivityLog(action, status) {
+            const now = new Date();
+            const dateTimeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+            
+            // Créer un ID pour cette activité
+            const activityId = 'activity-' + Date.now();
+            
+            // Stocker l'activité
+            activitiesLog.push({
+                id: activityId,
+                action: action,
+                dateTime: dateTimeStr,
+                status: status
+            });
+            
+            // Mettre à jour l'affichage du journal
+            updateActivityLog();
+        }
+        
+        // Fonction pour mettre à jour l'affichage du journal d'activité
+        function updateActivityLog() {
+            const activitiesBody = document.getElementById('activities-body');
+            const noActivitiesRow = document.getElementById('no-activities-row');
+            
+            // Supprimer le message "Aucune activité" si nécessaire
+            if (noActivitiesRow && activitiesLog.length > 0) {
+                noActivitiesRow.remove();
+            }
+            
+            // Vider le tableau
+            activitiesBody.innerHTML = '';
+            
+            // Ajouter les activités du plus récent au plus ancien
+            activitiesLog.slice().reverse().forEach(activity => {
+                const newRow = document.createElement('tr');
+                newRow.setAttribute('id', activity.id);
+                
+                newRow.innerHTML = `
+                    <td>${activity.action}</td>
+                    <td>${activity.dateTime}</td>
+                    <td>
+                        <span class="badge ${activity.status === 'Allumé' ? 'bg-success' : 'bg-secondary'}">
+                            ${activity.status}
+                        </span>
+                    </td>
+                `;
+                
+                activitiesBody.appendChild(newRow);
+            });
+            
+            // Si aucune activité, afficher le message
+            if (activitiesLog.length === 0) {
+                const noActivitiesRow = document.createElement('tr');
+                noActivitiesRow.id = 'no-activities-row';
+                noActivitiesRow.innerHTML = '<td colspan="3" class="text-center text-muted">Aucune activité enregistrée.</td>';
+                activitiesBody.appendChild(noActivitiesRow);
+            }
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

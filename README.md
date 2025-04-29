@@ -68,6 +68,11 @@ Il a été réalisé dans le cadre d'un projet de développement web, avec une o
    ```bash
    composer install
    ```
+4. Effectuer la commande pour la génération de rapports :
+   ```bash
+   composer require dompdf/dompdf
+   ```
+   
 4. Lancer le serveur symfony:
    ```bash
    symfony serve
