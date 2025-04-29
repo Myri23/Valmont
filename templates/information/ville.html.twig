@@ -10,13 +10,20 @@
         <p>Une ville connectée, dynamique et tournée vers l'avenir.</p>
     </header>
 
+<div class="background-image-container">
+
+
     <section class="container-grid">
         <div class="card">
             <h2>À propos de Valmont</h2>
-            <p>Située entre mer et collines, Valmont est une ville à taille humaine où il fait bon vivre. Connue pour ses parcs verdoyants, son patrimoine culturel riche et son engagement pour le développement durable, elle accueille chaque année des milliers de visiteurs et nouveaux habitants.</p>
+            <p>
+            <strong>Située entre mer scintillante et collines verdoyantes, Valmont est une ville à taille humaine qui allie douceur de vivre et dynamisme.</strong>
+            </p>
+            <p>
+            Reconnue pour la beauté de ses parcs naturels, la richesse de son patrimoine historique et la vitalité de sa scène culturelle, Valmont offre un cadre de vie exceptionnel à ses habitants comme à ses visiteurs. Chaque année, elle séduit des milliers de nouveaux arrivants par son atmosphère chaleureuse, son engagement fort en faveur du développement durable et sa capacité à conjuguer tradition et modernité.
+            </p>
         </div>
-
-        <div class="card2">
+        <div class="card">
             <h2>Maire de Valmont</h2>
             <div class="photo-container2">
                     <img src="{{ asset('images/Abdelah.jpeg') }}" alt="Abdelah EL HARSAL" class="photo2"></br>
@@ -165,10 +172,20 @@
             <a href="mailto:valmontcitynoreply@gmail.com" class="btn btn-primary">Contact général</a>
         </div>
     </section>
-
+</div>
     <footer class="footer">
         <p>&copy; 2025 - Valmont | Ville connectée</p>
     </footer>
 </body>
+<style>
+    .background-image-container {
+        background-image: url('{{ asset('images/valmont_ville.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* effet de défilement parallax */
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+</style>
 </html>
 {% endblock %}

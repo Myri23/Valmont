@@ -3,8 +3,10 @@
 {% block title %}Administration - Utilisateurs{% endblock %}
 
 {% block body %}
-<div class="container mt-4">
-    <h1 class="mb-4">Membres de Valmont</h1>
+<div class="background-image-container">
+
+    <div class="container mt-4 py-5" style="background: rgba(255, 255, 255, 0.90); border-radius: 15px; text-align: center;">
+    <h1 class="mb-4"> 👤 Membres de Valmont</h1>
     
     
     <div class="table-responsive">
@@ -46,9 +48,17 @@
         </table>
     </div>
 </div>
+</div>
 
 <style>
-    /* Styles personnalisés pour ajouter plus d'espace */
+    .background-image-container {
+        background-image: url('{{ asset('images/valmont_membres.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* effet de défilement parallax */
+        min-height: 100vh;
+        padding: 30px 0;
+    }
     .table {
         border-spacing: 0 8px;
         border-collapse: separate;
