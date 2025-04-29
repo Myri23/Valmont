@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\ObjetConnecte;
 use App\Entity\PoubelleConnectee;
+use App\Entity\ParkingIntelligent;
+
 use App\Form\ObjetConnecteType;
 use App\Form\PoubelleConnecteeType;
+use App\Form\ParkingIntelligentType;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,4 +75,40 @@ class ObjetConnecteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+   #[Route('/objets/ajouter-parking', name: 'app_parking_intelligent_new')]
+    public function newParking(Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $objetConnecte = new ObjetConnecte();
+        $objetConnecte->setType('Parking');
+        $parkingIntelligent = new ParkingIntelligent();
+        
+        $form = $this->createFormBuilder(['objet' => $objetConnecte, 'parking' => $parkingIntelligent])
+            ->add('objet', ObjetConnecteType::class)
+            ->add('parking', ParkingIntelligentType::class)
+            ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($objetConnecte);
+            $entityManager->flush();
+            
+            $parkingIntelligent->setObjet($objetConnecte);
+            
+            $entityManager->persist($parkingIntelligent);
+            $entityManager->flush();
+            
+            $this->addFlash('success', 'Le parking intelligent a été ajouté avec succès.');
+            
+            return $this->redirectToRoute('app_objets_list');
+        }
+        
+        return $this->render('gestion/new_parking.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    
 }

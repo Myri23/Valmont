@@ -15,11 +15,10 @@ class ObjetConnecteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
-            
-            ->add('type', HiddenType::class, [
-                'data' => 'Poubelle',
-            ])
+                    
+            ->add('type', HiddenType::class)
             
             ->add('nom', TextType::class, [
                 'label' => 'Nom',
