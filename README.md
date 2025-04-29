@@ -96,11 +96,6 @@ Fonctionnalités de la page d'acceuil
 
 ---
 
-## FAQ
-
-Faq a ajouté si nécessaire
-
----
 
 ## Contributeurs
 - **Balit Ilian**
